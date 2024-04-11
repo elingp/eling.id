@@ -4,5 +4,5 @@ node_modules
 # cache-dirs
 **/.cache
 
-pnpm-lock.yaml
+package-lock.json
 dist
