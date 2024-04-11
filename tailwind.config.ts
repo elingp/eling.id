@@ -32,8 +32,8 @@ export default {
 			},
 			fontFamily: {
 				// Add any custom fonts here
-				sans: [...fontFamily.sans],
-				serif: [...fontFamily.serif],
+				serif: ["Merriweather", ...fontFamily.serif],
+				sans: ["Raleway", ...fontFamily.sans],
 			},
 			transitionProperty: {
 				height: "height",
