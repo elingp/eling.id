@@ -10,7 +10,6 @@ module.exports = {
 		"plugin:astro/jsx-a11y-recommended",
 		"plugin:deprecation/recommended",
 		"plugin:regexp/recommended",
-		"plugin:typescript-sort-keys/recommended",
 		"plugin:markdown/recommended-legacy",
 	],
 	overrides: [
@@ -20,15 +19,6 @@ module.exports = {
 			parserOptions: {
 				extraFileExtensions: [".astro"],
 				parser: "@typescript-eslint/parser",
-			},
-			rules: {
-				"astro/jsx-a11y/no-redundant-roles": [
-					"error",
-					{
-						ol: ["list"],
-						ul: ["list"],
-					},
-				],
 			},
 		},
 	],
