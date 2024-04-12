@@ -52,7 +52,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		<SocialList />
 	</section>
 	<section aria-label="Blog post list" class="mt-16">
-		<h2 class="title mb-4 text-xl">Posts</h2>
+		<h2 class="title mb-4 text-2xl font-semibold">Posts</h2>
 		<ul class="space-y-4">
 			{
 				allPostsByDate.map((p) => (
@@ -64,7 +64,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</ul>
 	</section>
 	<section class="mt-16">
-		<h2 class="title mb-4 text-xl">Projects</h2>
+		<h2 class="title mb-4 text-2xl font-semibold">Projects</h2>
 		<dl class="space-y-4">
 			{
 				elingProject.map(({ desc, href, title }) => (

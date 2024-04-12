@@ -11,7 +11,7 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<div class="space-y-6">
+	<div class="prose prose-lg prose-cactus space-y-6 prose-headings:font-semibold">
 		<h1 class="title">About Me</h1>
 		<p>
 			Hey there, I’m Eling Pramuatmaja, a tech-loving explorer on a lifelong learning adventure! 🚀
@@ -27,7 +27,7 @@ const meta = {
 				<figcaption class="text-center"><small>Eling circa 2023</small></figcaption>
 			</figure>
 		</div>
-		<h2 class="text-xl">Short Bio</h2>
+		<h2>Short Bio</h2>
 		<p>
 			Let me take you on a journey through my digital escapades! It all started when I stumbled upon
 			the magic of coding at the tender age of 13. From that moment, I was hooked. HTML/CSS became
@@ -49,7 +49,7 @@ const meta = {
 			green initiatives, I’m committed to leveraging my expertise in tech to make a meaningful
 			impact on the world around us.
 		</p>
-		<h2 class="text-xl">What's My Jam?</h2>
+		<h2>What's My Jam?</h2>
 		<ul class="list-inside list-disc">
 			<li>
 				🤖 <b>Tech Enthusiast:</b> I'm always keeping an eye on the latest tech trends and developments.
@@ -68,11 +68,11 @@ const meta = {
 				fellow adventurers and weave tales of imagination.
 			</li>
 		</ul>
-		<h2 class="text-xl">What's Next?</h2>
+		<h2>What's Next?</h2>
 		<p>
 			As I prepare for new opportunities, I’m eager to contribute my skills and knowledge in NLP,
 			tech, and related fields to meaningful projects in the tech industry.
 		</p>
-		<SocialList />
+		<div class="not-prose"><SocialList /></div>
 	</div>
 </PageLayout>
