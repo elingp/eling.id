@@ -1,5 +1,5 @@
 ---
-import aboutImg from "@/assets/eling.jpg";
+import aboutImg from "@/assets/eling-about.jpg";
 import SocialList from "@/components/SocialList.astro";
 import PageLayout from "@/layouts/Base.astro";
 import { Image } from "astro:assets";
@@ -12,10 +12,9 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<div class="space-y-6">
-		<h1 class="title">About</h1>
+		<h1 class="title">About Me</h1>
 		<p>
-			Hi, I’m Eling Pramuatmaja. I love to say that I’m a technology and data enthusiast who has a
-			passion for lifelong learning, but your mileage may vary if you know me personally 😁.
+			Hey there, I’m Eling Pramuatmaja, a tech-loving explorer on a lifelong learning adventure! 🚀
 		</p>
 		<div class="flex justify-center">
 			<figure>
@@ -25,47 +24,55 @@ const meta = {
 					loading="eager"
 					src={aboutImg}
 				/>
-				<figcaption class="text-center"><small>Eling circa 2020</small></figcaption>
+				<figcaption class="text-center"><small>Eling circa 2023</small></figcaption>
 			</figure>
 		</div>
 		<h2 class="text-xl">Short Bio</h2>
-		<small>(From my LinkedIn)</small>
 		<p>
-			When I was 13, I learned that you could change the color of texts in a website—I touched upon
-			HTML/CSS. It was an amazing moment! I realized that you could build stuff and solve problems
-			by typing codes in front of a computer, a tool that I’ve loved since I was little. Thus I
-			yearned to learn more, studying HTML/CSS and JavaScript by myself on various online platforms.
+			Let me take you on a journey through my digital escapades! It all started when I stumbled upon
+			the magic of coding at the tender age of 13. From that moment, I was hooked. HTML/CSS became
+			my starting playground, Python my trusty sidekick for data science adventures, and Java and
+			PHP my tools for crafting digital wonders.
 		</p>
 		<p>
-			Growing from this passion for learning, I grasped various interests along the way. From
-			realizing the importance of the human condition to understand others, discerning the
-			significance of our environment for a sustainable future, to doing scientific research and
-			recognizing how data could uncover invisible patterns.
+			As I navigated through the vast landscape of tech, my curiosity led me to delve deeper into
+			the realm of machine learning and artificial intelligence. The intricacies of natural language
+			processing fascinated me, igniting a passion for understanding how technology can bridge the
+			gap between human communication and digital innovation. While my bachelor's degree thesis on
+			Text Summarization in Indonesian is still a work in progress, I'm eager to apply my knowledge
+			and skills in real-world scenarios that push the boundaries of what’s possible.
 		</p>
 		<p>
-			These backgrounds have made me into a technology and data enthusiast who has a passion for
-			lifelong learning and agility in adapting to changes.
+			Outside the digital realm, I’m a staunch advocate for environmental conservation. My belief in
+			the power of technology to drive positive change fuels my desire to explore ways in which tech
+			can contribute to a sustainable future. From following climate news to actively seeking out
+			green initiatives, I’m committed to leveraging my expertise in tech to make a meaningful
+			impact on the world around us.
 		</p>
-		<p>
-			I’m eager to learn various stuff and thus experienced in using Python for data science and
-			Java or PHP for backend programming, with a sprinkle of HTML/CSS & JavaScript for web
-			development. In my spare time, I’m passionate about doing data competitions and reading the
-			latest scientific research and news. Currently, in the tech world, I have a great interest in
-			the state of machine learning, specifically natural language processing.
-		</p>
-		<p>
-			I was also fortunate to be acknowledged by some prestigious scholarship programs like Google
-			Bangkit 2021, YABB & GoTo Generasi GIGIH 2.0, Blibli Future Program Batch 5, XL Future Leaders
-			Batch 9, and Beasiswa Unggulan 2019 from the Ministry of Education and Culture.
-		</p>
-		<p>Some of my current interests are:</p>
+		<h2 class="text-xl">What's My Jam?</h2>
 		<ul class="list-inside list-disc">
-			<li>Machine learning (My thesis was about NLP!)</li>
-			<li>Climate change</li>
-			<li>Manga/manhwa (I read a lot. Maybe too many...)</li>
-			<li>Anime</li>
-			<li>TTRPG (I’ve been playing a lot of D&D 5e, Pathfinder 2e, among others lately.)</li>
+			<li>
+				🤖 <b>Tech Enthusiast:</b> I'm always keeping an eye on the latest tech trends and developments.
+				HackerNews is my daily dose of tech news!
+			</li>
+			<li>
+				🌍 <b>Climate Advocate:</b> Passionate about the environment and the role technology plays in
+				preserving it for future generations.
+			</li>
+			<li>
+				📚 <b>Literature Lover:</b> Lost in the worlds of manga, manhwa, and anime, I find solace and
+				inspiration in stories that transcend boundaries.
+			</li>
+			<li>
+				🎲 <b>TTRPG Explorer:</b> Delving into the realms of tabletop role-playing games, I connect with
+				fellow adventurers and weave tales of imagination.
+			</li>
 		</ul>
+		<h2 class="text-xl">What's Next?</h2>
+		<p>
+			As I prepare for new opportunities, I’m eager to contribute my skills and knowledge in NLP,
+			tech, and related fields to meaningful projects in the tech industry.
+		</p>
 		<SocialList />
 	</div>
 </PageLayout>
