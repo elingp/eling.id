@@ -12,7 +12,7 @@
 		--theme-text: 203deg 11% 15%;
 		--theme-accent: 24deg 90% 53%;
 		--theme-accent-2: 0deg 0% 7%;
-		--theme-quote: 24deg 90% 53%;
+		--theme-quote: 24deg 90% 20%;
 	}
 
 	:root[data-theme="dark"] {
@@ -22,7 +22,7 @@
 		--theme-text: 220deg 3% 79%;
 		--theme-accent: 24deg 90% 66%;
 		--theme-accent-2: 0deg 0% 93%;
-		--theme-quote: 24deg 90% 66%;
+		--theme-quote: 24deg 90% 90%;
 	}
 
 	html {
