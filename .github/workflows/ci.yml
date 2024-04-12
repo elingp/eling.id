@@ -10,26 +10,45 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  cache-and-install:
     name: Check for build and type issues
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: install node
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
 
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      - uses: actions/cache@v4
+        name: Setup pnpm cache
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
         # use astro check for issues
       - name: Run check
-        run: npm run check
+        run: pnpm check
 
         # ensure build works
       - name: Run build
-        run: npm run build
+        run: pnpm build
