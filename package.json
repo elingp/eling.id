@@ -9,7 +9,8 @@
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"format": "prettier -w --cache . && prettier -w --cache **/*.astro",
-		"check": "astro check"
+		"check": "astro check",
+		"lint": "eslint ."
 	},
 	"dependencies": {
 		"@astrojs/mdx": "2.3.0",
@@ -39,15 +40,11 @@
 		"astro-eslint-parser": "^0.17.0",
 		"autoprefixer": "^10.4.19",
 		"eslint": "^8.57.0",
-		"eslint-import-resolver-typescript": "^3.6.1",
 		"eslint-plugin-astro": "^0.34.0",
 		"eslint-plugin-deprecation": "^2.0.0",
-		"eslint-plugin-import": "^2.29.1",
 		"eslint-plugin-jsx-a11y": "^6.8.0",
 		"eslint-plugin-markdown": "^4.0.1",
-		"eslint-plugin-perfectionist": "^2.8.0",
 		"eslint-plugin-regexp": "^2.5.0",
-		"eslint-plugin-typescript-sort-keys": "^3.2.0",
 		"mdast-util-to-string": "^4.0.0",
 		"pagefind": "^1.1.0",
 		"postcss": "^8.4.38",
