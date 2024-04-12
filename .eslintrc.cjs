@@ -9,7 +9,6 @@ module.exports = {
 		"plugin:astro/recommended",
 		"plugin:astro/jsx-a11y-recommended",
 		"plugin:deprecation/recommended",
-		"plugin:perfectionist/recommended-natural",
 		"plugin:regexp/recommended",
 		"plugin:typescript-sort-keys/recommended",
 		"plugin:markdown/recommended-legacy",
@@ -35,7 +34,7 @@ module.exports = {
 	],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		ecmaVersion: latest,
+		ecmaVersion: 2022,
 		sourceType: "module",
 		project: "./tsconfig.json",
 	},
