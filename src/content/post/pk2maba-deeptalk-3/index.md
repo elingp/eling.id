@@ -7,7 +7,7 @@ tags: ["pk2maba"]
 
 ![Eling dan Kak Felin.](cover.jpg)
 
-<center><i><small>Eling dan Kak Felin.</small></i></center>
+<div class="md-figcaption">Eling dan Kak Felin.</div>
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
@@ -41,7 +41,7 @@ Berikut adalah rangkuman dari _sharing session_ yang saya lakukan bersama Kak Fe
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan kak Felin, ketua divisi Kesehatan PK2MABA & Startup Academy 2018. _Have a nice day!_
 
-#PK2MABAFILKOM2018 #TakeTheAction
+# PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 

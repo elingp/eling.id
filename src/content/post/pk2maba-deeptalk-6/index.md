@@ -5,9 +5,9 @@ publishDate: "04 Oct 2018"
 tags: ["pk2maba"]
 ---
 
-![Jonathan (Dito) dan Eling.](cover.jpg)
+![Jonathan dan Eling.](cover.jpg)
 
-<center><i><small>Jonathan (Dito) dan Eling.</small></i></center>
+<div class="md-figcaption">Jonathan dan Eling.</div>
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
@@ -53,7 +53,7 @@ Nah, setelah mengenal Jonathan melalui biodatanya sendiri, mari kita telusuri le
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Jonathan, teman dari prodi Sistem Informasi. _Have a nice day!_
 
-#PK2MABAFILKOM2018 #TakeTheAction
+# PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 

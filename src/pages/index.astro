@@ -10,27 +10,32 @@ const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
 
 const elingProject: { desc: string; href: string; title: string }[] = [
 	{
-		desc: "Machine learning algorithms from scratch using Python.",
+		desc: "App to recognize several categories of foods and their calories.",
+		href: "https://github.com/husain502/Careproject",
+		title: "CARE (Camera Calories)",
+	},
+	{
+		desc: "Simple ML algorithms from scratch using Python.",
 		href: "https://github.com/elingp/ml-from-scratch",
 		title: "ML from Scratch",
 	},
 	{
-		desc: "SPA with vanilla JavaScript and Webpack 5.",
+		desc: "SPA boilerplate using vanilla JavaScript and Webpack 5.",
 		href: "https://github.com/elingp/vanilla-spa-webpack-boilerplate",
 		title: "Vanilla SPA Webpack Boilerplate",
 	},
 	{
-		desc: "Programming Q&A website in Indonesia.",
+		desc: "Forum-style programming Q&A website.",
 		href: "https://github.com/elingp/tanja-pemrograman",
 		title: "Tanja Pemrograman",
 	},
 	{
-		desc: "Internal study resources aggregator.",
+		desc: "Internal study resources aggregator website.",
 		href: "https://github.com/elingp/seenau",
 		title: "Seenau",
 	},
 	{
-		desc: "Puskesmas Meo Meo patient information management website.",
+		desc: "Health Center patient information management website.",
 		href: "https://github.com/elingp/sistem-informasi-puskesmas",
 		title: "Sistem Informasi Puskesmas",
 	},
@@ -41,18 +46,14 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 	<section>
 		<h1 class="title mb-6">Hello, World!</h1>
 		<p class="mb-4">
-			I’m Eling, and welcome to my blog! I’ll be posting a lot of unrelated stuff here since I’m yet
-			to find my niche. You may see my current interests on the <a
-				class="cactus-link"
-				href="/about"
-			>
-				About Me
-			</a>.
+			I’m <b>Eling</b>, the voice behind this blog. Here, I share my journey through tech, my random
+			musings, and my adventures in manga/anime and TTRPGs. While I’m still discovering my niche,
+			you’ll find a bit of everything that captures my interest. Enjoy!
 		</p>
 		<SocialList />
 	</section>
 	<section aria-label="Blog post list" class="mt-16">
-		<h2 class="title mb-4 text-2xl font-semibold">Posts</h2>
+		<h2 class="title mb-4 text-xl md:text-2xl">Most Recent 10 Posts</h2>
 		<ul class="space-y-4">
 			{
 				allPostsByDate.map((p) => (
@@ -64,7 +65,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</ul>
 	</section>
 	<section class="mt-16">
-		<h2 class="title mb-4 text-2xl font-semibold">Projects</h2>
+		<h2 class="title mb-4 text-xl md:text-2xl">Public Projects</h2>
 		<dl class="space-y-4">
 			{
 				elingProject.map(({ desc, href, title }) => (
