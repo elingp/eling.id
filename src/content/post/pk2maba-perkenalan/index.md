@@ -1,13 +1,13 @@
 ---
 title: "Perkenalan (PK2MABA & Startup Academy)"
-description: "Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!"
+description: "Halo semuanya! Salam satu hati satu jiwa FILKOM! Perkenalkan, saya R. Komang Eling Pramuatmaja..."
 publishDate: "17 Aug 2018"
 tags: ["pk2maba"]
 ---
 
-![Eling ketika masih di Bali.](cover.jpg)
+![Eling di Bali circa 2018.](cover.jpg)
 
-<center><i><small>Eling ketika masih di Bali.</small></i></center>
+<div class="md-figcaption">Eling di Bali circa 2018.</div>
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
@@ -17,8 +17,9 @@ Saya memilih Universitas Brawijaya karena _track record_-nya yang terpercaya dan
 
 Sekian dulu perkenalan singkat dari saya. Untuk selanjutnya, saya akan mem-_posting_ tugas Deep Talk yang berisi serangkaian rangkuman dari _sharing session_ bersama orang-orang spesial yang saya ajak berdialog. _Have a nice day!_
 
-#PK2MABAFILKOM2018
-#TakeTheAction
+# PK2MABAFILKOM2018
+
+# TakeTheAction
 
 ---
 
