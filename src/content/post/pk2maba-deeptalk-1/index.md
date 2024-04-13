@@ -45,7 +45,7 @@ Berikut adalah rangkuman dari _sharing session_ yang saya lakukan bersama Pak La
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Pak Lana, dosen Fakultas Ilmu Komputer. _Have a nice day!_
 
-# PK2MABAFILKOM2018 #TakeTheAction
+\#PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 

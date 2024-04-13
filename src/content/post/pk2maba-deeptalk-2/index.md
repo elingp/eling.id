@@ -43,7 +43,7 @@ Berikut adalah rangkuman dari _sharing session_ yang saya lakukan bersama Kak Ca
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Kak Candra, mahasiswa PTI 2017. _Have a nice day!_
 
-# PK2MABAFILKOM2018 #TakeTheAction
+\#PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 
