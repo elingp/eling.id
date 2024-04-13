@@ -43,7 +43,7 @@ Nah, setelah mengenal Rama melalui biodatanya sendiri, mari kita telusuri lebih 
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Rama, teman dari prodi Teknik Informatika. _Have a nice day!_
 
-# PK2MABAFILKOM2018 #TakeTheAction
+\#PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 
