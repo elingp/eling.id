@@ -7,7 +7,7 @@ tags: ["gigih"]
 
 ![Persistence is an important mindset.](cover.webp)
 
-<center><i><small>Persistence is an important mindset.</small></i></center>
+<div class="md-figcaption">Persistence is an important mindset.</div>
 
 Persistence is a recurring theme in many fictional stories. The hero will face struggles along the way, tasting failure upon failure but never giving up, until they succeed in being the hero of the story. They fight with their circumstances until success is the only option. It is a cliché in narration you can find anywhere, from movies, novels, and comic books; from the western to the eastern culture. It is a cliché we also need in real life.
 

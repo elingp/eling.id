@@ -42,6 +42,6 @@
 	}
 
 	p {
-		@apply text-lg leading-7;
+		@apply text-base leading-7 md:text-lg md:leading-8;
 	}
 }

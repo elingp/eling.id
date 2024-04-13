@@ -7,7 +7,7 @@ tags: ["gigih"]
 
 ![Feeling timid about the future.](cover.webp)
 
-<center><i><small>Feeling timid about the future.</small></i></center>
+<div class="md-figcaption">Feeling timid about the future.</div>
 
 ## Ongoing Changes
 

@@ -48,13 +48,12 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		<p class="mb-4">
 			I’m <b>Eling</b>, the voice behind this blog. Here, I share my journey through tech, my random
 			musings, and my adventures in manga/anime and TTRPGs. While I’m still discovering my niche,
-			you’ll find a bit of everything that captures my interest. Curious to know more? Head over to
-			the <a class="cactus-link" href="/about"> About page </a>.
+			you’ll find a bit of everything that captures my interest. Enjoy!
 		</p>
 		<SocialList />
 	</section>
 	<section aria-label="Blog post list" class="mt-16">
-		<h2 class="title mb-4 text-2xl font-semibold">Posts</h2>
+		<h2 class="title mb-4 text-xl md:text-2xl">Most Recent 10 Posts</h2>
 		<ul class="space-y-4">
 			{
 				allPostsByDate.map((p) => (
@@ -66,7 +65,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</ul>
 	</section>
 	<section class="mt-16">
-		<h2 class="title mb-4 text-2xl font-semibold">Public Projects</h2>
+		<h2 class="title mb-4 text-xl md:text-2xl">Public Projects</h2>
 		<dl class="space-y-4">
 			{
 				elingProject.map(({ desc, href, title }) => (

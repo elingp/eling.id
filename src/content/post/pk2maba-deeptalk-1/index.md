@@ -7,7 +7,7 @@ tags: ["pk2maba"]
 
 ![Pak Lana dan Eling.](cover.jpg)
 
-<center><i><small>Pak Lana dan Eling.</small></i></center>
+<div class="md-figcaption">Pak Lana dan Eling.</div>
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
@@ -45,7 +45,7 @@ Berikut adalah rangkuman dari _sharing session_ yang saya lakukan bersama Pak La
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Pak Lana, dosen Fakultas Ilmu Komputer. _Have a nice day!_
 
-#PK2MABAFILKOM2018 #TakeTheAction
+# PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 
