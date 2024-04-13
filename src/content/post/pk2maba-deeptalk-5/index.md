@@ -7,7 +7,7 @@ tags: ["pk2maba"]
 
 ![Eling dan Rama.](cover.jpg)
 
-<center><i><small>Eling dan Rama.</small></i></center>
+<div class="md-figcaption">Eling dan Rama.</div>
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
@@ -43,7 +43,7 @@ Nah, setelah mengenal Rama melalui biodatanya sendiri, mari kita telusuri lebih 
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan Rama, teman dari prodi Teknik Informatika. _Have a nice day!_
 
-#PK2MABAFILKOM2018 #TakeTheAction
+# PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 

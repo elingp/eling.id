@@ -11,11 +11,32 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<div class="prose prose-lg prose-cactus space-y-6 prose-headings:font-semibold">
-		<h1 class="title">About Me</h1>
+	<div class="prose prose-base prose-cactus space-y-6 md:prose-lg prose-headings:font-semibold">
+		<h1 class="not-prose title">About</h1>
+		<h2>About This Blog</h2>
 		<p>
-			Hey there, I’m Eling Pramuatmaja, a tech-loving explorer on a lifelong learning adventure! 🚀
+			Welcome to my slice of the web—a cozy nook where tech and tales intertwine. Here’s a sneak
+			peek into what brews in my mind:
 		</p>
+		<ul class="list-inside list-disc">
+			<li>
+				<b>Tech Tales:</b> From back-end to machine learning, follow my odyssey as I build stuff, unravel
+				the mysteries of AI, and share the gems I uncover along the way.
+			</li>
+			<li>
+				<b>Life Bytes:</b> Dive into the chapters of my life—from distant lands to daily musings, and
+				perhaps a sprinkle of self-help wisdom when the muse strikes.
+			</li>
+			<li>
+				<b>Otaku Chronicles:</b> A space dedicated to my love for manga, manhwa, and the occasional anime.
+				Expect infrequent reviews and discussions on the narratives that captivate me.
+			</li>
+			<li>
+				<b>TTRPG Adventures:</b> Fresh on the TTRPG trail, I’m chronicling my quests and campaigns. It’s
+				not just D&D 5e—expect tales from Pathfinder 2e to Call of Cthulhu 7e and beyond.
+			</li>
+		</ul>
+		<h2>About Me</h2>
 		<div class="flex justify-center">
 			<figure>
 				<Image
@@ -24,54 +45,26 @@ const meta = {
 					loading="eager"
 					src={aboutImg}
 				/>
-				<figcaption class="text-center"><small>Eling circa 2023</small></figcaption>
+				<figcaption class="text-center">Eling circa 2023</figcaption>
 			</figure>
 		</div>
-		<h2>Short Bio</h2>
 		<p>
-			Let me take you on a journey through my digital escapades! It all started when I stumbled upon
-			the magic of coding at the tender age of 13. From that moment, I was hooked. HTML/CSS became
-			my starting playground, Python my trusty sidekick for data science adventures, and Java and
-			PHP my tools for crafting digital wonders.
+			I’m Eling Pramuatmaja, a tech enthusiast navigating the final chapters of my bachelor’s degree
+			and making strides in the tech industry. My academic pursuits in Text Summarization are just
+			the beginning of my quest to contribute to innovative tech solutions.
 		</p>
 		<p>
-			As I navigated through the vast landscape of tech, my curiosity led me to delve deeper into
-			the realm of machine learning and artificial intelligence. The intricacies of natural language
-			processing fascinated me, igniting a passion for understanding how technology can bridge the
-			gap between human communication and digital innovation. While my bachelor's degree thesis on
-			Text Summarization in Indonesian is still a work in progress, I'm eager to apply my knowledge
-			and skills in real-world scenarios that push the boundaries of what’s possible.
+			While I’m not categorically an eco-activist, I’m a keen follower of green tech and climate
+			news, always exploring how technology can contribute to environmental sustainability.
 		</p>
 		<p>
-			Outside the digital realm, I’m a staunch advocate for environmental conservation. My belief in
-			the power of technology to drive positive change fuels my desire to explore ways in which tech
-			can contribute to a sustainable future. From following climate news to actively seeking out
-			green initiatives, I’m committed to leveraging my expertise in tech to make a meaningful
-			impact on the world around us.
+			My leisure time is a blend of reading manga and manhwa, watching anime, and immersing myself
+			in the rich storytelling of TTRPGs. These hobbies are more than pastimes; they’re a source of
+			inspiration and connection.
 		</p>
-		<h2>What's My Jam?</h2>
-		<ul class="list-inside list-disc">
-			<li>
-				🤖 <b>Tech Enthusiast:</b> I'm always keeping an eye on the latest tech trends and developments.
-				HackerNews is my daily dose of tech news!
-			</li>
-			<li>
-				🌍 <b>Climate Advocate:</b> Passionate about the environment and the role technology plays in
-				preserving it for future generations.
-			</li>
-			<li>
-				📚 <b>Literature Lover:</b> Lost in the worlds of manga, manhwa, and anime, I find solace and
-				inspiration in stories that transcend boundaries.
-			</li>
-			<li>
-				🎲 <b>TTRPG Explorer:</b> Delving into the realms of tabletop role-playing games, I connect with
-				fellow adventurers and weave tales of imagination.
-			</li>
-		</ul>
-		<h2>What's Next?</h2>
 		<p>
-			As I prepare for new opportunities, I’m eager to contribute my skills and knowledge in NLP,
-			tech, and related fields to meaningful projects in the tech industry.
+			Whether you’re a tech professional, a fellow eco-conscious individual, or a narrative
+			enthusiast, there’s something here for you!
 		</p>
 		<div class="not-prose"><SocialList /></div>
 	</div>

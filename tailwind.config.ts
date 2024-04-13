@@ -126,7 +126,10 @@ export default {
 					},
 				},
 				".title": {
-					"@apply text-2xl font-semibold text-accent-2": {},
+					"@apply text-2xl md:text-4xl font-semibold text-accent-2": {},
+				},
+				".md-figcaption": {
+					"@apply -mt-4 mb-8 text-center text-gray-500 text-sm": {},
 				},
 			});
 		}),

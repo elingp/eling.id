@@ -1,6 +1,8 @@
 /** @type {import("@types/eslint").Linter.Config} */
 module.exports = {
 	env: {
+		browser: true,
+		es2022: true,
 		node: true,
 	},
 	extends: [
@@ -8,9 +10,8 @@ module.exports = {
 		"plugin:@typescript-eslint/recommended",
 		"plugin:astro/recommended",
 		"plugin:astro/jsx-a11y-recommended",
-		"plugin:deprecation/recommended",
 		"plugin:regexp/recommended",
-		"plugin:markdown/recommended-legacy",
+		"plugin:deprecation/recommended",
 	],
 	overrides: [
 		{
@@ -21,12 +22,18 @@ module.exports = {
 				parser: "@typescript-eslint/parser",
 			},
 		},
+		{
+			extends: ["plugin:markdown/recommended-legacy"],
+			files: ["**/*.md"],
+			processor: "markdown/markdown",
+		},
 	],
 	parser: "@typescript-eslint/parser",
 	parserOptions: {
-		ecmaVersion: 2022,
+		ecmaVersion: "latest",
+		project: true,
 		sourceType: "module",
-		project: "./tsconfig.json",
+		tsconfigRootDir: __dirname,
 	},
 	root: true,
 };
