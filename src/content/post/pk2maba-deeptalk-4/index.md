@@ -47,7 +47,7 @@ Berikut adalah rangkuman dari _sharing session_ yang saya lakukan bersama Kak Yo
 
 Baik, cukup sekian rangkuman dari _sharing session_ saya dengan kak Yoga, anggota HMIF dari divisi PIP. _Have a nice day!_
 
-# PK2MABAFILKOM2018 #TakeTheAction
+\#PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 

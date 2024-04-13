@@ -17,9 +17,7 @@ Saya memilih Universitas Brawijaya karena _track record_-nya yang terpercaya dan
 
 Sekian dulu perkenalan singkat dari saya. Untuk selanjutnya, saya akan mem-_posting_ tugas Deep Talk yang berisi serangkaian rangkuman dari _sharing session_ bersama orang-orang spesial yang saya ajak berdialog. _Have a nice day!_
 
-# PK2MABAFILKOM2018
-
-# TakeTheAction
+\#PK2MABAFILKOM2018 #TakeTheAction
 
 ---
 
