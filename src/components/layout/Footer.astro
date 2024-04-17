@@ -1,5 +1,6 @@
 ---
 import { menuLinks, siteConfig } from "@/site-config";
+import { Icon } from "astro-icon/components";
 
 const year = new Date().getFullYear();
 ---
@@ -11,7 +12,8 @@ const year = new Date().getFullYear();
 		&copy; {year}
 		{siteConfig.author}. <span class="inline-block">
 			<a href="https://github.com/chrismwilliams/astro-theme-cactus"
-				>🌵&nbsp;Based on Astro Cactus</a
+				><Icon aria-hidden="true" class="inline h-4 w-4" name={"mdi:cactus"} />&nbsp;Based on Astro
+				Cactus</a
 			>
 		</span>
 	</div>
