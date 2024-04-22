@@ -19,7 +19,7 @@
 		"@astrojs/tailwind": "5.1.0",
 		"@fontsource/merriweather": "^5.0.12",
 		"@fontsource/raleway": "^5.0.17",
-		"astro": "4.6.2",
+		"astro": "4.6.3",
 		"astro-expressive-code": "^0.35.1",
 		"astro-icon": "^1.1.0",
 		"rehype-external-links": "^3.0.0",
