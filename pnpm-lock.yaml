@@ -21,8 +21,8 @@ dependencies:
     specifier: ^5.0.12
     version: 5.0.12
   '@fontsource/raleway':
-    specifier: ^5.0.17
-    version: 5.0.17
+    specifier: ^5.0.19
+    version: 5.0.19
   astro:
     specifier: 4.6.2
     version: 4.6.2(typescript@5.4.5)
@@ -1080,8 +1080,8 @@ packages:
     resolution: {integrity: sha512-l7brVGcFUiGhK7bucRbwWYZDInfyXuVYEthHNw26RkkfMR9TFTiOAIABnN6PFr6Vjaz+c0o7ibLmdEMeSMDfRA==}
     dev: false
 
-  /@fontsource/raleway@5.0.17:
-    resolution: {integrity: sha512-JQ86C+y7jSnaxKaqhYX5i6suc7IgUvAkVnP+Z7iWvtrZRl94nXzUU89E84eMq6tCOmbBin/uvtAGfgdJGskT1A==}
+  /@fontsource/raleway@5.0.19:
+    resolution: {integrity: sha512-S4fAg/Kmvkw5g6Z2eoxGijeYcopsfQIla+iXbOYZsIUaFHcS49l/qBNO3MWZ8iJ+PCFulz9juv2OjPPvMW43oA==}
     dev: false
 
   /@humanwhocodes/config-array@0.11.14:
