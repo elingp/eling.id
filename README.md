@@ -9,19 +9,22 @@ Astro Cactus is a simple opinionated starter built with the Astro framework. Use
 
 ## Table Of Contents
 
-1. [Key Features](#key-features)
-2. [Demo](#demo-💻)
-3. [Quick start](#quick-start)
-4. [Preview](#preview)
-5. [Commands](#commands)
-6. [Configure](#configure)
-7. [Adding Posts](#adding-posts)
-   - [Frontmatter](#frontmatter)
-   - [Frontmatter Snippet](#frontmatter-snippet)
-8. [Pagefind search](#pagefind-search)
-9. [Analytics](#analytics)
-10. [Deploy](#deploy)
-11. [Acknowledgment](#acknowledgment)
+- [Table Of Contents](#table-of-contents)
+- [Key Features](#key-features)
+- [Demo 💻](#demo-)
+- [Quick start](#quick-start)
+- [Preview](#preview)
+- [Commands](#commands)
+- [Configure](#configure)
+- [Updating](#updating)
+- [Adding posts](#adding-posts)
+  - [Frontmatter](#frontmatter)
+  - [Frontmatter snippet](#frontmatter-snippet)
+- [Pagefind search](#pagefind-search)
+- [Analytics](#analytics)
+- [Deploy](#deploy)
+- [Acknowledgment](#acknowledgment)
+- [License](#license)
 
 ## Key Features
 
@@ -97,6 +100,12 @@ Replace pnpm with your choice of npm / yarn
   - You can also create your own og images and skip satori generating it for you by adding an ogImage property in the frontmatter with a link to the asset, an example can be found in `src/content/post/social-image.md`. More info on frontmatter can be found [here](#frontmatter)
 - Optional:
   - Fonts: This theme sets the body element to the font family `font-mono`, located in the global css file `src/styles/global.css`. You can change fonts by removing the variant `font-mono`, after which TailwindCSS will default to the `font-sans` [font family stack](https://tailwindcss.com/docs/font-family).
+
+## Updating
+
+If you've forked the template, you can [sync the fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) with your own project, remembering to not click Discard Changes as you will lose your own.
+
+If you have a template repository, you can add this template as a remote, as discussed [here](https://stackoverflow.com/questions/56577184/github-pull-changes-from-a-template-repository).
 
 ## Adding posts
 

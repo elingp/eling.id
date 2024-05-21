@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+
 import { fontFamily } from "tailwindcss/defaultTheme";
 import plugin from "tailwindcss/plugin";
 
@@ -7,19 +8,39 @@ export default {
 		"./src/**/*.{astro,html,js,jsx,md,svelte,ts,tsx,vue}",
 		"!./src/pages/og-image/[slug].png.ts",
 	],
-	darkMode: ["class", '[data-theme="dark"]'],
 	corePlugins: {
 		// disable aspect ratio as per docs -> @tailwindcss/aspect-ratio
 		aspectRatio: false,
 		// disable some core plugins as they are included in the css, even when unused
-		touchAction: false,
-		ringOffsetWidth: false,
-		ringOffsetColor: false,
-		scrollSnapType: false,
 		borderOpacity: false,
-		textOpacity: false,
 		fontVariantNumeric: false,
+		ringOffsetColor: false,
+		ringOffsetWidth: false,
+		scrollSnapType: false,
+		textOpacity: false,
+		touchAction: false,
 	},
+	darkMode: ["class", '[data-theme="dark"]'],
+	plugins: [
+		require("@tailwindcss/typography"),
+		require("@tailwindcss/aspect-ratio"),
+		plugin(function ({ addComponents }) {
+			addComponents({
+				".cactus-link": {
+					"&:hover": {
+						"@apply decoration-link decoration-2": {},
+					},
+					"@apply underline underline-offset-2": {},
+				},
+				".title": {
+					"@apply text-2xl md:text-4xl font-semibold text-accent-2": {},
+				},
+				".md-figcaption": {
+					"@apply -mt-4 mb-8 text-center text-gray-500 text-sm": {},
+				},
+			});
+		}),
+	],
 	theme: {
 		extend: {
 			colors: {
@@ -39,7 +60,7 @@ export default {
 				height: "height",
 			},
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
+			// @ts-expect-error
 			// Remove above once tailwindcss exposes theme type
 			typography: (theme) => ({
 				cactus: {
@@ -114,24 +135,4 @@ export default {
 			}),
 		},
 	},
-	plugins: [
-		require("@tailwindcss/typography"),
-		require("@tailwindcss/aspect-ratio"),
-		plugin(function ({ addComponents }) {
-			addComponents({
-				".cactus-link": {
-					"@apply underline underline-offset-2": {},
-					"&:hover": {
-						"@apply decoration-link decoration-2": {},
-					},
-				},
-				".title": {
-					"@apply text-2xl md:text-4xl font-semibold text-accent-2": {},
-				},
-				".md-figcaption": {
-					"@apply -mt-4 mb-8 text-center text-gray-500 text-sm": {},
-				},
-			});
-		}),
-	],
 } satisfies Config;
