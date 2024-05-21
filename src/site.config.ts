@@ -25,28 +25,42 @@ export const siteConfig: SiteConfig = {
 		// Webmention.io API endpoint. Get your own here: https://webmention.io/, and follow this blog post: https://astro-cactus.chriswilliams.dev/posts/webmentions/
 		link: "",
 	},
+	// Option to sort posts by updatedDate if set to true (if property exists). Default (false) will sort by publishDate
+	sortPostsByUpdatedDate: false,
 };
 
 // Used to generate links in both the Header & Footer.
-export const menuLinks: Array<{ title: string; path: string }> = [
+export const menuLinks: { path: string; title: string }[] = [
 	{
-		title: "Home",
 		path: "/",
+		title: "Home",
 	},
 	{
-		title: "About",
 		path: "/about/",
+		title: "About",
 	},
 	{
-		title: "Blog",
 		path: "/posts/",
+		title: "Blog",
 	},
 ];
 
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
-	themes: ["dracula", "github-light"],
+	themes: ["github-dark", "github-light"],
+	styleOverrides: {
+		borderRadius: "4px",
+		codeFontFamily:
+			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
+		codeFontSize: "0.875rem",
+		codeLineHeight: "1.7142857rem",
+		codePaddingInline: "1rem",
+		frames: {
+			frameBoxShadowCssValue: "none",
+		},
+		uiLineHeight: "inherit",
+	},
 	themeCssSelector(theme, { styleVariants }) {
 		// If one dark and one light theme are available
 		// generate theme CSS selectors compatible with cactus-theme dark mode switch
@@ -59,16 +73,4 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		return `[data-theme="${theme.name}"]`;
 	},
 	useThemedScrollbars: false,
-	styleOverrides: {
-		frames: {
-			frameBoxShadowCssValue: "none",
-		},
-		uiLineHeight: "inherit",
-		codeFontSize: "0.875rem",
-		codeLineHeight: "1.7142857rem",
-		borderRadius: "4px",
-		codePaddingInline: "1rem",
-		codeFontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
-	},
 };
