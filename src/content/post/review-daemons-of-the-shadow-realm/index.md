@@ -148,4 +148,4 @@ For now, it’s a “Kinda Great” on my scale. It’s the kind of manga that g
 
 That’s a wrap on my first review! I’m still finding my feet in the world of manga critiques—and critiques in general, as I will also be making them for anime and novels, among others—but I’m learning as I go. Your thoughts and feedback are always welcome. Thanks for hanging out with me, and I’ll catch you in the next one!
 
-_**Thanks** to Hamdani, Dela, and Ademas for reading drafts of this._
+_**Thanks** to Hamdani and Dela for reading the early drafts of this._
