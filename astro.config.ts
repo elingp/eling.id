@@ -5,10 +5,11 @@ import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import remarkUnwrapImages from "remark-unwrap-images";
 import rehypeExternalLinks from "rehype-external-links";
-import { remarkReadingTime } from "./src/utils/remark-reading-time";
 import icon from "astro-icon";
 import expressiveCode from "astro-expressive-code";
+
 import { expressiveCodeOptions } from "./src/site.config";
+import { remarkReadingTime } from "./src/utils/remark-reading-time";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,8 +21,8 @@ export default defineConfig({
 			[
 				rehypeExternalLinks,
 				{
-					target: "_blank",
 					rel: ["nofollow, noopener, noreferrer"],
+					target: "_blank",
 				},
 			],
 		],
@@ -53,13 +54,14 @@ export default defineConfig({
 	},
 });
 
-function rawFonts(ext: Array<string>) {
+function rawFonts(ext: string[]) {
 	return {
 		name: "vite-plugin-raw-fonts",
-		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-		// @ts-ignore:next-line
+		// @ts-expect-error:next-line
 		transform(_, id) {
+			// eslint-disable-next-line
 			if (ext.some((e) => id.endsWith(e))) {
+				// eslint-disable-next-line
 				const buffer = fs.readFileSync(id);
 				return {
 					code: `export default ${JSON.stringify(buffer)}`,
