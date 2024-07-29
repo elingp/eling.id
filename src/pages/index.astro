@@ -52,12 +52,12 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</p>
 		<SocialList />
 	</section>
-	<section aria-label="Blog post list" class="mt-16">
+	<section aria-label="Most recent 10 posts" class="mt-16">
 		<h2 class="title mb-4 text-xl md:text-2xl">Most Recent 10 Posts</h2>
 		<ul class="space-y-4">
 			{
 				allPostsByDate.map((p) => (
-					<li class="flex flex-col gap-x-2 sm:flex-row">
+					<li class="grid gap-2 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
 						<PostPreview post={p} />
 					</li>
 				))
