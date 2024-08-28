@@ -25,14 +25,6 @@
 		--theme-quote: 24deg 90% 90%;
 	}
 
-	html {
-		@apply scroll-smooth;
-	}
-
-	body {
-		@apply mx-auto flex min-h-screen max-w-4xl flex-col bg-bgColor px-8 pt-16 font-serif text-base font-normal text-textColor antialiased;
-	}
-
 	h2,
 	h3,
 	h4,
