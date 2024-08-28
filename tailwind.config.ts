@@ -120,7 +120,7 @@ export default {
 								},
 							},
 						},
-            /* Admonitions/Aside css*/
+						/* Admonitions/Aside css*/
 						".aside": {
 							"--admonition-color": "var(--tw-prose-quotes)",
 							"@apply my-4 py-4 ps-4 border-s-2 border-[--admonition-color]": "",

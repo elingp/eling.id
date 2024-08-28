@@ -42,7 +42,7 @@ export default defineConfig({
 		icon(),
 		tailwind({
 			applyBaseStyles: false,
-      nesting: true,
+			nesting: true,
 		}),
 		sitemap(),
 		mdx(),
