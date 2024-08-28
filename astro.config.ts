@@ -1,27 +1,32 @@
-import { defineConfig } from "astro/config";
-import fs from "fs";
+import fs from "node:fs";
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
-import remarkUnwrapImages from "remark-unwrap-images";
-import rehypeExternalLinks from "rehype-external-links";
-import icon from "astro-icon";
+import tailwind from "@astrojs/tailwind";
 import expressiveCode from "astro-expressive-code";
-
+import icon from "astro-icon";
+import { defineConfig } from "astro/config";
 import { expressiveCodeOptions } from "./src/site.config";
-import { remarkReadingTime } from "./src/utils/remark-reading-time";
+
+// Remark plugins
+import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
+import remarkUnwrapImages from "remark-unwrap-images";
+import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
+import { remarkReadingTime } from "./src/plugins/remark-reading-time";
+
+// Rehype plugins
+import rehypeExternalLinks from "rehype-external-links";
 
 // https://astro.build/config
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
 	site: "https://eling.id/",
 	markdown: {
-		remarkPlugins: [remarkUnwrapImages, remarkReadingTime],
+		remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, remarkAdmonitions],
 		rehypePlugins: [
 			[
 				rehypeExternalLinks,
 				{
-					rel: ["nofollow, noopener, noreferrer"],
+					rel: ["nofollow, noreferrer"],
 					target: "_blank",
 				},
 			],
@@ -37,6 +42,7 @@ export default defineConfig({
 		icon(),
 		tailwind({
 			applyBaseStyles: false,
+			nesting: true,
 		}),
 		sitemap(),
 		mdx(),
@@ -59,9 +65,7 @@ function rawFonts(ext: string[]) {
 		name: "vite-plugin-raw-fonts",
 		// @ts-expect-error:next-line
 		transform(_, id) {
-			// eslint-disable-next-line
 			if (ext.some((e) => id.endsWith(e))) {
-				// eslint-disable-next-line
 				const buffer = fs.readFileSync(id);
 				return {
 					code: `export default ${JSON.stringify(buffer)}`,
