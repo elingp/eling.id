@@ -24,8 +24,8 @@ importers:
         specifier: ^5.0.14
         version: 5.0.14
       '@fontsource/raleway':
-        specifier: ^5.0.20
-        version: 5.0.20
+        specifier: ^5.1.0
+        version: 5.1.0
       astro:
         specifier: 4.14.6
         version: 4.14.6(@types/node@22.5.1)(rollup@4.21.1)(typescript@5.5.4)
@@ -524,8 +524,8 @@ packages:
   '@fontsource/merriweather@5.0.14':
     resolution: {integrity: sha512-fdlH6iHzbrxdS/e2GbDHNtBSH7HXn2fz5f4uyCZjC4tPmMMTV9xM3RMplrRUegWQ7OD0XDuhXhnO5lSZo+9h+A==}
 
-  '@fontsource/raleway@5.0.20':
-    resolution: {integrity: sha512-ZgTAEnlVYUIk75RM1Xsyk932zQ29DgxVr7io0QwVfDwcr88LHop0e2BZhBBI4MxL4b5L+T91RYwm6mLl/CXnpA==}
+  '@fontsource/raleway@5.1.0':
+    resolution: {integrity: sha512-g97nQtuEMVlW95xKCZuDun4gSxmBOxf+7yfValqOwATvJL/98RkCacEsBgJlFNtWxO0+FkmoMl3b9kvZpyQ6VA==}
 
   '@iconify-json/mdi@1.1.68':
     resolution: {integrity: sha512-7//TKCiXLU6kNWeOJRTBbisofVO7rF1sD1TZTL4/V9nqlmVNczQ5IOY0GgKOTsitkcTnX9GXgrgbjw3OI5B69w==}
@@ -3696,7 +3696,7 @@ snapshots:
 
   '@fontsource/merriweather@5.0.14': {}
 
-  '@fontsource/raleway@5.0.20': {}
+  '@fontsource/raleway@5.1.0': {}
 
   '@iconify-json/mdi@1.1.68':
     dependencies:
