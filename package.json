@@ -21,7 +21,7 @@
 		"@astrojs/tailwind": "5.1.0",
 		"@fontsource/merriweather": "^5.0.14",
 		"@fontsource/raleway": "^5.0.20",
-		"astro": "4.14.6",
+		"astro": "4.15.11",
 		"astro-expressive-code": "^0.36.0",
 		"astro-icon": "^1.1.1",
 		"cssnano": "^7.0.5",
