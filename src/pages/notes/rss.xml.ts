@@ -1,6 +1,6 @@
 import { getCollection } from "astro:content";
-import rss from "@astrojs/rss";
 import { siteConfig } from "@/site.config";
+import rss from "@astrojs/rss";
 
 export const GET = async () => {
 	const notes = await getCollection("note");
@@ -12,7 +12,7 @@ export const GET = async () => {
 		items: notes.map((note) => ({
 			title: note.data.title,
 			pubDate: note.data.publishDate,
-			link: `notes/${note.id}/`
-		}))
+			link: `notes/${note.id}/`,
+		})),
 	});
 };

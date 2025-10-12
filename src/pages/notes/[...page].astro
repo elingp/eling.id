@@ -22,22 +22,22 @@ const { page } = Astro.props;
 
 const meta = {
 	description: "Read my collection of notes",
-	title: "Notes"
+	title: "Notes",
 };
 
 const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
 			text: "← Previous Page",
-			url: page.url.prev
-		}
+			url: page.url.prev,
+		},
 	}),
 	...(page.url.next && {
 		nextUrl: {
 			text: "Next Page →",
-			url: page.url.next
-		}
-	})
+			url: page.url.next,
+		},
+	}),
 };
 ---
 
@@ -49,7 +49,10 @@ const paginationProps = {
 		</section>
 		{page.lastPage > 1 && <Pagination {...paginationProps} />}
 	</div>
-	<a class="mt-16 inline-flex gap-2 sm:gap-3 text-lg items-center hover:text-accent" href="/notes/rss.xml">
+	<a
+		class="mt-16 inline-flex items-center gap-2 text-lg hover:text-accent sm:gap-3"
+		href="/notes/rss.xml"
+	>
 		<Icon class="h-6 w-6" name="mdi:rss" />
 		<span>RSS Feed</span>
 	</a>
