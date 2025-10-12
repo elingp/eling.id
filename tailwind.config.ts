@@ -8,8 +8,6 @@ export default {
 		"!./src/pages/og-image/[slug].png.ts",
 	],
 	corePlugins: {
-		// disable aspect ratio as per docs -> @tailwindcss/aspect-ratio
-		aspectRatio: false,
 		// disable some core plugins as they are included in the css, even when unused
 		borderOpacity: false,
 		fontVariantNumeric: false,
@@ -22,7 +20,6 @@ export default {
 	darkMode: ["class", '[data-theme="dark"]'],
 	plugins: [
 		require("@tailwindcss/typography"),
-		require("@tailwindcss/aspect-ratio"),
 		plugin(({ addComponents }) => {
 			addComponents({
 				".cactus-link": {
@@ -86,12 +83,16 @@ export default {
 							border: "1px dotted #666",
 							borderRadius: "2px",
 						},
+						kbd: {
+							"@apply dark:bg-textColor": "",
+						},
 						blockquote: {
 							borderLeftWidth: "0",
 						},
 						hr: {
 							borderTopStyle: "dashed",
 						},
+						/* Table */
 						thead: {
 							borderBottomWidth: "none",
 						},
@@ -104,6 +105,15 @@ export default {
 						},
 						tfoot: {
 							borderTop: "1px dashed #666",
+						},
+						'th[align="center"], td[align="center"]': {
+							"text-align": "center",
+						},
+						'th[align="right"], td[align="right"]': {
+							"text-align": "right",
+						},
+						'th[align="left"], td[align="left"]': {
+							"text-align": "left",
 						},
 						sup: {
 							"@apply ms-0.5": "",
@@ -120,7 +130,7 @@ export default {
 								},
 							},
 						},
-						/* Admonitions/Aside css*/
+						/* Admonitions/Aside */
 						".aside": {
 							"--admonition-color": "var(--tw-prose-quotes)",
 							"@apply my-4 py-4 ps-4 border-s-2 border-[--admonition-color]": "",
