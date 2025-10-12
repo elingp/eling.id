@@ -58,7 +58,7 @@ export default defineConfig({
 			/**
 			 * optional
 			 **/
-			// short_name: "Astro_Cactus",
+			short_name: "Eling_Pramuatmaja",
 			description: siteConfig.description,
 			lang: siteConfig.lang,
 			icon: "public/icon.svg", // the source for generating favicon & icons
