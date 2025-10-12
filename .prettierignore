@@ -6,3 +6,7 @@ node_modules
 
 pnpm-lock.yaml
 dist
+
+# VS Code snippets should be strict JSON (no trailing commas)
+# Let Biome handle formatting
+.vscode/*.code-snippets
