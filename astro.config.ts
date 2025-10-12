@@ -6,24 +6,24 @@ import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 
 // Remark plugins
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
-import remarkUnwrapImages from "remark-unwrap-images";
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 
 // Rehype plugins
 import rehypeExternalLinks from "rehype-external-links";
+import rehypeUnwrapImages from "rehype-unwrap-images";
 
 // https://astro.build/config
 export default defineConfig({
 	// ! Please remember to replace the following site property with your own domain
 	site: "https://eling.id/",
 	markdown: {
-		remarkPlugins: [remarkUnwrapImages, remarkReadingTime, remarkDirective, remarkAdmonitions],
+		remarkPlugins: [remarkReadingTime, remarkDirective, remarkAdmonitions],
 		rehypePlugins: [
 			[
 				rehypeExternalLinks,
@@ -32,6 +32,7 @@ export default defineConfig({
 					target: "_blank",
 				},
 			],
+			rehypeUnwrapImages,
 		],
 		remarkRehype: {
 			footnoteLabelProperties: {
@@ -99,6 +100,13 @@ export default defineConfig({
 		plugins: [rawFonts([".ttf", ".woff"])],
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],
+		},
+	},
+	env: {
+		schema: {
+			WEBMENTION_API_KEY: envField.string({ context: "server", access: "secret", optional: true }),
+			WEBMENTION_URL: envField.string({ context: "client", access: "public", optional: true }),
+			WEBMENTION_PINGBACK: envField.string({ context: "client", access: "public", optional: true }),
 		},
 	},
 });
