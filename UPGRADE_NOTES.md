@@ -394,3 +394,355 @@ Before deploying:
 **Updated on:** October 13, 2025
 **Upgrade performed by:** GitHub Copilot (Agentic Mode)
 
+---
+
+## v5.0.0 New Features Explained
+
+### 1. Notes Collection (NEW in v5.0.0) 📝
+
+**What are Notes?**
+
+Notes are a **new type of content** designed for shorter, more casual posts compared to full blog posts. Think of them like:
+
+- Twitter/X posts but on your own site
+- Quick thoughts or observations
+- Brief updates or announcements
+- Micro-blogging content
+
+**Key Differences from Blog Posts:**
+
+| Feature             | Blog Posts                      | Notes                           |
+| ------------------- | ------------------------------- | ------------------------------- |
+| **Purpose**         | Long-form articles              | Short-form content              |
+| **Location**        | `src/content/post/`             | `src/content/note/`             |
+| **URL Pattern**     | `/posts/[slug]/`                | `/notes/[slug]/`                |
+| **Required Fields** | title, description, publishDate | title, publishDate              |
+| **Optional Fields** | tags, draft, coverImage, etc.   | description only                |
+| **Date Format**     | Flexible (ISO or readable)      | ISO 8601 with timezone (strict) |
+| **Tags**            | ✅ Full tag support             | ❌ No tags                      |
+| **Draft Mode**      | ✅ Supported                    | ❌ Not supported                |
+| **TOC**             | ✅ Table of Contents            | ❌ No TOC (too short)           |
+| **Reading Time**    | ✅ Displayed                    | ❌ Not displayed                |
+| **Typical Length**  | 500+ words                      | 50-200 words                    |
+| **Webmentions**     | ✅ Supported                    | ❌ Not included                 |
+| **RSS Feed**        | `/rss.xml`                      | `/notes/rss.xml`                |
+| **Component**       | `BlogPost.astro` layout         | `Note.astro` component          |
+
+**Example Note Frontmatter:**
+
+```yaml
+---
+title: "Hello, Welcome"
+description: "An introduction to using notes" # optional
+publishDate: "2024-10-14T11:23:00Z" # MUST be ISO 8601 format!
+---
+This is a short note. No tags, no drafts, just quick content.
+```
+
+**Where Notes Appear:**
+
+- **Homepage**: Shows latest 5 notes (if any exist)
+- **Notes Page**: `/notes/` - paginated list (10 per page)
+- **Individual Pages**: `/notes/[slug]/`
+- **RSS Feed**: `/notes/rss.xml`
+- **Search**: Indexed by Pagefind
+
+**When to Use Notes:**
+
+- ✅ Quick thoughts or opinions
+- ✅ Brief announcements
+- ✅ Links to interesting content with commentary
+- ✅ Status updates
+- ✅ Short tutorials or tips
+- ❌ In-depth tutorials (use blog posts)
+- ❌ Content needing tags/categories (use blog posts)
+- ❌ Long-form articles (use blog posts)
+
+**How to Create a Note:**
+
+```bash
+# Create new note file
+touch src/content/note/my-first-note.md
+```
+
+```yaml
+---
+title: "My First Note"
+publishDate: "2025-01-13T10:00:00Z" # Use ISO 8601!
+---
+This is my first note. It's short and sweet!
+```
+
+**VSCode Snippet:**
+
+Type `frontmatter-note` in a `.md` file to auto-generate the frontmatter structure.
+
+---
+
+### 2. Tag Collection & Custom Tag Pages (NEW in v5.0.0) 🏷️
+
+**What Changed with Tags?**
+
+Before v5.0.0, tags were just simple strings in your post frontmatter. Now you can create **custom tag pages** with descriptions and introductory content!
+
+**Old Way (Still Works):**
+
+```yaml
+---
+title: "My Post"
+tags: ["javascript", "tutorial"]
+---
+```
+
+This creates:
+
+- Tag page at `/tags/javascript/` (auto-generated)
+- Tag page at `/tags/tutorial/` (auto-generated)
+- Both show list of posts with that tag
+
+**New Way (v5.0.0+):**
+
+Create a file in `src/content/tag/` to **customize** the tag page:
+
+```bash
+# Create custom tag page
+touch src/content/tag/javascript.md
+```
+
+```yaml
+---
+title: "JavaScript Tutorials" # Custom title (optional)
+description: "Learn JavaScript with these tutorials" # Meta description (optional)
+---
+Welcome to my JavaScript tutorials! Here you'll find everything from basics to advanced topics.
+
+I've been writing JavaScript for over 5 years, and these posts represent my journey...
+```
+
+**What This Adds:**
+
+- **Custom H1 title** instead of just "#javascript"
+- **Custom meta description** for SEO
+- **Intro paragraph(s)** before the list of posts
+- **Markdown content** to explain the tag/category
+
+**Key Differences:**
+
+| Old Tags (v4)               | New Tag Pages (v5)                       |
+| --------------------------- | ---------------------------------------- |
+| Just strings in frontmatter | **Optional** files in `src/content/tag/` |
+| Auto-generated title        | Custom title & description               |
+| No intro text               | Markdown intro content                   |
+| Basic tag page              | Rich content page                        |
+| Still works!                | Enhanced experience                      |
+
+**Important Notes:**
+
+1. **Tag files are OPTIONAL** - if you don't create a tag file, the old auto-generated page still works
+2. **Filename MUST match tag name** - `javascript.md` for tag `"javascript"`
+3. **Case-sensitive** - tags are lowercased, so use lowercase filenames
+4. **Not required for posts** - you can still just use tags in post frontmatter
+
+**Examples Included:**
+
+- `src/content/tag/test.md` - Full example with title and description
+- `src/content/tag/markdown.md` - Shows custom intro text
+- `src/content/tag/image.md` - Example without title (just description)
+
+**When to Use Custom Tag Pages:**
+
+- ✅ You have a series of posts on a topic
+- ✅ You want to explain what the tag category is about
+- ✅ Better SEO for important categories
+- ✅ Professional appearance for main topics
+- ❌ One-off tags (not worth the effort)
+- ❌ Self-explanatory tags (may not need intro)
+
+---
+
+### 3. Other Important New Features in v5.0.0
+
+#### **Astro env API (Environment Variables)**
+
+**Before v5.0.0:**
+
+```ts
+// astro.config.ts
+export default defineConfig({
+	// ...
+});
+
+// .env file accessed directly via import.meta.env
+const apiKey = import.meta.env.WEBMENTION_API_KEY;
+```
+
+**After v5.0.0:**
+
+```ts
+// astro.config.ts
+import { defineConfig, envField } from "astro/config";
+
+export default defineConfig({
+	env: {
+		schema: {
+			WEBMENTION_API_KEY: envField.string({
+				context: "server", // Only available server-side
+				access: "secret", // Won't be exposed to client
+				optional: true,
+			}),
+			WEBMENTION_URL: envField.string({
+				context: "client", // Available client-side
+				access: "public",
+				optional: true,
+			}),
+		},
+	},
+});
+```
+
+```ts
+// In components
+import { WEBMENTION_URL } from "astro:env/client";
+import { WEBMENTION_API_KEY } from "astro:env/server";
+```
+
+**Benefits:**
+
+- ✅ **Type-safe** environment variables
+- ✅ **Validation** at build time
+- ✅ **Clear separation** between server/client vars
+- ✅ **Security** - server vars never exposed to client
+- ✅ **Auto-completion** in your IDE
+
+---
+
+#### **Glob Loaders (Content Collections)**
+
+**Before v5.0.0:**
+
+```ts
+// src/content/config.ts
+const post = defineCollection({
+	type: "content",
+	schema: ({ image }) =>
+		z.object({
+			// schema...
+		}),
+});
+```
+
+**After v5.0.0:**
+
+```ts
+// src/content.config.ts (note: different filename!)
+import { glob } from "astro/loaders";
+
+const post = defineCollection({
+	loader: glob({ base: "./src/content/post", pattern: "**/*.{md,mdx}" }),
+	schema: ({ image }) =>
+		z.object({
+			// schema...
+		}),
+});
+```
+
+**Benefits:**
+
+- ✅ **Faster builds** - more efficient file loading
+- ✅ **More flexible** - can load from anywhere, not just content/
+- ✅ **Better for large sites** - scales better with many files
+- ✅ **Future-proof** - enables future data sources (CMS, APIs, etc.)
+
+---
+
+#### **Entry ID Changes (Breaking Change)**
+
+**Before v5.0.0:**
+
+```ts
+const { slug } = entry;
+// Use: /posts/${slug}/
+```
+
+**After v5.0.0:**
+
+```ts
+const { id } = entry;
+// Use: /posts/${id}/
+```
+
+**Why?** Better aligns with filesystem structure and future data sources.
+
+**Files Updated:**
+
+- `src/components/blog/PostPreview.astro`
+- `src/layouts/BlogPost.astro`
+- `src/pages/posts/[...slug].astro`
+- `src/pages/rss.xml.ts`
+- `src/pages/og-image/[...slug].png.ts`
+
+---
+
+#### **Plugin Migration (remark → rehype)**
+
+**Before v5.0.0:**
+
+```ts
+markdown: {
+  remarkPlugins: [remarkUnwrapImages],
+}
+```
+
+**After v5.0.0:**
+
+```ts
+markdown: {
+  rehypePlugins: [rehypeUnwrapImages],
+}
+```
+
+**Why?** Better positioning in the rendering pipeline for image processing.
+
+---
+
+### Summary of What's New
+
+**Major Features:**
+
+1. ✅ **Notes Collection** - Short-form content type
+2. ✅ **Custom Tag Pages** - Rich tag category pages
+3. ✅ **Astro env API** - Type-safe environment variables
+4. ✅ **Glob Loaders** - More efficient content loading
+5. ✅ **Simplified Imports** - Unified `@/*` path alias
+
+**Breaking Changes Handled:**
+
+1. ✅ `entry.slug` → `entry.id`
+2. ✅ `src/content/config.ts` → `src/content.config.ts`
+3. ✅ `remarkUnwrapImages` → `rehypeUnwrapImages`
+4. ✅ Environment variables moved to Astro env API
+
+**Files Added:**
+
+- `src/content.config.ts` - New content collections file
+- `src/content/note/welcome.md` - Example note
+- `src/content/tag/*.md` - Example tag pages (3 files)
+- `src/components/note/Note.astro` - Note display component
+- `src/pages/notes/[...page].astro` - Notes listing
+- `src/pages/notes/[...slug].astro` - Individual note pages
+- `src/pages/notes/rss.xml.ts` - Notes RSS feed
+- `.env` - Environment variables configuration
+
+**Unchanged (Your Content):**
+
+- ✅ All your blog posts
+- ✅ Your customizations (fonts, colors, layout)
+- ✅ Your branding and images
+- ✅ Your social links
+- ✅ Homepage project showcase
+
+---
+
+```
+
+```
