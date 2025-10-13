@@ -7,6 +7,14 @@ export async function getAllPosts(): Promise<CollectionEntry<"post">[]> {
 	});
 }
 
+/** Get tag metadata by tag name */
+export async function getTagMeta(tag: string): Promise<CollectionEntry<"tag"> | undefined> {
+	const tagEntries = await getCollection("tag", (entry) => {
+		return entry.id === tag;
+	});
+	return tagEntries[0];
+}
+
 /** sort post by date, desc.*/
 export function sortMDByDate(posts: CollectionEntry<"post">[]) {
 	return posts.sort((a, b) => {

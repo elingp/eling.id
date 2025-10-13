@@ -481,11 +481,11 @@ Type `frontmatter-note` in a `.md` file to auto-generate the frontmatter structu
 
 ### 2. Tag Collection & Custom Tag Pages (NEW in v5.0.0) 🏷️
 
-**What Changed with Tags?**
+**IMPORTANT: Tags Still Work Automatically!**
 
-Before v5.0.0, tags were just simple strings in your post frontmatter. Now you can create **custom tag pages** with descriptions and introductory content!
+The tag collection is **completely optional**. Your existing tags work exactly as before without any changes.
 
-**Old Way (Still Works):**
+**How Tags Work (Always):**
 
 ```yaml
 ---
@@ -494,24 +494,25 @@ tags: ["javascript", "tutorial"]
 ---
 ```
 
-This creates:
+This **automatically** creates:
 
-- Tag page at `/tags/javascript/` (auto-generated)
-- Tag page at `/tags/tutorial/` (auto-generated)
+- Tag page at `/tags/javascript/` (auto-generated from `src/pages/tags/[tag]/[...page].astro`)
+- Tag page at `/tags/tutorial/` (auto-generated same way)
 - Both show list of posts with that tag
+- **No manual files needed!**
 
-**New Way (v5.0.0+):**
+**What's NEW in v5.0.0? (Optional Enhancement)**
 
-Create a file in `src/content/tag/` to **customize** the tag page:
+You can now **optionally customize** tag pages by creating files in `src/content/tag/`:
 
 ```bash
-# Create custom tag page
+# OPTIONAL: Create custom intro for a tag page
 touch src/content/tag/javascript.md
 ```
 
 ```yaml
 ---
-title: "JavaScript Tutorials" # Custom title (optional)
+title: "JavaScript Tutorials" # Custom page title (optional)
 description: "Learn JavaScript with these tutorials" # Meta description (optional)
 ---
 Welcome to my JavaScript tutorials! Here you'll find everything from basics to advanced topics.
@@ -519,9 +520,9 @@ Welcome to my JavaScript tutorials! Here you'll find everything from basics to a
 I've been writing JavaScript for over 5 years, and these posts represent my journey...
 ```
 
-**What This Adds:**
+**What This Customization Adds:**
 
-- **Custom H1 title** instead of just "#javascript"
+- **Custom H1 title** instead of just "Tag: #javascript"
 - **Custom meta description** for SEO
 - **Intro paragraph(s)** before the list of posts
 - **Markdown content** to explain the tag/category
@@ -536,14 +537,35 @@ I've been writing JavaScript for over 5 years, and these posts represent my jour
 | Basic tag page              | Rich content page                        |
 | Still works!                | Enhanced experience                      |
 
-**Important Notes:**
+**CRITICAL Understanding:**
 
-1. **Tag files are OPTIONAL** - if you don't create a tag file, the old auto-generated page still works
-2. **Filename MUST match tag name** - `javascript.md` for tag `"javascript"`
-3. **Case-sensitive** - tags are lowercased, so use lowercase filenames
-4. **Not required for posts** - you can still just use tags in post frontmatter
+1. **Tags from `src/content/tag/` do NOT generate tag pages**
+2. **Tag pages are ALWAYS generated from post frontmatter tags**
+3. **Files in `src/content/tag/` ONLY add custom content to existing tag pages**
+4. **You must use a tag in a post's frontmatter for its page to exist**
+5. **Filename MUST match tag name** - `javascript.md` for tag `"javascript"` (case-sensitive, lowercase)
 
-**Examples Included:**
+**How It Works:**
+
+```yaml
+# In any post: src/content/post/my-post.md
+tags: ["javascript"] # This creates /tags/javascript/ page automatically
+```
+
+```md
+<!-- OPTIONAL: src/content/tag/javascript.md -->
+
+## <!-- This adds custom intro to the EXISTING /tags/javascript/ page -->
+
+title: "JavaScript Tutorials"
+description: "My JavaScript posts"
+
+---
+
+Custom intro text here...
+```
+
+**Examples Included (These are demonstrations - you can delete them):**
 
 - `src/content/tag/test.md` - Full example with title and description
 - `src/content/tag/markdown.md` - Shows custom intro text
