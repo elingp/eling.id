@@ -42,18 +42,22 @@ const paginationProps = {
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-6">Notes</h1>
-	<div class="grid gap-y-8 sm:gap-y-12">
-		<section class="flex flex-col gap-y-6">
-			{page.data.map((note) => <Note note={note} as="h2" isPreview />)}
-		</section>
-		{page.lastPage > 1 && <Pagination {...paginationProps} />}
-	</div>
-	<a
-		class="mt-16 inline-flex items-center gap-2 text-lg hover:text-accent sm:gap-3"
-		href="/notes/rss.xml"
-	>
-		<Icon class="h-6 w-6" name="mdi:rss" />
-		<span>RSS Feed</span>
-	</a>
+	<section>
+		<h1 class="title mb-6 flex items-center gap-3">
+			Notes <a class="text-accent" href="/notes/rss.xml" target="_blank">
+				<span class="sr-only">RSS feed</span>
+				<Icon aria-hidden="true" class="h-8 w-8" focusable="false" name="mdi:rss" />
+			</a>
+		</h1>
+		<ul class="mt-6 space-y-8 text-start">
+			{
+				page.data.map((note) => (
+					<li class="">
+						<Note note={note} as="h2" isPreview />
+					</li>
+				))
+			}
+		</ul>
+		<Pagination {...paginationProps} />
+	</section>
 </PageLayout>

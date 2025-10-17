@@ -1,18 +1,19 @@
 ---
-import { type CollectionEntry, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
 import Pagination from "@/components/Paginator.astro";
 import PostPreview from "@/components/blog/PostPreview.astro";
-import { getAllPosts, getTagMeta, getUniqueTags, sortMDByDate } from "@/data/post";
+import { getAllPosts, getUniqueTags } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
+import { collectionDateSort } from "@/utils/date";
 import type { GetStaticPaths, Page } from "astro";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
 	const allPosts = await getAllPosts();
-	const allPostsByDate = sortMDByDate(allPosts);
-	const uniqueTags = getUniqueTags(allPostsByDate);
+	const sortedPosts = allPosts.sort(collectionDateSort);
+	const uniqueTags = getUniqueTags(sortedPosts);
 
 	return uniqueTags.flatMap((tag) => {
-		const filterPosts = allPostsByDate.filter((post) => post.data.tags.includes(tag));
+		const filterPosts = sortedPosts.filter((post) => post.data.tags.includes(tag));
 		return paginate(filterPosts, {
 			pageSize: 10,
 			params: { tag },
@@ -27,13 +28,9 @@ interface Props {
 const { page } = Astro.props;
 const { tag } = Astro.params;
 
-// Try to get custom tag metadata
-const tagMeta = await getTagMeta(tag);
-const TagContent = tagMeta ? (await render(tagMeta)).Content : null;
-
 const meta = {
-	description: tagMeta?.data.description ?? `View all posts with the tag - ${tag}`,
-	title: tagMeta?.data.title ?? `Tag: ${tag}`,
+	description: `View all posts with the tag - ${tag}`,
+	title: `Tag: ${tag}`,
 };
 
 const paginationProps = {
@@ -56,23 +53,14 @@ const paginationProps = {
 	<h1 class="title mb-6 flex items-center">
 		<a class="sm:hover:underline" href="/tags/">Tags</a>
 		<span class="me-3 ms-2">→</span>
-		<span class="title text-accent">#{tag}</span>
+		<span class="title">#{tag}</span>
 	</h1>
-	{/* Show custom tag description and content if it exists */}
-	{tagMeta?.data.description && <p class="mb-4 italic">{tagMeta.data.description}</p>}
-	{
-		TagContent && (
-			<div class="prose prose-cactus mb-8">
-				<TagContent />
-			</div>
-		)
-	}
 	<section aria-label="Blog post list">
-		<ul class="space-y-8">
+		<ul class="space-y-4">
 			{
 				page.data.map((p) => (
-					<li class="flex flex-col flex-wrap gap-2 sm:flex-row [&_q]:basis-full">
-						<PostPreview as="h1" post={p} withDesc />
+					<li class="grid gap-2 sm:grid-cols-[auto_1fr]">
+						<PostPreview as="h1" post={p} />
 					</li>
 				))
 			}

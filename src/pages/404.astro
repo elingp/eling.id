@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-import aboutImg from "@/assets/about-astro.png";
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
@@ -15,12 +13,4 @@ const meta = {
 		Please use the navigation to find your way back or go to <a class="cactus-link" href="/">Home</a
 		>.
 	</p>
-	<div class="my-4 grid justify-center">
-		<Image
-			alt="A cartoon cactus looking at the 'Astro.build' logo"
-			class="rotate-180"
-			loading="eager"
-			src={aboutImg}
-		/>
-	</div>
 </PageLayout>

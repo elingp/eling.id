@@ -1,17 +1,15 @@
 ---
 import { Image } from "astro:assets";
+import elingIcon from "@/assets/eling.jpg";
+import Search from "@/components/Search.astro";
+import ThemeToggle from "@/components/ThemeToggle.astro";
 import { menuLinks } from "@/site.config";
-import elingIcon from "../../assets/eling.jpg";
-import Search from "../Search.astro";
-import ThemeToggle from "../ThemeToggle.astro";
-
-const url = new URL(Astro.request.url);
 ---
 
 <header class="group relative mb-12 flex items-center sm:ps-[4.5rem]" id="main-header">
 	<div class="flex sm:flex-col">
 		<a
-			aria-current={url.pathname === "/" ? "page" : false}
+			aria-current={Astro.url.pathname === "/" ? "page" : false}
 			class="inline-flex items-center grayscale hover:filter-none sm:relative sm:inline-block"
 			href="/"
 		>
@@ -31,7 +29,7 @@ const url = new URL(Astro.request.url);
 			{
 				menuLinks.map((link) => (
 					<a
-						aria-current={url.pathname === link.path ? "page" : false}
+						aria-current={Astro.url.pathname === link.path ? "page" : false}
 						class="px-4 py-4 underline-offset-2 sm:py-0 sm:hover:underline"
 						data-astro-prefetch
 						href={link.path}

@@ -7,24 +7,7 @@ export async function getAllPosts(): Promise<CollectionEntry<"post">[]> {
 	});
 }
 
-/** Get tag metadata by tag name */
-export async function getTagMeta(tag: string): Promise<CollectionEntry<"tag"> | undefined> {
-	const tagEntries = await getCollection("tag", (entry) => {
-		return entry.id === tag;
-	});
-	return tagEntries[0];
-}
-
-/** sort post by date, desc.*/
-export function sortMDByDate(posts: CollectionEntry<"post">[]) {
-	return posts.sort((a, b) => {
-		const aDate = new Date(a.data.publishDate).valueOf();
-		const bDate = new Date(b.data.publishDate).valueOf();
-		return bDate - aDate;
-	});
-}
-
-/** groups posts by year, using the year as the key
+/** groups posts by year (based on option siteConfig.sortPostsByUpdatedDate), using the year as the key
  *  Note: This function doesn't filter draft posts, pass it the result of getAllPosts above to do so.
  */
 export function groupPostsByYear(posts: CollectionEntry<"post">[]) {
