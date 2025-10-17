@@ -21,8 +21,8 @@
 		"body": [
 			"---",
 			"title: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}",
-			"description: 'Please enter a description of your post here, between 50-160 chars!'",
-			"publishDate: $CURRENT_DATE $CURRENT_MONTH_NAME $CURRENT_YEAR",
+			"description: \"Please enter a description of your post here, between 50-160 chars!\"",
+			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z (set TZ!)\"",
 			"tags: []",
 			"draft: false",
 			"---",
@@ -36,8 +36,8 @@
 		"body": [
 			"---",
 			"title: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}",
-			"description: 'Enter a description here (optional)'",
-			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\"",
+			"description: \"Enter a description here (optional)\"",
+			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z (set TZ!)\"",
 			"---",
 			"$2"
 		],

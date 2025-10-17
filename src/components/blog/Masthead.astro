@@ -5,10 +5,12 @@ import FormattedDate from "@/components/FormattedDate.astro";
 
 interface Props {
 	content: CollectionEntry<"post">;
+	readingTime: string;
 }
 
 const {
 	content: { data },
+	readingTime,
 } = Astro.props;
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
@@ -34,14 +36,13 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	{data.title}
 </h1>
 <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-	<p class="font-semibold">
+	<p class="font-medium">
 		<FormattedDate date={data.publishDate} dateTimeOptions={dateTimeOptions} /> /{" "}
-		{/* @ts-ignore:next-line. TODO: add reading time to collection schema? */}
-		{data.readingTime}
+		{readingTime}
 	</p>
 	{
 		data.updatedDate && (
-			<span class="rounded-lg bg-quote/10 px-2 py-1 text-quote">
+			<span class="rounded-lg bg-quote/5 px-2 py-1 text-quote">
 				Updated:
 				<FormattedDate class="ms-1" date={data.updatedDate} dateTimeOptions={dateTimeOptions} />
 			</span>
@@ -68,16 +69,13 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 				<path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
 				<path d="M6 9h-.01" />
 			</svg>
-			{data.tags.map((tag) => (
+			{data.tags.map((tag, i) => (
 				<>
-					<a
-						aria-label={`View more blogs with the tag ${tag}`}
-						class="cactus-link inline-block"
-						data-pagefind-filter="tag"
-						href={`/tags/${tag}/`}
-					>
-						&#35;{tag}
-					</a>
+					{/* prettier-ignore */}
+					<span class="contents">
+						<a aria-label={`View more blogs with the tag ${tag}`} class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href={`/tags/${tag}/`}>{tag}
+						</a>{i < data.tags.length - 1 && ", "}
+					</span>
 				</>
 			))}
 		</div>
