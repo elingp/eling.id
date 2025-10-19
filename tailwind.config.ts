@@ -8,6 +8,7 @@ export default {
 				DEFAULT: {
 					css: {
 						a: {
+							textDecoration: "underline",
 							textUnderlineOffset: "2px",
 							"&:hover": {
 								"@media (hover: hover)": {
@@ -15,9 +16,13 @@ export default {
 									textDecorationThickness: "2px",
 								},
 							},
+							"&:active": {
+								textDecorationStyle: "dotted",
+								backgroundColor: "color-mix(in oklch, var(--color-link) 10%, transparent)",
+							},
 						},
 						blockquote: {
-							borderLeftWidth: "0",
+							fontStyle: "normal",
 							quotes: "none",
 						},
 						code: {

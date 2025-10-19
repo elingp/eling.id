@@ -57,7 +57,7 @@
 
 @layer components {
 	.cactus-link {
-		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
+		@apply hover:decoration-link active:bg-link/10 underline underline-offset-2 hover:decoration-2 active:decoration-dotted;
 	}
 
 	.title {

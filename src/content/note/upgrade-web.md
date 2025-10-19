@@ -1,7 +1,7 @@
 ---
 title: Upgrading my website
 description: ""
-publishDate: "2025-10-19T22:27:00+07:00"
+publishDate: "2025-10-19T22:27:00Z"
 ---
 
 This past week, I’ve been trying to upgrade my personal web (_this_ website) to the latest version of the original template. It’s been about a year since I upgraded the deps or touched the website in any way.
