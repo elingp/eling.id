@@ -20,7 +20,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 
 {
 	data.coverImage && (
-		<div class="mb-6 aspect-[16/9]">
+		<div class="mb-6 aspect-video">
 			<Image
 				alt={data.coverImage.alt}
 				class="object-cover"
@@ -42,7 +42,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	</p>
 	{
 		data.updatedDate && (
-			<span class="rounded-lg bg-quote/5 px-2 py-1 text-quote">
+			<span class="bg-quote/5 text-quote rounded-lg px-2 py-1">
 				Updated:
 				<FormattedDate class="ms-1" date={data.updatedDate} dateTimeOptions={dateTimeOptions} />
 			</span>
@@ -73,7 +73,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 				<>
 					{/* prettier-ignore */}
 					<span class="contents">
-						<a aria-label={`View more blogs with the tag ${tag}`} class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href={`/tags/${tag}/`}>{tag}
+						<a class="cactus-link inline-block before:content-['#']" data-pagefind-filter="tag" href={`/tags/${tag}/`}><span class="sr-only">View more blogs with the tag&nbsp;</span>{tag}
 						</a>{i < data.tags.length - 1 && ", "}
 					</span>
 				</>
