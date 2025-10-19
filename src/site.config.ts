@@ -12,6 +12,8 @@ export const siteConfig: SiteConfig = {
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42
 	ogLocale: "en_GB",
+	// Site URL used in astro.config.ts
+	url: "https://eling.id/",
 	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
 		locale: "en-GB",

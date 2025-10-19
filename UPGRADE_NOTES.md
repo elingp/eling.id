@@ -101,7 +101,6 @@ pnpm run build
    ```
 
    Visit http://localhost:4321 and verify:
-
    - Home page renders correctly
    - Blog posts display properly
    - Theme switching works
@@ -768,3 +767,135 @@ markdown: {
 ```
 
 ```
+
+## v5.0.0 → v6.0.0 (Completed ✓)
+
+**Date:** October 17, 2025
+**Branch:** `upgrade-to-v6.0.0`
+**Status:** ✅ Completed and tested
+
+### Major Changes
+
+This is a **major version upgrade** with **Tailwind CSS v4** migration - the biggest breaking change in this upgrade.
+
+#### 1. Dependencies Updated
+
+**Major Upgrades:**
+
+- `tailwindcss@3.4.16` → `tailwindcss@4.0.0` ⚠️ **Major Breaking Changes**
+- `@astrojs/tailwind@5.1.3` → **REMOVED** (replaced by `@tailwindcss/vite`)
+- `@tailwindcss/vite@4.0.0-beta.8` → **NEW** (Tailwind v4 integration)
+- `astro@5.0.3` → `astro@5.1.5`
+- `@astrojs/mdx@4.0.1` → `@astrojs/mdx@4.0.5`
+
+**Added:**
+
+- `@astrojs/markdown-remark@^6.0.2` - Core markdown processing
+- `@tailwindcss/vite@4.0.0-beta.8` - Tailwind v4 Vite plugin
+- `rehype-autolink-headings@^7.1.0` - Auto-link headings
+
+**Removed:**
+
+- `@astrojs/tailwind@5.1.3` - Replaced by @tailwindcss/vite
+- `postcss.config.cjs` - File removed (not needed in v4)
+
+#### 2. Tailwind v4 Migration
+
+Tailwind v4 is a complete rewrite with CSS-first configuration:
+
+**Key Changes:**
+
+- ✅ Colors now defined in CSS using `@theme` directive
+- ✅ Custom components moved to `@layer components`
+- ✅ Dark mode using `@variant dark` selector
+- ✅ Uses `oklch()` color space instead of `hsl()`
+- ✅ PostCSS no longer required
+- ✅ `theme()` function replaced with CSS variables
+
+**CSS Variable Renames:**
+
+- `--theme-bg` → `--color-global-bg`
+- `--theme-text` → `--color-global-text`
+- `bg-bgColor` → `bg-global-bg`
+- `text-textColor` → `text-global-text`
+
+#### 3. Configuration Changes
+
+**astro.config.ts:**
+
+- Moved tailwind from integrations to vite.plugins
+- Added rehype-autolink-headings plugin
+- Site URL now uses `siteConfig.url`
+
+**site.config.ts:**
+
+- Added `url: "https://eling.id/"` property
+
+**tailwind.config.ts:**
+
+- Simplified from 250+ lines to ~80 lines
+- Only typography plugin configuration remains
+
+**global.css:**
+
+- Complete rewrite for Tailwind v4 syntax
+- New directives: `@import`, `@config`, `@variant`, `@theme`
+
+#### 4. Component Updates
+
+**TOC Component:**
+
+- Changed from `<aside>` to `<details>` element
+- Better accessibility and built-in expand/collapse
+
+**All Components:**
+
+- Updated class names throughout site
+- Replaced `theme()` with `var()` in styles
+
+#### 5. Custom Styling & Personalization
+
+During the upgrade, several custom style tweaks were applied to differentiate from the upstream template:
+
+**global.css:**
+- Added `scrollbar-gutter: stable` to prevent layout shift
+- Customized font stacks with proper fallbacks
+- Removed smart quotes from blockquotes (`quotes: "none"`)
+- Fine-tuned spacing and typography
+
+**Component adjustments:**
+- Search styles moved to separate `src/styles/blocks/search.css`
+- Various layout and spacing tweaks across components
+- Updated example content and notes
+
+**Content updates:**
+- Added `upgrade-web.md` note about the v6.0.0 upgrade
+- Removed default welcome note
+- Updated markdown examples
+
+### Build Verification
+
+✅ All checks passed:
+
+- `pnpm build` - 19 pages, 13 indexed (2019 words)
+- `pnpm format` - 1 file formatted
+- `pnpm lint` - No issues
+- `pnpm check` - 0 errors, 0 warnings
+
+### Files Modified
+
+**Configuration:** 8 files (package.json, astro.config.ts, tsconfig.json, site.config.ts, types.ts, tailwind.config.ts, global.css)
+**Components:** 18 files updated with new class names and styles
+**Content:** 1 note added, 1 removed, 2 posts updated
+**Deleted:** 1 file (postcss.config.cjs)
+**Added:** 1 file (src/styles/blocks/search.css)
+
+### Resources
+
+- [Tailwind CSS v4.0 Beta](https://tailwindcss.com/blog/tailwindcss-v4-beta)
+- [Astro Cactus v6.0.0](https://github.com/chrismwilliams/astro-theme-cactus/releases/tag/v6.0.0)
+- [Full Changelog: v5.0.0...v6.0.0](https://github.com/chrismwilliams/astro-theme-cactus/compare/v5.0.0...v6.0.0)
+
+---
+
+**Updated on:** October 17, 2025
