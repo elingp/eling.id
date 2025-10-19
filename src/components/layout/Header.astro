@@ -35,7 +35,6 @@ import { menuLinks } from "@/site.config";
 					<a
 						aria-current={Astro.url.pathname === link.path ? "page" : false}
 						class="active:bg-link/10 px-4 py-4 underline-offset-2 hover:underline sm:py-0 sm:active:decoration-dotted"
-						data-astro-prefetch
 						href={link.path}
 					>
 						{link.title}
