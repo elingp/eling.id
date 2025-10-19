@@ -30,7 +30,7 @@ const comments = mentions.filter(
 								<a
 									class="u-author not-prose ring-global-text hover:ring-link focus-visible:ring-link shrink-0 overflow-hidden rounded-full ring-2 hover:ring-4 focus-visible:ring-4"
 									href={mention.author.url}
-									rel="noreferrer"
+									rel="noopener noreferrer"
 									target="_blank"
 									title={mention.author.name}
 								>
@@ -61,7 +61,7 @@ const comments = mentions.filter(
 									aria-labelledby="cmt-source"
 									class="u-url not-prose hover:text-link"
 									href={mention.url}
-									rel="noreferrer"
+									rel="noopener noreferrer"
 									target="_blank"
 								>
 									<span class="hidden" id="cmt-source">
