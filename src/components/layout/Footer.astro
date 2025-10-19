@@ -24,12 +24,12 @@ const year = new Date().getFullYear();
 	</div>
 	<nav
 		aria-labelledby="footer_links"
-		class="sm:divide-text-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted sm:active:decoration-dotted"
+		class="sm:divide-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted"
 	>
 		{
 			menuLinks.map((link) => (
 				<a
-					class="hover:text-global-text active:bg-link/10 px-4 py-2 hover:underline sm:py-0"
+					class="hover:text-global-text active:bg-link/10 px-4 py-2 hover:underline sm:py-0 sm:active:decoration-dotted"
 					href={link.path}
 				>
 					{link.title}
