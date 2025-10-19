@@ -53,7 +53,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 <PageLayout meta={meta}>
 	<div class="mb-6 flex items-center gap-3">
 		<h1 class="title">Posts</h1>
-		<a class="text-accent" href="/rss.xml" target="_blank">
+		<a class="text-accent active:bg-link/10" href="/rss.xml" target="_blank">
 			<span class="sr-only">RSS feed</span>
 			<Icon aria-hidden="true" class="h-8 w-8" focusable="false" name="mdi:rss" />
 		</a>
@@ -83,7 +83,11 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			!!uniqueTags.length && (
 				<aside>
 					<h2 class="title mb-4 flex items-center gap-2 text-lg">
-						<a aria-label="View all blog categories" class="sm:hover:text-accent" href="/tags/">
+						<a
+							aria-label="View all blog categories"
+							class="sm:hover:text-accent active:bg-link/10"
+							href="/tags/"
+						>
 							Tags
 						</a>
 						<svg
@@ -115,7 +119,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 						))}
 					</ul>
 					<span class="mt-4 block sm:text-end">
-						<a class="hover:text-accent" href="/tags/">
+						<a class="hover:text-accent active:bg-link/10" href="/tags/">
 							View all <span aria-hidden="true">→</span>
 							<span class="sr-only">blog tags</span>
 						</a>
