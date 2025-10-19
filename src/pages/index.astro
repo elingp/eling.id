@@ -102,7 +102,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 			{
 				elingProject.map(({ desc, href, title }) => (
 					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
-						<a class="cactus-link min-w-66" href={href} rel="noreferrer" target="_blank">
+						<a class="cactus-link min-w-66" href={href} rel="noopener noreferrer" target="_blank">
 							{title}
 						</a>
 						{desc}
