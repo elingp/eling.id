@@ -2,8 +2,11 @@
 title: "A post of Markdown elements"
 description: "This post is for testing and listing a number of different markdown elements"
 publishDate: "22 Feb 2023"
-updatedDate: 22 Jan 2024
-tags: ["test", "markdown"]
+updatedDate: "20 Oct 2025"
+coverImage:
+  src: "./cover.png"
+  alt: "Astro build wallpaper"
+tags: ["test", "markdown", "image"]
 draft: true
 ---
 
