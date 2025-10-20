@@ -150,7 +150,7 @@ import "@/styles/blocks/search.css";
 				console.warn("Dialog not found");
 				return;
 			}
-      // check if it's the Control+K or ⌘+K shortcut
+			// check if it's the Control+K or ⌘+K shortcut
 			if ((e.metaKey === true || e.ctrlKey === true) && e.key === "k") {
 				this.#dialog.open ? this.closeModal() : this.openModal();
 				e.preventDefault();

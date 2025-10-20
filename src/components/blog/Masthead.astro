@@ -21,12 +21,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 {
 	data.coverImage && (
 		<div class="mb-6 aspect-video">
-			<Image
-				alt={data.coverImage.alt}
-				layout="constrained"
-				priority
-				src={data.coverImage.src}
-			/>
+			<Image alt={data.coverImage.alt} layout="constrained" priority src={data.coverImage.src} />
 		</div>
 	)
 }

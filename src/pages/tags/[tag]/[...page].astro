@@ -55,7 +55,10 @@ const paginationProps = {
 	<nav class="mb-8" aria-label="Breadcrumbs">
 		<ul class="flex items-center">
 			<li class="flex items-center">
-				<a class="text-accent hover:underline hover:decoration-2 active:decoration-dotted active:bg-link/10" href="/tags/">Tags</a>
+				<a
+					class="text-accent active:bg-link/10 hover:underline hover:decoration-2 active:decoration-dotted"
+					href="/tags/">Tags</a
+				>
 				<Icon aria-hidden="true" name="fa7-solid:chevron-right" class="mx-1.5" />
 			</li>
 			<li aria-current="page" class=""><span aria-hidden="true">#</span>{tag}</li>
@@ -69,7 +72,7 @@ const paginationProps = {
 	<ul class="space-y-4">
 		{
 			page.data.map((p) => (
-				<li class="gap-1 sm:grid-cols-[auto_1fr] grid">
+				<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
 					<PostPreview as="h2" post={p} />
 				</li>
 			))

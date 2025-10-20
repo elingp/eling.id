@@ -31,13 +31,10 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 			)
 		}
 	</Tag>
-  <p class="font-medium mt-1">
-    <FormattedDate
-		  {...(!isPreview && { dateTimeOptions })}
-		  date={note.data.publishDate}
-	  />
-  </p>
-	
+	<p class="mt-1 font-medium">
+		<FormattedDate {...!isPreview && { dateTimeOptions }} date={note.data.publishDate} />
+	</p>
+
 	<div
 		class="prose prose-sm prose-cactus mt-4 max-w-none [&>p:last-of-type]:mb-0"
 		class:list={{ "line-clamp-6": isPreview }}
