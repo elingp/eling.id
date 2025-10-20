@@ -20,7 +20,7 @@
 		"@astrojs/rss": "4.0.11",
 		"@astrojs/sitemap": "3.2.1",
 		"@fontsource/merriweather": "^5.0.14",
-		"@fontsource/raleway": "^5.0.20",
+		"@fontsource/raleway": "^5.2.8",
 		"@tailwindcss/vite": "4.0.0-beta.8",
 		"astro": "5.1.5",
 		"astro-expressive-code": "^0.39.0",

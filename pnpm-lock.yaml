@@ -24,8 +24,8 @@ importers:
         specifier: ^5.0.14
         version: 5.0.14
       '@fontsource/raleway':
-        specifier: ^5.0.20
-        version: 5.0.20
+        specifier: ^5.2.8
+        version: 5.2.8
       '@tailwindcss/vite':
         specifier: 4.0.0-beta.8
         version: 4.0.0-beta.8(vite@6.3.6(@types/node@22.5.1)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.5.0))
@@ -614,8 +614,8 @@ packages:
   '@fontsource/merriweather@5.0.14':
     resolution: {integrity: sha512-fdlH6iHzbrxdS/e2GbDHNtBSH7HXn2fz5f4uyCZjC4tPmMMTV9xM3RMplrRUegWQ7OD0XDuhXhnO5lSZo+9h+A==}
 
-  '@fontsource/raleway@5.0.20':
-    resolution: {integrity: sha512-ZgTAEnlVYUIk75RM1Xsyk932zQ29DgxVr7io0QwVfDwcr88LHop0e2BZhBBI4MxL4b5L+T91RYwm6mLl/CXnpA==}
+  '@fontsource/raleway@5.2.8':
+    resolution: {integrity: sha512-OATNM+J4XniKQRlI1e67v3euOnCUiXwpqgMofomKc5JNYOq0JPE6E5uTXMnFaZejKN1Z7s05JrHpmYB7/tg1Fw==}
 
   '@iconify-json/fa7-brands@1.2.0':
     resolution: {integrity: sha512-OTdHSwRmycgQQXQr7wJQFyD08zj4OxoRfaWhCuI3a9MhbnHJApU4U2Qbp6hP4zicqOmQB9UII9+MA1IDNNLPlQ==}
@@ -3073,6 +3073,7 @@ packages:
   sitemap@8.0.0:
     resolution: {integrity: sha512-+AbdxhM9kJsHtruUF39bwS/B0Fytw6Fr1o4ZAIAEqA6cke2xcoO2GleBw9Zw7nRzILVEgz7zBM5GiTJjie1G9A==}
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
+    deprecated: 'SECURITY: Multiple vulnerabilities fixed in 8.0.1 (XML injection, path traversal, command injection, protocol injection). Upgrade immediately: npm install sitemap@8.0.1'
     hasBin: true
 
   smol-toml@1.4.2:
@@ -4060,7 +4061,7 @@ snapshots:
 
   '@fontsource/merriweather@5.0.14': {}
 
-  '@fontsource/raleway@5.0.20': {}
+  '@fontsource/raleway@5.2.8': {}
 
   '@iconify-json/fa7-brands@1.2.0':
     dependencies:
