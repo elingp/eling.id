@@ -55,7 +55,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 ---
 
 <PageLayout meta={meta}>
-	<div class="mb-6 flex items-center gap-3">
+	<div class="mb-12 flex items-center gap-3">
 		<h1 class="title">Posts</h1>
 		<a
 			class="text-accent active:bg-link/10"
@@ -71,7 +71,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		<div>
 			{
 				pinnedPosts.length > 0 && (
-					<section class="mb-16">
+					<section class="mb-12">
 						<h2 class="title mb-6 text-xl">Pinned Posts</h2>
 						<ul class="space-y-4" role="list">
 							{pinnedPosts.map((p) => (
@@ -85,7 +85,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			}
 			{
 				descYearKeys.map((yearKey) => (
-					<section class="mb-16">
+					<section class="mb-12">
 						<h2 id={`year-${yearKey}`} class="title text-lg">
 							<span class="sr-only">Posts in</span>
 							{yearKey}
@@ -142,7 +142,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 						))}
 					</ul>
 					<span class="mt-4 block sm:text-end">
-						<a class="hover:text-accent active:bg-link/10" href="/tags/">
+						<a class="text-accent-2 hover:text-accent active:bg-link/10" href="/tags/">
 							View all <span aria-hidden="true">→</span>
 							<span class="sr-only">blog tags</span>
 						</a>
