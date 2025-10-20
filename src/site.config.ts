@@ -1,10 +1,15 @@
-import type { SiteConfig } from "@/types";
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
+import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "Eling Pramuatmaja",
-	// Used to construct the meta title property found in src/components/BaseHead.astro L:11, and webmanifest name found in astro.config.ts L:42
+	/*
+		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
+		- The webmanifest name found in astro.config.ts L:42
+		- The link value found in src/components/layout/Header.astro L:35
+		- In the footer found in src/components/layout/Footer.astro L:12
+	*/
 	title: "Eling Pramuatmaja",
 	// Used as the default description meta property and webmanifest description
 	description: "A personal website of Eling Pramuatmaja",
@@ -52,7 +57,7 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	styleOverrides: {
 		borderRadius: "4px",
 		codeFontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;',
+			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 		codeFontSize: "0.875rem",
 		codeLineHeight: "1.7142857rem",
 		codePaddingInline: "1rem",

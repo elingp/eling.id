@@ -22,7 +22,7 @@
 			"---",
 			"title: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}",
 			"description: \"Please enter a description of your post here, between 50-160 chars!\"",
-			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z (set TZ!)\"",
+			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\"",
 			"tags: []",
 			"draft: false",
 			"---",
@@ -37,10 +37,18 @@
 			"---",
 			"title: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}",
 			"description: \"Enter a description here (optional)\"",
-			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z (set TZ!)\"",
+			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\"",
 			"---",
 			"$2"
 		],
 		"description": "Add frontmatter for a new Markdown note"
+	},
+	"Add update date to an Astro Cactus Post frontmatter": {
+		"scope": "markdown,mdx",
+		"prefix": "frontmatter-update",
+		"body": [
+			"updatedDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\""
+		],
+		"description": "Add update date to an existing frontmatter"
 	}
 }

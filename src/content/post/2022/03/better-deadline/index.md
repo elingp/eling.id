@@ -3,6 +3,7 @@ title: "Better Ways to Set a Deadline"
 description: "We all have been there. Loads of deadlines were approaching. The usual 24 hours a day seems to be inadequate..."
 publishDate: "30 Mar 2022"
 tags: ["gigih"]
+pinned: true
 ---
 
 ![Stressing on deadline.](cover.webp)

@@ -1,6 +1,6 @@
 ---
-import { getFormattedDate } from "@/utils/date";
 import type { HTMLAttributes } from "astro/types";
+import { getFormattedDate } from "@/utils/date";
 
 type Props = HTMLAttributes<"time"> & {
 	date: Date;
@@ -10,7 +10,15 @@ type Props = HTMLAttributes<"time"> & {
 const { date, dateTimeOptions, ...attrs } = Astro.props;
 
 const postDate = getFormattedDate(date, dateTimeOptions);
+const hoverDate = getFormattedDate(date, {
+	day: "numeric",
+	month: "short",
+	year: "numeric",
+	hour: "2-digit",
+	minute: "2-digit",
+	hour12: false,
+});
 const ISO = date.toISOString();
 ---
 
-<time datetime={ISO} title={ISO} {...attrs}>{postDate}</time>
+<time datetime={ISO} title={hoverDate} {...attrs}>{postDate}</time>

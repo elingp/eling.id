@@ -3,6 +3,7 @@ title: "Being Persistent"
 description: "Persistence is a recurring theme in many fictional stories. The hero will face struggles along the way..."
 publishDate: "06 Apr 2022"
 tags: ["gigih"]
+pinned: true
 ---
 
 ![Persistence is an important mindset.](cover.webp)
