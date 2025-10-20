@@ -47,7 +47,10 @@
 				"noUselessElse": "error",
 				"useImportType": "error"
 			},
-			"suspicious": { "noExplicitAny": "warn" }
+			"suspicious": {
+				"noExplicitAny": "warn",
+				"noUnknownAtRules": "off"
+			}
 		}
 	},
 	"javascript": {
