@@ -36,14 +36,16 @@ export const remarkGithubCard: Plugin<[], Root> = () => (tree) => {
 						const t = document.getElementById('${SimpleUUID}');
 						t.classList.remove("gh-loading");
 
+						const numberFormatter = new Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 });
+
 						if (data.description) {
 							t.querySelector('.gh-description').innerText = data.description.replace(/:[a-zA-Z0-9_]+:/g, '');
 						} else {
 							t.querySelector('.gh-description').style.display = 'none';
 						}
 						if (data.language) t.querySelector('.gh-language').innerText = data.language;
-        		t.querySelector('.gh-forks').innerText = Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(data.forks).replaceAll("\u202f", '');
-        		t.querySelector('.gh-stars').innerText = Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(data.stargazers_count).replaceAll("\u202f", '');
+        		t.querySelector('.gh-forks').innerText = numberFormatter.format(data.forks).replaceAll("\u202f", '');
+        		t.querySelector('.gh-stars').innerText = numberFormatter.format(data.stargazers_count).replaceAll("\u202f", '');
 						const avatarEl = t.querySelector('.gh-avatar');
         		avatarEl.style.backgroundImage = 'url(' + data.owner.avatar_url + ')';
 
@@ -107,10 +109,12 @@ export const remarkGithubCard: Plugin<[], Root> = () => (tree) => {
 						const t = document.getElementById('${SimpleUUID}');
 						t.classList.remove("gh-loading");
 
+						const numberFormatter = new Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 });
+
 						const avatarEl = t.querySelector('.gh-avatar');
         		avatarEl.style.backgroundImage = 'url(' + data.avatar_url + ')';
-						t.querySelector('.gh-followers').innerText = Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(data.followers).replaceAll("\u202f", '');
-						t.querySelector('.gh-repositories').innerText = Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(data.public_repos).replaceAll("\u202f", '');
+						t.querySelector('.gh-followers').innerText = numberFormatter.format(data.followers).replaceAll("\u202f", '');
+						t.querySelector('.gh-repositories').innerText = numberFormatter.format(data.public_repos).replaceAll("\u202f", '');
 						if (data.location) t.querySelector('.gh-region').innerText = data.location;
 
 					})
