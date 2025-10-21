@@ -63,9 +63,6 @@
 		"typescript": "^5.9.3"
 	},
 	"pnpm": {
-		"overrides": {
-			"sharp": "^0.34.2"
-		},
 		"onlyBuiltDependencies": [
 			"@biomejs/biome",
 			"@tailwindcss/oxide",
