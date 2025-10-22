@@ -42,6 +42,19 @@
 		}
 	}
 
+	/* Global tactile feedback for all interactive elements */
+	a:active,
+	button:active,
+	[role="button"]:active {
+		@apply bg-link/10;
+	}
+
+	/* Add dotted underline to links with existing underlines when active */
+	a[class*="underline"]:active,
+	a.cactus-link:active {
+		@apply decoration-dotted;
+	}
+
 	:target {
 		scroll-margin-block: 5ex;
 	}
@@ -80,7 +93,7 @@
 	@import "./components/github-card.css";
 
 	.cactus-link {
-		@apply hover:decoration-link active:bg-link/10 underline underline-offset-2 hover:decoration-2 active:decoration-dotted;
+		@apply hover:decoration-link underline underline-offset-2 hover:decoration-2;
 	}
 
 	.title {
@@ -92,7 +105,7 @@
 	}
 
 	.prose :where(h2, h3, h4, h5, h6) > a {
-		@apply hover:text-accent active:bg-link/10;
+		@apply hover:text-accent;
 	}
 }
 
