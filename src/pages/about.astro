@@ -11,46 +11,50 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-12">About</h1>
-	<div class="prose prose-sm prose-cactus max-w-none">
-		<p>
-			Hi! I’m Eling Pramuatmaja, a computer science student nearing the end of my degree. My focus
-			is on AI, particularly in text summarization for Indonesian news. I’ve gained valuable
-			industry experience through an internship as a software developer at Blibli and was honored to
-			participate in prestigious programs like the XL Future Leaders scholarship (Batch 9), Generasi
-			GIGIH 2.0 at Gojek, and Bangkit Academy 2021 in machine learning.
-		</p>
-		<div class="flex justify-center">
-			<figure>
-				<Image
-					alt="A profile picture of Eling Pramuatmaja"
-					fetchpriority="high"
-					loading="eager"
-					src={aboutImg}
-				/>
-				<figcaption class="text-center">Eling circa 2023</figcaption>
-			</figure>
+	<article class="grow">
+		<header class="mb-12">
+			<h1 class="title">About</h1>
+		</header>
+		<div class="prose prose-lg md:prose-xl">
+			<p>
+				Hi! I’m Eling Pramuatmaja, a computer science student nearing the end of my degree. My focus
+				is on AI, particularly in text summarization for Indonesian news. I’ve gained valuable
+				industry experience through an internship as a software developer at Blibli and was honored
+				to participate in prestigious programs like the XL Future Leaders scholarship (Batch 9),
+				Generasi GIGIH 2.0 at Gojek, and Bangkit Academy 2021 in machine learning.
+			</p>
+			<div class="flex justify-center">
+				<figure>
+					<Image
+						alt="A profile picture of Eling Pramuatmaja"
+						fetchpriority="high"
+						loading="eager"
+						src={aboutImg}
+					/>
+					<figcaption class="text-center">Eling circa 2023</figcaption>
+				</figure>
+			</div>
+			<p>
+				I currently work as a tech specialist, where I apply my skills to bridge technology and
+				practical solutions. On this blog, I share my journey through the tech world, from software
+				development to AI, alongside my exploration of other interests.
+			</p>
+			<p>
+				I’m a passionate reader, diving into everything from novels and nonfiction to news and TTRPG
+				rulebooks. My fascination with how tech can impact the environment is something I hope to
+				focus more on in the future.
+			</p>
+			<p>
+				Outside of tech, I’m an avid fan of storytelling through manga, anime, and tabletop
+				role-playing games like Pathfinder 2e and Dungeons & Dragons 5e. While I’m just starting to
+				write about these interests, I’m excited to share my thoughts as I dive deeper into these
+				worlds.
+			</p>
+			<p>
+				Whether you’re here for tech insights or just curious about my hobbies, I hope you find
+				something that resonates.
+			</p>
+			<div class="not-prose"><SocialList /></div>
 		</div>
-		<p>
-			I currently work as a tech specialist, where I apply my skills to bridge technology and
-			practical solutions. On this blog, I share my journey through the tech world, from software
-			development to AI, alongside my exploration of other interests.
-		</p>
-		<p>
-			I’m a passionate reader, diving into everything from novels and nonfiction to news and TTRPG
-			rulebooks. My fascination with how tech can impact the environment is something I hope to
-			focus more on in the future.
-		</p>
-		<p>
-			Outside of tech, I’m an avid fan of storytelling through manga, anime, and tabletop
-			role-playing games like Pathfinder 2e and Dungeons & Dragons 5e. While I’m just starting to
-			write about these interests, I’m excited to share my thoughts as I dive deeper into these
-			worlds.
-		</p>
-		<p>
-			Whether you’re here for tech insights or just curious about my hobbies, I hope you find
-			something that resonates.
-		</p>
-		<div class="not-prose"><SocialList /></div>
-	</div>
+	</article>
 </PageLayout>

@@ -2,15 +2,23 @@
 import PageLayout from "@/layouts/Base.astro";
 
 const meta = {
-	description: "Oops! It looks like this page is lost in space!",
-	title: "Oops! You found a missing page!",
+	description: "The page you are looking for doesn’t exist or has been moved.",
+	title: "Error 404 | Page Not Found",
 };
 ---
 
 <PageLayout meta={meta}>
-	<h1 class="title mb-12">404 | Oops! You found a missing page!</h1>
-	<p class="mb-8">
-		Please use the navigation to find your way back or go to <a class="cactus-link" href="/">Home</a
-		>.
-	</p>
+	<article class="grow">
+		<header class="mb-12">
+			<h1 class="title">Error 404 | Page Not Found</h1>
+		</header>
+		<div class="prose prose-lg md:prose-xl">
+			<p>The page you are looking for doesn’t exist or has been moved.</p>
+			<p>
+				Please use the navigation to find your way back or go to <a class="cactus-link" href="/"
+					>Home</a
+				>.
+			</p>
+		</div>
+	</article>
 </PageLayout>

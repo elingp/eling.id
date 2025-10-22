@@ -82,10 +82,6 @@
 	h6 {
 		@apply font-sans;
 	} */
-
-	p {
-		@apply text-base leading-7 md:text-lg md:leading-8;
-	}
 }
 
 @layer components {
@@ -97,7 +93,7 @@
 	}
 
 	.title {
-		@apply text-accent-2 text-2xl font-semibold md:text-4xl;
+		@apply text-accent-2 text-3xl font-bold md:text-4xl;
 	}
 
 	.md-figcaption {

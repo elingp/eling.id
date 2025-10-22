@@ -23,7 +23,7 @@ import { menuLinks } from "@/site.config";
 				format="webp"
 				quality={80}
 			/>
-			<span class="font-sans text-lg font-bold sm:text-2xl">Eling Pramuatmaja</span>
+			<span class="font-sans text-lg font-bold sm:text-3xl">Eling Pramuatmaja</span>
 		</a>
 		<nav
 			aria-label="Main menu"
@@ -34,7 +34,7 @@ import { menuLinks } from "@/site.config";
 				menuLinks.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="active:bg-link/10 text-accent px-2 py-4 sm:px-4 sm:py-0 sm:underline-offset-2 sm:hover:underline sm:active:decoration-dotted"
+						class="active:bg-link/10 text-accent px-2 py-4 sm:px-4 sm:py-0 sm:text-lg sm:underline-offset-2 sm:hover:underline sm:active:decoration-dotted"
 						href={link.path}
 					>
 						{link.title}
