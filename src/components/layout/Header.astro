@@ -10,7 +10,7 @@ import { menuLinks } from "@/site.config";
 	<div class="flex sm:flex-col">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="active:bg-link/10 inline-flex items-center grayscale hover:filter-none active:filter-none sm:relative sm:inline-block"
+			class="inline-flex items-center grayscale hover:filter-none active:filter-none sm:relative sm:inline-block"
 			href="/"
 		>
 			<Image
@@ -34,7 +34,7 @@ import { menuLinks } from "@/site.config";
 				menuLinks.map((link) => (
 					<a
 						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="active:bg-link/10 text-accent px-2 py-4 sm:px-4 sm:py-0 sm:text-lg sm:underline-offset-2 sm:hover:underline sm:active:decoration-dotted"
+						class="text-accent px-2 py-4 sm:px-4 sm:py-0 sm:text-lg sm:underline-offset-2 sm:hover:underline"
 						href={link.path}
 					>
 						{link.title}
@@ -49,7 +49,7 @@ import { menuLinks } from "@/site.config";
 		<button
 			aria-expanded="false"
 			aria-haspopup="menu"
-			class="group active:bg-link/10 relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
 			id="toggle-navigation-menu"
 			type="button"
 		>

@@ -11,7 +11,7 @@ const year = new Date().getFullYear();
 		&copy; {year}
 		{siteConfig.author}. <span class="inline-block">
 			<a
-				class="hover:text-global-text active:bg-link/10"
+				class="hover:text-global-text"
 				href="https://github.com/chrismwilliams/astro-theme-cactus"
 				rel="noopener noreferrer"
 				target="_blank"
@@ -44,10 +44,7 @@ const year = new Date().getFullYear();
 	>
 		{
 			menuLinks.map((link) => (
-				<a
-					class="hover:text-global-text active:bg-link/10 px-4 py-2 hover:underline sm:py-0 sm:active:decoration-dotted"
-					href={link.path}
-				>
+				<a class="hover:text-global-text px-4 py-2 hover:underline sm:py-0" href={link.path}>
 					{link.title}
 				</a>
 			))
