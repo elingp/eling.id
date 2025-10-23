@@ -1,9 +1,8 @@
+import * as fs from "node:fs";
 import { Resvg } from "@resvg/resvg-js";
 import type { APIContext, InferGetStaticPropsType } from "astro";
 import satori, { type SatoriOptions } from "satori";
 import { html } from "satori-html";
-import MerriweatherBold from "@/assets/merriweather-bold.ttf";
-import MerriweatherRegular from "@/assets/merriweather-regular.ttf";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 import { getFormattedDate } from "@/utils/date";
@@ -12,13 +11,17 @@ const ogOptions: SatoriOptions = {
 	// debug: true,
 	fonts: [
 		{
-			data: Buffer.from(MerriweatherRegular),
+			data: fs.readFileSync(
+				"node_modules/@fontsource/merriweather/files/merriweather-latin-400-normal.woff",
+			),
 			name: "Merriweather",
 			style: "normal",
 			weight: 400,
 		},
 		{
-			data: Buffer.from(MerriweatherBold),
+			data: fs.readFileSync(
+				"node_modules/@fontsource/merriweather/files/merriweather-latin-700-normal.woff",
+			),
 			name: "Merriweather",
 			style: "normal",
 			weight: 700,
