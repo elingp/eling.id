@@ -17,6 +17,15 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.minutesRead;
+
+// Determine the actual updated date to show:
+// 1. If updatedDate is manually set in frontmatter, use that (takes priority)
+// 2. Otherwise, use git lastModified, but only if it's significantly different from publishDate (more than 1 day)
+const gitLastModified = new Date(remarkPluginFrontmatter.lastModified);
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const daysSincePublish = (gitLastModified.getTime() - publishDate.getTime()) / ONE_DAY_MS;
+
+const finalUpdatedDate = updatedDate || (daysSincePublish > 1 ? gitLastModified : null);
 ---
 
 <BaseLayout
@@ -29,7 +38,7 @@ const readingTime: string = remarkPluginFrontmatter.minutesRead;
 >
 	<article class="grow break-words" data-pagefind-body>
 		<header id="blog-hero" class="mb-12">
-			<Masthead content={post} readingTime={readingTime} />
+			<Masthead content={post} readingTime={readingTime} updatedDate={finalUpdatedDate} />
 		</header>
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 			{!!headings.length && <TOC headings={headings} />}
