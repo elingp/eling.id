@@ -54,7 +54,7 @@ const groupedByYear = groupPostsByYear(page.data);
 const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} sourcePath="src/pages/posts/[...page].astro">
 	<header class="mb-12 flex items-center gap-2">
 		<h1 class="title">Posts</h1>
 		<a class="text-accent" href="/rss.xml" target="_blank" rel="noopener noreferrer">

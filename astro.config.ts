@@ -15,8 +15,8 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 // Remark plugins
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
+import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
 import { remarkGithubCard } from "./src/plugins/remark-github-card";
-import { remarkModifiedTime } from "./src/plugins/remark-modified-time";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config";
 
@@ -82,10 +82,10 @@ export default defineConfig({
 		],
 		remarkPlugins: [
 			remarkReadingTime,
+			remarkGitMetadata,
 			remarkDirective,
 			remarkGithubCard,
 			remarkAdmonitions,
-			remarkModifiedTime,
 		],
 		remarkRehype: {
 			footnoteLabelProperties: {

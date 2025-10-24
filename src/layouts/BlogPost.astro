@@ -26,6 +26,9 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const daysSincePublish = (gitLastModified.getTime() - publishDate.getTime()) / ONE_DAY_MS;
 
 const finalUpdatedDate = updatedDate || (daysSincePublish > 1 ? gitLastModified : null);
+
+// Get the source file path for GitHub link from the remark plugin
+const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 ---
 
 <BaseLayout
@@ -35,6 +38,7 @@ const finalUpdatedDate = updatedDate || (daysSincePublish > 1 ? gitLastModified 
 		ogImage: socialImage,
 		title,
 	}}
+	sourcePath={sourcePath}
 >
 	<article class="grow break-words" data-pagefind-body>
 		<header id="blog-hero" class="mb-12">

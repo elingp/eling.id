@@ -2,11 +2,23 @@
 import FormattedDate from "@/components/FormattedDate.astro";
 import { menuLinks, siteConfig } from "@/site.config";
 
+interface Props {
+	sourcePath?: string;
+}
+
+const { sourcePath } = Astro.props;
+
 const year = new Date().getFullYear();
 const buildDate = new Date();
 const githubRepo = "elingp/eling.id";
 const commitHash = import.meta.env.PUBLIC_COMMIT_HASH || "dev";
 const shortHash = commitHash.slice(0, 7);
+
+const branch = commitHash === "dev" ? "dev" : "main";
+const encodedPath = sourcePath ? encodeURI(sourcePath) : "";
+const sourceUrl = encodedPath
+	? `https://github.com/${githubRepo}/blob/${branch}/${encodedPath}`
+	: `https://github.com/${githubRepo}`;
 ---
 
 <footer
@@ -22,11 +34,10 @@ const shortHash = commitHash.slice(0, 7);
 				target="_blank">Based on Astro Cactus</a
 			>.
 		</span>
-		<span class="inline-block"> Built on <FormattedDate date={buildDate} />. </span>
 		<span class="inline-block"
 			><a
 				class="hover:text-global-text hover:underline"
-				href={`https://github.com/${githubRepo}`}
+				href={sourceUrl}
 				rel="noopener noreferrer"
 				target="_blank"
 			>
@@ -44,6 +55,7 @@ const shortHash = commitHash.slice(0, 7);
 				{shortHash}
 			</a></span
 		>
+		<span class="inline-block"> (<FormattedDate date={buildDate} />)</span>
 	</div>
 	<nav
 		aria-labelledby="footer_links"

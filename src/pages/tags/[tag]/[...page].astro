@@ -35,6 +35,9 @@ const meta = {
 	title: tagMeta?.data.title ?? `Posts about ${tag}`,
 };
 
+// Determine source path: if tag has custom content, link to that; otherwise link to the page template
+const sourcePath = tagMeta ? `src/content/tag/${tag}.md` : "src/pages/tags/[tag]/[...page].astro";
+
 const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
@@ -51,7 +54,7 @@ const paginationProps = {
 };
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} sourcePath={sourcePath}>
 	<nav class="mb-8" aria-label="Breadcrumbs">
 		<ul class="flex items-center">
 			<li class="flex items-center">
