@@ -1,5 +1,4 @@
 ---
-import FormattedDate from "@/components/FormattedDate.astro";
 import { menuLinks, siteConfig } from "@/site.config";
 
 interface Props {
@@ -8,8 +7,9 @@ interface Props {
 
 const { sourcePath } = Astro.props;
 
+const footerMenuLinks = [...menuLinks, { title: "RSS", path: "/rss.xml" }];
+
 const year = new Date().getFullYear();
-const buildDate = new Date();
 const githubRepo = "elingp/eling.id";
 const commitHash = import.meta.env.PUBLIC_COMMIT_HASH || "dev";
 const shortHash = commitHash.slice(0, 7);
@@ -25,15 +25,8 @@ const sourceUrl = encodedPath
 	class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-8 text-center align-top font-sans text-sm font-medium text-gray-600 sm:flex-row sm:justify-between sm:text-xs dark:text-gray-400"
 >
 	<div class="me-0 sm:me-4">
-		&copy; {year}
-		{siteConfig.author}. <span class="inline-block">
-			<a
-				class="hover:text-global-text hover:underline"
-				href="https://github.com/chrismwilliams/astro-theme-cactus"
-				rel="noopener noreferrer"
-				target="_blank">Based on Astro Cactus</a
-			>.
-		</span>
+		&copy; 2018–{year}
+		{siteConfig.author}.
 		<span class="inline-block"
 			><a
 				class="hover:text-global-text hover:underline"
@@ -42,10 +35,8 @@ const sourceUrl = encodedPath
 				target="_blank"
 			>
 				View source
-			</a>·
-		</span>
-		<span class="inline-block"
-			><a
+			</a>(
+			<a
 				class="hover:text-global-text font-mono hover:underline"
 				href={`https://github.com/${githubRepo}/commit/${commitHash}`}
 				rel="noopener noreferrer"
@@ -53,17 +44,17 @@ const sourceUrl = encodedPath
 				title="View commit on GitHub"
 			>
 				{shortHash}
-			</a></span
-		>
-		<span class="inline-block"> (<FormattedDate date={buildDate} />)</span>
+			</a>
+			)
+		</span>
 	</div>
 	<nav
 		aria-labelledby="footer_links"
 		class="sm:divide-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted"
 	>
 		{
-			menuLinks.map((link) => (
-				<a class="hover:text-global-text px-4 py-2 hover:underline sm:py-0" href={link.path}>
+			footerMenuLinks.map((link) => (
+				<a class="hover:text-global-text px-2 py-2 hover:underline sm:py-0" href={link.path}>
 					{link.title}
 				</a>
 			))
