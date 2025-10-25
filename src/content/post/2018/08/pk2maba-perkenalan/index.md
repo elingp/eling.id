@@ -5,9 +5,11 @@ publishDate: "17 Aug 2018"
 tags: ["pk2maba"]
 ---
 
-![Eling di Bali circa 2018.](cover.jpg)
+:::figure
+![Eling di Bali circa 2018.](cover.jpg "Eling di Bali circa 2018.")
 
-<div class="md-figcaption">Eling di Bali circa 2018.</div>
+Eling di Bali circa 2018.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

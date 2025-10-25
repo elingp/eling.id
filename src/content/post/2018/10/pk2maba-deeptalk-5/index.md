@@ -5,9 +5,11 @@ publishDate: "03 Oct 2018"
 tags: ["pk2maba"]
 ---
 
-![Eling dan Rama.](cover.jpg)
+:::figure
+![Eling dan Rama.](cover.jpg "Eling dan Rama.")
 
-<div class="md-figcaption">Eling dan Rama.</div>
+Eling dan Rama.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

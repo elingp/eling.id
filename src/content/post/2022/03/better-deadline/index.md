@@ -6,9 +6,11 @@ tags: ["gigih"]
 pinned: true
 ---
 
-![Stressing on deadline.](cover.webp)
+:::figure
+![Stressing on deadline.](cover.webp "Stressing on deadline.")
 
-<div class="md-figcaption">Stressing on deadline.</div>
+Stressing on deadline.
+:::
 
 We all have been there. Loads of deadlines were approaching. The usual 24 hours a day seems to be inadequate. People kept bogging us down with other things to do. We got distracted by the new drama happening on social media. Everything just kept crashing down. Then, our brain suddenly got tingled, overwhelmed by fear, and we became hype focused–finishing all the deadlines in a zap. We submitted the works, felt quickly relieved, and then began loathing ourselves because we did not do our best to finish them–we survived with a thin razor of time left. Then we repeat this cycle.
 

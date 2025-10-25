@@ -5,9 +5,11 @@ publishDate: "05 Sep 2018"
 tags: ["pk2maba"]
 ---
 
-![Pak Lana dan Eling.](cover.jpg)
+:::figure
+![Pak Lana dan Eling.](cover.jpg "Pak Lana dan Eling.")
 
-<div class="md-figcaption">Pak Lana dan Eling.</div>
+Pak Lana dan Eling.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

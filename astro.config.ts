@@ -15,6 +15,7 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 // Remark plugins
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
+import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
 import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
 import { remarkGithubCard } from "./src/plugins/remark-github-card";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
@@ -84,6 +85,7 @@ export default defineConfig({
 			remarkReadingTime,
 			remarkGitMetadata,
 			remarkDirective,
+			remarkFigureCaption, // Must be after remarkDirective
 			remarkGithubCard,
 			remarkAdmonitions,
 		],

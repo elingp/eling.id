@@ -134,3 +134,43 @@ To use this feature you just use the "Github" directive:
 ```markdown title="Linking a user"
 ::github{user="withastro"}
 ```
+
+## Image Captions (Figures)
+
+You can add semantic captions to images using the `:::figure` directive. This creates a proper HTML `<figure>` element with a `<figcaption>` for better accessibility and SEO.
+
+The caption supports Markdown formatting, including **bold**, _italic_, and [links](https://example.com).
+
+To use this feature, wrap your image in a `:::figure` directive:
+
+```md
+:::figure
+![Astro logo](../../2023/02/markdown-elements/logo.png "Astro logo")
+
+The Astro logo - Build the web you want!
+:::
+```
+
+Outputs:
+
+:::figure
+![Astro logo](../../2023/02/markdown-elements/logo.png "Astro logo")
+
+The Astro logo - Build the web you want!
+:::
+
+You can also use rich content in captions:
+
+```md
+:::figure
+![Example image](../../2023/02/markdown-elements/logo.png "Example")
+
+This caption has **bold text**, _italic text_, and a [link](https://astro.build)!
+:::
+```
+
+:::figure
+![Example image](../../2023/02/markdown-elements/logo.png "Example")
+
+This caption has **bold text**, _italic text_, and a [link](https://astro.build)!
+:::

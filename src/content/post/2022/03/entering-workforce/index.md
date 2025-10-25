@@ -5,9 +5,11 @@ publishDate: "31 Mar 2022"
 tags: ["gigih"]
 ---
 
-![Feeling timid about the future.](cover.webp)
+:::figure
+![Feeling timid about the future.](cover.webp "Feeling timid about the future.")
 
-<div class="md-figcaption">Feeling timid about the future.</div>
+Feeling timid about the future.
+:::
 
 ## Ongoing Changes
 

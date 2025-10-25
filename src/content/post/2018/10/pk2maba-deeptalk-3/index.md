@@ -5,9 +5,11 @@ publishDate: "01 Oct 2018"
 tags: ["pk2maba"]
 ---
 
-![Eling dan Kak Felin.](cover.jpg)
+:::figure
+![Eling dan Kak Felin.](cover.jpg "Eling dan Kak Felin.")
 
-<div class="md-figcaption">Eling dan Kak Felin.</div>
+Eling dan Kak Felin.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

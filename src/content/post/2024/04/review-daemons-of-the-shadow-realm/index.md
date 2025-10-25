@@ -10,9 +10,11 @@ Hey there! Welcome to the first-ever post on my new blog, where I’ll be chatti
 
 ## Introduction
 
-![Vol. 1 Cover](Volume_01_EN.jpg)
+:::figure
+![Vol. 1 Cover](Volume_01_EN.jpg "Vol. 1 Cover")
 
-<div class="md-figcaption">Vol. 1 Cover</div>
+Vol. 1 Cover
+:::
 
 So, I’ve been hopping around different manga and manhwa, mostly the ones that pop up in Weekly Shonen Jump or Jump+. But then, MyAnimeList threw down the gauntlet with their annual “[You Should Read This Manga 2024](https://myanimelist.net/stacks/41944)” challenge. I’m all in for that sweet MAL badge I missed last year.
 
@@ -34,21 +36,27 @@ I got my hands on all the English volumes ([via Square Enix](https://squareenixm
 
 I’m no art critic, but I know what I like. And _Daemons of the Shadow Realm_? It’s got it going on.
 
-![The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)](0002-033.jpg)
+:::figure
+![The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)](0002-033.jpg "The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)")
 
-<div class="md-figcaption">The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)</div>
+The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)
+:::
 
 Arakawa’s art is super clean and sharp. She knows how to use shadows to make the big moments pop. The way she lays out the pages and panels makes it easy to get lost in the story. And those full-page spreads? They’re epic, not just filler.
 
-![Look at the two best girls! (Vol. 1 Ch. 4)](0004-028.jpg)
+:::figure
+![Look at the two best girls! (Vol. 1 Ch. 4)](0004-028.jpg "Look at the two best girls! (Vol. 1 Ch. 4)")
 
-<div class="md-figcaption">Look at the two best girls! (Vol. 1 Ch. 4)</div>
+Look at the two best girls! (Vol. 1 Ch. 4)
+:::
 
 The characters look awesome, with a cool _shounen_ vibe—less about looking real, more about feeling real. And the _chibi_ versions of Gabby and Asa? They’re the cutest. You can really feel what the characters are going through, whether they’re angry, cocky, or sneaky.
 
-![The actions are easy to follow. (Vol. 1 Ch. 2)](0002-027.jpg)
+:::figure
+![The actions are easy to follow. (Vol. 1 Ch. 2)](0002-027.jpg "The actions are easy to follow. (Vol. 1 Ch. 2)")
 
-<div class="md-figcaption">The actions are easy to follow. (Vol. 1 Ch. 2)</div>
+The actions are easy to follow. (Vol. 1 Ch. 2)
+:::
 
 The fight scenes are clear and exciting, even when things get wild. It’s not all about the battles, though; but when they happen, they hit hard.
 
@@ -56,21 +64,27 @@ Backgrounds aren’t usually my thing, but here, they add a lot to the mood. Whe
 
 ## Character Exploration
 
-![Some of the early characters. (Vol. 2 Ch. 5)](0005-003.jpg)
+:::figure
+![Some of the early characters. (Vol. 2 Ch. 5)](0005-003.jpg "Some of the early characters. (Vol. 2 Ch. 5)")
 
-<div class="md-figcaption">Some of the early characters. (Vol. 2 Ch. 5)</div>
+Some of the early characters. (Vol. 2 Ch. 5)
+:::
 
 Alright, let’s talk about the crew in _Daemons of the Shadow Realm_. We’ve got Yuru, the stoic mountain hunter with a heart of gold, and Asa, his sister who’s got his back no matter what. They’ve been apart for a decade, but they’re both craving a slice of normal life—something that’s pretty hard to come by when you’re born into a world of daemons and destiny.
 
-![Yuru is hardboiled, alright. (Vol. 3 Ch. 11)](0011-002.jpg)
+:::figure
+![Yuru is hardboiled, alright. (Vol. 3 Ch. 11)](0011-002.jpg "Yuru is hardboiled, alright. (Vol. 3 Ch. 11)")
 
-<div class="md-figcaption">Yuru is hardboiled, alright. (Vol. 3 Ch. 11)</div>
+Yuru is hardboiled, alright. (Vol. 3 Ch. 11)
+:::
 
 These two have some serious sibling synergy, but they’re also dealing with their own personal battles. Yuru’s all about going solo, while Asa’s the team player. Watching them butt heads and then sync up is half the fun.
 
-![Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)](0011-018.jpg)
+:::figure
+![Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)](0011-018.jpg "Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)")
 
-<div class="md-figcaption">Dera and Jin must <i>not</i> be in the same room together. (Vol. 3 Ch. 11)</div>
+Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)
+:::
 
 The supporting cast? They’re gold. Dera’s the life of the party, always ready with a plan, and Jin’s the strong, silent type who’s got wisdom for days. They’re like the cool uncles guiding our heroes through the chaos.
 
@@ -78,9 +92,11 @@ And let’s not forget Yuru’s daemon sidekicks, Left and Right. They’re loya
 
 The rest of the Kagemori family is a whole soap opera on its own. The head honcho’s got a soft spot for kids but won’t think twice about cutting down a traitor. Then there’s Hagure, the manga-loving rebel, and Asuma, the brooding strategist. Family dinners at their place _must_ be intense.
 
-![Gabby and her epic monologue. (Vol. 6 Ch. 23)](0023-018.jpg)
+:::figure
+![Gabby and her epic monologue. (Vol. 6 Ch. 23)](0023-018.jpg "Gabby and her epic monologue. (Vol. 6 Ch. 23)")
 
-<div class="md-figcaption">Gabby and her epic monologue. (Vol. 6 Ch. 23)</div>
+Gabby and her epic monologue. (Vol. 6 Ch. 23)
+:::
 
 Gabby’s the wild card—fiercely loyal to Asa and not afraid to call out anyone who crosses them. Her epic rants in one of the chapters are the stuff of legend.
 
@@ -90,25 +106,31 @@ And there are so many more characters waiting in the wings, each with their own 
 
 I’m not one to get all deep into themes, but this manga makes it fun. It’s got some serious topics, but nothing too heavy for its _shounen_ roots.
 
-![Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)](0011-014.jpg)
+:::figure
+![Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)](0011-014.jpg "Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)")
 
-<div class="md-figcaption">Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)</div>
+Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)
+:::
 
 It’s all about Yuru and Asa trying to fix their sibling bond while everything’s going crazy around them. Watching them go from estranged siblings to a dynamic duo is a wild ride. There’s potential for a deeper dive into their bond, and I’m here for it.
 
 The story also plays around with the classic idea of power and what it means to have it. The main characters deal with the whole “great power, great responsibility” thing and whether they should be in charge or someone else should call the shots. It’s interesting, but I’m waiting for _that_ mind-blowing take that’ll shake things up.
 
-![This manga is fun! (Vol. 4 Ch. 15)](0015-001.jpg)
+:::figure
+![This manga is fun! (Vol. 4 Ch. 15)](0015-001.jpg "This manga is fun! (Vol. 4 Ch. 15)")
 
-<div class="md-figcaption">This manga is fun! (Vol. 4 Ch. 15)</div>
+This manga is fun! (Vol. 4 Ch. 15)
+:::
 
 This manga dances on the tightrope between serious and silly. It’s not your typical good-versus-evil showdown. Characters wear their shades of gray, and sibling bonds stretch and snap. But here’s the secret sauce: amidst ancient prophecies and daemon battles, the manga serves up comic relief like a well-timed punchline. Because life—and manga—is all about finding that sweet spot between darkness and laughter.
 
 ## Worldbuilding and Setting
 
-![Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)](0004-046-047.jpg)
+:::figure
+![Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)](0004-046-047.jpg "Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)")
 
-<div class="md-figcaption">Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)</div>
+Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)
+:::
 
 The setting is modern Japan, and you can tell Arakawa did her homework. Her sketches and notes show she cares about the little things, like getting a statue just right, even if it’s only in a couple of panels.
 
@@ -116,17 +138,21 @@ The mix of old-school and modern-day Japan is super cool. Yuru’s old-timey way
 
 There’s a whole bunch of clans with their own agendas, and we’ve only scratched the surface. It feels like there’s a whole world out there waiting to be explored.
 
-![Some of the _yokai_ in the series. (Vol. 6 Ch. 22)](0022-002.jpg)
+:::figure
+![Some of the _yokai_ in the series. (Vol. 6 Ch. 22)](0022-002.jpg "Some of the _yokai_ in the series. (Vol. 6 Ch. 22)")
 
-<div class="md-figcaption">Some of the <i>yokai</i> in the series. (Vol. 6 Ch. 22)</div>
+Some of the _yokai_ in the series. (Vol. 6 Ch. 22)
+:::
 
 And the _[yokai](https://en.wikipedia.org/wiki/Y%C5%8Dkai)_ from Japanese folklore? They bring a whole layer of history to the story. Even if you don’t know the myths, the translator’s notes are a great little bonus that’ll make you want to learn more. (Yeah, I did _not_ spend hours googling about them after reading some chapters.)
 
 ## Pacing and Structure
 
-![There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)](0003-026.jpg)
+:::figure
+![There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)](0003-026.jpg "There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)")
 
-<div class="md-figcaption">There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)</div>
+There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)
+:::
 
 The story’s been going on for two years but covers less than a few weeks in the manga world. It’s a slow burn, but that lets the characters and plot really shine. You get to know everyone and everything so well, it’s like you’re part of their world.
 
@@ -134,9 +160,11 @@ The chapters come out monthly, and they’re worth the wait. Each one focuses on
 
 ## Conclusion
 
-![The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)](0002-036-037.jpg)
+:::figure
+![The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)](0002-036-037.jpg "The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)")
 
-<div class="md-figcaption">The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)</div>
+The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)
+:::
 
 So, what’s the verdict on _Daemons of the Shadow Realm_? It’s a solid **7.5 out of 10** for me. It’s got all the makings of a great _shounen_ manga, but it’s not quite there yet. The story’s cooking up something good—I can feel it—but we’re still waiting for that big “wow” moment.
 

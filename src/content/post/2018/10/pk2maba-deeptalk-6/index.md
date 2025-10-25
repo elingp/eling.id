@@ -5,9 +5,11 @@ publishDate: "04 Oct 2018"
 tags: ["pk2maba"]
 ---
 
-![Jonathan dan Eling.](cover.jpg)
+:::figure
+![Jonathan dan Eling.](cover.jpg "Jonathan dan Eling.")
 
-<div class="md-figcaption">Jonathan dan Eling.</div>
+Jonathan dan Eling.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

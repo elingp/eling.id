@@ -5,9 +5,11 @@ publishDate: "02 Oct 2018"
 tags: ["pk2maba"]
 ---
 
-![Eling dan Kak Yoga.](cover.jpg)
+:::figure
+![Eling dan Kak Yoga.](cover.jpg "Eling dan Kak Yoga.")
 
-<div class="md-figcaption">Eling dan Kak Yoga.</div>
+Eling dan Kak Yoga.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 

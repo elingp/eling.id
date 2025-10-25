@@ -5,9 +5,11 @@ publishDate: "06 Sep 2018"
 tags: ["pk2maba"]
 ---
 
-![Kak Candra dan Eling.](cover.jpg)
+:::figure
+![Kak Candra dan Eling.](cover.jpg "Kak Candra dan Eling.")
 
-<div class="md-figcaption">Kak Candra dan Eling.</div>
+Kak Candra dan Eling.
+:::
 
 Halo semuanya! Halo teman-teman sekalian! Salam satu hati satu jiwa FILKOM!
 
