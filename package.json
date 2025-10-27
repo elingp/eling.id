@@ -22,7 +22,7 @@
 		"@astrojs/sitemap": "3.6.0",
 		"@fontsource/merriweather": "^5.2.11",
 		"@fontsource/raleway": "^5.2.8",
-		"@tailwindcss/vite": "4.1.14",
+		"@tailwindcss/vite": "4.1.16",
 		"astro": "5.14.6",
 		"astro-expressive-code": "^0.41.3",
 		"astro-icon": "^1.1.5",
