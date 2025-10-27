@@ -71,7 +71,31 @@ export default defineConfig({
 	markdown: {
 		rehypePlugins: [
 			rehypeHeadingIds,
-			[rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: ["not-prose"] } }],
+			[
+				rehypeAutolinkHeadings,
+				{
+					behavior: "append",
+					properties: {
+						className: ["anchor-link"],
+						ariaLabel: "Link to this section",
+					},
+					content: {
+						type: "element",
+						tagName: "span",
+						properties: {
+							className: ["anchor-icon"],
+						},
+						children: [
+							{
+								type: "element",
+								tagName: "span",
+								properties: { className: ["sr-only"] },
+								children: [{ type: "text", value: " Link to this heading" }],
+							},
+						],
+					},
+				},
+			],
 			[
 				rehypeExternalLinks,
 				{
