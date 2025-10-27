@@ -97,7 +97,11 @@
 	}
 
 	.md-figcaption {
-		@apply -mt-6 mb-6 text-center text-sm text-gray-500;
+		@apply -mt-6 mb-6 text-center;
+	}
+
+	.md-figcaption > p {
+		@apply text-global-text/70 m-0 text-sm md:text-base;
 	}
 
 	.prose :where(h2, h3, h4, h5, h6) > a {
