@@ -44,7 +44,7 @@
 		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.9.4",
+		"@astrojs/check": "^0.9.5",
 		"@biomejs/biome": "^2.2.6",
 		"@iconify-json/fa7-brands": "^1.2.0",
 		"@iconify-json/fa7-solid": "^1.2.2",
