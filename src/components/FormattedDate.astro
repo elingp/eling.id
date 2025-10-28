@@ -78,6 +78,7 @@ const mergedClass = className ? `client-formatted-date ${className}` : "client-f
 						const defaultOptions = JSON.parse(defaultOptionsStr);
 						options = { ...defaultOptions };
 					} catch (e) {
+						console.warn("Failed to parse default date options:", defaultOptionsStr, e);
 						// Use hardcoded defaults
 					}
 				}
@@ -88,6 +89,7 @@ const mergedClass = className ? `client-formatted-date ${className}` : "client-f
 						const componentOptions = JSON.parse(optionsStr);
 						options = { ...options, ...componentOptions };
 					} catch (e) {
+						console.warn("Failed to parse component date options:", optionsStr, e);
 						// Keep current options
 					}
 				}
