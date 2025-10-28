@@ -15,6 +15,8 @@ import rehypeUnwrapImages from "rehype-unwrap-images";
 // Remark plugins
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
+import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
+import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
 import { remarkGithubCard } from "./src/plugins/remark-github-card";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config";
@@ -69,7 +71,31 @@ export default defineConfig({
 	markdown: {
 		rehypePlugins: [
 			rehypeHeadingIds,
-			[rehypeAutolinkHeadings, { behavior: "wrap", properties: { className: ["not-prose"] } }],
+			[
+				rehypeAutolinkHeadings,
+				{
+					behavior: "append",
+					properties: {
+						className: ["anchor-link"],
+						ariaLabel: "Link to this section",
+					},
+					content: {
+						type: "element",
+						tagName: "span",
+						properties: {
+							className: ["anchor-icon"],
+						},
+						children: [
+							{
+								type: "element",
+								tagName: "span",
+								properties: { className: ["sr-only"] },
+								children: [{ type: "text", value: " Link to this heading" }],
+							},
+						],
+					},
+				},
+			],
 			[
 				rehypeExternalLinks,
 				{
@@ -79,7 +105,14 @@ export default defineConfig({
 			],
 			rehypeUnwrapImages,
 		],
-		remarkPlugins: [remarkReadingTime, remarkDirective, remarkGithubCard, remarkAdmonitions],
+		remarkPlugins: [
+			remarkReadingTime,
+			remarkGitMetadata,
+			remarkDirective,
+			remarkFigureCaption, // Must be after remarkDirective
+			remarkGithubCard,
+			remarkAdmonitions,
+		],
 		remarkRehype: {
 			footnoteLabelProperties: {
 				className: [""],

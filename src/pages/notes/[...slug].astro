@@ -23,8 +23,10 @@ const meta = {
 		`Read about my note posted on: ${note.data.publishDate.toLocaleDateString()}`,
 	title: note.data.title,
 };
+
+const sourcePath = `src/content/note/${note.id}.md`;
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} sourcePath={sourcePath}>
 	<Note as="h1" note={note} />
 </PageLayout>

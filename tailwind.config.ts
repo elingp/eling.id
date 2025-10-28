@@ -85,11 +85,25 @@ export default {
 						},
 					},
 				},
-				sm: {
+				lg: {
 					css: {
-						code: {
-							fontSize: "var(--text-sm)",
-							fontWeight: "400",
+						// Mobile: body=18px, h2=28px, h3=22px, h4=18px (inherits body)
+						h2: {
+							fontSize: "1.75rem", // 28px (default: 30px)
+						},
+						h3: {
+							fontSize: "1.375rem", // 22px (default: 24px)
+						},
+					},
+				},
+				xl: {
+					css: {
+						// Desktop: body=20px, h2=32px, h3=26px, h4=20px (inherits body)
+						h2: {
+							fontSize: "2rem", // 32px (default: 36px)
+						},
+						h3: {
+							fontSize: "1.625rem", // 26px (default: 30px)
 						},
 					},
 				},

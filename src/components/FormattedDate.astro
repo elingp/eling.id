@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { siteConfig } from "@/site.config";
 import { getFormattedDate } from "@/utils/date";
 
 type Props = HTMLAttributes<"time"> & {
@@ -7,18 +8,119 @@ type Props = HTMLAttributes<"time"> & {
 	dateTimeOptions?: Intl.DateTimeFormatOptions;
 };
 
-const { date, dateTimeOptions, ...attrs } = Astro.props;
+const { date, dateTimeOptions, class: className, ...attrs } = Astro.props;
 
+// Server-side format as fallback (for no-JS scenarios)
 const postDate = getFormattedDate(date, dateTimeOptions);
-const hoverDate = getFormattedDate(date, {
-	day: "numeric",
-	month: "short",
+
+const hoverDateOptions: Intl.DateTimeFormatOptions = {
 	year: "numeric",
+	month: "short",
+	day: "numeric",
 	hour: "2-digit",
 	minute: "2-digit",
-	hour12: false,
-});
+	timeZoneName: "short",
+};
+const hoverDate = getFormattedDate(date, hoverDateOptions);
+
 const ISO = date.toISOString();
+
+// Merge classes: always include client-formatted-date + any passed classes
+const mergedClass = className ? `client-formatted-date ${className}` : "client-formatted-date";
 ---
 
-<time datetime={ISO} title={hoverDate} {...attrs}>{postDate}</time>
+<time
+	datetime={ISO}
+	title={hoverDate}
+	data-locale={siteConfig.date.locale}
+	data-default-options={JSON.stringify(siteConfig.date.options)}
+	data-options={JSON.stringify(dateTimeOptions)}
+	{...attrs}
+	class={mergedClass}
+>
+	{postDate}
+</time>
+
+<script>
+	/**
+	 * Format dates in viewer's local timezone (client-side)
+	 */
+	function formatClientDates() {
+		const dateElements = document.querySelectorAll<HTMLTimeElement>(".client-formatted-date");
+
+		dateElements.forEach((el) => {
+			const datetime = el.getAttribute("datetime");
+			if (!datetime) return;
+
+			const locale = el.getAttribute("data-locale") || "en-GB"; // Site config defaults
+			const defaultOptionsStr = el.getAttribute("data-default-options");
+			const optionsStr = el.getAttribute("data-options");
+
+			try {
+				const date = new Date(datetime);
+
+				// Validate date
+				if (isNaN(date.getTime())) {
+					console.error("Invalid date:", datetime);
+					return;
+				}
+
+				// Site config defaults
+				let options: Intl.DateTimeFormatOptions = {
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+				};
+
+				// Merge with site config defaults if provided
+				if (defaultOptionsStr && defaultOptionsStr !== "null") {
+					try {
+						const defaultOptions = JSON.parse(defaultOptionsStr);
+						options = { ...defaultOptions };
+					} catch (e) {
+						console.warn("Failed to parse default date options:", defaultOptionsStr, e);
+						// Use hardcoded defaults
+					}
+				}
+
+				// Merge with component-specific options (override defaults)
+				if (optionsStr && optionsStr !== "null") {
+					try {
+						const componentOptions = JSON.parse(optionsStr);
+						options = { ...options, ...componentOptions };
+					} catch (e) {
+						console.warn("Failed to parse component date options:", optionsStr, e);
+						// Keep current options
+					}
+				}
+
+				// Format datetime in viewer's timezone
+				const formatted = date.toLocaleString(locale, options);
+
+				// Find and update only text nodes to preserve any child elements
+				el.childNodes.forEach((node) => {
+					if (node.nodeType === Node.TEXT_NODE) {
+						node.textContent = formatted;
+					}
+				});
+
+				const hoverDate = date.toLocaleString(locale, {
+					year: "numeric",
+					month: "short",
+					day: "numeric",
+					hour: "2-digit",
+					minute: "2-digit",
+					timeZoneName: "short",
+				});
+				el.setAttribute("title", hoverDate);
+			} catch (e) {
+				// Keep server-rendered fallback if formatting fails
+				console.error("Date formatting error:", e);
+			}
+		});
+	}
+
+	formatClientDates();
+
+	document.addEventListener("astro:page-load", formatClientDates);
+</script>
