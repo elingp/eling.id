@@ -20,12 +20,19 @@ const readingTime: string = remarkPluginFrontmatter.minutesRead;
 
 // Determine the actual updated date to show:
 // 1. If updatedDate is manually set in frontmatter, use that (takes priority)
-// 2. Otherwise, use git lastModified, but only if it's significantly different from publishDate (more than 1 day)
+// 2. Otherwise, use git lastModified, but only if:
+//    a) It's significantly different from publishDate (more than 1 day)
+//    b) It's after the URL migration cutoff (to ignore move-only commits)
 const gitLastModified = new Date(remarkPluginFrontmatter.lastModified);
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const daysSincePublish = (gitLastModified.getTime() - publishDate.getTime()) / ONE_DAY_MS;
 
-const finalUpdatedDate = updatedDate || (daysSincePublish > 1 ? gitLastModified : null);
+// Cutoff: ignore git changes before this date (URL migration happened on 2025-10-28)
+const URL_MIGRATION_CUTOFF = new Date("2025-10-28T00:00:00Z");
+const isAfterMigration = gitLastModified > URL_MIGRATION_CUTOFF;
+
+const finalUpdatedDate =
+	updatedDate || (daysSincePublish > 1 && isAfterMigration ? gitLastModified : null);
 
 // Get the source file path for GitHub link from the remark plugin
 const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
