@@ -28,7 +28,7 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const daysSincePublish = (gitLastModified.getTime() - publishDate.getTime()) / ONE_DAY_MS;
 
 // Cutoff: ignore git changes before this date (URL migration happened on 2025-10-28)
-const URL_MIGRATION_CUTOFF = new Date("2025-10-28T00:00:00Z");
+const URL_MIGRATION_CUTOFF = new Date("2025-10-28T02:00:00Z");
 const isAfterMigration = gitLastModified > URL_MIGRATION_CUTOFF;
 
 const finalUpdatedDate =
