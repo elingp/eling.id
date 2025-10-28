@@ -35,6 +35,9 @@ const meta = {
 	title: tagMeta?.data.title ?? `Posts about ${tag}`,
 };
 
+// Determine source path: if tag has custom content, link to that; otherwise link to the page template
+const sourcePath = tagMeta ? `src/content/tag/${tag}.md` : "src/pages/tags/[tag]/[...page].astro";
+
 const paginationProps = {
 	...(page.url.prev && {
 		prevUrl: {
@@ -51,21 +54,18 @@ const paginationProps = {
 };
 ---
 
-<PageLayout meta={meta}>
+<PageLayout meta={meta} sourcePath={sourcePath}>
 	<nav class="mb-8" aria-label="Breadcrumbs">
 		<ul class="flex items-center">
 			<li class="flex items-center">
-				<a
-					class="text-accent active:bg-link/10 hover:underline hover:decoration-2 active:decoration-dotted"
-					href="/tags/">Tags</a
-				>
+				<a class="text-accent hover:underline hover:decoration-2" href="/tags/">Tags</a>
 				<Icon aria-hidden="true" name="fa7-solid:chevron-right" class="mx-1.5" />
 			</li>
 			<li aria-current="page" class=""><span aria-hidden="true">#</span>{tag}</li>
 		</ul>
 	</nav>
 	<h1 class="title capitalize">{tagMeta?.data.title ?? `Posts about ${tag}`}</h1>
-	<div class="prose prose-sm prose-cactus mb-12 max-w-none">
+	<div class="prose prose-lg md:prose-xl mb-12 max-w-none">
 		{tagMeta?.data.description && <p>{tagMeta.data.description}</p>}
 		{TagContent && <TagContent />}
 	</div>

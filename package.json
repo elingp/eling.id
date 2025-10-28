@@ -1,12 +1,12 @@
 {
 	"name": "astro-cactus",
 	"type": "module",
-	"version": "6.9.0",
+	"version": "6.10.0",
 	"private": false,
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"lint": "biome lint .",
@@ -17,13 +17,13 @@
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.8",
-		"@astrojs/mdx": "4.3.7",
-		"@astrojs/rss": "4.0.12",
+		"@astrojs/mdx": "4.3.8",
+		"@astrojs/rss": "4.0.13",
 		"@astrojs/sitemap": "3.6.0",
 		"@fontsource/merriweather": "^5.2.11",
 		"@fontsource/raleway": "^5.2.8",
-		"@tailwindcss/vite": "4.1.14",
-		"astro": "5.14.6",
+		"@tailwindcss/vite": "4.1.16",
+		"astro": "5.15.1",
 		"astro-expressive-code": "^0.41.3",
 		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
@@ -44,8 +44,8 @@
 		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {
-		"@astrojs/check": "^0.9.4",
-		"@biomejs/biome": "^2.2.6",
+		"@astrojs/check": "^0.9.5",
+		"@biomejs/biome": "^2.3.1",
 		"@iconify-json/fa7-brands": "^1.2.0",
 		"@iconify-json/fa7-solid": "^1.2.2",
 		"@pagefind/default-ui": "^1.4.0",
@@ -59,13 +59,10 @@
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "^0.7.1",
 		"reading-time": "^1.5.0",
-		"tailwindcss": "4.1.14",
+		"tailwindcss": "4.1.16",
 		"typescript": "^5.9.3"
 	},
 	"pnpm": {
-		"overrides": {
-			"sharp": "^0.34.2"
-		},
 		"onlyBuiltDependencies": [
 			"@biomejs/biome",
 			"@tailwindcss/oxide",
@@ -73,5 +70,5 @@
 			"sharp"
 		]
 	},
-	"packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d"
+	"packageManager": "pnpm@10.19.0+sha512.c9fc7236e92adf5c8af42fd5bf1612df99c2ceb62f27047032f4720b33f8eacdde311865e91c411f2774f618d82f320808ecb51718bfa82c060c4ba7c76a32b8"
 }

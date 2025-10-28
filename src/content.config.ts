@@ -28,11 +28,28 @@ const post = defineCollection({
 			publishDate: z
 				.string()
 				.or(z.date())
-				.transform((val) => new Date(val)),
+				.transform((val) => {
+					const date = new Date(val);
+					// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
+					if (typeof val === "string" && !val.includes("T") && !val.includes("t")) {
+						const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
+						return utcDate;
+					}
+					return date;
+				}),
 			updatedDate: z
 				.string()
 				.optional()
-				.transform((str) => (str ? new Date(str) : undefined)),
+				.transform((str) => {
+					if (!str) return undefined;
+					const date = new Date(str);
+					// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
+					if (!str.includes("T") && !str.includes("t")) {
+						const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
+						return utcDate;
+					}
+					return date;
+				}),
 			pinned: z.boolean().default(false),
 		}),
 });

@@ -17,6 +17,25 @@ const socialImage = ogImage ?? `/og-image/${post.id}.png`;
 const articleDate = updatedDate?.toISOString() ?? publishDate.toISOString();
 const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.minutesRead;
+
+// Determine the actual updated date to show:
+// 1. If updatedDate is manually set in frontmatter, use that (takes priority)
+// 2. Otherwise, use git lastModified, but only if:
+//    a) It's significantly different from publishDate (more than 1 day)
+//    b) It's after the URL migration cutoff (to ignore move-only commits)
+const gitLastModified = new Date(remarkPluginFrontmatter.lastModified);
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const daysSincePublish = (gitLastModified.getTime() - publishDate.getTime()) / ONE_DAY_MS;
+
+// Cutoff: ignore git changes before this date (URL migration happened on 2025-10-28)
+const URL_MIGRATION_CUTOFF = new Date("2025-10-28T02:00:00Z");
+const isAfterMigration = gitLastModified > URL_MIGRATION_CUTOFF;
+
+const finalUpdatedDate =
+	updatedDate || (daysSincePublish > 1 && isAfterMigration ? gitLastModified : null);
+
+// Get the source file path for GitHub link from the remark plugin
+const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 ---
 
 <BaseLayout
@@ -26,13 +45,16 @@ const readingTime: string = remarkPluginFrontmatter.minutesRead;
 		ogImage: socialImage,
 		title,
 	}}
+	sourcePath={sourcePath}
 >
 	<article class="grow break-words" data-pagefind-body>
-		<div id="blog-hero" class="mb-12"><Masthead content={post} readingTime={readingTime} /></div>
+		<header id="blog-hero" class="mb-12">
+			<Masthead content={post} readingTime={readingTime} updatedDate={finalUpdatedDate} />
+		</header>
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 			{!!headings.length && <TOC headings={headings} />}
 			<div
-				class="prose prose-base prose-headings:font-semibold prose-headings:text-accent-2 sm:prose-th:before:content-none"
+				class="prose prose-lg md:prose-xl prose-headings:text-accent-2 sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
 			>
 				<slot />
 				<WebMentions />
@@ -40,7 +62,7 @@ const readingTime: string = remarkPluginFrontmatter.minutesRead;
 		</div>
 	</article>
 	<button
-		class="hover:border-accent active:border-accent fixed end-4 bottom-8 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-8 sm:h-12 sm:w-12 dark:bg-zinc-700"
+		class="hover:border-accent active:border-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full border-2 border-transparent bg-zinc-200 text-3xl opacity-0 transition-all transition-discrete duration-300 data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12 dark:bg-zinc-700"
 		data-show="false"
 		id="to-top-btn"
 	>
