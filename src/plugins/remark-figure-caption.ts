@@ -16,7 +16,7 @@ import { h } from "../utils/remark";
  * Transforms to:
  * <figure>
  *   <img src="image.jpg" alt="Alt text" title="Hover caption text" />
- *   <figcaption>Caption with <a href="url">links</a> and <strong>formatting</strong></figcaption>
+ *   <figcaption><p>Caption with <a href="url">links</a> and <strong>formatting</strong></p></figcaption>
  * </figure>
  */
 export function remarkFigureCaption() {
