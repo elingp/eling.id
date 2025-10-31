@@ -75,6 +75,10 @@
 		max-width: 100%;
 	}
 
+	figcaption > p {
+		@apply text-global-text/70 text-sm md:text-base;
+	}
+
 	/* h2,
 	h3,
 	h4,
@@ -94,14 +98,6 @@
 
 	.title {
 		@apply text-accent-2 text-3xl font-bold md:text-4xl;
-	}
-
-	.md-figcaption {
-		@apply -mt-6 mb-6 text-center;
-	}
-
-	.md-figcaption > p {
-		@apply text-global-text/70 m-0 text-sm md:text-base;
 	}
 
 	.anchor-link {

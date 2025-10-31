@@ -42,7 +42,7 @@ export function remarkFigureCaption() {
 
 			const figure = h("figure", {}, [
 				imageNode, // Keep the image node so Astro can optimize it
-				h("figcaption", { class: "md-figcaption" }, captionContent),
+				h("figcaption", {}, captionContent),
 			]);
 
 			parent.children[index] = figure;
