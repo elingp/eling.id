@@ -13,7 +13,6 @@
 	--color-link: oklch(69.44% 0.1812 47.58);
 	--color-accent: oklch(69.44% 0.1812 47.58);
 	--color-accent-2: oklch(18.15% 0 0);
-	--color-quote: oklch(35.59% 0.0918 48.24);
 
 	--font-sans:
 		Raleway, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -38,7 +37,6 @@
 			--color-link: oklch(76.62% 0.1369 52.94);
 			--color-accent: oklch(76.62% 0.1369 52.94);
 			--color-accent-2: oklch(94.66% 0 0);
-			--color-quote: oklch(92.72% 0.0391 55.85);
 		}
 	}
 
@@ -145,6 +143,6 @@
 	--tw-prose-headings: var(--color-accent-2);
 	--tw-prose-hr: 0.5px dashed #666;
 	--tw-prose-links: var(--color-global-text);
-	--tw-prose-quotes: var(--color-quote);
+	--tw-prose-quotes: color-mix(in oklch, var(--color-global-text) 85%, transparent);
 	--tw-prose-th-borders: #666;
 }
