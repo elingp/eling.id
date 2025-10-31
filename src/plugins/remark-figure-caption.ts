@@ -16,7 +16,7 @@ import { h } from "../utils/remark";
  * Transforms to:
  * <figure>
  *   <img src="image.jpg" alt="Alt text" title="Hover caption text" />
- *   <figcaption><p>Caption with <a href="url">links</a> and <strong>formatting</strong></p></figcaption>
+ *   <figcaption>Caption with <a href="url">links</a> and <strong>formatting</strong></figcaption>
  * </figure>
  */
 export function remarkFigureCaption() {
@@ -26,7 +26,6 @@ export function remarkFigureCaption() {
 				return;
 			}
 
-			// The first child should be a paragraph containing an image
 			const firstChild = node.children[0];
 			if (!firstChild || firstChild.type !== "paragraph") {
 				return;
@@ -37,13 +36,13 @@ export function remarkFigureCaption() {
 				return;
 			}
 
-			// Everything after the first paragraph is the caption content
-			const captionContent = node.children.slice(1);
+			const captionNodes = node.children.slice(1);
+			const captionContent =
+				captionNodes.length === 1 && captionNodes[0]?.type === "paragraph"
+					? captionNodes[0].children
+					: captionNodes;
 
-			const figure = h("figure", {}, [
-				imageNode, // Keep the image node so Astro can optimize it
-				h("figcaption", {}, captionContent),
-			]);
+			const figure = h("figure", {}, [imageNode, h("figcaption", {}, captionContent)]);
 
 			parent.children[index] = figure;
 		});
