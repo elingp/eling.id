@@ -17,7 +17,6 @@ export default {
 								},
 							},
 							"&:active": {
-								textDecorationStyle: "dotted",
 								backgroundColor: "color-mix(in oklch, var(--color-link) 10%, transparent)",
 							},
 						},

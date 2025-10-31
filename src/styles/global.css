@@ -40,17 +40,11 @@
 		}
 	}
 
-	/* Global tactile feedback for all interactive elements */
+	/* Tactile feedback for all interactive elements */
 	a:active,
 	button:active,
 	[role="button"]:active {
 		@apply bg-link/10;
-	}
-
-	/* Add dotted underline to links with existing underlines when active */
-	a[class*="underline"]:active,
-	a.cactus-link:active {
-		@apply decoration-dotted;
 	}
 
 	:target {
