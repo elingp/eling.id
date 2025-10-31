@@ -9,15 +9,14 @@ export default {
 					css: {
 						a: {
 							textDecoration: "underline",
+							textDecorationColor: "var(--color-link)",
 							textUnderlineOffset: "2px",
 							"&:hover": {
 								"@media (hover: hover)": {
-									textDecorationColor: "var(--color-link)",
 									textDecorationThickness: "2px",
 								},
 							},
 							"&:active": {
-								textDecorationStyle: "dotted",
 								backgroundColor: "color-mix(in oklch, var(--color-link) 10%, transparent)",
 							},
 						},
@@ -94,6 +93,9 @@ export default {
 						h3: {
 							fontSize: "1.375rem", // 22px (default: 24px)
 						},
+						figcaption: {
+							fontSize: "0.875rem", // 14px (text-sm)
+						},
 					},
 				},
 				xl: {
@@ -104,6 +106,9 @@ export default {
 						},
 						h3: {
 							fontSize: "1.625rem", // 26px (default: 30px)
+						},
+						figcaption: {
+							fontSize: "1rem", // 16px (text-base)
 						},
 					},
 				},
