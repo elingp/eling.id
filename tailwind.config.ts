@@ -9,10 +9,10 @@ export default {
 					css: {
 						a: {
 							textDecoration: "underline",
+							textDecorationColor: "var(--color-link)",
 							textUnderlineOffset: "2px",
 							"&:hover": {
 								"@media (hover: hover)": {
-									textDecorationColor: "var(--color-link)",
 									textDecorationThickness: "2px",
 								},
 							},
