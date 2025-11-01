@@ -8,8 +8,8 @@ This repository contains the source code for my personal website where I share t
 
 ## Tech Stack
 
-- **Framework**: [Astro](https://astro.build) v5.15.1
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) v4.1.16 with [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
+- **Framework**: [Astro](https://astro.build)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com) with [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
 - **Content**: Markdown/MDX with [Content Collections](https://docs.astro.build/en/guides/content-collections/)
 - **Code Highlighting**: [Expressive Code](https://expressive-code.com/)
 - **Search**: [Pagefind](https://pagefind.app/) for static search
