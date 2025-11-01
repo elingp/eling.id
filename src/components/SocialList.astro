@@ -52,7 +52,13 @@ const socialLinks: {
 						rel={`noopener noreferrer ${isWebmention ? "me authn" : ""}`}
 						target="_blank"
 					>
-						<Icon aria-hidden="true" class="h-8 w-8" focusable="false" name={name} />
+						<Icon
+							aria-hidden="true"
+							class="h-8 w-8"
+							focusable="false"
+							title={friendlyName}
+							name={name}
+						/>
 						<span class="sr-only">{friendlyName}</span>
 					</a>
 				</li>
