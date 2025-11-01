@@ -67,7 +67,7 @@
 }
 
 #cactus__search mark {
-	color: var(--color-quote);
+	color: color-mix(in oklch, var(--color-accent) 90%, transparent);
 	background-color: transparent;
 	font-weight: 600;
 }
