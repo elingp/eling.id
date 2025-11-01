@@ -1,10 +1,6 @@
 # eling.id
 
-Personal website and blog of Eling Pramuatmaja.
-
-## About
-
-This repository contains the source code for my personal website where I share thoughts on my hobbies, technology, and my learning journey in general. The site serves as both a platform to share long-form blog posts and quick notes, as well as a portfolio showcasing my work.
+This repo contains the source code for my personal website. The site serves as both a platform to share long-form blog posts and quick notes, as well as a portfolio showcasing my work.
 
 ## Tech Stack
 
@@ -89,23 +85,9 @@ pnpm dev
 
 ### Posts vs Notes
 
-**Posts** are long-form, polished articles meant for sharing complete thoughts, tutorials, or in-depth explorations. They support:
+**Posts** are long-form, polished articles meant for sharing complete thoughts, tutorials, or in-depth explorations.
 
-- Required description for SEO and previews
-- Optional cover images
-- Tags for categorization
-- Draft mode
-- Pinning to homepage
-- Optional manual `updatedDate` override
-- Flexible date format (e.g., "30 Mar 2022" or ISO 8601)
-
-**Notes** are quick, timestamped thoughts or updates. They're more casual and don't require:
-
-- Descriptions (optional)
-- Tags
-- Cover images
-
-Notes use strict ISO 8601 datetime format with timezone offsets (e.g., `"2025-10-19T15:27:00Z"`).
+**Notes** are quick, timestamped thoughts or updates. They're more casual and support:
 
 ### Writing Posts
 
@@ -127,7 +109,7 @@ Your content here...
 **Frontmatter Fields:**
 
 - `title` (required, max 60 chars)
-- `description` (required)
+- `description` (required) - For SEO and previews
 - `publishDate` (required) - Can be "DD MMM YYYY" or ISO 8601
 - `updatedDate` (optional) - Manually override the last-modified date
 - `tags` (optional) - Array of strings, auto-lowercased and de-duplicated
@@ -158,7 +140,7 @@ Your note content...
 
 ### Date Handling
 
-This site has intelligent date handling:
+The site has intelligent date handling:
 
 1. **Published Date**:
    - Posts: Accept friendly formats like "30 Mar 2022" (converted to UTC midnight) or ISO 8601
@@ -175,7 +157,7 @@ This site has intelligent date handling:
 
 ### Custom Markdown Features
 
-This blog includes custom remark plugins for enhanced markdown:
+The site includes custom remark plugins for enhanced markdown:
 
 #### Admonitions
 
@@ -264,14 +246,8 @@ Content types are defined in `src/content.config.ts`:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
 - Theme based on [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus) by Chris Williams
-
-## Contact
-
-- Website: [eling.id](https://eling.id)
-- Email: [eling@eling.id](mailto:eling@eling.id)
-- GitHub: [@elingp](https://github.com/elingp)
