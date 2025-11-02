@@ -103,7 +103,7 @@ draft: false
 pinned: false
 ---
 
-Your content here...
+Your post content...
 ```
 
 **Frontmatter Fields:**
