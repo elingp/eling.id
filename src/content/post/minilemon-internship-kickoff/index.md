@@ -1,6 +1,6 @@
 ---
 title: "So, I’m an Intern at Minilemon: Kicking Things Off"
-description: "In an unexpected turn of events, I landed an internship as a backend developer at a new tech company Minilemon Technology this month."
+description: "In an unexpected turn of events, I landed an internship as a backend developer at a relatively new tech company, Minilemon Technology, this month"
 publishDate: "2025-11-07T10:30:00Z"
 tags:
   - minilemon
