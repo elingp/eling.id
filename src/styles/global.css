@@ -138,5 +138,6 @@
 	--tw-prose-hr: 0.5px dashed #666;
 	--tw-prose-links: var(--color-global-text);
 	--tw-prose-quotes: color-mix(in oklch, var(--color-global-text) 85%, transparent);
+	--tw-prose-quote-borders: color-mix(in oklch, var(--color-accent) 85%, transparent);
 	--tw-prose-th-borders: #666;
 }
