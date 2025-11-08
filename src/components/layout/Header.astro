@@ -8,12 +8,12 @@ import { menuLinks } from "@/site.config";
 	<div class="flex sm:flex-col">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="inline-flex items-center hover:grayscale active:filter-none sm:relative sm:inline-block"
+			class="inline-flex items-center rounded-md hover:grayscale active:filter-none sm:relative sm:inline-block"
 			href="/"
 		>
 			<svg
 				aria-hidden="true"
-				class="fill-accent me-2 h-10 w-10 sm:absolute sm:-start-18 sm:me-0 sm:h-14 sm:w-14"
+				class="fill-accent me-1 h-11 w-11 sm:absolute sm:-start-18 sm:me-0 sm:h-14 sm:w-14"
 				focusable="false"
 				viewBox="0 0 500 500"
 				xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,8 @@ import { menuLinks } from "@/site.config";
 				<path
 					transform="translate(0,500) scale(0.1,-0.1)"
 					d="M1121 4319 c-179 -21 -347 -163 -402 -340 -18 -58 -19 -115 -19 -1479 0 -1361 1 -1421 19 -1479 26 -84 59 -137 127 -202 70 -66 128 -101 209 -126 56 -17 114 -18 865 -18 l805 0 71 22 c181 57 315 206 343 383 7 40 11 287 11 642 l0 577 383 3 c370 4 384 4 445 27 126 46 242 160 294 289 l23 57 3 614 c2 530 0 621 -13 674 -21 80 -55 138 -129 215 -82 86 -169 128 -291 142 -111 12 -2637 11 -2744 -1z m2579 -1009 l0 -410 -362 0 c-408 0 -450 -5 -549 -66 -79 -47 -155 -134 -198 -224 l-36 -75 -3 -627 -3 -628 -624 0 -625 0 0 509 0 509 333 4 332 3 60 28 c102 48 155 115 174 220 24 131 -38 256 -156 317 -64 33 -143 40 -455 40 l-288 0 0 405 0 405 1200 0 1200 0 0 -410z"
-				></path>
+				>
+				</path>
 			</svg>
 			<span class="font-sans text-lg/5 font-extrabold sm:text-3xl">Eling Pramuatmaja</span>
 		</a>
@@ -49,39 +50,38 @@ import { menuLinks } from "@/site.config";
 		<button
 			aria-expanded="false"
 			aria-haspopup="menu"
-			class="group relative ms-4 h-7 w-7 sm:invisible sm:hidden"
+			class="group relative ms-3 h-9 w-9 rounded-md sm:invisible sm:hidden"
 			id="toggle-navigation-menu"
 			type="button"
 		>
 			<span class="sr-only">Open main menu</span>
 			<svg
 				aria-hidden="true"
-				class="hover:text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
-				fill="none"
+				class="hover:text-accent absolute start-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
 				focusable="false"
-				id="line-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
+				viewBox="0 0 448 512"
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<title>Open menu</title>
-				<path d="M3.75 9h16.5m-16.5 6.75h16.5" stroke-linecap="round" stroke-linejoin="round"
-				></path>
+				<path
+					fill="currentColor"
+					d="M0 96c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32m0 160c0-17.7 14.3-32 32-32h384c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32m448 160c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32h384c17.7 0 32 14.3 32 32"
+				>
+				</path>
 			</svg>
 			<svg
 				aria-hidden="true"
-				class="text-accent absolute start-1/2 top-1/2 h-full w-full -translate-x-1/2 -translate-y-1/2 scale-0 cursor-pointer opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
-				fill="none"
+				class="text-accent absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 cursor-pointer opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
 				focusable="false"
-				id="cross-svg"
-				stroke="currentColor"
-				stroke-width="1.5"
-				viewBox="0 0 24 24"
+				viewBox="0 0 384 512"
 				xmlns="http://www.w3.org/2000/svg"
 			>
 				<title>Close menu</title>
-				<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+				<path
+					fill="currentColor"
+					d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256L9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l137.3-137.4l137.4 137.3c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7z"
+				>
+				</path>
 			</svg>
 		</button>
 	</mobile-button>
