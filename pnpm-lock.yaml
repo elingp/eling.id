@@ -96,6 +96,9 @@ importers:
       '@iconify-json/fa7-brands':
         specifier: ^1.2.0
         version: 1.2.0
+      '@iconify-json/fa7-regular':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/fa7-solid':
         specifier: ^1.2.2
         version: 1.2.2
@@ -476,6 +479,9 @@ packages:
 
   '@iconify-json/fa7-brands@1.2.0':
     resolution: {integrity: sha512-OTdHSwRmycgQQXQr7wJQFyD08zj4OxoRfaWhCuI3a9MhbnHJApU4U2Qbp6hP4zicqOmQB9UII9+MA1IDNNLPlQ==}
+
+  '@iconify-json/fa7-regular@1.2.1':
+    resolution: {integrity: sha512-nq9R7PvDxGYdru05qU0zdS/sdeAlvqBvkHFxuER9G6GlsIR3nZqY55FAxDTo/OKNNInHWdUaakSpvvj3hQluHw==}
 
   '@iconify-json/fa7-solid@1.2.2':
     resolution: {integrity: sha512-qTvkcYWGtYxAZVfXzSrCvxYhQFsl1iCztZzXJDlD0oGAkmOqcxcvQxRhN984Ssn+ZApG7xPeUVKUV99OALbJFw==}
@@ -3792,6 +3798,10 @@ snapshots:
   '@fontsource/raleway@5.2.8': {}
 
   '@iconify-json/fa7-brands@1.2.0':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/fa7-regular@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 
