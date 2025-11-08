@@ -28,6 +28,6 @@ For the next few days, I’ll be supercharging my learning on this stack. I migh
 
 I know, I know, RTFM _is_ the consensus with learning most tech-related stuff. But a guy just wants to be extra sure, y’know. One can’t be too cautious… Oh, have I told you that I’m the type of person who opens hundreds of browser tabs during research of basically _anything_—even mundane stuff? Anyway, wish me luck. 🙂
 
-[^1]: I know “unpaid” can be loaded terms these days. But the company is explicit about it in their [job listings](https://glints.com/id/companies/minilemon/3c3c8e9e-5878-495a-92f4-5d6e40700fe0) (all caps and everything), so I’m just calling it what it is.
+[^1]: I know “unpaid” can be loaded terms these days. But the company is explicit about it in their [job listings](https://archive.is/fthej) (all caps and everything), so I’m just calling it what it is.
 
 [^2]: Basically, they’re people who frequent running events not because of the sports (e.g., surpassing their PB time, getting the medals) but to take chic photos of themselves wearing their favorite OOTD while posing like a runner. They mainly do this to post their images on social media, along with their Strava stats, as a form of social validation. I don’t have anything against this trend as long as people stay healthy, but there _is_ a hint of pejorative in this slang phrase.
