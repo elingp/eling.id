@@ -1,5 +1,6 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
+import { Icon } from "astro-icon/components";
 
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
@@ -67,19 +68,12 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		id="to-top-btn"
 	>
 		<span class="sr-only">Back to top</span>
-		<svg
+		<Icon
 			aria-hidden="true"
-			class="h-6 w-6"
-			fill="none"
-			focusable="false"
-			stroke="currentColor"
-			stroke-width="2"
-			viewBox="0 0 24 24"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<title>Back to top</title>
-			<path d="M4.5 15.75l7.5-7.5 7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
-		</svg>
+			name="fa7-solid:chevron-up"
+			title="Back to top"
+			class="inline-block h-4 w-4 sm:h-6 sm:w-6"
+		/>
 	</button>
 </BaseLayout>
 
