@@ -47,6 +47,7 @@
 		"@astrojs/check": "^0.9.5",
 		"@biomejs/biome": "^2.3.2",
 		"@iconify-json/fa7-brands": "^1.2.0",
+		"@iconify-json/fa7-regular": "^1.2.1",
 		"@iconify-json/fa7-solid": "^1.2.2",
 		"@pagefind/default-ui": "^1.4.0",
 		"@resvg/resvg-js": "^2.6.2",
