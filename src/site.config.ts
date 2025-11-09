@@ -55,16 +55,8 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
 	themes: ["github-dark", "github-light"],
 	styleOverrides: {
-		borderRadius: "4px",
 		codeFontFamily:
-			'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-		codeFontSize: "0.875rem",
-		codeLineHeight: "1.7142857rem",
-		codePaddingInline: "1rem",
-		frames: {
-			frameBoxShadowCssValue: "none",
-		},
-		uiLineHeight: "inherit",
+			'"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
 	},
 	themeCssSelector(theme, { styleVariants }) {
 		// If one dark and one light theme are available

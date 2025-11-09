@@ -11,21 +11,25 @@ const ogOptions: SatoriOptions = {
 	fonts: [
 		{
 			data: fs.readFileSync(
-				"node_modules/@fontsource/merriweather/files/merriweather-latin-700-normal.woff",
+				"node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-700-normal.woff",
 			),
-			name: "Merriweather",
+			name: "Source Serif 4",
 			style: "normal",
 			weight: 700,
 		},
 		{
-			data: fs.readFileSync("node_modules/@fontsource/raleway/files/raleway-latin-500-normal.woff"),
-			name: "Raleway",
+			data: fs.readFileSync(
+				"node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-500-normal.woff",
+			),
+			name: "Source Sans 3",
 			style: "normal",
 			weight: 500,
 		},
 		{
-			data: fs.readFileSync("node_modules/@fontsource/raleway/files/raleway-latin-700-normal.woff"),
-			name: "Raleway",
+			data: fs.readFileSync(
+				"node_modules/@fontsource/source-sans-3/files/source-sans-3-latin-700-normal.woff",
+			),
+			name: "Source Sans 3",
 			style: "normal",
 			weight: 700,
 		},
@@ -37,8 +41,8 @@ const ogOptions: SatoriOptions = {
 const markup = (title: string, pubDate: string) =>
 	html`<div tw="flex flex-col w-full h-full bg-[#1d1f20] text-[#c9c9c9]">
 		<div tw="flex flex-col flex-1 w-full p-10 justify-center">
-			<p tw="text-4xl mb-4 font-medium" style="font-family: Raleway">${pubDate}</p>
-			<h1 tw="text-6xl font-bold leading-snug text-white" style="font-family: Merriweather">
+			<p tw="text-4xl mb-4 font-medium" style="font-family: 'Source Sans 3'">${pubDate}</p>
+			<h1 tw="text-6xl font-bold leading-snug text-white" style="font-family: 'Source Serif 4'">
 				${title}
 			</h1>
 		</div>
@@ -58,7 +62,7 @@ const markup = (title: string, pubDate: string) =>
 						d="m149.19 181.93l0.31 33.94c51.79 0.58 57.64 0.93 60.5 2.22 1.93 0.86 5.07 2.94 7 4.62 1.93 1.67 4.51 5.01 5.75 7.42 1.55 3 2.29 6.25 2.35 10.37 0.06 3.5-0.59 7.67-1.55 10-0.91 2.2-3.09 5.5-4.85 7.34-1.76 1.83-5 4.31-7.2 5.5-3.77 2.03-5.69 2.19-33 2.66l-29 0.5-0.5 85.5h105c-0.01-79.29 0.38-98.64 1.1-102.5 0.6-3.3 2.02-7.8 3.15-10 1.12-2.2 3.49-5.8 5.27-8 1.78-2.2 5.66-5.68 8.61-7.73 2.95-2.05 7.62-4.47 10.37-5.38 4.1-1.35 10.69-1.71 36.75-2.02l31.75-0.37v-68h-202.11z"
 					/>
 				</svg>
-				<p tw="text-5xl ml-5 font-bold" style="font-family: Raleway">${siteConfig.title}</p>
+				<p tw="text-5xl ml-5 font-bold" style="font-family: 'Source Sans 3'">${siteConfig.title}</p>
 			</div>
 		</div>
 	</div>`;

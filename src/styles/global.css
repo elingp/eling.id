@@ -15,9 +15,12 @@
 	--color-accent-2: oklch(18.15% 0 0);
 
 	--font-sans:
-		Raleway, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Source Sans 3", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
 		"Segoe UI Symbol", "Noto Color Emoji";
-	--font-serif: Merriweather, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+	--font-mono:
+		"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", monospace;
 }
 
 @layer base {
@@ -66,14 +69,6 @@
 	[data-astro-image="constrained"] {
 		max-width: 100%;
 	}
-
-	/* h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		@apply font-sans;
-	} */
 }
 
 @layer components {
