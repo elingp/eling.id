@@ -7,6 +7,10 @@ export default {
 			typography: () => ({
 				DEFAULT: {
 					css: {
+						lineHeight: "1.5",
+						"[class~='lead']": {
+							lineHeight: "1.55",
+						},
 						a: {
 							textDecoration: "underline",
 							textDecorationColor: "var(--color-link)",
@@ -86,6 +90,10 @@ export default {
 				},
 				lg: {
 					css: {
+						lineHeight: "1.5",
+						"[class~='lead']": {
+							lineHeight: "1.55",
+						},
 						// Mobile: body=18px, h2=28px, h3=22px, h4=18px (inherits body)
 						h2: {
 							fontSize: "1.75rem", // 28px (default: 30px)
@@ -95,11 +103,16 @@ export default {
 						},
 						figcaption: {
 							fontSize: "0.875rem", // 14px (text-sm)
+							lineHeight: "1.45",
 						},
 					},
 				},
 				xl: {
 					css: {
+						lineHeight: "1.5",
+						"[class~='lead']": {
+							lineHeight: "1.55",
+						},
 						// Desktop: body=20px, h2=32px, h3=26px, h4=20px (inherits body)
 						h2: {
 							fontSize: "2rem", // 32px (default: 36px)
@@ -109,6 +122,7 @@ export default {
 						},
 						figcaption: {
 							fontSize: "1rem", // 16px (text-base)
+							lineHeight: "1.45",
 						},
 					},
 				},
