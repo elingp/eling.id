@@ -9,11 +9,9 @@
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
-		"lint": "biome lint .",
-		"format": "pnpm run format:code && pnpm run format:imports",
-		"format:code": "biome format . --write && prettier -w \"**/*\" \"!**/*.{md,mdx}\" --ignore-unknown --cache",
-		"format:imports": "biome check --formatter-enabled=false --write",
-		"check": "astro check"
+		"check": "astro check && biome check",
+		"lint": "biome check --write",
+		"format": "prettier -w . --cache"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.9",
@@ -65,12 +63,7 @@
 		"typescript": "^5.9.3"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"@tailwindcss/oxide",
-			"esbuild",
-			"sharp"
-		]
+		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"]
 	},
 	"packageManager": "pnpm@10.22.0+sha512.bf049efe995b28f527fd2b41ae0474ce29186f7edcb3bf545087bd61fbbebb2bf75362d1307fda09c2d288e1e499787ac12d4fcb617a974718a6051f2eee741c"
 }
