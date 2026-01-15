@@ -1,19 +1,20 @@
 {
 	"name": "eling.id",
 	"type": "module",
-	"version": "6.10.0",
+	"version": "6.11.0",
 	"private": false,
+	"engines": {
+		"node": ">=24"
+	},
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
-		"lint": "biome lint .",
-		"format": "pnpm run format:code && pnpm run format:imports",
-		"format:code": "biome format . --write && prettier -w \"**/*\" \"!**/*.{md,mdx}\" --ignore-unknown --cache",
-		"format:imports": "biome check --formatter-enabled=false --write",
-		"check": "astro check"
+		"lint": "biome check --write",
+		"format": "prettier -w . --cache",
+		"check": "astro check && biome check"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.10",
@@ -46,7 +47,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.6",
-		"@biomejs/biome": "2.3.6",
+		"@biomejs/biome": "2.3.11",
 		"@iconify-json/fa7-brands": "^1.2.1",
 		"@iconify-json/fa7-regular": "^1.2.2",
 		"@iconify-json/fa7-solid": "^1.2.3",
@@ -57,20 +58,18 @@
 		"@types/mdast": "^4.0.4",
 		"autoprefixer": "^10.4.23",
 		"pagefind": "^1.4.0",
-		"prettier": "3.6.2",
+		"prettier": "3.8.0",
 		"prettier-plugin-astro": "0.14.1",
-		"prettier-plugin-tailwindcss": "0.7.1",
+		"prettier-plugin-tailwindcss": "0.7.2",
 		"reading-time": "^1.5.0",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3"
 	},
 	"pnpm": {
-		"onlyBuiltDependencies": [
-			"@biomejs/biome",
-			"@tailwindcss/oxide",
-			"esbuild",
-			"sharp"
-		]
+		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"],
+		"overrides": {
+			"sharp": "^0.34.5"
+		}
 	},
 	"packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48"
 }

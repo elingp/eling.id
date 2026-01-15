@@ -33,8 +33,9 @@ This repo contains the source code for my personal website. The site serves as b
 
 ### Prerequisites
 
-- Node.js 18+
+- Node.js 24 (LTS)
 - pnpm (recommended) or npm
+- [mise](https://mise.jdx.dev/) (for toolchain management)
 
 ### Setup
 
@@ -42,6 +43,9 @@ This repo contains the source code for my personal website. The site serves as b
 # Clone the repository
 git clone https://github.com/elingp/eling.id.git
 cd eling.id
+
+# Install toolchain (Node via mise)
+mise install
 
 # Install dependencies
 pnpm install

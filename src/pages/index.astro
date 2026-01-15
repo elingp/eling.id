@@ -9,9 +9,8 @@ import { collectionDateSort } from "@/utils/date";
 // Posts
 const MAX_POSTS = 10;
 const allPosts = await getAllPosts();
-const allPostsByDate = allPosts
-	.sort(collectionDateSort)
-	.slice(0, MAX_POSTS) as CollectionEntry<"post">[];
+const allPostsByDate = allPosts.sort(collectionDateSort) as CollectionEntry<"post">[];
+const latestPosts = allPostsByDate.slice(0, MAX_POSTS);
 
 // Pinned Posts, set to a max of 3;
 const MAX_PINNED_POSTS = 3;
@@ -54,9 +53,9 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 <PageLayout meta={{ title: "Home" }} sourcePath="src/pages/index.astro">
 	<section class="prose prose-lg md:prose-xl">
 		<p class="mb-4">
-			Hi! I’m <b>Eling</b> (he/him). I write about my fascination with tech, my hobbies (like manga,
-			anime, and TTRPGs), and other random musings. I’m still discovering my niche, so you’ll find a
-			bit of everything that captures my interest. Enjoy!
+			Hi! I’m <b>Eling</b> (he/him). I write about my fascination with tech, my hobbies (like manga, anime,
+			and TTRPGs), and other random musings. I’m still discovering my niche, so you’ll find a bit of everything
+			that captures my interest. Enjoy!
 		</p>
 		<div class="not-prose"><SocialList /></div>
 	</section>
@@ -84,7 +83,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</h2>
 		<ul class="space-y-4" role="list">
 			{
-				allPostsByDate.map((p) => (
+				latestPosts.map((p) => (
 					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
 						<PostPreview post={p} />
 					</li>
