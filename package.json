@@ -3,6 +3,9 @@
 	"type": "module",
 	"version": "6.10.0",
 	"private": false,
+	"engines": {
+		"node": ">=24"
+	},
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
