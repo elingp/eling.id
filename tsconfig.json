@@ -2,8 +2,6 @@
 	"extends": "astro/tsconfigs/strictest",
 	"compilerOptions": {
 		"baseUrl": ".",
-		"lib": ["es2022", "dom", "dom.iterable"],
-		"moduleResolution": "bundler",
 		"paths": {
 			"@/*": ["src/*"]
 		}
