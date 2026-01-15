@@ -1,18 +1,24 @@
 name: ci
 
+permissions: {}
+
 on:
   push:
-    branches: [dev]
+    branches: [**]
   pull_request:
-    branches: [main, dev]
+    branches: [main]
 
-permissions:
-  contents: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   cache-and-install:
     name: Check for build and type issues
     runs-on: ubuntu-latest
+    # Run if it's a push OR if the repo of the PR != the repo of the base.
+    # (i.e., Run if it's a fork. Don't run if it's an internal branch, because 'push' already covered it.)
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
 
     steps:
       - name: Checkout code
@@ -34,7 +40,7 @@ jobs:
 
         # use astro check for issues
       - name: Run Astro check
-        run: pnpm astro check
+        run: pnpm check
 
         # ensure build works
       - name: Run Astro build
