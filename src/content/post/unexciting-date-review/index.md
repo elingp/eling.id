@@ -17,7 +17,7 @@ In short: it’s a deadpan, slow-burn rom-com about two awkward adults trying—
 Japanese Volume 1 cover of *Unexciting Date*. Image: Suzuyuki via [X/Twitter](https://x.com/moriagaranai/status/1991416243866464628/)
 :::
 
-Here’s an unofficial synopsis to give you a feel for it.
+Here’s an [unofficial synopsis](https://anilist.co/manga/204291) to give you a feel for it.
 
 > A So-So Match on a Dating App…
 >
