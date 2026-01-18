@@ -1,13 +1,13 @@
 ---
 title: "The Exciting Charm of ‘Unexciting Date’"
-description: "I’ve just caught up to a new ongoing manga, and the latest chapter is so good that I want to talk about it. The series is called “Unexciting Date”, but their dates are anything but unexciting for readers."
+description: "I’ve just caught up to a new ongoing manga, and I’m so hooked that I need to talk about it. The series is called “Unexciting Date”, but their dates are anything but unexciting for readers."
 publishDate: "2026-01-18T17:30:00+08:00"
 tags:
   - manga
   - review
 ---
 
-I’ve just caught up to a new ongoing manga, and the latest chapter is *so* good that I want to talk about it. The series is called *Unexciting Date* (Japanese: 盛りあがらないデート, Hepburn: *Moriagaranai Date*), but their dates are *anything* but unexciting for readers. Imagine this: two gloomy, introverted adults, clumsily dating each other. Sounds like a snooze-fest, but throw in some manga hijinks, and you’ve got a tooth-achingly sweet and fresh rom-com series!
+I’ve just caught up to a new ongoing manga, and I’m *so* hooked that I need to talk about it. The series is called *Unexciting Date* (Japanese: 盛りあがらないデート, Hepburn: *Moriagaranai Date*), but their dates are *anything* but unexciting for readers. Imagine this: two gloomy, introverted adults, clumsily dating each other. Sounds like a snooze-fest, but throw in some manga hijinks, and you’ve got a tooth-achingly sweet and fresh rom-com series!
 
 In short: it’s a deadpan, slow-burn rom-com about two awkward adults trying—sincerely, clumsily—to date.
 
@@ -29,7 +29,7 @@ Here’s an unofficial synopsis to give you a feel for it.
 
 Isn’t the synopsis interesting enough already???
 
-Not sold yet? Well, let me gush about it more then. (This is definitely not an objective review, but then again, I’m not a professional critic!)
+Not sold yet? Fine. Let me gush about it some more.
 
 ## Why It Works
 
@@ -37,7 +37,7 @@ For context: I’ve read a ton of rom-com manga. I’ve pretty much learned all 
 
 But two dreary adults dating each other is exceedingly rare. It’s rare because the archetype is not a “main character” type, or is usually used as a cheap self-insert for the reader. And yet, *Unexciting Date* manages to explore them in a way that’s funny, but still warm and grounded. Did I mention that both of them are functioning, working adults who are not hormonal trainwrecks you often see in teenage rom-coms? Yes, this is a [josei](https://tvtropes.org/pmwiki/pmwiki.php/Main/Josei) manga.
 
-Both main characters tick every “socially inept” box. They are shy. They overthink. They are awkward around others. They don’t communicate well. Heck, one suffers from bad habits like smoking and gambling, and the other has comically bad luck. Sounds rough! But they are earnest. They are kind people. They want to grow their relationship with each other. They’re just… not built for it. These are two relatable people who are trying their best. And the author [Suzuyuki](https://x.com/suzuyuki_cookie) executed their characterization brilliantly. Both Haida and Kuroi have a consistent depiction throughout. Still, they slowly but surely come out of their shell to reach each other. And as a reader—especially for the slice-of-life and slow-burn enjoyer—it’s fantastic. It’s lovely to see their small but measurable growth.
+Both main characters tick every “socially inept” box. They are shy. They overthink. They are awkward around others. They don’t communicate well. Heck, one suffers from bad habits like smoking and gambling, and the other has comically bad luck. Sounds rough! But they are earnest. They are kind people. They want to grow their relationship with each other. They’re just… not built for it. These are two relatable people who are trying their best. And the author [Suzuyuki](https://x.com/suzuyuki_cookie) executed their characterization brilliantly. Both Haida and Kuroi have a consistent depiction throughout. Still, they slowly but surely come out of their shell to reach each other. Small victories feel genuinely earned rather than rushed by plot convenience. Like finally working up the courage to initiate physical contact, or learning to voice their feelings instead of spiraling into anxious overthinking. And as a reader—especially for the slice-of-life and slow-burn enjoyer—it’s fantastic. It’s lovely to see their small but measurable growth.
 
 Anyway, I could keep yapping about the character writing. Let’s talk about the jokes.
 
@@ -57,9 +57,9 @@ A lot of the humor is just… commitment to the bit. Like this scene where Haida
 
 On the art side, three things really stand out for me: expressions, outfits, and backgrounds.
 
-The art of this series rules—especially the facial expressions. The cast look distinct and easily recognizable, with the main duo being the most memorable. They have the signature “[resting bitch face](https://en.wikipedia.org/wiki/Resting_bitch_face),” which doesn’t help their case at all. People, especially the two, can easily misinterpret them. There are several jokes about this, where they overanalyze each other’s ambiguous reactions.
+The art of this series rules—especially the facial expressions. The cast look distinct and easily recognizable, with the main duo the most memorable. They have the signature “[resting bitch face](https://en.wikipedia.org/wiki/Resting_bitch_face),” which doesn’t help their case at all. People, especially the two, can easily misinterpret them. There are several jokes about this, where they overanalyze each other’s ambiguous reactions.
 
-There is also the wonderful fact that the characters change clothes! If you’ve read a lot of manga, you’ll quickly notice the characters almost always wear the same attire. This is not the case here. The author draws various outfits, and they all look gorgeous (and comfy)!
+There is also the wonderful fact that the characters change clothes! If you’ve read a lot of manga, you’ll quickly notice the characters almost always wear the same attire. This is not the case here. The author draws various outfits, and they all look gorgeous (and comfy)! It’s a small detail that makes the world feel lived-in rather than like a static stage for rom-com beats to play out.
 
 Another small thing I really appreciate: the backgrounds. Almost all the panels have neatly drawn backgrounds. Of course, there are panels without—often when they want to specifically frame the character and focus on something else. But when it isn’t framed that way, there’s almost always something in the background. To me, it’s a hallmark of well-drawn, unrushed manga—a trait I associate with series that aren’t being crushed by deadlines.[^1] Business is business, and there are too many circumstances to consider for me to generalize it this way. However, it’s my personal observation, and it suggests that the author takes pride in their work.
 
@@ -73,7 +73,7 @@ I got the idea to write about this because chapter 27 left me with such a wonder
 
 ## Who It’s For
 
-Now, let’s be real. It’s not for everyone, and it’s fine. If you’re a rom-com enjoyer, this will be a lovely discovery. It will be right up your alley, especially if you love slow-burn romances. If you’re tired of loud shounen escalation, this might even feel refreshing. It’s best when you want an uncomplicated story that will make you feel good. At the very least, I’m glad I read *Unexciting Date*. Give it a try.
+So, should you read it? Look, I’m clearly biased—but if you’re already a rom-com enjoyer, this will be a lovely discovery. It’ll be right up your alley, especially if you love slow-burn romances. And if you’re coming from the shounen side and you’re tired of loud escalation, this might feel refreshing. It’s best when you want an uncomplicated story that will make you feel good. I can’t promise it’ll work for everyone—humor is subjective, and the pacing is deliberately slow—but I’m glad I gave it a shot. At the very least, give it a try.
 
 If you want to check it out, here are the official links:
 - [Official Raw](https://ganma.jp/web/magazine/moriagaranai) on Ganma
@@ -89,7 +89,7 @@ And here’s the fan translation (which is how I read it):
 
 Okay, mini-detour—because the scanlation (fan translation) release experience was half the fun.
 
-The series is unofficially translated by a favorite scanlator (fan translator) of mine called [u/OsisTheNie](https://www.reddit.com/user/OsisTheNie/), someone I’ve been following for the past two years, since the series they pick often align with my taste. Osis releases their translation daily on the [r/manga](https://www.reddit.com/r/manga/) subreddit until they’re caught up with the latest Japanese raw. Whenever they do, it’s a joy to open the subreddit. And, as a rom-com-pilled subreddit, I think a lot of people there agree. Osis’s posts almost always hit the front page and generate a ton of [discussion](https://www.reddit.com/r/manga/search/?q=flair%3Adisc+title%3A%22unexciting%20date%22&sort=new).[^2]
+The series is unofficially translated by a favorite scanlator of mine, [u/OsisTheNie](https://www.reddit.com/user/OsisTheNie/), someone I’ve been following for the past two years, since the series they pick often align with my taste. Osis releases their translation daily on the [r/manga](https://www.reddit.com/r/manga/) subreddit until they’re caught up with the latest Japanese raw. Whenever they do, it’s a joy to open the subreddit. And, as a rom-com-pilled subreddit, I think a lot of people there agree. Osis’s posts almost always hit the front page and generate a ton of [discussion](https://www.reddit.com/r/manga/search/?q=flair%3Adisc+title%3A%22unexciting%20date%22&sort=new).[^2]
 
 So, yeah, I’ve been really enjoying the daily release. I obsessively checked the subreddit for a new chapter, and I read most of the discussions. In a way, it’s kind of a sad goodbye because, now that we’re caught up, I’ll have to wait for a new chapter. The hype train has finally pulled into the station. But I’m grateful. It was an entertaining end to 2025 and the start of 2026.
 
