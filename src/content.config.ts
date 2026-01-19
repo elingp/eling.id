@@ -50,6 +50,7 @@ const post = defineCollection({
 					}
 					return date;
 				}),
+			autoUpdateDate: z.boolean().default(false),
 			pinned: z.boolean().default(false),
 		}),
 });
