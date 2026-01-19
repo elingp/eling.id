@@ -25,6 +25,5 @@ export const GET: APIRoute = async (context) => {
 		description: siteConfig.description,
 		site: siteUrl,
 		items,
-		stylesheet: "/rss/styles.xsl",
 	});
 };
