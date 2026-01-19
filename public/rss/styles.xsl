@@ -256,43 +256,22 @@
 						const preferDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 						const setTheme = (mode) => {
 							root.setAttribute("data-theme", mode);
-							if (toggle) toggle.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
+							toggle.setAttribute("aria-pressed", mode === "dark" ? "true" : "false");
 							localStorage.setItem("rss-theme", mode);
 						};
 						setTheme(storedTheme || (preferDark ? "dark" : "light"));
-						if (toggle) {
-							toggle.addEventListener("click", () => {
-								const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
-								setTheme(next);
-							});
-						}
+						toggle.addEventListener("click", () => {
+							const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+							setTheme(next);
+						});
 
 						const button = document.querySelector("[data-copy-feed]");
-						if (!button) return;
 						const status = document.getElementById("copy-status");
-						const urlFromMarkup = button.getAttribute("data-feed-url");
-						const feedUrl = (urlFromMarkup && urlFromMarkup.trim() !== "") ? urlFromMarkup : window.location.href;
-						const setStatus = (message) => {
-							if (status) status.textContent = message;
-						};
-						const copyFallback = () => {
-							window.prompt("Copy this feed URL:", feedUrl);
-							return true;
-						};
+						const feedUrl = button.getAttribute("data-feed-url") || window.location.href;
 						button.addEventListener("click", async () => {
-							try {
-								if (navigator.clipboard && window.isSecureContext) {
-									await navigator.clipboard.writeText(feedUrl);
-									setStatus("Copied!");
-								} else if (copyFallback()) {
-									setStatus("Copied!");
-								} else {
-									setStatus("Copy unavailable");
-								}
-								button.classList.add("copied");
-							} catch {
-								setStatus("Copy failed");
-							}
+							await navigator.clipboard.writeText(feedUrl);
+							status.textContent = "Copied!";
+							button.classList.add("copied");
 						});
 					})();
 				]]></script>

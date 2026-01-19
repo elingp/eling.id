@@ -10,24 +10,21 @@ export const GET: APIRoute = async (context) => {
 		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	);
 
-	const feedItems: RSSFeedItem[] = [];
-
-	for (const note of notes) {
-		const content = await renderRssContent(note, siteUrl);
-		feedItems.push({
+	const items: RSSFeedItem[] = await Promise.all(
+		notes.map(async (note) => ({
 			title: note.data.title,
 			link: `/notes/${note.id}/`,
 			pubDate: note.data.publishDate,
 			description: note.data.description,
-			content,
-		});
-	}
+			content: await renderRssContent(note, siteUrl),
+		})),
+	);
 
 	return rss({
 		title: siteConfig.title,
 		description: siteConfig.description,
 		site: siteUrl,
-		items: feedItems,
+		items,
 		stylesheet: "/rss/styles.xsl",
 	});
 };

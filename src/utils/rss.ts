@@ -64,33 +64,18 @@ async function getContainer(): Promise<AstroContainer> {
 export async function renderRssContent(entry: RenderableEntry, siteUrl: URL): Promise<string> {
 	const container = await getContainer();
 	const { Content } = await render(entry);
-	const rawContent = await container.renderToString(Content);
 
-	return transform(rawContent.replace(/^<!doctype html>\s*/i, ""), [
+	return transform((await container.renderToString(Content)).replace(/^<!doctype html>\s*/i, ""), [
 		async (root) => {
-			await walk(root, (node: unknown) => {
-				if (!node || typeof node !== "object") return;
-				if (!("attributes" in node)) return;
-				const rawAttrs = (node as { attributes?: unknown }).attributes;
-				if (!rawAttrs || typeof rawAttrs !== "object") return;
-				const attrs = rawAttrs as Record<string, unknown>;
+			await walk(root, (node) => {
+				if (!node || typeof node !== "object" || !("attributes" in node)) return;
+				const attrs = (node as { attributes?: Record<string, string> }).attributes;
+				if (!attrs) return;
 
-				const href = attrs.href;
-				if (typeof href === "string") {
-					attrs.href = absolutizeUrl(href, siteUrl);
-				}
-				const src = attrs.src;
-				if (typeof src === "string") {
-					attrs.src = absolutizeUrl(src, siteUrl);
-				}
-				const poster = attrs.poster;
-				if (typeof poster === "string") {
-					attrs.poster = absolutizeUrl(poster, siteUrl);
-				}
-				const srcset = attrs.srcset;
-				if (typeof srcset === "string") {
-					attrs.srcset = absolutizeSrcset(srcset, siteUrl);
-				}
+				if (attrs.href) attrs.href = absolutizeUrl(attrs.href, siteUrl);
+				if (attrs.src) attrs.src = absolutizeUrl(attrs.src, siteUrl);
+				if (attrs.poster) attrs.poster = absolutizeUrl(attrs.poster, siteUrl);
+				if (attrs.srcset) attrs.srcset = absolutizeSrcset(attrs.srcset, siteUrl);
 			});
 			return root;
 		},
