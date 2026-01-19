@@ -19,27 +19,17 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.minutesRead;
 
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-const isValidDate = (value: Date | null | undefined): value is Date =>
-	value instanceof Date && !Number.isNaN(value.getTime());
 
 // Determine the actual updated date to show:
 // 1. If updatedDate is manually set in frontmatter, use that (takes priority)
 // 2. Otherwise, use git lastModified only when autoUpdateDate is enabled and:
 //    a) It's significantly different from publishDate (more than 1 day)
-const manualUpdatedDate = isValidDate(updatedDate) ? updatedDate : null;
-let gitLastModified: Date | null = null;
-
-if (autoUpdateDate && typeof remarkPluginFrontmatter.lastModified === "string") {
-	const parsed = new Date(remarkPluginFrontmatter.lastModified);
-	gitLastModified = isValidDate(parsed) ? parsed : null;
-}
-
+const gitLastModified = autoUpdateDate ? new Date(remarkPluginFrontmatter.lastModified) : null;
 const shouldUseGitUpdatedDate =
 	autoUpdateDate &&
 	gitLastModified &&
 	gitLastModified.getTime() - publishDate.getTime() > ONE_DAY_MS;
-
-const finalUpdatedDate = manualUpdatedDate ?? (shouldUseGitUpdatedDate ? gitLastModified : null);
+const finalUpdatedDate = updatedDate ?? (shouldUseGitUpdatedDate ? gitLastModified : null);
 const articleDate = (finalUpdatedDate ?? publishDate).toISOString();
 
 // Get the source file path for GitHub link from the remark plugin
