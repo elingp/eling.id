@@ -16,6 +16,7 @@ export const GET: APIRoute = async (context) => {
 			link: `/notes/${note.id}/`,
 			pubDate: note.data.publishDate,
 			description: note.data.description,
+			author: siteConfig.author,
 			content: await renderRssContent(note, siteUrl),
 		})),
 	);
@@ -25,5 +26,6 @@ export const GET: APIRoute = async (context) => {
 		description: siteConfig.description,
 		site: siteUrl,
 		items,
+		customData: `<language>${siteConfig.lang}</language>`,
 	});
 };
