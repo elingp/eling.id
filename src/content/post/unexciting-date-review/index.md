@@ -1,7 +1,7 @@
 ---
 title: "The Exciting Charm of ‘Unexciting Date’"
 description: "I’ve just caught up to a new ongoing manga, and I’m so hooked that I need to talk about it. The series is called “Unexciting Date”, but their dates are anything but unexciting for readers."
-publishDate: "2026-01-19T21:00:00+08:00"
+publishDate: "2026-01-18T18:30:00+08:00"
 tags:
   - manga
   - review
