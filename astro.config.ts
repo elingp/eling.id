@@ -1,5 +1,4 @@
 import fs from "node:fs";
-// Rehype plugins
 import { rehypeHeadingIds } from "@astrojs/markdown-remark";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -12,8 +11,8 @@ import webmanifest from "astro-webmanifest";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
-// Remark plugins
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
+import { rehypeExternalLinkIcon } from "./src/plugins/rehype-external-link-icon";
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
 import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
 import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
@@ -101,6 +100,13 @@ export default defineConfig({
 				{
 					rel: ["noopener", "noreferrer"],
 					target: "_blank",
+				},
+			],
+			[
+				rehypeExternalLinkIcon,
+				{
+					siteUrl: siteConfig.url,
+					className: "is-external",
 				},
 			],
 			rehypeUnwrapImages,
