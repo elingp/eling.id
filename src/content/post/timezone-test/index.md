@@ -4,6 +4,7 @@ description: "Test page to verify client-side timezone conversion works correctl
 publishDate: "2025-10-24T15:30:00Z"
 tags: ["test"]
 draft: true
+autoUpdateDate: true
 ---
 
 ## Testing Date Display
