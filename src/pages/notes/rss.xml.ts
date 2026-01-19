@@ -1,18 +1,31 @@
 import { getCollection } from "astro:content";
-import rss from "@astrojs/rss";
+import rss, { type RSSFeedItem } from "@astrojs/rss";
+import type { APIRoute } from "astro";
 import { siteConfig } from "@/site.config";
+import { normalizeSiteUrl, renderRssContent } from "@/utils/rss";
 
-export const GET = async () => {
-	const notes = await getCollection("note");
+export const GET: APIRoute = async (context) => {
+	const siteUrl = normalizeSiteUrl(context.site);
+	const notes = (await getCollection("note")).sort(
+		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+	);
+
+	const items: RSSFeedItem[] = await Promise.all(
+		notes.map(async (note) => ({
+			title: note.data.title,
+			link: `/notes/${note.id}/`,
+			pubDate: note.data.publishDate,
+			description: note.data.description,
+			author: siteConfig.author,
+			content: await renderRssContent(note, siteUrl),
+		})),
+	);
 
 	return rss({
 		title: siteConfig.title,
 		description: siteConfig.description,
-		site: import.meta.env.SITE,
-		items: notes.map((note) => ({
-			title: note.data.title,
-			pubDate: note.data.publishDate,
-			link: `notes/${note.id}/`,
-		})),
+		site: siteUrl,
+		items,
+		customData: `<language>${siteConfig.lang}</language>`,
 	});
 };
