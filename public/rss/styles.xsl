@@ -33,6 +33,7 @@
 						--muted: color-mix(in oklch, var(--text) 75%, white);
 						--accent: oklch(69.44% 0.1812 47.58);
 						--accent-2: oklch(18.15% 0 0);
+						--button-text: var(--accent-2);
 						--border: color-mix(in oklch, var(--text) 15%, white);
 						--input-bg: oklch(96.5% 0 0);
 						--shadow: 0 10px 30px rgba(16, 24, 40, 0.12);
@@ -45,6 +46,7 @@
 						--muted: color-mix(in oklch, var(--text) 70%, black);
 						--accent: oklch(76.62% 0.1369 52.94);
 						--accent-2: oklch(94.66% 0 0);
+						--button-text: oklch(18.15% 0 0);
 						--border: color-mix(in oklch, var(--text) 18%, black);
 						--input-bg: oklch(25% 0.0045 248);
 						--shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -84,12 +86,12 @@
 						font-size: clamp(1.7rem, 3vw, 2.4rem);
 						margin: 0 0 0.75rem 0;
 						display: flex;
-						align-items: flex-start;
+						align-items: center;
 						gap: 0.6rem;
 						line-height: 1.15;
 					}
 					h1 img {
-						margin-top: 0.15rem;
+						margin-top: 0;
 						flex-shrink: 0;
 					}
 					a {
@@ -113,29 +115,35 @@
 						appearance: none;
 						border: 1px solid transparent;
 						background: var(--accent);
-						color: var(--accent-2);
+						color: var(--button-text);
 						padding: 0.6rem 1rem;
 						border-radius: 999px;
 						font-weight: 600;
 						cursor: pointer;
-						transition: transform 0.1s ease, box-shadow 0.2s ease;
+						transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 					}
 					button:hover {
-						transform: translateY(-1px);
-						box-shadow: 0 8px 16px rgba(43, 188, 138, 0.25);
+						background: color-mix(in oklch, var(--accent) 88%, var(--text));
 					}
 					button:focus-visible {
 						outline: 2px solid var(--accent);
 						outline-offset: 2px;
 					}
+					button:active {
+						background: color-mix(in oklch, var(--accent) 80%, var(--text));
+					}
 					button.copied,
 					button.secondary {
 						background: transparent;
-						color: var(--accent);
+						color: var(--text);
 						border-color: var(--accent);
 					}
 					button.secondary:hover {
-						box-shadow: none;
+						background: color-mix(in oklch, var(--accent) 12%, transparent);
+						color: var(--accent);
+					}
+					button.secondary:active {
+						background: color-mix(in oklch, var(--accent) 18%, transparent);
 					}
 					@media (max-width: 640px) {
 						main {
