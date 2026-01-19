@@ -2,6 +2,7 @@
 title: "So, I’m an Intern at Minilemon: Kicking Things Off"
 description: "I landed an internship as a backend developer at a new tech company called Minilemon Technology this month."
 publishDate: "2025-11-07T10:30:00Z"
+updatedDate: "2026-01-19T21:00:00+08:00"
 tags:
   - minilemon
   - tech
