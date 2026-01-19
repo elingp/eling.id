@@ -2,20 +2,70 @@ import { loadRenderers } from "astro:container";
 import { render } from "astro:content";
 import { getContainerRenderer as getMDXRenderer } from "@astrojs/mdx";
 import rss, { type RSSFeedItem } from "@astrojs/rss";
+import type { APIRoute } from "astro";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { transform, walk } from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 import { getAllPosts } from "@/data/post";
 import { siteConfig } from "@/site.config";
 
-export const GET = async () => {
-	let baseUrl = import.meta.env.SITE;
-	if (baseUrl.endsWith("/")) {
-		baseUrl = baseUrl.slice(0, -1);
-	}
+let containerPromise: Promise<AstroContainer> | undefined;
 
-	const renderers = await loadRenderers([getMDXRenderer()]);
-	const container = await AstroContainer.create({ renderers });
+function normalizeSiteUrl(site: URL | string | undefined): URL {
+	if (site instanceof URL) return site;
+	if (typeof site === "string" && site.length > 0) return new URL(site);
+	if (typeof import.meta.env.SITE === "string" && import.meta.env.SITE.length > 0) {
+		return new URL(import.meta.env.SITE);
+	}
+	throw new Error(
+		"RSS endpoint requires `site` to be configured in astro.config (or `import.meta.env.SITE` to be set).",
+	);
+}
+
+function absolutizeUrl(value: string, site: URL): string {
+	const trimmed = value.trim();
+	if (
+		trimmed === "" ||
+		trimmed.startsWith("#") ||
+		trimmed.startsWith("mailto:") ||
+		trimmed.startsWith("tel:") ||
+		trimmed.startsWith("data:")
+	) {
+		return value;
+	}
+	try {
+		return new URL(trimmed, site).toString();
+	} catch {
+		return value;
+	}
+}
+
+function absolutizeSrcset(value: string, site: URL): string {
+	return value
+		.split(",")
+		.map((candidate) => {
+			const trimmed = candidate.trim();
+			if (trimmed === "") return candidate;
+			const [urlPart, ...rest] = trimmed.split(/\s+/);
+			const absoluteUrl = absolutizeUrl(urlPart ?? "", site);
+			return [absoluteUrl, ...rest].filter(Boolean).join(" ");
+		})
+		.join(", ");
+}
+
+async function getContainer(): Promise<AstroContainer> {
+	if (!containerPromise) {
+		containerPromise = (async () => {
+			const renderers = await loadRenderers([getMDXRenderer()]);
+			return AstroContainer.create({ renderers });
+		})();
+	}
+	return containerPromise;
+}
+
+export const GET: APIRoute = async (context) => {
+	const siteUrl = normalizeSiteUrl(context.site);
+	const container = await getContainer();
 	const posts = (await getAllPosts()).sort(
 		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	);
@@ -23,32 +73,43 @@ export const GET = async () => {
 	const feedItems: RSSFeedItem[] = [];
 
 	for (const post of posts) {
-		// Get the `<Content/>` component for the current post.
 		const { Content } = await render(post);
-		// Use the Astro container to render the content to a string.
 		const rawContent = await container.renderToString(Content);
-		// Process and sanitize the raw content:
-		// - Removes `<!DOCTYPE html>` preamble
-		// - Makes link `href` and image `src` attributes absolute instead of relative
-		// - Strips any `<script>` and `<style>` tags
-		const content = await transform(rawContent.replace(/^<!DOCTYPE html>/, ""), [
-			async (node) => {
-				await walk(node, (node) => {
-					if (node.name === "a" && node.attributes.href?.startsWith("/")) {
-						node.attributes.href = baseUrl + node.attributes.href;
+
+		const content = await transform(rawContent.replace(/^<!doctype html>\s*/i, ""), [
+			async (root) => {
+				await walk(root, (node: unknown) => {
+					if (!node || typeof node !== "object") return;
+					if (!("attributes" in node)) return;
+					const rawAttrs = (node as { attributes?: unknown }).attributes;
+					if (!rawAttrs || typeof rawAttrs !== "object") return;
+					const attrs = rawAttrs as Record<string, unknown>;
+
+					const href = attrs.href;
+					if (typeof href === "string") {
+						attrs.href = absolutizeUrl(href, siteUrl);
 					}
-					if (node.name === "img" && node.attributes.src?.startsWith("/")) {
-						node.attributes.src = baseUrl + node.attributes.src;
+					const src = attrs.src;
+					if (typeof src === "string") {
+						attrs.src = absolutizeUrl(src, siteUrl);
+					}
+					const poster = attrs.poster;
+					if (typeof poster === "string") {
+						attrs.poster = absolutizeUrl(poster, siteUrl);
+					}
+					const srcset = attrs.srcset;
+					if (typeof srcset === "string") {
+						attrs.srcset = absolutizeSrcset(srcset, siteUrl);
 					}
 				});
-				return node;
+				return root;
 			},
-			sanitize({ dropElements: ["script", "style"] }),
+			sanitize({ dropElements: ["script", "style", "iframe", "object", "embed"] }),
 		]);
+
 		feedItems.push({
-			...post.data,
 			title: post.data.title,
-			link: `posts/${post.id}/`,
+			link: `/posts/${post.id}/`,
 			pubDate: post.data.publishDate,
 			description: post.data.description,
 			content,
@@ -58,7 +119,7 @@ export const GET = async () => {
 	return rss({
 		title: siteConfig.title,
 		description: siteConfig.description,
-		site: baseUrl,
+		site: siteUrl,
 		items: feedItems,
 		stylesheet: "/rss/styles.xsl",
 	});
