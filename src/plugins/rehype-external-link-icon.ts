@@ -7,11 +7,10 @@ type RehypeExternalLinkIconOptions = {
 	className?: string;
 };
 
-export const rehypeExternalLinkIcon: Plugin<[RehypeExternalLinkIconOptions], Root> = (options) => {
-	const className = options?.className ?? "is-external";
-	const siteUrl = options?.siteUrl;
-	if (!siteUrl) return (tree) => tree;
-
+export const rehypeExternalLinkIcon: Plugin<[RehypeExternalLinkIconOptions], Root> = ({
+	siteUrl,
+	className = "is-external",
+}) => {
 	const siteHost = new URL(siteUrl).host;
 
 	return (tree) => {
@@ -22,13 +21,7 @@ export const rehypeExternalLinkIcon: Plugin<[RehypeExternalLinkIconOptions], Roo
 			if (typeof href !== "string") return;
 			if (href.startsWith("#")) return;
 
-			let url: URL;
-			try {
-				url = new URL(href, siteUrl);
-			} catch {
-				return;
-			}
-
+			const url = new URL(href, siteUrl);
 			if (url.protocol !== "http:" && url.protocol !== "https:") return;
 			if (url.hostname === siteHost) return;
 
