@@ -1,0 +1,58 @@
+.to-top-btn {
+	position: fixed;
+	isolation: isolate;
+	background-color: color-mix(in oklch, var(--color-global-bg) 92%, var(--color-accent) 8%);
+	color: var(--color-global-text);
+	border: 1px solid color-mix(in oklch, var(--color-accent) 18%, transparent);
+	transition:
+		scale 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+		box-shadow 200ms ease;
+}
+
+.to-top-btn:hover {
+	border-color: color-mix(in oklch, var(--color-accent) 45%, transparent);
+	scale: 1.03;
+}
+
+.to-top-btn:active {
+	scale: 0.96;
+}
+
+.to-top-btn[data-clicked="true"] {
+	animation: to-top-pop 450ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.to-top-ring {
+	transform: rotate(-90deg);
+}
+
+.to-top-ring-track {
+	fill: none;
+	stroke-width: 6;
+	stroke: color-mix(in oklch, var(--color-accent) 20%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.to-top-btn {
+		transition: none;
+	}
+
+	.to-top-btn[data-clicked="true"] {
+		animation: none;
+	}
+}
+
+@keyframes to-top-pop {
+	0% {
+		scale: 1;
+		box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 35%, transparent);
+	}
+	60% {
+		scale: 1.08;
+		box-shadow: 0 0 0 10px color-mix(in oklch, var(--color-accent) 15%, transparent);
+	}
+	100% {
+		scale: 1;
+		box-shadow: 0 0 0 0 color-mix(in oklch, var(--color-accent) 0%, transparent);
+	}
+}
