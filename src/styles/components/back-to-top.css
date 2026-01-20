@@ -1,7 +1,7 @@
 .to-top-btn {
 	position: fixed;
 	isolation: isolate;
-	background-color: color-mix(in oklch, var(--color-global-bg) 92%, var(--color-accent) 8%);
+	background-color: var(--color-global-bg);
 	color: var(--color-global-text);
 	border: 1px solid color-mix(in oklch, var(--color-accent) 18%, transparent);
 	transition:

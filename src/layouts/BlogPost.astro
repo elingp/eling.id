@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import BackToTopProgress from "@/components/BackToTopProgress.astro";
+import BackToTop from "@/components/BackToTop.astro";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
@@ -58,5 +58,5 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 			</div>
 		</div>
 	</article>
-	<BackToTopProgress />
+	<BackToTop />
 </BaseLayout>
