@@ -6,7 +6,7 @@ tags: ["gigih"]
 ---
 
 :::figure
-![Feeling timid about the future.](cover.webp "Feeling timid about the future.")
+![Feeling timid about the future.](cover.webp)
 
 Feeling timid about the future.
 :::

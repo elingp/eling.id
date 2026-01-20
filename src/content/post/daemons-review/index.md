@@ -11,7 +11,7 @@ Hey there! Welcome to the first-ever post on my new blog, where I’ll be chatti
 ## Introduction
 
 :::figure
-![Vol. 1 Cover](Volume_01_EN.jpg "Vol. 1 Cover")
+![Vol. 1 Cover](Volume_01_EN.jpg)
 
 Vol. 1 Cover
 :::
@@ -37,7 +37,7 @@ I got my hands on all the English volumes ([via Square Enix](https://squareenixm
 I’m no art critic, but I know what I like. And _Daemons of the Shadow Realm_? It’s got it going on.
 
 :::figure
-![The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)](0002-033.jpg "The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)")
+![The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)](0002-033.jpg)
 
 The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)
 :::
@@ -45,7 +45,7 @@ The shadows and shadings heighten the moments. (Vol. 1 Ch. 2)
 Arakawa’s art is super clean and sharp. She knows how to use shadows to make the big moments pop. The way she lays out the pages and panels makes it easy to get lost in the story. And those full-page spreads? They’re epic, not just filler.
 
 :::figure
-![Look at the two best girls! (Vol. 1 Ch. 4)](0004-028.jpg "Look at the two best girls! (Vol. 1 Ch. 4)")
+![Look at the two best girls! (Vol. 1 Ch. 4)](0004-028.jpg)
 
 Look at the two best girls! (Vol. 1 Ch. 4)
 :::
@@ -53,7 +53,7 @@ Look at the two best girls! (Vol. 1 Ch. 4)
 The characters look awesome, with a cool _shounen_ vibe—less about looking real, more about feeling real. And the _chibi_ versions of Gabby and Asa? They’re the cutest. You can really feel what the characters are going through, whether they’re angry, cocky, or sneaky.
 
 :::figure
-![The actions are easy to follow. (Vol. 1 Ch. 2)](0002-027.jpg "The actions are easy to follow. (Vol. 1 Ch. 2)")
+![The actions are easy to follow. (Vol. 1 Ch. 2)](0002-027.jpg)
 
 The actions are easy to follow. (Vol. 1 Ch. 2)
 :::
@@ -65,7 +65,7 @@ Backgrounds aren’t usually my thing, but here, they add a lot to the mood. Whe
 ## Character Exploration
 
 :::figure
-![Some of the early characters. (Vol. 2 Ch. 5)](0005-003.jpg "Some of the early characters. (Vol. 2 Ch. 5)")
+![Some of the early characters. (Vol. 2 Ch. 5)](0005-003.jpg)
 
 Some of the early characters. (Vol. 2 Ch. 5)
 :::
@@ -73,7 +73,7 @@ Some of the early characters. (Vol. 2 Ch. 5)
 Alright, let’s talk about the crew in _Daemons of the Shadow Realm_. We’ve got Yuru, the stoic mountain hunter with a heart of gold, and Asa, his sister who’s got his back no matter what. They’ve been apart for a decade, but they’re both craving a slice of normal life—something that’s pretty hard to come by when you’re born into a world of daemons and destiny.
 
 :::figure
-![Yuru is hardboiled, alright. (Vol. 3 Ch. 11)](0011-002.jpg "Yuru is hardboiled, alright. (Vol. 3 Ch. 11)")
+![Yuru is hardboiled, alright. (Vol. 3 Ch. 11)](0011-002.jpg)
 
 Yuru is hardboiled, alright. (Vol. 3 Ch. 11)
 :::
@@ -81,7 +81,7 @@ Yuru is hardboiled, alright. (Vol. 3 Ch. 11)
 These two have some serious sibling synergy, but they’re also dealing with their own personal battles. Yuru’s all about going solo, while Asa’s the team player. Watching them butt heads and then sync up is half the fun.
 
 :::figure
-![Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)](0011-018.jpg "Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)")
+![Dera and Jin must not be in the same room together. (Vol. 3 Ch. 11)](0011-018.jpg)
 
 Dera and Jin must _not_ be in the same room together. (Vol. 3 Ch. 11)
 :::
@@ -93,7 +93,7 @@ And let’s not forget Yuru’s daemon sidekicks, Left and Right. They’re loya
 The rest of the Kagemori family is a whole soap opera on its own. The head honcho’s got a soft spot for kids but won’t think twice about cutting down a traitor. Then there’s Hagure, the manga-loving rebel, and Asuma, the brooding strategist. Family dinners at their place _must_ be intense.
 
 :::figure
-![Gabby and her epic monologue. (Vol. 6 Ch. 23)](0023-018.jpg "Gabby and her epic monologue. (Vol. 6 Ch. 23)")
+![Gabby and her epic monologue. (Vol. 6 Ch. 23)](0023-018.jpg)
 
 Gabby and her epic monologue. (Vol. 6 Ch. 23)
 :::
@@ -107,7 +107,7 @@ And there are so many more characters waiting in the wings, each with their own 
 I’m not one to get all deep into themes, but this manga makes it fun. It’s got some serious topics, but nothing too heavy for its _shounen_ roots.
 
 :::figure
-![Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)](0011-014.jpg "Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)")
+![Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)](0011-014.jpg)
 
 Asa not being a brocon challenge (impossible). (Vol. 3 Ch. 11)
 :::
@@ -117,7 +117,7 @@ It’s all about Yuru and Asa trying to fix their sibling bond while everything�
 The story also plays around with the classic idea of power and what it means to have it. The main characters deal with the whole “great power, great responsibility” thing and whether they should be in charge or someone else should call the shots. It’s interesting, but I’m waiting for _that_ mind-blowing take that’ll shake things up.
 
 :::figure
-![This manga is fun! (Vol. 4 Ch. 15)](0015-001.jpg "This manga is fun! (Vol. 4 Ch. 15)")
+![This manga is fun! (Vol. 4 Ch. 15)](0015-001.jpg)
 
 This manga is fun! (Vol. 4 Ch. 15)
 :::
@@ -127,7 +127,7 @@ This manga dances on the tightrope between serious and silly. It’s not your ty
 ## Worldbuilding and Setting
 
 :::figure
-![Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)](0004-046-047.jpg "Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)")
+![Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)](0004-046-047.jpg)
 
 Hiromu Arakawa and her attention to detail. (Vol. 1 Extras)
 :::
@@ -139,7 +139,7 @@ The mix of old-school and modern-day Japan is super cool. Yuru’s old-timey way
 There’s a whole bunch of clans with their own agendas, and we’ve only scratched the surface. It feels like there’s a whole world out there waiting to be explored.
 
 :::figure
-![Some of the _yokai_ in the series. (Vol. 6 Ch. 22)](0022-002.jpg "Some of the _yokai_ in the series. (Vol. 6 Ch. 22)")
+![Some of the yokai in the series. (Vol. 6 Ch. 22)](0022-002.jpg)
 
 Some of the _yokai_ in the series. (Vol. 6 Ch. 22)
 :::
@@ -149,7 +149,7 @@ And the _[yokai](https://en.wikipedia.org/wiki/Y%C5%8Dkai)_ from Japanese folklo
 ## Pacing and Structure
 
 :::figure
-![There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)](0003-026.jpg "There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)")
+![There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)](0003-026.jpg)
 
 There are lots of dialogues and back and forth! (Vol. 1 Ch. 3)
 :::
@@ -161,7 +161,7 @@ The chapters come out monthly, and they’re worth the wait. Each one focuses on
 ## Conclusion
 
 :::figure
-![The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)](0002-036-037.jpg "The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)")
+![The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)](0002-036-037.jpg)
 
 The two pages that piqued my interest and sold me off to read the rest. (Vol. 1 Ch. 2)
 :::

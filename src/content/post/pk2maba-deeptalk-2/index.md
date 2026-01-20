@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Kak Candra dan Eling.](cover.jpg "Kak Candra dan Eling.")
+![Kak Candra dan Eling.](cover.jpg)
 
 Kak Candra dan Eling.
 :::

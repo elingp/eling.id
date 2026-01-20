@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Eling dan Rama.](cover.jpg "Eling dan Rama.")
+![Eling dan Rama.](cover.jpg)
 
 Eling dan Rama.
 :::

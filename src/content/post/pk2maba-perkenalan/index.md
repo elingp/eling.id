@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Eling di Bali circa 2018.](cover.jpg "Eling di Bali circa 2018.")
+![Eling di Bali circa 2018.](cover.jpg)
 
 Eling di Bali circa 2018.
 :::

@@ -20,7 +20,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	class:list={[isPreview && "bg-global-text/5 inline-grid rounded-md px-4 py-3"]}
 	data-pagefind-body={isPreview ? false : true}
 >
-	<Tag class:list={["text-accent-2 font-bold", isPreview ? "text-base md:text-lg" : "title"]}>
+	<Tag class:list={["text-global-text font-bold", isPreview ? "text-base md:text-lg" : "title"]}>
 		{
 			isPreview ? (
 				<a class="cactus-link" href={`/notes/${note.id}/`}>

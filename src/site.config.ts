@@ -53,7 +53,7 @@ export const menuLinks: { path: string; title: string }[] = [
 // https://expressive-code.com/reference/configuration/
 export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 	// One dark, one light theme => https://expressive-code.com/guides/themes/#available-themes
-	themes: ["github-dark", "github-light"],
+	themes: ["rose-pine", "rose-pine-dawn"],
 	styleOverrides: {
 		codeFontFamily:
 			'"Source Code Pro", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
