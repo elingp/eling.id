@@ -6,6 +6,7 @@ import { Icon } from "astro-icon/components";
 	class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12"
 	data-show="false"
 	id="to-top-btn"
+	type="button"
 >
 	<span class="sr-only">Back to top</span>
 	<svg
@@ -24,8 +25,12 @@ import { Icon } from "astro-icon/components";
 </button>
 
 <script>
-	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
-	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
+	const scrollBtn = document.getElementById("to-top-btn");
+	const targetHeader = document.getElementById("blog-hero");
+	if (!(scrollBtn instanceof HTMLButtonElement) || !(targetHeader instanceof HTMLElement)) {
+		return;
+	}
+
 	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 	const observer = new IntersectionObserver((entries) => {
