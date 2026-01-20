@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Eling dan Kak Felin.](cover.jpg "Eling dan Kak Felin.")
+![Eling dan Kak Felin.](cover.jpg)
 
 Eling dan Kak Felin.
 :::

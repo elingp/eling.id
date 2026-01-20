@@ -7,7 +7,7 @@ pinned: true
 ---
 
 :::figure
-![Stressing on deadline.](cover.webp "Stressing on deadline.")
+![Stressing on deadline.](cover.webp)
 
 Stressing on deadline.
 :::

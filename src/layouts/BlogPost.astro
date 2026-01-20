@@ -1,6 +1,6 @@
 ---
 import { type CollectionEntry, render } from "astro:content";
-import BackToTopProgress from "@/components/BackToTopProgress.astro";
+import BackToTop from "@/components/BackToTop.astro";
 import Masthead from "@/components/blog/Masthead.astro";
 import TOC from "@/components/blog/TOC.astro";
 import WebMentions from "@/components/blog/webmentions/index.astro";
@@ -51,12 +51,12 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 			{!!headings.length && <TOC headings={headings} />}
 			<div
-				class="prose prose-lg md:prose-xl prose-headings:text-accent-2 sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
+				class="prose prose-lg md:prose-xl prose-headings:text-global-text sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
 			>
 				<slot />
 				<WebMentions />
 			</div>
 		</div>
 	</article>
-	<BackToTopProgress />
+	<BackToTop />
 </BaseLayout>

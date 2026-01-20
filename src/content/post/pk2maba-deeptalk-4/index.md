@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Eling dan Kak Yoga.](cover.jpg "Eling dan Kak Yoga.")
+![Eling dan Kak Yoga.](cover.jpg)
 
 Eling dan Kak Yoga.
 :::

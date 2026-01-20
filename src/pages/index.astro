@@ -62,14 +62,14 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 	{
 		pinnedPosts.length > 0 && (
 			<section class="mt-12">
-				<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">
+				<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
 					<a class="hover:text-accent" href="/posts/">
 						Pinned posts
 					</a>
 				</h2>
-				<ul class="space-y-4" role="list">
+				<ul class="space-y-3" role="list">
 					{pinnedPosts.map((p) => (
-						<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
+						<li class="grid gap-0.5 sm:grid-cols-[auto_1fr]">
 							<PostPreview post={p} />
 						</li>
 					))}
@@ -78,13 +78,13 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		)
 	}
 	<section class="mt-12">
-		<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">
-			<a class="hover:text-accent" href="/posts/">Most recent 10 posts</a>
+		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
+			<a class="hover:text-accent" href="/posts/">Recent posts</a>
 		</h2>
-		<ul class="space-y-4" role="list">
+		<ul class="space-y-3" role="list">
 			{
 				latestPosts.map((p) => (
-					<li class="grid gap-1 sm:grid-cols-[auto_1fr]">
+					<li class="grid gap-0.5 sm:grid-cols-[auto_1fr]">
 						<PostPreview post={p} />
 					</li>
 				))
@@ -92,13 +92,13 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</ul>
 	</section>
 	<section class="mt-12">
-		<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">Public projects</h2>
+		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">Public projects</h2>
 		<ul class="space-y-4" role="list">
 			{
 				elingProject.map(({ desc, href, title }) => (
-					<li class="grid gap-2 text-base sm:grid-cols-[auto_1fr] md:text-lg">
+					<li class="grid gap-1 text-base sm:grid-cols-[auto_1fr] md:gap-5 md:text-lg">
 						<a
-							class="cactus-link has-external-icon is-external min-w-66"
+							class="cactus-link has-external-icon is-external min-w-66 font-semibold md:font-medium"
 							href={href}
 							rel="noopener noreferrer"
 							target="_blank"
