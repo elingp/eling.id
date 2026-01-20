@@ -15,7 +15,7 @@ const { as: Tag = "div", post, withDesc = false } = Astro.props;
 	class="text-muted min-w-30 text-base font-medium md:text-lg"
 	date={post.data.publishDate}
 />
-<Tag class="text-base md:text-lg">
+<Tag class="text-base leading-snug font-semibold md:text-lg md:font-medium">
 	{post.data.draft && <span class="text-danger">(Draft) </span>}
 	<a class="cactus-link" href={`/posts/${post.id}/`}>
 		{post.data.title}
