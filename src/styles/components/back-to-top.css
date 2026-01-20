@@ -29,8 +29,7 @@
 	transform: rotate(-90deg);
 }
 
-.to-top-ring-track,
-.to-top-ring-progress {
+.to-top-ring-track {
 	fill: none;
 	stroke-width: 6;
 }
@@ -39,15 +38,8 @@
 	stroke: color-mix(in oklch, var(--color-accent) 20%, transparent);
 }
 
-.to-top-ring-progress {
-	stroke: var(--color-accent);
-	transition: stroke-dashoffset 140ms linear;
-	filter: drop-shadow(0 0 8px color-mix(in oklch, var(--color-accent) 50%, transparent));
-}
-
 @media (prefers-reduced-motion: reduce) {
-	.to-top-btn,
-	.to-top-ring-progress {
+	.to-top-btn {
 		transition: none;
 	}
 
