@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Jonathan dan Eling.](cover.jpg "Jonathan dan Eling.")
+![Jonathan dan Eling.](cover.jpg)
 
 Jonathan dan Eling.
 :::

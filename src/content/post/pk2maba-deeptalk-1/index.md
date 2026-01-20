@@ -6,7 +6,7 @@ tags: ["pk2maba"]
 ---
 
 :::figure
-![Pak Lana dan Eling.](cover.jpg "Pak Lana dan Eling.")
+![Pak Lana dan Eling.](cover.jpg)
 
 Pak Lana dan Eling.
 :::

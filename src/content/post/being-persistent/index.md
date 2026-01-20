@@ -7,7 +7,7 @@ pinned: true
 ---
 
 :::figure
-![Persistence is an important mindset.](cover.webp "Persistence is an important mindset.")
+![Persistence is an important mindset.](cover.webp)
 
 Persistence is an important mindset.
 :::
