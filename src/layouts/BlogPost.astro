@@ -51,7 +51,7 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 			{!!headings.length && <TOC headings={headings} />}
 			<div
-				class="prose prose-lg md:prose-xl prose-headings:text-accent-2 sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
+				class="prose prose-lg md:prose-xl prose-headings:text-global-text sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
 			>
 				<slot />
 				<WebMentions />

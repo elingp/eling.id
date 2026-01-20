@@ -62,7 +62,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 	{
 		pinnedPosts.length > 0 && (
 			<section class="mt-12">
-				<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">
+				<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
 					<a class="hover:text-accent" href="/posts/">
 						Pinned posts
 					</a>
@@ -78,7 +78,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		)
 	}
 	<section class="mt-12">
-		<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">
+		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
 			<a class="hover:text-accent" href="/posts/">Most recent 10 posts</a>
 		</h2>
 		<ul class="space-y-4" role="list">
@@ -92,7 +92,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		</ul>
 	</section>
 	<section class="mt-12">
-		<h2 class="text-accent-2 mb-6 text-2xl font-bold md:text-3xl">Public projects</h2>
+		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">Public projects</h2>
 		<ul class="space-y-4" role="list">
 			{
 				elingProject.map(({ desc, href, title }) => (
