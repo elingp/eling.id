@@ -1,0 +1,95 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button
+	class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12"
+	data-show="false"
+	id="to-top-btn"
+>
+	<span class="sr-only">Back to top</span>
+	<svg
+		class="to-top-ring pointer-events-none absolute inset-0 h-full w-full"
+		viewBox="0 0 100 100"
+		aria-hidden="true"
+	>
+		<circle class="to-top-ring-track" cx="50" cy="50" r="45"></circle>
+		<circle class="to-top-ring-progress" cx="50" cy="50" r="45"></circle>
+	</svg>
+	<Icon
+		aria-hidden="true"
+		name="fa7-solid:chevron-up"
+		title="Back to top"
+		class="relative z-10 inline-block h-4 w-4 sm:h-6 sm:w-6"
+	/>
+</button>
+
+<script>
+	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
+	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
+	const ringProgress = scrollBtn?.querySelector(".to-top-ring-progress") as SVGCircleElement;
+
+	if (scrollBtn && targetHeader && ringProgress) {
+		const ringLength = ringProgress.getTotalLength();
+		ringProgress.style.strokeDasharray = `${ringLength} ${ringLength}`;
+		ringProgress.style.strokeDashoffset = `${ringLength}`;
+
+		const controller = new AbortController();
+		const { signal } = controller;
+		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+		const updateRing = () => {
+			const scrollHeight = document.documentElement.scrollHeight;
+			const clientHeight = document.documentElement.clientHeight;
+			const maxScroll = Math.max(scrollHeight - clientHeight, 1);
+			const progress = Math.min(Math.max(window.scrollY / maxScroll, 0), 1);
+			ringProgress.style.strokeDashoffset = `${ringLength * (1 - progress)}`;
+		};
+
+		let ticking = false;
+		const onScroll = () => {
+			if (ticking) return;
+			ticking = true;
+			window.requestAnimationFrame(() => {
+				updateRing();
+				ticking = false;
+			});
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				// only show the scroll to top button when the heading is out of view
+				scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+			});
+		});
+
+		scrollBtn.addEventListener(
+			"click",
+			() => {
+				const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
+				document.documentElement.scrollTo({ behavior, top: 0 });
+				if (!prefersReducedMotion.matches) {
+					scrollBtn.dataset.clicked = "true";
+					window.setTimeout(() => {
+						scrollBtn.dataset.clicked = "false";
+					}, 450);
+				}
+			},
+			{ signal },
+		);
+
+		observer.observe(targetHeader);
+		document.addEventListener("scroll", onScroll, { passive: true, signal });
+		window.addEventListener("resize", updateRing, { passive: true, signal });
+		updateRing();
+
+		document.addEventListener(
+			"astro:before-swap",
+			() => {
+				controller.abort();
+				observer.disconnect();
+			},
+			{ once: true },
+		);
+	}
+</script>

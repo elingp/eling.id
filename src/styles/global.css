@@ -73,6 +73,7 @@
 
 @layer components {
 	@import "./components/admonition.css";
+	@import "./components/back-to-top.css";
 	@import "./components/github-card.css";
 
 	.cactus-link {
