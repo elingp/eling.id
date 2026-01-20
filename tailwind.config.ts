@@ -64,13 +64,13 @@ export default {
 							borderBottomWidth: "none",
 						},
 						tfoot: {
-							borderTop: "1px dashed var(--color-border)",
+							borderTop: "1px dashed var(--color-border-active)",
 						},
 						thead: {
 							borderBottomWidth: "none",
 						},
 						"thead th": {
-							borderBottom: "1px dashed var(--color-border)",
+							borderBottom: "1px dashed var(--color-border-active)",
 							fontWeight: "700",
 						},
 						'th[align="center"], td[align="center"]': {
