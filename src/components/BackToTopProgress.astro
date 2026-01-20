@@ -26,42 +26,25 @@ import { Icon } from "astro-icon/components";
 <script>
 	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
 	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
-	if (scrollBtn && targetHeader) {
-		const controller = new AbortController();
-		const { signal } = controller;
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				// only show the scroll to top button when the heading is out of view
-				scrollBtn.dataset.show = (!entry.isIntersecting).toString();
-			});
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			// only show the scroll to top button when the heading is out of view
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
 		});
+	});
 
-		scrollBtn.addEventListener(
-			"click",
-			() => {
-				const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
-				document.documentElement.scrollTo({ behavior, top: 0 });
-				if (!prefersReducedMotion.matches) {
-					scrollBtn.dataset.clicked = "true";
-					window.setTimeout(() => {
-						scrollBtn.dataset.clicked = "false";
-					}, 450);
-				}
-			},
-			{ signal },
-		);
+	scrollBtn.addEventListener("click", () => {
+		const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
+		document.documentElement.scrollTo({ behavior, top: 0 });
+		if (!prefersReducedMotion.matches) {
+			scrollBtn.dataset.clicked = "true";
+			window.setTimeout(() => {
+				scrollBtn.dataset.clicked = "false";
+			}, 450);
+		}
+	});
 
-		observer.observe(targetHeader);
-
-		document.addEventListener(
-			"astro:before-swap",
-			() => {
-				controller.abort();
-				observer.disconnect();
-			},
-			{ once: true },
-		);
-	}
+	observer.observe(targetHeader);
 </script>

@@ -11,9 +11,6 @@
 
 .to-top-btn:hover {
 	border-color: color-mix(in oklch, var(--color-accent) 45%, transparent);
-}
-
-.to-top-btn:hover {
 	scale: 1.03;
 }
 
@@ -32,9 +29,6 @@
 .to-top-ring-track {
 	fill: none;
 	stroke-width: 6;
-}
-
-.to-top-ring-track {
 	stroke: color-mix(in oklch, var(--color-accent) 20%, transparent);
 }
 
