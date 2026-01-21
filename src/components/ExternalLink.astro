@@ -27,5 +27,5 @@ const targetValue = derivedNewTab ? (target ?? "_blank") : target;
 
 <a href={href} class={className} rel={relValue} target={targetValue} {...attrs}>
 	<slot />
-	{newTab && showNewTabHint && <span class="sr-only"> (opens in a new tab)</span>}
+	{derivedNewTab && showNewTabHint && <span class="sr-only"> (opens in a new tab)</span>}
 </a>
