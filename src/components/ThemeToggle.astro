@@ -3,8 +3,11 @@ import { Icon } from "astro-icon/components";
 ---
 
 <theme-toggle class="ms-3 sm:ms-4">
-	<button class="hover:text-accent relative h-9 w-9 cursor-pointer rounded-md p-2" type="button">
-		<span class="sr-only">Dark Theme</span>
+	<button
+		class="hover:text-accent focus-visible:ring-accent relative h-9 w-9 cursor-pointer rounded-md p-2 focus-visible:ring-2 focus-visible:outline-none"
+		type="button"
+	>
+		<span class="sr-only">Dark mode</span>
 		<Icon
 			aria-hidden="true"
 			name="fa7-regular:sun"
@@ -30,24 +33,27 @@ import { Icon } from "astro-icon/components";
 			const button = this.querySelector<HTMLButtonElement>("button");
 
 			if (button) {
-				// set aria role value
-				button.setAttribute("role", "switch");
-				button.setAttribute("aria-checked", String(rootInDarkMode()));
+				const updateAriaState = () => {
+					button.setAttribute("aria-pressed", String(rootInDarkMode()));
+				};
 
-				// button event
+				updateAriaState();
+
 				button.addEventListener("click", () => {
-					// invert theme
-					let themeChangeEvent = new CustomEvent("theme-change", {
+					const themeChangeEvent = new CustomEvent("theme-change", {
 						detail: {
 							theme: rootInDarkMode() ? "light" : "dark",
 						},
 					});
-					// dispatch event -> ThemeProvider.astro
 					document.dispatchEvent(themeChangeEvent);
-
-					// set the aria-checked attribute
-					button.setAttribute("aria-checked", String(rootInDarkMode()));
+					updateAriaState();
 				});
+
+				document.addEventListener("theme-change", updateAriaState);
+				document.addEventListener("astro:after-swap", updateAriaState);
+				window
+					.matchMedia("(prefers-color-scheme: light)")
+					.addEventListener("change", updateAriaState);
 			} else {
 				console.warn("Theme Toggle: No button found");
 			}

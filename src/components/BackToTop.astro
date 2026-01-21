@@ -2,27 +2,29 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<button
-	class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12"
-	data-show="false"
-	id="to-top-btn"
-	type="button"
->
-	<span class="sr-only">Back to top</span>
-	<svg
-		class="to-top-ring pointer-events-none absolute inset-0 h-full w-full"
-		viewBox="0 0 100 100"
-		aria-hidden="true"
+<aside aria-label="Back to top">
+	<button
+		class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12"
+		data-show="false"
+		id="to-top-btn"
+		type="button"
 	>
-		<circle class="to-top-ring-track" cx="50" cy="50" r="45"></circle>
-	</svg>
-	<Icon
-		aria-hidden="true"
-		name="fa7-solid:chevron-up"
-		title="Back to top"
-		class="relative z-10 inline-block h-4 w-4 sm:h-6 sm:w-6"
-	/>
-</button>
+		<span class="sr-only">Back to top</span>
+		<svg
+			class="to-top-ring pointer-events-none absolute inset-0 h-full w-full"
+			viewBox="0 0 100 100"
+			aria-hidden="true"
+		>
+			<circle class="to-top-ring-track" cx="50" cy="50" r="45"></circle>
+		</svg>
+		<Icon
+			aria-hidden="true"
+			name="fa7-solid:chevron-up"
+			title="Back to top"
+			class="relative z-10 inline-block h-4 w-4 sm:h-6 sm:w-6"
+		/>
+	</button>
+</aside>
 
 <script>
 	const scrollBtn = document.getElementById("to-top-btn");
@@ -33,7 +35,10 @@ import { Icon } from "astro-icon/components";
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
 				// only show the scroll to top button when the heading is out of view
-				scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+				const shouldShow = !entry.isIntersecting;
+				scrollBtn.dataset.show = shouldShow.toString();
+				scrollBtn.setAttribute("aria-hidden", (!shouldShow).toString());
+				scrollBtn.tabIndex = shouldShow ? 0 : -1;
 			});
 		});
 

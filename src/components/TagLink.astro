@@ -1,0 +1,18 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+	href: string;
+	tag: string;
+	srPrefix?: string;
+	showHash?: boolean;
+}
+
+const { href, tag, srPrefix, showHash = true, class: className, ...attrs } = Astro.props;
+---
+
+<a href={href} class={className} {...attrs}>
+	{showHash && <span aria-hidden="true">#</span>}{
+		srPrefix && <span class="sr-only">{`${srPrefix} `}</span>
+	}<span>{tag}</span>
+</a>
