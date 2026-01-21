@@ -64,15 +64,16 @@ const paginationProps = {
 			<li aria-current="page" class=""><span aria-hidden="true">#</span>{tag}</li>
 		</ul>
 	</nav>
-	<h1 class="title capitalize">{tagMeta?.data.title ?? `Posts about ${tag}`}</h1>
-	<div class="prose prose-lg md:prose-xl mb-12 max-w-none">
+	<h1 class="title capitalize" id="tag-title">{tagMeta?.data.title ?? `Posts about ${tag}`}</h1>
+	<section class="prose prose-lg md:prose-xl mb-12 max-w-none" aria-labelledby="tag-description">
+		<h2 class="sr-only" id="tag-description">Tag description</h2>
 		{tagMeta?.data.description && <p>{tagMeta.data.description}</p>}
 		{TagContent && <TagContent />}
-	</div>
-	<ul class="space-y-3">
+	</section>
+	<ul class="space-y-2">
 		{
 			page.data.map((p) => (
-				<li class="grid gap-0.5 sm:grid-cols-[auto_1fr]">
+				<li>
 					<PostPreview as="h2" post={p} />
 				</li>
 			))

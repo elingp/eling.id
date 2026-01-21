@@ -4,42 +4,56 @@ import { Icon } from "astro-icon/components";
 import "@/styles/blocks/search.css";
 ---
 
-<site-search class="ms-auto" id="search">
-	<button
-		class="hover:text-accent flex h-9 w-9 cursor-pointer items-center justify-center rounded-md"
-		aria-keyshortcuts="Control+K Meta+K"
-		data-open-modal
-		disabled
-	>
-		<Icon aria-hidden="true" name="fa7-solid:search" title="Search" class="h-6 w-6" />
-		<span class="sr-only">Open Search</span>
-	</button>
-	<dialog
-		aria-label="search"
-		class="bg-global-bg border-ui h-full max-h-full w-full max-w-full border shadow-sm backdrop:backdrop-blur-sm open:flex sm:mx-auto sm:mt-16 sm:mb-auto sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md"
-	>
-		<div class="dialog-frame flex grow flex-col gap-4 p-6 pt-12 sm:pt-6">
-			<button
-				class="bg-ui-2 text-global-text hover:bg-ui-3 border-ui ms-auto cursor-pointer rounded-md border p-2 font-semibold transition-colors"
-				data-close-modal>Close</button
-			>
-			{
-				import.meta.env.DEV ? (
-					<div class="mx-auto text-center">
-						<p>
-							Search is only available in production builds. <br />
-							Try building and previewing the site to test it out locally.
-						</p>
-					</div>
-				) : (
-					<div class="search-container">
-						<div id="cactus__search" />
-					</div>
-				)
-			}
-		</div>
-	</dialog>
-</site-search>
+<search class="ms-auto" id="search" aria-label="Site search">
+	<site-search>
+		<button
+			class="hover:text-accent focus-visible:ring-accent flex h-9 w-9 cursor-pointer items-center justify-center rounded-md focus-visible:ring-2 focus-visible:outline-none"
+			aria-haspopup="dialog"
+			aria-controls="search-dialog"
+			aria-expanded="false"
+			aria-keyshortcuts="Control+K Meta+K"
+			data-open-modal
+			disabled
+		>
+			<Icon aria-hidden="true" name="fa7-solid:search" title="Search" class="h-6 w-6" />
+			<span class="sr-only">Open Search</span>
+		</button>
+		<dialog
+			aria-labelledby="search-title"
+			aria-describedby="search-description"
+			id="search-dialog"
+			class="bg-global-bg border-ui h-full max-h-full w-full max-w-full border shadow-sm backdrop:backdrop-blur-sm open:flex sm:mx-auto sm:mt-16 sm:mb-auto sm:h-max sm:max-h-[calc(100%-8rem)] sm:min-h-[15rem] sm:w-5/6 sm:max-w-[48rem] sm:rounded-md"
+		>
+			<div class="dialog-frame flex grow flex-col gap-4 p-6 pt-12 sm:pt-6">
+				<h2 class="sr-only" id="search-title">Site search</h2>
+				<p class="sr-only" id="search-description">
+					Search the site content and open results in the current page.
+				</p>
+				<button
+					class="bg-ui-2 text-global-text hover:bg-ui-3 border-ui focus-visible:ring-accent ms-auto cursor-pointer rounded-md border p-2 font-semibold transition-colors focus-visible:ring-2 focus-visible:outline-none"
+					data-close-modal
+					type="button"
+				>
+					Close
+				</button>
+				{
+					import.meta.env.DEV ? (
+						<div class="mx-auto text-center">
+							<p>
+								Search is only available in production builds. <br />
+								Try building and previewing the site to test it out locally.
+							</p>
+						</div>
+					) : (
+						<div class="search-container" aria-live="polite">
+							<div id="cactus__search" />
+						</div>
+					)
+				}
+			</div>
+		</dialog>
+	</site-search>
+</search>
 
 <script>
 	class SiteSearch extends HTMLElement {
@@ -73,6 +87,8 @@ import "@/styles/blocks/search.css";
 
 			if (this.#dialog) {
 				this.#dialog.addEventListener("close", () => {
+					this.#openBtn?.setAttribute("aria-expanded", "false");
+					this.#openBtn?.focus();
 					window.removeEventListener("click", this.onWindowClick);
 				});
 			} else {
@@ -110,22 +126,22 @@ import "@/styles/blocks/search.css";
 			}
 
 			this.#dialog.showModal();
+			this.#openBtn?.setAttribute("aria-expanded", "true");
 			this.querySelector("input")?.focus();
 			event?.stopPropagation();
 			window.addEventListener("click", this.onWindowClick, { signal: this.#controller.signal });
 		};
 
-		closeModal = () => this.#dialog?.close();
+		closeModal = () => {
+			this.#dialog?.close();
+			this.#openBtn?.setAttribute("aria-expanded", "false");
+		};
 
 		onWindowClick = (event: MouseEvent) => {
-			// check if it's a link
-			const isLink = "href" in (event.target || {});
-			// make sure the click is either a link or outside of the dialog
-			if (
-				isLink ||
-				(document.body.contains(event.target as Node) &&
-					!this.#dialogFrame?.contains(event.target as Node))
-			) {
+			const target = event.target as HTMLElement | null;
+			const isLink = Boolean(target?.closest("a"));
+			const clickedOutside = Boolean(target && !this.#dialogFrame?.contains(target));
+			if (isLink || clickedOutside) {
 				this.closeModal();
 			}
 		};

@@ -4,6 +4,8 @@ import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import Pagination from "@/components/Paginator.astro";
+import RssLink from "@/components/RssLink.astro";
+import TagLink from "@/components/TagLink.astro";
 import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
 import PageLayout from "@/layouts/Base.astro";
 import { collectionDateSort } from "@/utils/date";
@@ -56,21 +58,18 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 
 <PageLayout meta={meta} sourcePath="src/pages/posts/[...page].astro">
 	<header class="mb-12 flex items-center gap-2">
-		<h1 class="title">Posts</h1>
-		<a class="text-accent" href="/rss.xml" target="_blank" rel="noopener noreferrer">
-			<span class="sr-only">RSS feed</span>
-			<Icon aria-hidden="true" class="h-6 w-6" focusable="false" title="RSS" name="fa7-solid:rss" />
-		</a>
+		<h1 class="title" id="posts-title">Posts</h1>
+		<RssLink href="/rss.xml" label="RSS feed" />
 	</header>
-	<div class="grid sm:grid-cols-[3fr_1fr] sm:gap-x-8 sm:gap-y-16">
-		<div>
+	<section class="grid sm:grid-cols-[3fr_1fr] sm:gap-x-8 sm:gap-y-16" aria-labelledby="posts-title">
+		<section aria-label="Post listings">
 			{
 				pinnedPosts.length > 0 && (
-					<section class="mb-12">
-						<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">Pinned posts</h2>
-						<ul class="space-y-3" role="list">
+					<section class="mb-8">
+						<h2 class="text-global-text text-2xl font-bold md:text-3xl">Pinned posts</h2>
+						<ul class="mt-3 space-y-2">
 							{pinnedPosts.map((p) => (
-								<li class="grid gap-0.5 sm:grid-cols-[auto_1fr]">
+								<li>
 									<PostPreview post={p} />
 								</li>
 							))}
@@ -80,14 +79,14 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			}
 			{
 				descYearKeys.map((yearKey) => (
-					<section class="mb-12">
+					<section class="mb-8">
 						<h2 id={`year-${yearKey}`} class="text-global-text text-xl font-bold md:text-2xl">
 							<span class="sr-only">Posts in</span>
 							{yearKey}
 						</h2>
-						<ul class="mt-5 space-y-3 text-start">
+						<ul class="mt-3 space-y-2 text-start">
 							{groupedByYear[yearKey]?.map((p) => (
-								<li class="grid gap-0.5 sm:grid-cols-[auto_1fr] sm:[&_q]:col-start-2">
+								<li>
 									<PostPreview post={p} />
 								</li>
 							))}
@@ -96,10 +95,10 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 				))
 			}
 			<Pagination {...paginationProps} />
-		</div>
+		</section>
 		{
 			!!uniqueTags.length && (
-				<aside>
+				<aside aria-label="Tags">
 					<h2 class="text-global-text mb-4 flex items-center gap-2 text-xl font-bold md:text-2xl">
 						<a aria-label="View all blog categories" class="sm:hover:text-accent" href="/tags/">
 							Tags
@@ -114,11 +113,12 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 					<ul class="flex flex-wrap gap-2">
 						{uniqueTags.map((tag) => (
 							<li>
-								<a class="cactus-link flex items-center justify-center" href={`/tags/${tag}/`}>
-									<span aria-hidden="true">#</span>
-									<span class="sr-only">View all posts with the tag</span>
-									{tag}
-								</a>
+								<TagLink
+									class="cactus-link flex items-center justify-center"
+									href={`/tags/${tag}/`}
+									srPrefix="View all posts with the tag"
+									tag={tag}
+								/>
 							</li>
 						))}
 					</ul>
@@ -131,5 +131,5 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 				</aside>
 			)
 		}
-	</div>
+	</section>
 </PageLayout>

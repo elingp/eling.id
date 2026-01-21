@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import elingImg from "@/assets/eling.jpg";
+import ExternalLink from "@/components/ExternalLink.astro";
 import SocialList from "@/components/SocialList.astro";
 import PageLayout from "@/layouts/Base.astro";
 
@@ -16,37 +17,26 @@ const meta = {
 		<header class="mb-12">
 			<h1 class="title">About</h1>
 		</header>
-		<div class="prose prose-lg md:prose-xl">
+		<section class="prose prose-lg md:prose-xl" aria-labelledby="about-content">
+			<h2 class="sr-only" id="about-content">About content</h2>
 			<p>
 				Hi! I’m Eling Pramuatmaja. I currently work as a tech consultant for a digital marketing
-				agency. I studied computer science at <a
+				agency. I studied computer science at <ExternalLink
 					class="cactus-link is-external"
-					href="https://filkom.ub.ac.id/"
-					rel="noopener noreferrer"
-					target="_blank">Universitas Brawijaya</a
+					href="https://filkom.ub.ac.id/">Universitas Brawijaya</ExternalLink
 				>, focusing on AI—particularly Indonesian text summarization. I’ve also had some great
-				learning experiences through an internship at <a
+				learning experiences through an internship at
+				<ExternalLink class="cactus-link is-external" href="https://www.blibli.com/"
+					>Blibli</ExternalLink
+				>, plus programs like <ExternalLink
 					class="cactus-link is-external"
-					href="https://www.blibli.com/"
-					rel="noopener noreferrer"
-					target="_blank">Blibli</a
-				>
-				, plus programs like <a
+					href="https://www.xlaxiata.co.id/en/xl-future-leader">XL Future Leaders</ExternalLink
+				> (Batch 9), <ExternalLink
 					class="cactus-link is-external"
-					href="https://www.xlaxiata.co.id/en/xl-future-leader"
-					rel="noopener noreferrer"
-					target="_blank">XL Future Leaders</a
-				>
-				(Batch 9), <a
+					href="https://goto-impact.org/generasi-gigih">Generasi GIGIH</ExternalLink
+				> 2.0 at GoTo, and <ExternalLink
 					class="cactus-link is-external"
-					href="https://goto-impact.org/generasi-gigih"
-					rel="noopener noreferrer"
-					target="_blank">Generasi GIGIH</a
-				> 2.0 at GoTo, and <a
-					class="cactus-link is-external"
-					href="https://grow.google/intl/id_id/bangkit/"
-					rel="noopener noreferrer"
-					target="_blank">Bangkit Academy</a
+					href="https://grow.google/intl/id_id/bangkit/">Bangkit Academy</ExternalLink
 				> 2021 in machine learning.
 			</p>
 			<figure>
@@ -67,11 +57,9 @@ const meta = {
 			</p>
 			<p>
 				Outside of tech, I’m a big reader, and I love storytelling. I bounce between novels,
-				nonfiction, news, manga, and anime. I’m also an avid TTRPG player—my current favorite is <a
-					class="cactus-link is-external"
-					href="https://paizo.com/pathfinder"
-					rel="noopener noreferrer"
-					target="_blank">Pathfinder 2e</a
+				nonfiction, news, manga, and anime. I’m also an avid TTRPG player—my current favorite is
+				<ExternalLink class="cactus-link is-external" href="https://paizo.com/pathfinder"
+					>Pathfinder 2e</ExternalLink
 				>.
 			</p>
 			<p>
@@ -79,6 +67,6 @@ const meta = {
 				find something that resonates with you.
 			</p>
 			<div class="not-prose"><SocialList /></div>
-		</div>
+		</section>
 	</article>
 </PageLayout>

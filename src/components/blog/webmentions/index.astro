@@ -1,4 +1,5 @@
 ---
+import ExternalLink from "@/components/ExternalLink.astro";
 import { getWebmentionsForUrl } from "@/utils/webmentions";
 import Comments from "./Comments.astro";
 import Likes from "./Likes.astro";
@@ -19,5 +20,5 @@ if (!webMentions.length) return;
 </div>
 <p class="mt-8">
 	Responses powered by{" "}
-	<a href="https://webmention.io" rel="noreferrer" target="_blank">Webmentions</a>
+	<ExternalLink href="https://webmention.io">Webmentions</ExternalLink>
 </p>
