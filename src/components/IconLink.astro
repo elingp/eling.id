@@ -10,27 +10,13 @@ interface Props extends Omit<HTMLAttributes<"a">, "href"> {
 }
 
 const { href, label, newTab, showNewTabHint = true, class: className, ...attrs } = Astro.props;
-
-const isHttpUrl = href.startsWith("http://") || href.startsWith("https://");
-let isExternal = isHttpUrl;
-
-if (isHttpUrl && Astro.site) {
-	try {
-		const url = new URL(href);
-		isExternal = url.origin !== Astro.site.origin;
-	} catch {
-		isExternal = true;
-	}
-}
-
-const derivedNewTab = newTab ?? isExternal;
 ---
 
 <ExternalLink
 	href={href}
 	class={className}
-	newTab={derivedNewTab}
 	showNewTabHint={showNewTabHint}
+	{...newTab === undefined ? {} : { newTab }}
 	{...attrs}
 >
 	<span class="sr-only">{label}</span>

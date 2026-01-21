@@ -18,16 +18,7 @@ const {
 } = Astro.props;
 
 const isHttpUrl = href.startsWith("http://") || href.startsWith("https://");
-let isExternal = isHttpUrl;
-
-if (isHttpUrl && Astro.site) {
-	try {
-		const url = new URL(href);
-		isExternal = url.origin !== Astro.site.origin;
-	} catch {
-		isExternal = true;
-	}
-}
+const isExternal = isHttpUrl && Astro.site ? new URL(href).origin !== Astro.site.origin : isHttpUrl;
 
 const derivedNewTab = newTab ?? isExternal;
 const relValue = derivedNewTab ? [rel, "noopener", "noreferrer"].filter(Boolean).join(" ") : rel;
