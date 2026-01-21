@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import ExternalLink from "@/components/ExternalLink.astro";
 import type { WebmentionsChildren } from "@/types";
 
 interface Props {
@@ -11,7 +12,7 @@ const MAX_LIKES = 10;
 
 const likes = mentions.filter((mention) => mention["wm-property"] === "like-of");
 const likesToShow = likes
-	.filter((like) => like.author?.photo && like.author.photo !== "")
+	.filter((like) => like.author?.photo && like.author.photo !== "" && like.author?.url)
 	.slice(0, MAX_LIKES);
 ---
 
@@ -23,14 +24,12 @@ const likesToShow = likes
 				{likes.length > 1 ? " People" : " Person"} liked this
 			</p>
 			{!!likesToShow.length && (
-				<ul class="flex list-none flex-wrap overflow-hidden ps-2" role="list">
+				<ul class="flex list-none flex-wrap overflow-hidden ps-2">
 					{likesToShow.map((like) => (
 						<li class="p-like h-cite -ms-2">
-							<a
+							<ExternalLink
 								class="u-url not-prose ring-global-text hover:ring-link focus-visible:ring-link relative inline-block overflow-hidden rounded-full ring-2 hover:z-10 hover:ring-4 focus-visible:z-10 focus-visible:ring-4"
-								href={like.author?.url}
-								rel="noopener noreferrer"
-								target="_blank"
+								href={like.author!.url}
 								title={like.author?.name}
 							>
 								<span class="p-author h-card">
@@ -42,7 +41,7 @@ const likesToShow = likes
 										width={48}
 									/>
 								</span>
-							</a>
+							</ExternalLink>
 						</li>
 					))}
 				</ul>

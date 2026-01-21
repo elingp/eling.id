@@ -1,4 +1,5 @@
 ---
+import ExternalLink from "@/components/ExternalLink.astro";
 import { menuLinks, siteConfig } from "@/site.config";
 
 interface Props {
@@ -24,36 +25,37 @@ const sourceUrl = encodedPath
 <footer
 	class="text-muted mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-8 text-center align-top font-sans text-sm font-medium sm:flex-row sm:justify-between sm:text-xs"
 >
-	<div class="me-0 sm:me-4">
+	<p class="me-0 sm:me-4">
 		&copy; 2018–{year}
 		{siteConfig.author}.
 		<span class="inline-block"
-			><a
-				class="hover:text-global-text"
+			><ExternalLink
+				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
 				href={sourceUrl}
-				rel="noopener noreferrer"
-				target="_blank"
-				title="View page source on GitHub"><span class="hover:underline">Page source</span></a
-			>. Build: <a
-				class="hover:text-global-text"
+				title="View page source on GitHub"
+				><span class="hover:underline">Page source</span></ExternalLink
+			>. Build: <ExternalLink
+				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
 				href={`https://github.com/${githubRepo}/commit/${commitHash}`}
-				rel="noopener noreferrer"
-				target="_blank"
 				title="View build commit on GitHub"
-				><span class="font-mono hover:underline">{shortHash}</span></a
+				><span class="font-mono hover:underline">{shortHash}</span></ExternalLink
 			>
 		</span>
-	</div>
-	<nav
-		aria-labelledby="footer_links"
-		class="sm:divide-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted"
-	>
-		{
-			footerMenuLinks.map((link) => (
-				<a class="hover:text-global-text px-2 py-2 hover:underline sm:py-0" href={link.path}>
-					{link.title}
-				</a>
-			))
-		}
+	</p>
+	<nav aria-label="Footer links">
+		<ul class="sm:divide-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted">
+			{
+				footerMenuLinks.map((link) => (
+					<li>
+						<a
+							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none sm:py-0"
+							href={link.path}
+						>
+							{link.title}
+						</a>
+					</li>
+				))
+			}
+		</ul>
 	</nav>
 </footer>

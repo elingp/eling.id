@@ -48,15 +48,29 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		<header id="blog-hero" class="mb-12">
 			<Masthead content={post} readingTime={readingTime} updatedDate={finalUpdatedDate} />
 		</header>
-		<div class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
-			{!!headings.length && <TOC headings={headings} />}
-			<div
+		<section
+			class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"
+			aria-labelledby="post-title"
+		>
+			{
+				!!headings.length && (
+					<aside
+						aria-label="Table of contents"
+						class="lg:sticky lg:top-12 lg:order-2 lg:-me-32 lg:basis-64"
+					>
+						<TOC headings={headings} />
+					</aside>
+				)
+			}
+			<section
 				class="prose prose-lg md:prose-xl prose-headings:text-global-text sm:prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
+				aria-labelledby="post-content"
 			>
+				<h2 class="sr-only" id="post-content">Article content</h2>
 				<slot />
 				<WebMentions />
-			</div>
-		</div>
+			</section>
+		</section>
 	</article>
 	<BackToTop />
 </BaseLayout>

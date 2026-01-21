@@ -1,0 +1,40 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"a"> {
+	href: string;
+	newTab?: boolean;
+	showNewTabHint?: boolean;
+}
+
+const {
+	href,
+	newTab,
+	showNewTabHint = true,
+	rel,
+	target,
+	class: className,
+	...attrs
+} = Astro.props;
+
+const isHttpUrl = href.startsWith("http://") || href.startsWith("https://");
+let isExternal = isHttpUrl;
+
+if (isHttpUrl && Astro.site) {
+	try {
+		const url = new URL(href);
+		isExternal = url.origin !== Astro.site.origin;
+	} catch {
+		isExternal = true;
+	}
+}
+
+const derivedNewTab = newTab ?? isExternal;
+const relValue = derivedNewTab ? [rel, "noopener", "noreferrer"].filter(Boolean).join(" ") : rel;
+const targetValue = derivedNewTab ? (target ?? "_blank") : target;
+---
+
+<a href={href} class={className} rel={relValue} target={targetValue} {...attrs}>
+	<slot />
+	{newTab && showNewTabHint && <span class="sr-only"> (opens in a new tab)</span>}
+</a>

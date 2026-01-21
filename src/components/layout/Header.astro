@@ -9,7 +9,7 @@ import { menuLinks } from "@/site.config";
 	<div class="flex sm:flex-col">
 		<a
 			aria-current={Astro.url.pathname === "/" ? "page" : false}
-			class="inline-flex items-center rounded-md active:filter-none sm:relative sm:inline-block"
+			class="focus-visible:ring-accent inline-flex items-center rounded-md focus-visible:ring-2 focus-visible:outline-none active:filter-none sm:relative sm:inline-block"
 			href="/"
 		>
 			<svg
@@ -27,36 +27,39 @@ import { menuLinks } from "@/site.config";
 			</svg>
 			<span class="font-sans text-lg/5 font-extrabold sm:text-3xl">Eling Pramuatmaja</span>
 		</a>
-		<nav
-			aria-label="Main menu"
-			class="bg-global-bg divide-accent absolute -inset-x-4 top-14 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-dotted sm:bg-transparent sm:p-0"
-			id="navigation-menu"
-		>
-			{
-				menuLinks.map((link) => (
-					<a
-						aria-current={Astro.url.pathname === link.path ? "page" : false}
-						class="text-global-text sm:text-accent flex items-center justify-between px-2 py-4 font-semibold sm:px-4 sm:py-0 sm:text-lg sm:underline-offset-2 sm:hover:underline"
-						href={link.path}
-					>
-						{link.title}
-						<Icon
-							aria-hidden="true"
-							name="fa7-solid:chevron-right"
-							class="ms-auto h-3 w-3 sm:hidden"
-						/>
-					</a>
-				))
-			}
+		<nav aria-label="Main menu">
+			<ul
+				class="bg-global-bg divide-accent absolute -inset-x-4 top-14 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex sm:static sm:z-auto sm:-ms-4 sm:mt-1 sm:flex sm:flex-row sm:divide-x sm:divide-y-0 sm:divide-dotted sm:bg-transparent sm:p-0"
+				id="navigation-menu"
+			>
+				{
+					menuLinks.map((link) => (
+						<li>
+							<a
+								aria-current={Astro.url.pathname === link.path ? "page" : false}
+								class="text-global-text sm:text-accent flex items-center justify-between px-2 py-4 font-semibold focus-visible:underline focus-visible:underline-offset-2 focus-visible:outline-none sm:px-4 sm:py-0 sm:text-lg sm:underline-offset-2 sm:hover:underline"
+								href={link.path}
+							>
+								{link.title}
+								<Icon
+									aria-hidden="true"
+									name="fa7-solid:chevron-right"
+									class="ms-auto h-3 w-3 sm:hidden"
+								/>
+							</a>
+						</li>
+					))
+				}
+			</ul>
 		</nav>
 	</div>
 	<Search />
 	<ThemeToggle />
 	<mobile-button class="inline-flex">
 		<button
+			aria-controls="navigation-menu"
 			aria-expanded="false"
-			aria-haspopup="menu"
-			class="group relative ms-2 h-9 w-9 rounded-md sm:invisible sm:hidden"
+			class="group focus-visible:ring-accent relative ms-2 h-9 w-9 rounded-md focus-visible:ring-2 focus-visible:outline-none sm:invisible sm:hidden"
 			id="toggle-navigation-menu"
 			type="button"
 		>
@@ -78,19 +81,45 @@ import { menuLinks } from "@/site.config";
 </header>
 
 <script>
-	import { toggleClass } from "@/utils/domElement";
-
 	class MobileNavBtn extends HTMLElement {
 		#menuOpen: boolean = false;
 
 		connectedCallback() {
 			const headerEl = document.getElementById("main-header")!;
 			const mobileButtonEl = this.querySelector<HTMLButtonElement>("button");
+			const menuEl = document.getElementById("navigation-menu");
+			const srLabel = mobileButtonEl?.querySelector(".sr-only");
+			const firstMenuLink = menuEl?.querySelector<HTMLAnchorElement>("a");
+
+			const setMenuState = (open: boolean) => {
+				if (headerEl) headerEl.classList.toggle("menu-open", open);
+				this.#menuOpen = open;
+				mobileButtonEl?.setAttribute("aria-expanded", String(open));
+				if (srLabel) {
+					srLabel.textContent = open ? "Close main menu" : "Open main menu";
+				}
+				if (open) {
+					firstMenuLink?.focus();
+				} else {
+					mobileButtonEl?.focus();
+				}
+			};
 
 			mobileButtonEl?.addEventListener("click", () => {
-				if (headerEl) toggleClass(headerEl, "menu-open");
-				this.#menuOpen = !this.#menuOpen;
-				mobileButtonEl.setAttribute("aria-expanded", this.#menuOpen.toString());
+				setMenuState(!this.#menuOpen);
+			});
+
+			menuEl?.addEventListener("click", (event) => {
+				const target = event.target as HTMLElement | null;
+				if (this.#menuOpen && target?.closest("a")) {
+					setMenuState(false);
+				}
+			});
+
+			document.addEventListener("keydown", (event) => {
+				if (event.key === "Escape" && this.#menuOpen) {
+					setMenuState(false);
+				}
 			});
 		}
 	}
