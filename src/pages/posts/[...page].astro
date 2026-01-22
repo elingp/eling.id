@@ -61,13 +61,13 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 		<h1 class="title" id="posts-title">Posts</h1>
 		<RssLink href="/rss.xml" label="RSS feed" />
 	</header>
-	<section class="grid sm:grid-cols-[3fr_1fr] sm:gap-x-8 sm:gap-y-16" aria-labelledby="posts-title">
+	<section class="grid lg:grid-cols-[3fr_1fr] lg:gap-x-8 lg:gap-y-16" aria-labelledby="posts-title">
 		<section aria-label="Post listings">
 			{
 				pinnedPosts.length > 0 && (
 					<section class="mb-8">
 						<h2 class="text-global-text text-2xl font-bold md:text-3xl">Pinned posts</h2>
-						<ul class="mt-3 space-y-2">
+						<ul class="mt-3 space-y-4 md:space-y-2">
 							{pinnedPosts.map((p) => (
 								<li>
 									<PostPreview post={p} />
@@ -84,7 +84,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 							<span class="sr-only">Posts in</span>
 							{yearKey}
 						</h2>
-						<ul class="mt-3 space-y-2 text-start">
+						<ul class="mt-3 space-y-4 text-start md:space-y-2">
 							{groupedByYear[yearKey]?.map((p) => (
 								<li>
 									<PostPreview post={p} />
@@ -100,7 +100,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 			!!uniqueTags.length && (
 				<aside aria-label="Tags">
 					<h2 class="text-global-text mb-4 flex items-center gap-2 text-xl font-bold md:text-2xl">
-						<a aria-label="View all blog categories" class="sm:hover:text-accent" href="/tags/">
+						<a aria-label="View all blog categories" class="hover:text-accent" href="/tags/">
 							Tags
 						</a>
 						<Icon
@@ -122,7 +122,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 							</li>
 						))}
 					</ul>
-					<span class="mt-4 block sm:text-end">
+					<span class="mt-4 block lg:text-end">
 						<a class="text-global-text hover:text-accent text-base md:text-lg" href="/tags/">
 							View all <span aria-hidden="true">→</span>
 							<span class="sr-only">blog tags</span>
