@@ -30,14 +30,23 @@ export const GET: APIRoute = async (context) => {
 		items,
 		xmlns: { atom: "http://www.w3.org/2005/Atom" },
 		customData: `
-			<atom:link href="${siteUrl}rss.xml" rel="self" type="application/rss+xml" />
-			<copyright>${copyright}</copyright>
-			<docs>https://www.rssboard.org/rss-specification</docs>
-			<generator>Astro RSS</generator>
 			<language>${siteConfig.lang}</language>
-			<lastBuildDate>${lastBuildDate}</lastBuildDate>
+			<copyright>${copyright}</copyright>
 			<managingEditor>${siteConfig.email} (${siteConfig.author})</managingEditor>
 			<webMaster>${siteConfig.email} (${siteConfig.author})</webMaster>
+			<pubDate>${lastBuildDate}</pubDate>
+			<lastBuildDate>${lastBuildDate}</lastBuildDate>
+			<category>Weblog</category>
+			<generator>Astro RSS</generator>
+			<docs>https://www.rssboard.org/rss-specification</docs>
+			<image>
+				<url>${new URL("/rss-image.png", siteUrl)}</url>
+				<title>${siteConfig.title}</title>
+				<link>${siteUrl}</link>
+				<width>144</width>
+				<height>76</height>
+			</image>
+			<atom:link href="${siteUrl}rss.xml" rel="self" type="application/rss+xml" />
 		`,
 	});
 };
