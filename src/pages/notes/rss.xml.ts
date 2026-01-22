@@ -60,7 +60,7 @@ export const GET: APIRoute = async (context) => {
 				<link>${siteUrl}</link>
 				<width>144</width>
 				<height>76</height>
-        <description>${siteConfig.description}</description>
+				<description>${siteConfig.description}</description>
 			</image>
 			<atom:link href="${siteUrl}notes/rss.xml" rel="self" type="application/rss+xml" />
 		`,
