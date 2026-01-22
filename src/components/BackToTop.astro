@@ -28,18 +28,61 @@ import { Icon } from "astro-icon/components";
 <script>
 	const scrollBtn = document.getElementById("to-top-btn");
 	const targetHeader = document.getElementById("blog-hero");
+	const pageFooter = document.querySelector("footer");
 	if (scrollBtn instanceof HTMLButtonElement && targetHeader instanceof HTMLElement) {
 		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const SCROLL_DELTA_THRESHOLD = 6;
+		const SHOW_GRACE_MS = 300;
+
+		let isPastHeader = false;
+		let isFooterVisible = false;
+		let lastScrollY = window.scrollY;
+		let ticking = false;
+		let lastScrollUpTime = 0;
+
+		const setVisible = (visible: boolean) => {
+			scrollBtn.dataset.show = visible.toString();
+			scrollBtn.setAttribute("aria-hidden", (!visible).toString());
+			scrollBtn.tabIndex = visible ? 0 : -1;
+		};
+
+		// Show when (1) footer is visible, OR (2) header is out of view AND user recently scrolled up.
+		const updateVisibility = () => {
+			const now = performance.now();
+			const recentlyScrolledUp = now - lastScrollUpTime < SHOW_GRACE_MS;
+			setVisible(isFooterVisible || (isPastHeader && recentlyScrolledUp));
+		};
 
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-				// only show the scroll to top button when the heading is out of view
-				const shouldShow = !entry.isIntersecting;
-				scrollBtn.dataset.show = shouldShow.toString();
-				scrollBtn.setAttribute("aria-hidden", (!shouldShow).toString());
-				scrollBtn.tabIndex = shouldShow ? 0 : -1;
+				isPastHeader = !entry.isIntersecting;
+				updateVisibility();
 			});
 		});
+
+		const footerObserver = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				isFooterVisible = entry.isIntersecting;
+				updateVisibility();
+			});
+		});
+
+		const onScroll = () => {
+			const currentScrollY = window.scrollY;
+			if (ticking) return;
+			ticking = true;
+			window.requestAnimationFrame(() => {
+				const delta = currentScrollY - lastScrollY;
+				if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
+					if (delta < 0) {
+						lastScrollUpTime = performance.now();
+					}
+					lastScrollY = currentScrollY;
+					updateVisibility();
+				}
+				ticking = false;
+			});
+		};
 
 		scrollBtn.addEventListener("click", () => {
 			const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
@@ -52,6 +95,11 @@ import { Icon } from "astro-icon/components";
 			}
 		});
 
+		window.addEventListener("scroll", onScroll, { passive: true });
+
 		observer.observe(targetHeader);
+		if (pageFooter instanceof HTMLElement) {
+			footerObserver.observe(pageFooter);
+		}
 	}
 </script>
