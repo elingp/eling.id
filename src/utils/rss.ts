@@ -61,6 +61,9 @@ export function absolutizeSrcset(value: string, site: URL): string {
 
 const RSS_ATTRIBUTE_DENYLIST = new Set(["loading", "decoding", "fetchpriority"]);
 const DEFAULT_RSS_EXCERPT_LENGTH = 200;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
+type RssRemarkFrontmatter = Record<string, unknown>;
 
 function isElementNode(node: Node): node is ElementNode {
 	return node.type === 1;
@@ -137,38 +140,74 @@ async function getContainer(): Promise<AstroContainer> {
 	return containerPromise;
 }
 
+function getGitLastModifiedDate(remarkPluginFrontmatter?: RssRemarkFrontmatter): Date | null {
+	const lastModified = remarkPluginFrontmatter?.lastModified;
+	if (typeof lastModified !== "string") return null;
+	const date = new Date(lastModified);
+	return Number.isNaN(date.getTime()) ? null : date;
+}
+
+export function getEffectiveUpdatedDate(
+	data: {
+		publishDate: Date;
+		updatedDate?: Date | undefined;
+		autoUpdateDate?: boolean | undefined;
+	},
+	remarkPluginFrontmatter?: RssRemarkFrontmatter,
+): Date | null {
+	if (data.updatedDate) return data.updatedDate;
+	if (!data.autoUpdateDate) return null;
+	const gitLastModified = getGitLastModifiedDate(remarkPluginFrontmatter);
+	if (!gitLastModified) return null;
+	if (gitLastModified.getTime() - data.publishDate.getTime() <= ONE_DAY_MS) return null;
+	return gitLastModified;
+}
+
+export async function renderRssEntry(
+	entry: RenderableEntry,
+	siteUrl: URL,
+): Promise<{ content: string; remarkPluginFrontmatter: RssRemarkFrontmatter }> {
+	const { Content, remarkPluginFrontmatter } = await render(entry);
+	const content = await transform(
+		(await (await getContainer()).renderToString(Content)).replace(/^<!doctype html>\s*/i, ""),
+		[
+			async (root) => {
+				await walk(root, (node, parent, index) => {
+					if (!isElementNode(node)) return;
+					const attrs = node.attributes;
+
+					if (node.name === "a") {
+						if (isHeadingAutolink(attrs) || isFootnoteBackref(attrs)) {
+							removeNode(parent, index);
+							return;
+						}
+
+						if (isFootnoteRef(attrs) || isFragmentLink(attrs.href)) {
+							unwrapNode(parent, index, node);
+							return;
+						}
+					}
+
+					if (attrs.href) attrs.href = absolutizeUrl(attrs.href, siteUrl);
+					if (attrs.src) attrs.src = absolutizeUrl(attrs.src, siteUrl);
+					if (attrs.poster) attrs.poster = absolutizeUrl(attrs.poster, siteUrl);
+					if (attrs.srcset) attrs.srcset = absolutizeSrcset(attrs.srcset, siteUrl);
+					removeAttributesForRss(attrs);
+				});
+				return root;
+			},
+			sanitize({ dropElements: ["script", "style", "iframe", "object", "embed"] }),
+		],
+	);
+
+	return {
+		content,
+		remarkPluginFrontmatter,
+	};
+}
+
 export async function renderRssContent(entry: RenderableEntry, siteUrl: URL): Promise<string> {
-	const container = await getContainer();
-	const { Content } = await render(entry);
-
-	return transform((await container.renderToString(Content)).replace(/^<!doctype html>\s*/i, ""), [
-		async (root) => {
-			await walk(root, (node, parent, index) => {
-				if (!isElementNode(node)) return;
-				const attrs = node.attributes;
-
-				if (node.name === "a") {
-					if (isHeadingAutolink(attrs) || isFootnoteBackref(attrs)) {
-						removeNode(parent, index);
-						return;
-					}
-
-					if (isFootnoteRef(attrs) || isFragmentLink(attrs.href)) {
-						unwrapNode(parent, index, node);
-						return;
-					}
-				}
-
-				if (attrs.href) attrs.href = absolutizeUrl(attrs.href, siteUrl);
-				if (attrs.src) attrs.src = absolutizeUrl(attrs.src, siteUrl);
-				if (attrs.poster) attrs.poster = absolutizeUrl(attrs.poster, siteUrl);
-				if (attrs.srcset) attrs.srcset = absolutizeSrcset(attrs.srcset, siteUrl);
-				removeAttributesForRss(attrs);
-			});
-			return root;
-		},
-		sanitize({ dropElements: ["script", "style", "iframe", "object", "embed"] }),
-	]);
+	return (await renderRssEntry(entry, siteUrl)).content;
 }
 
 export function getRssExcerptFromHtml(

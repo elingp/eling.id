@@ -61,8 +61,30 @@ const note = defineCollection({
 		description: z.string().optional(),
 		publishDate: z
 			.string()
-			.datetime({ offset: true }) // Ensures ISO 8601 format with offsets allowed (e.g. "2024-01-01T00:00:00Z" and "2024-01-01T00:00:00+02:00")
-			.transform((val) => new Date(val)),
+			.or(z.date())
+			.transform((val) => {
+				const date = new Date(val);
+				// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
+				if (typeof val === "string" && !val.includes("T") && !val.includes("t")) {
+					const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
+					return utcDate;
+				}
+				return date;
+			}),
+		updatedDate: z
+			.string()
+			.optional()
+			.transform((str) => {
+				if (!str) return undefined;
+				const date = new Date(str);
+				// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
+				if (!str.includes("T") && !str.includes("t")) {
+					const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
+					return utcDate;
+				}
+				return date;
+			}),
+		autoUpdateDate: z.boolean().default(false),
 	}),
 });
 
