@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import IconLink from "@/components/IconLink.astro";
+import { siteConfig } from "@/site.config";
 
 const socialLinks: {
 	friendlyName: string;
@@ -35,7 +36,7 @@ const socialLinks: {
 	},
 	{
 		friendlyName: "Email",
-		link: "mailto:eling@eling.id",
+		link: `mailto:${siteConfig.email}`,
 		name: "fa7-solid:envelope",
 		newTab: false,
 	},

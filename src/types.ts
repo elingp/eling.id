@@ -5,6 +5,7 @@ export interface SiteConfig {
 		options: Intl.DateTimeFormatOptions;
 	};
 	description: string;
+	email: string;
 	lang: string;
 	ogLocale: string;
 	title: string;

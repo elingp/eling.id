@@ -13,6 +13,8 @@ export const siteConfig: SiteConfig = {
 	title: "Eling Pramuatmaja",
 	// Used as the default description meta property and webmanifest description
 	description: "A personal website of Eling Pramuatmaja",
+	// Used for RSS feed and SocialList component
+	email: "eling@eling.id",
 	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
 	lang: "en-GB",
 	// Meta property, found in src/components/BaseHead.astro L:42

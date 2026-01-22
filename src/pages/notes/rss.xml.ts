@@ -16,7 +16,7 @@ export const GET: APIRoute = async (context) => {
 			link: `/notes/${note.id}/`,
 			pubDate: note.data.publishDate,
 			description: note.data.description,
-			author: siteConfig.author,
+			author: `${siteConfig.email} (${siteConfig.author})`,
 			content: await renderRssContent(note, siteUrl),
 		})),
 	);
@@ -26,6 +26,10 @@ export const GET: APIRoute = async (context) => {
 		description: siteConfig.description,
 		site: siteUrl,
 		items,
-		customData: `<language>${siteConfig.lang}</language>`,
+		xmlns: { atom: "http://www.w3.org/2005/Atom" },
+		customData: `
+			<atom:link href="${siteUrl}notes/rss.xml" rel="self" type="application/rss+xml" />
+			<language>${siteConfig.lang}</language>
+		`,
 	});
 };
