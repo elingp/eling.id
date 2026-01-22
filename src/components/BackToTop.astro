@@ -10,12 +10,6 @@ import { Icon } from "astro-icon/components";
 		type="button"
 	>
 		<span class="sr-only">Back to top</span>
-		<svg
-			class="pointer-events-none absolute inset-0 h-full w-full"
-			viewBox="0 0 100 100"
-			aria-hidden="true"
-		>
-		</svg>
 		<Icon
 			aria-hidden="true"
 			name="fa7-solid:chevron-up"
@@ -26,80 +20,70 @@ import { Icon } from "astro-icon/components";
 </aside>
 
 <script>
-	const scrollBtn = document.getElementById("to-top-btn");
-	const targetHeader = document.getElementById("blog-hero");
-	const pageFooter = document.querySelector("footer");
-	if (scrollBtn instanceof HTMLButtonElement && targetHeader instanceof HTMLElement) {
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-		const SCROLL_DELTA_THRESHOLD = 6;
-		const SHOW_GRACE_MS = 300;
+	const scrollBtn = document.querySelector<HTMLButtonElement>("#to-top-btn")!;
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-		let isPastHeader = false;
-		let isFooterVisible = false;
-		let lastScrollY = window.scrollY;
-		let ticking = false;
-		let lastScrollUpTime = 0;
+	let isPastHeader = false;
+	let isFooterVisible = false;
+	let lastScrollY = window.scrollY;
+	let ticking = false;
+	let lastScrollUpTime = 0;
 
-		const setVisible = (visible: boolean) => {
-			scrollBtn.dataset.show = visible.toString();
-			scrollBtn.setAttribute("aria-hidden", (!visible).toString());
-			scrollBtn.tabIndex = visible ? 0 : -1;
-		};
+	const setVisible = (visible: boolean) => {
+		scrollBtn.dataset.show = visible.toString();
+		scrollBtn.setAttribute("aria-hidden", (!visible).toString());
+		scrollBtn.tabIndex = visible ? 0 : -1;
+	};
 
-		// Show when (1) footer is visible, OR (2) header is out of view AND user recently scrolled up.
-		const updateVisibility = () => {
-			const now = performance.now();
-			const recentlyScrolledUp = now - lastScrollUpTime < SHOW_GRACE_MS;
-			setVisible(isFooterVisible || (isPastHeader && recentlyScrolledUp));
-		};
+	// Show when (1) footer is visible, OR (2) header is out of view AND user recently scrolled up.
+	const updateVisibility = () => {
+		setVisible(isFooterVisible || (isPastHeader && performance.now() - lastScrollUpTime < 300));
+	};
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				isPastHeader = !entry.isIntersecting;
-				updateVisibility();
-			});
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			isPastHeader = !entry.isIntersecting;
+			updateVisibility();
 		});
+	});
 
-		const footerObserver = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				isFooterVisible = entry.isIntersecting;
-				updateVisibility();
-			});
+	const footerObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			isFooterVisible = entry.isIntersecting;
+			updateVisibility();
 		});
+	});
 
-		const onScroll = () => {
-			const currentScrollY = window.scrollY;
-			if (ticking) return;
-			ticking = true;
-			window.requestAnimationFrame(() => {
-				const delta = currentScrollY - lastScrollY;
-				if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
-					if (delta < 0) {
-						lastScrollUpTime = performance.now();
-					}
-					lastScrollY = currentScrollY;
-					updateVisibility();
+	const onScroll = () => {
+		const currentScrollY = window.scrollY;
+		if (ticking) return;
+		ticking = true;
+		window.requestAnimationFrame(() => {
+			const delta = currentScrollY - lastScrollY;
+			if (Math.abs(delta) >= 16) {
+				if (delta < 0) {
+					lastScrollUpTime = performance.now();
 				}
-				ticking = false;
-			});
-		};
-
-		scrollBtn.addEventListener("click", () => {
-			const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
-			document.documentElement.scrollTo({ behavior, top: 0 });
-			if (!prefersReducedMotion.matches) {
-				scrollBtn.dataset.clicked = "true";
-				window.setTimeout(() => {
-					scrollBtn.dataset.clicked = "false";
-				}, 450);
+				lastScrollY = currentScrollY;
+				updateVisibility();
 			}
+			ticking = false;
 		});
+	};
 
-		window.addEventListener("scroll", onScroll, { passive: true });
-
-		observer.observe(targetHeader);
-		if (pageFooter instanceof HTMLElement) {
-			footerObserver.observe(pageFooter);
+	scrollBtn.addEventListener("click", () => {
+		const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
+		document.documentElement.scrollTo({ behavior, top: 0 });
+		if (!prefersReducedMotion.matches) {
+			scrollBtn.dataset.clicked = "true";
+			window.setTimeout(() => {
+				scrollBtn.dataset.clicked = "false";
+			}, 450);
 		}
-	}
+	});
+
+	window.addEventListener("scroll", onScroll, { passive: true });
+
+	observer.observe(document.querySelector<HTMLElement>("#blog-hero")!);
+	footerObserver.observe(document.querySelector<HTMLElement>("footer")!);
 </script>
