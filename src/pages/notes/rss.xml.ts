@@ -17,7 +17,7 @@ export const GET: APIRoute = async (context) => {
 				title: note.data.title,
 				link: `/notes/${note.id}/`,
 				pubDate: note.data.publishDate,
-				description: note.data.description ?? getRssExcerptFromHtml(content),
+				description: note.data.description?.trim() || getRssExcerptFromHtml(content),
 				author: `${siteConfig.email} (${siteConfig.author})`,
 				content,
 			};
