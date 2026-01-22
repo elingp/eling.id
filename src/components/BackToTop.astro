@@ -22,6 +22,9 @@ import { Icon } from "astro-icon/components";
 <script>
 	const scrollBtn = document.querySelector<HTMLButtonElement>("#to-top-btn")!;
 	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const SCROLL_DELTA_THRESHOLD = 16;
+	const SHOW_GRACE_MS = 300;
+	const CLICK_ANIMATION_MS = 450;
 
 	let isPastHeader = false;
 	let isFooterVisible = false;
@@ -37,7 +40,9 @@ import { Icon } from "astro-icon/components";
 
 	// Show when (1) footer is visible, OR (2) header is out of view AND user recently scrolled up.
 	const updateVisibility = () => {
-		setVisible(isFooterVisible || (isPastHeader && performance.now() - lastScrollUpTime < 300));
+		setVisible(
+			isFooterVisible || (isPastHeader && performance.now() - lastScrollUpTime < SHOW_GRACE_MS),
+		);
 	};
 
 	const observer = new IntersectionObserver((entries) => {
@@ -60,7 +65,7 @@ import { Icon } from "astro-icon/components";
 		ticking = true;
 		window.requestAnimationFrame(() => {
 			const delta = currentScrollY - lastScrollY;
-			if (Math.abs(delta) >= 16) {
+			if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
 				if (delta < 0) {
 					lastScrollUpTime = performance.now();
 				}
@@ -78,7 +83,7 @@ import { Icon } from "astro-icon/components";
 			scrollBtn.dataset.clicked = "true";
 			window.setTimeout(() => {
 				scrollBtn.dataset.clicked = "false";
-			}, 450);
+			}, CLICK_ANIMATION_MS);
 		}
 	});
 

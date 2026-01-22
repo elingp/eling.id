@@ -37,7 +37,7 @@ This site follows a mobile-first approach with a strict two-mode layout policy:
 - **`lg:`** = desktop layout changes (columns, navigation mode, modal sizing).
 - **`md:`** = typography/readability-only adjustments (font size, leading, prose scale).
 
-We avoid `sm:` for layout changes to keep the mental model simple. Hover affordance are not breakpoint-gated.
+We avoid `sm:` for layout changes to keep the mental model simple. Hover affordances are not breakpoint-gated.
 
 ## Development
 
