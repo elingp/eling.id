@@ -7,7 +7,6 @@ import {
 	type Node,
 	parse,
 	TEXT_NODE,
-	type TextNode,
 	transform,
 	walk,
 	walkSync,
@@ -65,10 +64,6 @@ const DEFAULT_RSS_EXCERPT_LENGTH = 200;
 
 function isElementNode(node: Node): node is ElementNode {
 	return node.type === 1;
-}
-
-function isTextNode(node: Node): node is TextNode {
-	return node.type === TEXT_NODE;
 }
 
 function hasClass(attrs: Record<string, string>, className: string): boolean {
@@ -184,7 +179,7 @@ export function getRssExcerptFromHtml(
 	const parts: string[] = [];
 
 	walkSync(root, (node) => {
-		if (!isTextNode(node)) return;
+		if (node.type !== TEXT_NODE) return;
 		if (node.value) parts.push(node.value);
 	});
 
