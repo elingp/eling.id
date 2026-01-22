@@ -28,7 +28,7 @@ export const GET: APIRoute = async (context) => {
 		items,
 		xmlns: { atom: "http://www.w3.org/2005/Atom" },
 		customData: `
-			<atom:link href="${siteUrl}rss.xml" rel="self" type="application/rss+xml" />
+			<atom:link href="${siteUrl}notes/rss.xml" rel="self" type="application/rss+xml" />
 			<language>${siteConfig.lang}</language>
 		`,
 	});
