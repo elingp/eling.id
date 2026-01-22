@@ -101,7 +101,7 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 		<ul class="space-y-4 md:space-y-2">
 			{
 				elingProject.map(({ desc, href, title }) => (
-					<li class="grid gap-1 text-base sm:grid-cols-[auto_1fr] md:gap-5 md:text-lg">
+					<li class="grid gap-1 text-base md:text-lg lg:grid-cols-[auto_1fr] lg:gap-5">
 						<ExternalLink
 							class="cactus-link has-external-icon is-external min-w-66 font-semibold md:font-medium"
 							href={href}
