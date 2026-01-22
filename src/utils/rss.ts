@@ -2,7 +2,16 @@ import { loadRenderers } from "astro:container";
 import { render } from "astro:content";
 import { getContainerRenderer as getMDXRenderer } from "@astrojs/mdx";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
-import { type ElementNode, type Node, transform, walk } from "ultrahtml";
+import {
+	type ElementNode,
+	type Node,
+	parse,
+	TEXT_NODE,
+	type TextNode,
+	transform,
+	walk,
+	walkSync,
+} from "ultrahtml";
 import sanitize from "ultrahtml/transformers/sanitize";
 
 let containerPromise: Promise<AstroContainer> | undefined;
@@ -52,10 +61,14 @@ export function absolutizeSrcset(value: string, site: URL): string {
 }
 
 const RSS_ATTRIBUTE_DENYLIST = new Set(["loading", "decoding", "fetchpriority"]);
-const HEADING_AUTOLINK_ARIA = "Link to this section";
+const DEFAULT_RSS_EXCERPT_LENGTH = 200;
 
 function isElementNode(node: Node): node is ElementNode {
 	return node.type === 1;
+}
+
+function isTextNode(node: Node): node is TextNode {
+	return node.type === TEXT_NODE;
 }
 
 function hasClass(attrs: Record<string, string>, className: string): boolean {
@@ -71,7 +84,7 @@ function isFragmentLink(href: string | undefined): boolean {
 function isHeadingAutolink(attrs: Record<string, string>): boolean {
 	return (
 		hasClass(attrs, "anchor-link") &&
-		attrs["aria-label"] === HEADING_AUTOLINK_ARIA &&
+		attrs["aria-label"] === "Link to this section" &&
 		isFragmentLink(attrs.href)
 	);
 }
@@ -161,4 +174,25 @@ export async function renderRssContent(entry: RenderableEntry, siteUrl: URL): Pr
 		},
 		sanitize({ dropElements: ["script", "style", "iframe", "object", "embed"] }),
 	]);
+}
+
+export function getRssExcerptFromHtml(
+	html: string,
+	maxLength = DEFAULT_RSS_EXCERPT_LENGTH,
+): string {
+	const root = parse(html);
+	const parts: string[] = [];
+
+	walkSync(root, (node) => {
+		if (!isTextNode(node)) return;
+		if (node.value) parts.push(node.value);
+	});
+
+	const text = parts.join(" ").replace(/\s+/g, " ").trim();
+	if (text.length <= maxLength) return text;
+
+	const truncated = text.slice(0, maxLength);
+	const lastSpace = truncated.lastIndexOf(" ");
+	const safeCut = lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated;
+	return `${safeCut}…`;
 }
