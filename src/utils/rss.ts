@@ -52,15 +52,10 @@ export function absolutizeSrcset(value: string, site: URL): string {
 }
 
 const RSS_ATTRIBUTE_DENYLIST = new Set(["loading", "decoding", "fetchpriority"]);
-const FRAGMENT_PREFIX = "#";
 const HEADING_AUTOLINK_ARIA = "Link to this section";
 
 function isElementNode(node: Node): node is ElementNode {
 	return node.type === 1;
-}
-
-function isAnchorNode(node: ElementNode): boolean {
-	return node.name === "a";
 }
 
 function hasClass(attrs: Record<string, string>, className: string): boolean {
@@ -70,7 +65,7 @@ function hasClass(attrs: Record<string, string>, className: string): boolean {
 }
 
 function isFragmentLink(href: string | undefined): boolean {
-	return typeof href === "string" && href.trim().startsWith(FRAGMENT_PREFIX);
+	return typeof href === "string" && href.trim().startsWith("#");
 }
 
 function isHeadingAutolink(attrs: Record<string, string>): boolean {
@@ -143,9 +138,8 @@ export async function renderRssContent(entry: RenderableEntry, siteUrl: URL): Pr
 			await walk(root, (node, parent, index) => {
 				if (!isElementNode(node)) return;
 				const attrs = node.attributes;
-				if (!attrs) return;
 
-				if (isAnchorNode(node)) {
+				if (node.name === "a") {
 					if (isHeadingAutolink(attrs) || isFootnoteBackref(attrs)) {
 						removeNode(parent, index);
 						return;
