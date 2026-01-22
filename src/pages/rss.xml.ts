@@ -9,6 +9,8 @@ export const GET: APIRoute = async (context) => {
 	const posts = (await getAllPosts()).sort(
 		(a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
 	);
+	const lastBuildDate = new Date().toUTCString();
+	const copyright = `© 2018–${new Date().getFullYear()} ${siteConfig.author}.`;
 
 	const items: RSSFeedItem[] = await Promise.all(
 		posts.map(async (post) => ({
@@ -16,7 +18,6 @@ export const GET: APIRoute = async (context) => {
 			link: `/posts/${post.id}/`,
 			pubDate: post.data.publishDate,
 			description: post.data.description,
-			author: `${siteConfig.email} (${siteConfig.author})`,
 			content: await renderRssContent(post, siteUrl),
 			categories: post.data.tags.length ? post.data.tags : undefined,
 		})),
@@ -30,7 +31,13 @@ export const GET: APIRoute = async (context) => {
 		xmlns: { atom: "http://www.w3.org/2005/Atom" },
 		customData: `
 			<atom:link href="${siteUrl}rss.xml" rel="self" type="application/rss+xml" />
+			<copyright>${copyright}</copyright>
+			<docs>https://www.rssboard.org/rss-specification</docs>
+			<generator>Astro RSS</generator>
 			<language>${siteConfig.lang}</language>
+			<lastBuildDate>${lastBuildDate}</lastBuildDate>
+			<managingEditor>${siteConfig.email} (${siteConfig.author})</managingEditor>
+			<webMaster>${siteConfig.email} (${siteConfig.author})</webMaster>
 		`,
 	});
 };
