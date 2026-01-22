@@ -4,55 +4,91 @@ import { Icon } from "astro-icon/components";
 
 <aside aria-label="Back to top">
 	<button
-		class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 sm:end-30 sm:h-12 sm:w-12"
+		class="to-top-btn focus-visible:ring-accent fixed end-4 bottom-20 z-90 flex h-10 w-10 translate-y-28 cursor-pointer items-center justify-center rounded-full text-3xl opacity-0 shadow-sm transition-all transition-discrete duration-300 hover:shadow-md focus-visible:ring-2 focus-visible:outline-none data-[show=false]:pointer-events-none data-[show=true]:translate-y-0 data-[show=true]:opacity-100 lg:end-30 lg:h-12 lg:w-12"
 		data-show="false"
 		id="to-top-btn"
 		type="button"
 	>
 		<span class="sr-only">Back to top</span>
-		<svg
-			class="to-top-ring pointer-events-none absolute inset-0 h-full w-full"
-			viewBox="0 0 100 100"
-			aria-hidden="true"
-		>
-			<circle class="to-top-ring-track" cx="50" cy="50" r="45"></circle>
-		</svg>
 		<Icon
 			aria-hidden="true"
 			name="fa7-solid:chevron-up"
 			title="Back to top"
-			class="relative z-10 inline-block h-4 w-4 sm:h-6 sm:w-6"
+			class="relative z-10 inline-block h-4 w-4 lg:h-6 lg:w-6"
 		/>
 	</button>
 </aside>
 
 <script>
-	const scrollBtn = document.getElementById("to-top-btn");
-	const targetHeader = document.getElementById("blog-hero");
-	if (scrollBtn instanceof HTMLButtonElement && targetHeader instanceof HTMLElement) {
-		const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const scrollBtn = document.querySelector<HTMLButtonElement>("#to-top-btn")!;
+	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const SCROLL_DELTA_THRESHOLD = 16;
+	const SHOW_GRACE_MS = 300;
+	const CLICK_ANIMATION_MS = 450;
 
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				// only show the scroll to top button when the heading is out of view
-				const shouldShow = !entry.isIntersecting;
-				scrollBtn.dataset.show = shouldShow.toString();
-				scrollBtn.setAttribute("aria-hidden", (!shouldShow).toString());
-				scrollBtn.tabIndex = shouldShow ? 0 : -1;
-			});
+	let isPastHeader = false;
+	let isFooterVisible = false;
+	let lastScrollY = window.scrollY;
+	let ticking = false;
+	let lastScrollUpTime = 0;
+
+	const setVisible = (visible: boolean) => {
+		scrollBtn.dataset.show = visible.toString();
+		scrollBtn.setAttribute("aria-hidden", (!visible).toString());
+		scrollBtn.tabIndex = visible ? 0 : -1;
+	};
+
+	// Show when (1) footer is visible, OR (2) header is out of view AND user recently scrolled up.
+	const updateVisibility = () => {
+		setVisible(
+			isFooterVisible || (isPastHeader && performance.now() - lastScrollUpTime < SHOW_GRACE_MS),
+		);
+	};
+
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			isPastHeader = !entry.isIntersecting;
+			updateVisibility();
 		});
+	});
 
-		scrollBtn.addEventListener("click", () => {
-			const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
-			document.documentElement.scrollTo({ behavior, top: 0 });
-			if (!prefersReducedMotion.matches) {
-				scrollBtn.dataset.clicked = "true";
-				window.setTimeout(() => {
-					scrollBtn.dataset.clicked = "false";
-				}, 450);
+	const footerObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			isFooterVisible = entry.isIntersecting;
+			updateVisibility();
+		});
+	});
+
+	const onScroll = () => {
+		const currentScrollY = window.scrollY;
+		if (ticking) return;
+		ticking = true;
+		window.requestAnimationFrame(() => {
+			const delta = currentScrollY - lastScrollY;
+			if (Math.abs(delta) >= SCROLL_DELTA_THRESHOLD) {
+				if (delta < 0) {
+					lastScrollUpTime = performance.now();
+				}
+				lastScrollY = currentScrollY;
+				updateVisibility();
 			}
+			ticking = false;
 		});
+	};
 
-		observer.observe(targetHeader);
-	}
+	scrollBtn.addEventListener("click", () => {
+		const behavior = prefersReducedMotion.matches ? "auto" : "smooth";
+		document.documentElement.scrollTo({ behavior, top: 0 });
+		if (!prefersReducedMotion.matches) {
+			scrollBtn.dataset.clicked = "true";
+			window.setTimeout(() => {
+				scrollBtn.dataset.clicked = "false";
+			}, CLICK_ANIMATION_MS);
+		}
+	});
+
+	window.addEventListener("scroll", onScroll, { passive: true });
+
+	observer.observe(document.querySelector<HTMLElement>("#blog-hero")!);
+	footerObserver.observe(document.querySelector<HTMLElement>("footer")!);
 </script>

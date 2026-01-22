@@ -23,9 +23,9 @@ const sourceUrl = encodedPath
 ---
 
 <footer
-	class="text-muted mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-8 text-center align-top font-sans text-sm font-medium sm:flex-row sm:justify-between sm:text-xs"
+	class="text-muted mt-auto flex w-full flex-col items-center justify-center gap-y-2 pt-20 pb-8 text-center align-top font-sans text-sm font-medium md:text-xs lg:flex-row lg:justify-between"
 >
-	<p class="me-0 sm:me-4">
+	<p class="me-0 lg:me-4">
 		&copy; 2018–{year}
 		{siteConfig.author}.
 		<span class="inline-block"
@@ -43,12 +43,12 @@ const sourceUrl = encodedPath
 		</span>
 	</p>
 	<nav aria-label="Footer links">
-		<ul class="sm:divide-global-text flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-dotted">
+		<ul class="lg:divide-global-text flex gap-x-2 lg:gap-x-0 lg:divide-x lg:divide-dotted">
 			{
 				footerMenuLinks.map((link) => (
 					<li>
 						<a
-							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none sm:py-0"
+							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
 							href={link.path}
 						>
 							{link.title}

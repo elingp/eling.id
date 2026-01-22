@@ -29,6 +29,16 @@ This repo contains the source code for my personal website. The site serves as b
 - Custom remark plugins for enhanced markdown (admonitions, figure captions, GitHub cards, reading time)
 - SEO optimized with sitemap, robots.txt, and web manifest
 
+## Responsive Breakpoints Policy
+
+This site follows a mobile-first approach with a strict two-mode layout policy:
+
+- **Base (no prefix)** = mobile layout and defaults.
+- **`lg:`** = desktop layout changes (columns, navigation mode, modal sizing).
+- **`md:`** = typography/readability-only adjustments (font size, leading, prose scale).
+
+We avoid `sm:` for layout changes to keep the mental model simple. Hover affordances are not breakpoint-gated.
+
 ## Development
 
 ### Prerequisites

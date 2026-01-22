@@ -11,12 +11,12 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 const { as: Tag = "h3", post, withDesc = false } = Astro.props;
 ---
 
-<article class="grid gap-0 sm:grid-cols-[auto_1fr] sm:gap-0.5 sm:[&_p]:col-start-2">
+<article class="grid gap-0 lg:grid-cols-[auto_1fr] lg:gap-0.5 lg:[&_p]:col-start-2">
 	<FormattedDate
 		class="text-muted min-w-30 text-base font-medium md:text-lg"
 		date={post.data.publishDate}
 	/>
-	<Tag class="text-base leading-tight font-medium sm:leading-snug md:text-lg">
+	<Tag class="text-base leading-tight font-medium md:text-lg md:leading-snug">
 		{post.data.draft && <span class="text-danger">(Draft) </span>}
 		<a class="cactus-link" href={`/posts/${post.id}/`}>
 			{post.data.title}

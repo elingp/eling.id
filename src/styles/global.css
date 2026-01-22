@@ -384,13 +384,11 @@
 		opacity: 1;
 	}
 
-	@media (min-width: 768px) {
+	@media (hover: hover) {
 		.anchor-link {
 			opacity: 0;
 		}
-	}
 
-	@media (min-width: 768px) {
 		.prose :where(h2, h3, h4, h5, h6):hover .anchor-link {
 			opacity: 1;
 		}
