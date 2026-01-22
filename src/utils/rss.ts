@@ -52,15 +52,41 @@ export function absolutizeSrcset(value: string, site: URL): string {
 }
 
 const RSS_ATTRIBUTE_DENYLIST = new Set(["loading", "decoding", "fetchpriority"]);
+const FRAGMENT_PREFIX = "#";
+const HEADING_AUTOLINK_ARIA = "Link to this section";
 
 function isElementNode(node: Node): node is ElementNode {
 	return node.type === 1;
+}
+
+function isAnchorNode(node: ElementNode): boolean {
+	return node.name === "a";
 }
 
 function hasClass(attrs: Record<string, string>, className: string): boolean {
 	const classAttr = attrs.class;
 	if (!classAttr) return false;
 	return classAttr.split(/\s+/).includes(className);
+}
+
+function isFragmentLink(href: string | undefined): boolean {
+	return typeof href === "string" && href.trim().startsWith(FRAGMENT_PREFIX);
+}
+
+function isHeadingAutolink(attrs: Record<string, string>): boolean {
+	return (
+		hasClass(attrs, "anchor-link") &&
+		attrs["aria-label"] === HEADING_AUTOLINK_ARIA &&
+		isFragmentLink(attrs.href)
+	);
+}
+
+function isFootnoteBackref(attrs: Record<string, string>): boolean {
+	return hasClass(attrs, "footnote-backref");
+}
+
+function isFootnoteRef(attrs: Record<string, string>): boolean {
+	return "data-footnote-ref" in attrs && isFragmentLink(attrs.href);
 }
 
 function removeAttributesForRss(attrs: Record<string, string>): void {
@@ -119,31 +145,13 @@ export async function renderRssContent(entry: RenderableEntry, siteUrl: URL): Pr
 				const attrs = node.attributes;
 				if (!attrs) return;
 
-				const href = attrs.href?.trim();
-				if (node.name === "a") {
-					const isHeadingAutolink =
-						hasClass(attrs, "anchor-link") &&
-						attrs["aria-label"] === "Link to this section" &&
-						href?.startsWith("#");
-					if (isHeadingAutolink) {
+				if (isAnchorNode(node)) {
+					if (isHeadingAutolink(attrs) || isFootnoteBackref(attrs)) {
 						removeNode(parent, index);
 						return;
 					}
 
-					const isFootnoteBackref = hasClass(attrs, "footnote-backref");
-					if (isFootnoteBackref) {
-						removeNode(parent, index);
-						return;
-					}
-
-					const isFootnoteRef =
-						"data-footnote-ref" in attrs && typeof href === "string" && href.startsWith("#");
-					if (isFootnoteRef) {
-						unwrapNode(parent, index, node);
-						return;
-					}
-
-					if (typeof href === "string" && href.startsWith("#")) {
+					if (isFootnoteRef(attrs) || isFragmentLink(attrs.href)) {
 						unwrapNode(parent, index, node);
 						return;
 					}
