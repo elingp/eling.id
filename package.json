@@ -25,7 +25,7 @@
 		"@fontsource/source-sans-3": "^5.2.9",
 		"@fontsource/source-serif-4": "^5.2.9",
 		"@tailwindcss/vite": "^4.1.18",
-		"astro": "^5.16.11",
+		"astro": "^5.16.14",
 		"astro-expressive-code": "^0.41.6",
 		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
@@ -44,7 +44,7 @@
 		"sharp": "^0.34.5",
 		"ultrahtml": "^1.6.0",
 		"unified": "^11.0.5",
-		"unist-util-visit": "^5.0.0"
+		"unist-util-visit": "^5.1.0"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.6",
@@ -59,7 +59,7 @@
 		"@types/mdast": "^4.0.4",
 		"autoprefixer": "^10.4.23",
 		"pagefind": "^1.4.0",
-		"prettier": "3.8.0",
+		"prettier": "3.8.1",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "0.7.2",
 		"reading-time": "^1.5.0",
@@ -69,7 +69,8 @@
 	"pnpm": {
 		"onlyBuiltDependencies": ["@biomejs/biome", "@tailwindcss/oxide", "esbuild", "sharp"],
 		"overrides": {
-			"sharp": "^0.34.5"
+			"sharp": "^0.34.5",
+			"lodash": "^4.17.23"
 		}
 	},
 	"packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316"
