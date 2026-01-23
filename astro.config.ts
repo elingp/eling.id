@@ -84,14 +84,6 @@ export default defineConfig({
 						properties: {
 							className: ["anchor-icon"],
 						},
-						children: [
-							{
-								type: "element",
-								tagName: "span",
-								properties: { className: ["sr-only"], dataPagefindIgnore: "true" },
-								children: [{ type: "text", value: " Link to this heading" }],
-							},
-						],
 					},
 				},
 			],
