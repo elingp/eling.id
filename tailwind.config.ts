@@ -25,6 +25,7 @@ export default {
 							},
 						},
 						blockquote: {
+							fontWeight: "inherit",
 							fontStyle: "normal",
 							quotes: "none",
 						},
