@@ -5,6 +5,17 @@ function removeDupsAndLowerCase(array: string[]) {
 	return [...new Set(array.map((str) => str.toLowerCase()))];
 }
 
+function parseFrontmatterDate(value: string | Date, fieldName: string): Date {
+	const date = new Date(value);
+	if (Number.isNaN(date.getTime())) {
+		throw new Error(`Invalid ${fieldName}: ${String(value)}`);
+	}
+	if (typeof value === "string" && !value.includes("T") && !value.includes("t")) {
+		return new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
+	}
+	return date;
+}
+
 const titleSchema = z.string().max(60);
 
 const baseSchema = z.object({
@@ -28,27 +39,13 @@ const post = defineCollection({
 			publishDate: z
 				.string()
 				.or(z.date())
-				.transform((val) => {
-					const date = new Date(val);
-					// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
-					if (typeof val === "string" && !val.includes("T") && !val.includes("t")) {
-						const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
-						return utcDate;
-					}
-					return date;
-				}),
+				.transform((val) => parseFrontmatterDate(val, "publishDate")),
 			updatedDate: z
 				.string()
 				.optional()
 				.transform((str) => {
 					if (!str) return undefined;
-					const date = new Date(str);
-					// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
-					if (!str.includes("T") && !str.includes("t")) {
-						const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
-						return utcDate;
-					}
-					return date;
+					return parseFrontmatterDate(str, "updatedDate");
 				}),
 			autoUpdateDate: z.boolean().default(false),
 			pinned: z.boolean().default(false),
@@ -62,27 +59,13 @@ const note = defineCollection({
 		publishDate: z
 			.string()
 			.or(z.date())
-			.transform((val) => {
-				const date = new Date(val);
-				// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
-				if (typeof val === "string" && !val.includes("T") && !val.includes("t")) {
-					const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
-					return utcDate;
-				}
-				return date;
-			}),
+			.transform((val) => parseFrontmatterDate(val, "publishDate")),
 		updatedDate: z
 			.string()
 			.optional()
 			.transform((str) => {
 				if (!str) return undefined;
-				const date = new Date(str);
-				// Transform date string without time (e.g., "30 Mar 2022") as UTC midnight.
-				if (!str.includes("T") && !str.includes("t")) {
-					const utcDate = new Date(`${date.toISOString().split("T")[0]}T00:00:00Z`);
-					return utcDate;
-				}
-				return date;
+				return parseFrontmatterDate(str, "updatedDate");
 			}),
 		autoUpdateDate: z.boolean().default(false),
 	}),
