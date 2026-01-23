@@ -61,8 +61,6 @@ export function absolutizeSrcset(value: string, site: URL): string {
 
 const RSS_ATTRIBUTE_DENYLIST = new Set(["loading", "decoding", "fetchpriority"]);
 const DEFAULT_RSS_EXCERPT_LENGTH = 200;
-const ONE_DAY_MS = 24 * 60 * 60 * 1000;
-
 type RssRemarkFrontmatter = Record<string, unknown>;
 
 function isElementNode(node: Node): node is ElementNode {
@@ -140,28 +138,7 @@ async function getContainer(): Promise<AstroContainer> {
 	return containerPromise;
 }
 
-function getGitLastModifiedDate(remarkPluginFrontmatter?: RssRemarkFrontmatter): Date | null {
-	const lastModified = remarkPluginFrontmatter?.lastModified;
-	if (typeof lastModified !== "string") return null;
-	const date = new Date(lastModified);
-	return Number.isNaN(date.getTime()) ? null : date;
-}
-
-export function getEffectiveUpdatedDate(
-	data: {
-		publishDate: Date;
-		updatedDate?: Date | undefined;
-		autoUpdateDate?: boolean | undefined;
-	},
-	remarkPluginFrontmatter?: RssRemarkFrontmatter,
-): Date | null {
-	if (data.updatedDate) return data.updatedDate;
-	if (!data.autoUpdateDate) return null;
-	const gitLastModified = getGitLastModifiedDate(remarkPluginFrontmatter);
-	if (!gitLastModified) return null;
-	if (gitLastModified.getTime() - data.publishDate.getTime() <= ONE_DAY_MS) return null;
-	return gitLastModified;
-}
+export { getEffectiveUpdatedDate } from "./updatedDate";
 
 export async function renderRssEntry(
 	entry: RenderableEntry,

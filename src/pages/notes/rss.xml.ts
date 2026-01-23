@@ -28,7 +28,8 @@ export const GET: APIRoute = async (context) => {
 					content,
 				},
 				updatedDate:
-					getEffectiveUpdatedDate(note.data, remarkPluginFrontmatter) ?? note.data.publishDate,
+					getEffectiveUpdatedDate(note.data, remarkPluginFrontmatter.lastModified) ??
+					note.data.publishDate,
 			};
 		}),
 	);

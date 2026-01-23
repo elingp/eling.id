@@ -24,7 +24,8 @@ export const GET: APIRoute = async (context) => {
 					categories: post.data.tags.length ? post.data.tags : undefined,
 				},
 				updatedDate:
-					getEffectiveUpdatedDate(post.data, remarkPluginFrontmatter) ?? post.data.publishDate,
+					getEffectiveUpdatedDate(post.data, remarkPluginFrontmatter.lastModified) ??
+					post.data.publishDate,
 			};
 		}),
 	);
