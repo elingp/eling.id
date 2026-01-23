@@ -1,267 +1,197 @@
 # eling.id
 
-This repo contains the source code for my personal website. The site serves as both a platform to share long-form blog posts and quick notes, as well as a portfolio showcasing my work.
+<!-- markdownlint-disable MD033 -->
+<!-- prettier-ignore -->
+<div align="center">
+   <img src="./public/icon.svg" alt="eling.id icon" height="96" />
 
-## Tech Stack
+   <p>
+      Personal website of Eling Pramuatmaja — posts, notes, RSS, search, and webmentions.
+   </p>
 
-- **Framework**: [Astro](https://astro.build)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com) with [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
-- **Content**: Markdown/MDX with [Content Collections](https://docs.astro.build/en/guides/content-collections/)
-- **Code Highlighting**: [Expressive Code](https://expressive-code.com/)
-- **Search**: [Pagefind](https://pagefind.app/) for static search
-- **Open Graph Images**: [Satori](https://github.com/vercel/satori) for auto-generated social images
-- **Linting/Formatting**: [Biome](https://biomejs.dev/) and [Prettier](https://prettier.io/)
-- **Deployment**: [Cloudflare Pages](https://pages.cloudflare.com)
-- **Theme**: Based on [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus) by Chris Williams
+   <p>
+      <a href="https://eling.id/">Live site</a> ·
+      <a href="#getting-started">Getting started</a> ·
+      <a href="#project-commands">Commands</a> ·
+      <a href="#content-authoring">Content</a>
+   </p>
+
+   <p>
+      <a href="https://astro.build"><img alt="Astro" src="https://img.shields.io/badge/Astro-5-FF5D01?style=flat-square&logo=astro&logoColor=fff"></a>
+      <a href="https://nodejs.org/"><img alt="Node.js" src="https://img.shields.io/badge/Node.js-%3E%3D24-3c873a?style=flat-square&logo=node.js&logoColor=fff"></a>
+      <a href="https://pnpm.io/"><img alt="pnpm" src="https://img.shields.io/badge/pnpm-10-f69220?style=flat-square&logo=pnpm&logoColor=fff"></a>
+      <a href="https://pages.cloudflare.com/"><img alt="Cloudflare Pages" src="https://img.shields.io/badge/Cloudflare%20Pages-deployed-f38020?style=flat-square&logo=cloudflare&logoColor=fff"></a>
+   </p>
+</div>
+<!-- markdownlint-enable MD033 -->
+
+## Overview
+
+This repository contains the source code for [https://eling.id/](https://eling.id/).
+
+The site is built with [Astro](https://astro.build/) and uses Astro Content Collections for authoring **posts** and **notes** in Markdown/MDX.
+
+> [!NOTE]
+> This codebase started from (and still takes inspiration from) the excellent [Astro Cactus theme](https://github.com/chrismwilliams/astro-theme-cactus).
 
 ## Features
 
-- Fast, static-site generation with Astro
-- Dark and light mode support
-- Fully responsive design
-- Static search functionality via Pagefind
-- Blog posts and notes with tag support
-- Auto-generated OG images with Satori
-- RSS feeds for posts and notes (`/rss.xml` and `/notes/rss.xml`)
-- Webmentions support for social interactions
-- Syntax highlighting with Expressive Code
-- Git-based automatic last-modified dates
-- Custom remark plugins for enhanced markdown (admonitions, figure captions, GitHub cards, reading time)
-- SEO optimized with sitemap, robots.txt, and web manifest
+- Posts + notes (separate feeds and listing pages)
+- RSS feeds: `/rss.xml` and `/notes/rss.xml` (rendered from Markdown/MDX and sanitized for feed readers)
+- Static search via [Pagefind](https://pagefind.app/)
+- Auto-generated Open Graph images via [Satori](https://github.com/vercel/satori)
+- Syntax highlighting via [Expressive Code](https://expressive-code.com/)
+- Optional webmentions support (webmention.io)
+- SEO essentials: sitemap, robots.txt, web manifest
 
-## Responsive Breakpoints Policy
+## Tech stack
 
-This site follows a mobile-first approach with a strict two-mode layout policy:
+- Framework: [Astro](https://astro.build/) (TypeScript)
+- Content: Markdown/MDX + [Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- Styling: [Tailwind CSS](https://tailwindcss.com/) (+ typography)
+- Formatting/linting: [Prettier](https://prettier.io/) and [Biome](https://biomejs.dev/)
+- Deployment: [Cloudflare Pages](https://pages.cloudflare.com/)
 
-- **Base (no prefix)** = mobile layout and defaults.
-- **`lg:`** = desktop layout changes (columns, navigation mode, modal sizing).
-- **`md:`** = typography/readability-only adjustments (font size, leading, prose scale).
-
-We avoid `sm:` for layout changes to keep the mental model simple. Hover affordances are not breakpoint-gated.
-
-## Development
+## Getting started
 
 ### Prerequisites
 
-- Node.js 24 (LTS)
-- pnpm (recommended) or npm
-- [mise](https://mise.jdx.dev/) (for toolchain management)
+- Node.js **24+**
+- pnpm **10+**
+
+> [!TIP]
+> This repo includes a minimal [mise](https://mise.jdx.dev/) config. If you use mise, run `mise install` to get the right Node.js version.
 
 ### Setup
 
 ```bash
-# Clone the repository
 git clone https://github.com/elingp/eling.id.git
 cd eling.id
 
-# Install toolchain (Node via mise)
-mise install
-
-# Install dependencies
 pnpm install
-
-# Start development server
 pnpm dev
 ```
 
-### Available Commands
+Then open [http://localhost:4321](http://localhost:4321).
 
-| Command          | Description                                                   |
-| :--------------- | :------------------------------------------------------------ |
-| `pnpm install`   | Install dependencies                                          |
-| `pnpm dev`       | Start local dev server at `localhost:4321`                    |
-| `pnpm build`     | Build production site to `./dist/` (includes git commit hash) |
-| `pnpm postbuild` | Build Pagefind search index (automatically runs after build)  |
-| `pnpm preview`   | Preview production build locally                              |
-| `pnpm lint`      | Lint code with Biome                                          |
-| `pnpm format`    | Format code with Biome and Prettier                           |
-| `pnpm check`     | Type-check with Astro's TypeScript checker                    |
+## Project commands
 
-## Project Structure
+| Command          | Description                                                     |
+| ---------------- | --------------------------------------------------------------- |
+| `pnpm dev`       | Start the dev server (`localhost:4321`)                         |
+| `pnpm build`     | Build the site to `dist/` (includes commit hash when available) |
+| `pnpm postbuild` | Build the Pagefind index for search (runs after `build`)        |
+| `pnpm preview`   | Preview the production build locally                            |
+| `pnpm check`     | Type-check with `astro check` and run `biome check`             |
+| `pnpm lint`      | Run `biome check --write` (lints + applies safe fixes)          |
+| `pnpm format`    | Format with Prettier                                            |
 
-```
-/
-├── public/          # Static assets
-├── src/
-│   ├── assets/      # Images and media
-│   ├── components/  # Astro components
-│   ├── content/     # Blog posts, notes, and tags (Markdown/MDX)
-│   ├── layouts/     # Page layouts
-│   ├── pages/       # Route pages
-│   ├── plugins/     # Custom remark/rehype plugins
-│   ├── styles/      # Global CSS and Tailwind config
-│   └── utils/       # Utility functions
-├── astro.config.ts  # Astro configuration
-└── package.json
-```
+> [!IMPORTANT]
+> `pnpm build` runs `git rev-parse` to inject a commit hash into the build when Git metadata is available.
 
-## Content
+## Content authoring
 
-### Posts vs Notes
+Content lives in `src/content/`:
 
-**Posts** are long-form, polished articles meant for sharing complete thoughts, tutorials, or in-depth explorations.
+- `src/content/post/` — long-form posts
+- `src/content/note/` — short notes
+- `src/content/tag/` — tag metadata
 
-**Notes** are quick, timestamped thoughts or updates. They're more casual and support:
+### Post frontmatter
 
-### Writing Posts
-
-Create new blog posts in `src/content/post/` as Markdown or MDX files:
-
-```markdown
+```md
 ---
 title: "Your Post Title"
-description: "A brief description for SEO and post preview"
-publishDate: "1 Jan 2024"
-tags: ["tag1", "tag2"]
+description: "A short description for previews and SEO"
+publishDate: "1 Jan 2026" # or ISO 8601
+tags: ["astro", "web"]
 draft: false
 pinned: false
+updatedDate: "2026-01-23" # optional override
+autoUpdateDate: false
 ---
-
-Your post content...
 ```
 
-**Frontmatter Fields:**
+### Note frontmatter
 
-- `title` (required, max 60 chars)
-- `description` (required) - For SEO and previews
-- `publishDate` (required) - Can be "DD MMM YYYY" or ISO 8601
-- `updatedDate` (optional) - Manually override the last-modified date
-- `tags` (optional) - Array of strings, auto-lowercased and de-duplicated
-- `draft` (optional, default: false) - Hides post from production builds
-- `pinned` (optional, default: false) - Shows on homepage (max 3)
-- `coverImage` (optional) - Object with `src` (image path) and `alt` (string)
-- `ogImage` (optional) - Custom OG image path (auto-generated if omitted)
-
-### Writing Notes
-
-Create quick notes in `src/content/note/`:
-
-```markdown
+```md
 ---
 title: "Note Title"
-publishDate: "2024-01-01T12:00:00Z"
-description: "Optional short description"
+publishDate: "2026-01-23T12:00:00+00:00"
+description: "Optional"
+updatedDate: "2026-01-24T08:30:00+00:00" # optional
+autoUpdateDate: false
 ---
-
-Your note content...
 ```
 
-**Frontmatter Fields:**
+> [!NOTE]
+> Dates are parsed in the content schema (see `src/content.config.ts`). If you provide a date string without a time component, it is normalized to UTC midnight.
 
-- `title` (required, max 60 chars)
-- `publishDate` (required) - Must be ISO 8601 with timezone (e.g., "2024-01-01T12:00:00Z" or "2024-01-01T12:00:00+07:00")
-- `description` (optional)
+## Markdown extensions
 
-### Date Handling
+This site adds a few authoring conveniences via custom remark/rehype plugins.
 
-The site has intelligent date handling:
+### Admonitions
 
-1. **Published Date**:
-   - Posts: Accept friendly formats like "30 Mar 2022" (converted to UTC midnight) or ISO 8601
-   - Notes: Require strict ISO 8601 with timezone offset
-
-2. **Last Modified Date**:
-   - Automatically determined from Git history via `remark-git-metadata` plugin
-   - Only shows if modified >1 day after publish AND after 2025-10-28 (to ignore URL migration commits)
-   - Can be manually overridden with `updatedDate` in frontmatter
-
-3. **Display Format**:
-   - Configured in `src/site.config.ts` (currently: "31 Oct 2025" format with en-GB locale)
-   - Converted to user's local timezone on the client-side via JavaScript
-
-### Custom Markdown Features
-
-The site includes custom remark plugins for enhanced markdown:
-
-#### Admonitions
-
-Use `:::note`, `:::tip`, `:::important`, `:::warning`, `:::caution` for callout blocks:
-
-```markdown
-:::note[Custom Title]
-Your content here
+```md
+:::note[Heads up]
+This is a callout block.
 :::
 ```
 
-#### Figure Captions
+### Figure captions
 
-Wrap images with captions:
-
-```markdown
+```md
 :::figure
-![Alt text](./image.png "Title")
+![Alt text](./image.png)
 
-Caption with **formatting** and [links](https://example.com)
+Caption text here.
 :::
 ```
 
-#### GitHub Cards
+### GitHub cards
 
-Embed dynamic GitHub repo or user cards:
-
-```markdown
+```md
 ::github{repo="chrismwilliams/astro-theme-cactus"}
 ::github{user="withastro"}
 ```
 
-#### Reading Time
-
-Automatically calculated and displayed on post pages.
-
 ## Configuration
 
-### Site Configuration (`src/site.config.ts`)
+- `src/site.config.ts` — site metadata, nav links, date formatting, Expressive Code themes
+- `astro.config.ts` — integrations (sitemap, robots.txt, web manifest), markdown pipeline, image domains
 
-Customize:
+### Environment variables
 
-- Site title, author, and description
-- Language and locale settings
-- Date formatting options
-- Social links
-- Navigation menu items
-- Expressive Code themes and styling
-
-### Tailwind Configuration (`tailwind.config.ts`)
-
-The site uses Tailwind CSS v4 with custom configuration:
-
-- Typography plugin customization (responsive font sizes for headings, figcaptions)
-- Custom prose styles for links, blockquotes, tables
-- CSS variables for theming (`--color-link`, `--color-accent`, etc.)
-
-### Environment Variables
-
-Create a `.env` file for optional features:
+All webmentions env vars are optional (the site builds without them):
 
 ```bash
-# Optional: Enable webmentions
-WEBMENTION_API_KEY=your_webmention_io_token
+WEBMENTION_API_KEY=...
+WEBMENTION_URL=...
+WEBMENTION_PINGBACK=...
 ```
 
-Without `WEBMENTION_API_KEY`, the site builds fine but webmentions won't be fetched.
+## Project structure
 
-### Custom Remark Plugins
+```text
+public/          Static assets (includes icon.svg)
+src/assets/      Images and media
+src/components/  UI components
+src/content/     Posts, notes, tags
+src/layouts/     Page layouts
+src/pages/       Routes
+src/plugins/     remark/rehype plugins
+src/styles/      Global + component CSS
+src/utils/       Helpers (RSS, dates, TOC, webmentions)
+```
 
-The site includes several custom remark plugins in `src/plugins/`:
+## UI breakpoint policy
 
-- `remark-admonitions.ts` - Callout blocks (note, tip, warning, etc.)
-- `remark-figure-caption.ts` - Semantic figure/figcaption elements
-- `remark-git-metadata.ts` - Auto-generate last-modified dates from Git
-- `remark-github-card.ts` - Embed GitHub repo/user cards
-- `remark-reading-time.ts` - Calculate reading time
+This site follows a mobile-first approach with a strict two-mode layout policy:
 
-### Content Collections Schema
+- Base (no prefix): mobile layout defaults
+- `lg:`: desktop layout changes
+- `md:`: typography/readability-only adjustments
 
-Content types are defined in `src/content.config.ts`:
-
-- **Posts**: Flexible dates, tags, drafts, pinning, cover images
-- **Notes**: Strict ISO 8601 dates, minimal metadata
-- **Tags**: Optional custom title and description per tag
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Theme based on [Astro Cactus](https://github.com/chrismwilliams/astro-theme-cactus) by Chris Williams
+> [!TIP]
+> Avoid using `sm:` for layout changes to keep the mental model simple.
