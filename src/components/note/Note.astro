@@ -47,10 +47,10 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 				<FormattedDate {...!isPreview && { dateTimeOptions }} date={note.data.publishDate} />
 			</span>
 			{
-				effectiveUpdatedDate && (
+				!isPreview && effectiveUpdatedDate && (
 					<span class="bg-accent/15 rounded-lg px-2 font-sans font-medium">
 						Updated:
-						<FormattedDate date={effectiveUpdatedDate} dateTimeOptions={dateTimeOptions} />
+						<FormattedDate {...(!isPreview && { dateTimeOptions })} date={effectiveUpdatedDate} />
 					</span>
 				)
 			}
