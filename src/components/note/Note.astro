@@ -2,6 +2,7 @@
 import { type CollectionEntry, render } from "astro:content";
 import type { HTMLTag, Polymorphic } from "astro/types";
 import FormattedDate from "@/components/FormattedDate.astro";
+import { getEffectiveUpdatedDate } from "@/utils/updatedDate";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	note: CollectionEntry<"note">;
@@ -9,7 +10,11 @@ type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 };
 
 const { as: Tag = "h2", note, isPreview = false } = Astro.props;
-const { Content } = await render(note);
+const { Content, remarkPluginFrontmatter } = await render(note);
+const effectiveUpdatedDate = getEffectiveUpdatedDate(
+	note.data,
+	remarkPluginFrontmatter.lastModified,
+);
 
 const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	month: "long",
@@ -32,9 +37,24 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 				)
 			}
 		</Tag>
-		<p class:list={["font-sans font-medium", isPreview ? "mt-1" : "mt-3"]}>
-			<FormattedDate {...!isPreview && { dateTimeOptions }} date={note.data.publishDate} />
-		</p>
+		<div
+			class:list={[
+				"flex flex-wrap items-center gap-x-2 gap-y-1 font-sans font-medium",
+				isPreview ? "mt-1" : "mt-3",
+			]}
+		>
+			<span>
+				<FormattedDate {...!isPreview && { dateTimeOptions }} date={note.data.publishDate} />
+			</span>
+			{
+				effectiveUpdatedDate && (
+					<span class="bg-accent/15 rounded-lg px-2 font-sans font-medium">
+						Updated:
+						<FormattedDate date={effectiveUpdatedDate} dateTimeOptions={dateTimeOptions} />
+					</span>
+				)
+			}
+		</div>
 	</header>
 
 	<section
