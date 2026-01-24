@@ -1,5 +1,5 @@
 ---
-title: "A post of Astro Embed Components"
+title: "Astro Embed Components"
 description: "This post is for testing and listing a number of different Astro Embed components"
 publishDate: "2026-01-24T17:44:00+08:00"
 tags: ["test", "markdown"]
@@ -19,26 +19,69 @@ import {
 } from "astro-embed";
 import TwitterPost from "@/components/TwitterPost.astro";
 
+This post is a quick “kitchen sink” page for testing embed rendering, responsive sizing, and theming.
+It includes a few components from `astro-embed`, plus a custom `TwitterPost` wrapper component from this site.
+
+If you’re here while developing, this page is handy for:
+
+- verifying external embeds still work after dependency upgrades
+- checking light/dark theme behavior
+- tuning typography and max-width rules for embed cards
+
+## Twitter (custom component)
+
+These three are rendered via the site’s custom `TwitterPost` component. The goal is to keep tweet rendering consistent with the rest of the site and to make it easier to swap providers later if needed.
+
+The IDs are full URLs so it’s obvious what’s being embedded.
+
 <TwitterPost id="https://x.com/astrodotbuild/status/1511750228428435457" />
 
-<TwitterPost id="https://x.com/astrodotbuild/status/2012166691371823563" />
+<TwitterPost id="https://twitter.com/astrodotbuild/status/2012166691371823563" />
 
 <TwitterPost id="https://x.com/astrodotbuild/status/2014039719126921371" />
 
-<BaselineStatus id="scroll-snap" />
+## Baseline Status
 
-<BlueskyPost id="https://bsky.app/profile/mk.gg/post/3la4wqeyztm2u" />
+Baseline status cards are a nice quick check for typography and “card-like” styling.
+
+<BaselineStatus id="light-dark" />
+
+## Bluesky
+
+This is a representative Bluesky embed. Useful for checking how rich content and link previews look inside the post body.
+
+<BlueskyPost id="https://bsky.app/profile/dierkens.dev/post/3la2wzxzixe2c" />
+
+## Gist
+
+Gists are a good stress test for code blocks, scroll behavior, and overall layout stability.
 
 <Gist id="https://gist.github.com/delucis/0b44f4ff0397767b2416cc981692c346" />
 
+## Link Preview
+
+This is a simple unfurled link preview, mainly to confirm metadata rendering and sizing.
+
 <LinkPreview id="https://eling.id/" />
 
+## Mastodon
+
+Mastodon embeds use Shadow DOM for styling isolation, so this is where we validate the site’s explicit width rules (e.g. max-width on the embed root) and color/theme compatibility.
+
 <MastodonPost id="https://m.webtoo.ls/@astro/112966069629573422" />
+
+## Twitter (astro-embed)
+
+For comparison, here’s the `astro-embed` Tweet component. This helps us spot differences between the custom wrapper and the upstream embed behavior.
 
 <Tweet
 	theme="dark"
 	id="https://twitter.com/astrodotbuild/status/1511750228428435457"
 />
+
+## Video
+
+Two common video providers, mainly to confirm aspect ratio handling and poster rendering.
 
 <Vimeo id="https://vimeo.com/32001208" posterQuality="high" />
 
@@ -47,3 +90,7 @@ import TwitterPost from "@/components/TwitterPost.astro";
 	posterQuality="high"
 	title="The Astro Community: where contributors find a home"
 />
+
+---
+
+If an embed breaks, this page is usually where it shows up first.
