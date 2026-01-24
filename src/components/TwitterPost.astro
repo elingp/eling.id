@@ -1,0 +1,43 @@
+---
+import { Tweet } from "astro-embed";
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div class="twitter-post" data-tweet-id={id}>
+	<Tweet id={id} />
+</div>
+
+<script is:inline async src="https://platform.twitter.com/widgets.js"></script>
+
+<script is:inline>
+	const resolveTheme = () => {
+		const rootTheme = document.documentElement.getAttribute("data-theme");
+		if (rootTheme === "light" || rootTheme === "dark") {
+			return rootTheme;
+		}
+		return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+	};
+
+	const renderTweets = () => {
+		const theme = resolveTheme();
+		const containers = document.querySelectorAll(".twitter-post");
+		for (const container of containers) {
+			if (container.dataset.renderedTheme === theme) {
+				continue;
+			}
+			container.dataset.renderedTheme = theme;
+			container.innerHTML = `<blockquote class="twitter-tweet" data-theme="${theme}"><a href="${container.dataset.tweetId}"></a></blockquote>`;
+			window.twttr?.widgets?.load?.(container);
+		}
+	};
+
+	renderTweets();
+	document.addEventListener("theme-change", renderTweets);
+	document.addEventListener("astro:after-swap", renderTweets);
+	window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderTweets);
+</script>
