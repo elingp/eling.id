@@ -433,6 +433,11 @@
 	a.has-external-icon.is-external:hover::after {
 		background-color: var(--color-link);
 	}
+
+	astro-embed-mastodon::part(root) {
+		width: 100%;
+		max-width: 34rem;
+	}
 }
 
 @utility prose {
