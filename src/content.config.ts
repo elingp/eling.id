@@ -18,8 +18,26 @@ function parseFrontmatterDate(value: string | Date, fieldName: string): Date {
 
 const titleSchema = z.string().max(60);
 
+const publishDateSchema = z
+	.string()
+	.or(z.date())
+	.transform((val) => parseFrontmatterDate(val, "publishDate"));
+
+const updatedDateSchema = z
+	.string()
+	.optional()
+	.transform((str) => {
+		if (!str) return undefined;
+		return parseFrontmatterDate(str, "updatedDate");
+	});
+
+const autoUpdateDateSchema = z.boolean().default(false);
+
 const baseSchema = z.object({
 	title: titleSchema,
+	publishDate: publishDateSchema,
+	updatedDate: updatedDateSchema,
+	autoUpdateDate: autoUpdateDateSchema,
 });
 
 const post = defineCollection({
@@ -36,18 +54,6 @@ const post = defineCollection({
 			draft: z.boolean().default(false),
 			ogImage: z.string().optional(),
 			tags: z.array(z.string()).default([]).transform(removeDupsAndLowerCase),
-			publishDate: z
-				.string()
-				.or(z.date())
-				.transform((val) => parseFrontmatterDate(val, "publishDate")),
-			updatedDate: z
-				.string()
-				.optional()
-				.transform((str) => {
-					if (!str) return undefined;
-					return parseFrontmatterDate(str, "updatedDate");
-				}),
-			autoUpdateDate: z.boolean().default(false),
 			pinned: z.boolean().default(false),
 		}),
 });
@@ -56,18 +62,6 @@ const note = defineCollection({
 	loader: glob({ base: "./src/content/note", pattern: "**/*.{md,mdx}" }),
 	schema: baseSchema.extend({
 		description: z.string().optional(),
-		publishDate: z
-			.string()
-			.or(z.date())
-			.transform((val) => parseFrontmatterDate(val, "publishDate")),
-		updatedDate: z
-			.string()
-			.optional()
-			.transform((str) => {
-				if (!str) return undefined;
-				return parseFrontmatterDate(str, "updatedDate");
-			}),
-		autoUpdateDate: z.boolean().default(false),
 	}),
 });
 
