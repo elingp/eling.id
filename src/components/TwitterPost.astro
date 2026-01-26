@@ -1,78 +1,57 @@
 ---
-import { Tweet } from "astro-embed";
-
 interface Props {
 	id: string;
 }
 
 const { id } = Astro.props;
+const tweetUrl = id.replace("https://x.com/", "https://twitter.com/");
 ---
 
-<div class="twitter-post" data-tweet-id={id}>
-	<Tweet id={id} />
+<div class="twitter-post" data-tweet-id={tweetUrl}>
+	<blockquote class="twitter-tweet" data-dnt="true">
+		<a href={tweetUrl}></a>
+	</blockquote>
 </div>
 
 <script is:inline>
 	if (!window.__twitterPostInit) {
 		window.__twitterPostInit = true;
 
-		const resolveTheme = () => {
-			const rootTheme = document.documentElement.getAttribute("data-theme");
-			if (rootTheme === "light" || rootTheme === "dark") {
-				return rootTheme;
-			}
-			return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-		};
-
-		const ensureWidgets = () => {
-			if (window.twttr?.widgets?.load) {
-				return Promise.resolve();
-			}
-
-			const existing = document.querySelector("script[data-twitter-widgets]");
-			if (existing) {
-				return new Promise((resolve) => {
-					existing.addEventListener("load", resolve, { once: true });
-				});
-			}
-
-			return new Promise((resolve) => {
-				const script = document.createElement("script");
-				script.async = true;
-				script.src = "https://platform.twitter.com/widgets.js";
-				script.dataset.twitterWidgets = "true";
-				script.addEventListener("load", resolve, { once: true });
-				document.head.append(script);
-			});
-		};
+		const getTheme = () =>
+			document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
 
 		const renderTweets = () => {
-			const theme = resolveTheme();
-			const containers = document.querySelectorAll(".twitter-post");
+			const theme = getTheme();
 			let updated = false;
-			for (const container of containers) {
+			for (const container of document.querySelectorAll(".twitter-post")) {
 				if (container.dataset.renderedTheme === theme) {
 					continue;
 				}
 				container.dataset.renderedTheme = theme;
-				container.innerHTML = `<blockquote class="twitter-tweet" data-dnt="true" data-theme="${theme}"><a href="${container.dataset.tweetId.replace("https://x.com/", "https://twitter.com/")}"></a></blockquote>`;
+				const tweetId = container.dataset.tweetId;
+				container.innerHTML = `<blockquote class="twitter-tweet" data-dnt="true" data-theme="${theme}"><a href="${tweetId}"></a></blockquote>`;
 				updated = true;
 			}
-			if (updated) {
-				window.twttr?.widgets?.load?.();
+			if (updated && window.twttr?.widgets?.load) {
+				window.twttr.widgets.load();
 			}
 		};
 
-		const scheduleRender = () => {
+		const widgetsScript = document.querySelector("script[data-twitter-widgets]");
+		if (widgetsScript) {
+			widgetsScript.addEventListener("load", renderTweets, { once: true });
 			renderTweets();
-		};
+		} else {
+			const script = document.createElement("script");
+			script.async = true;
+			script.src = "https://platform.twitter.com/widgets.js";
+			script.dataset.twitterWidgets = "true";
+			script.addEventListener("load", renderTweets, { once: true });
+			document.head.append(script);
+		}
 
-		ensureWidgets().then(() => {
-			scheduleRender();
-			window.twttr?.widgets?.load?.();
-		});
-		document.addEventListener("theme-change", scheduleRender);
-		document.addEventListener("astro:after-swap", scheduleRender);
-		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", scheduleRender);
+		document.addEventListener("theme-change", renderTweets);
+		document.addEventListener("astro:after-swap", renderTweets);
+		window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", renderTweets);
 	}
 </script>
