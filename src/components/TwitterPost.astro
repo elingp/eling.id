@@ -28,8 +28,15 @@ const tweetUrl = id.replace("https://x.com/", "https://twitter.com/");
 					continue;
 				}
 				container.dataset.renderedTheme = theme;
-				const tweetId = container.dataset.tweetId;
-				container.innerHTML = `<blockquote class="twitter-tweet" data-dnt="true" data-theme="${theme}"><a href="${tweetId}"></a></blockquote>`;
+				const tweetUrl = container.dataset.tweetId;
+				const blockquote = document.createElement("blockquote");
+				blockquote.className = "twitter-tweet";
+				blockquote.setAttribute("data-dnt", "true");
+				blockquote.setAttribute("data-theme", theme);
+				const anchor = document.createElement("a");
+				anchor.href = tweetUrl;
+				blockquote.append(anchor);
+				container.replaceChildren(blockquote);
 				updated = true;
 			}
 			if (updated && window.twttr?.widgets?.load) {

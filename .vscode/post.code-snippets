@@ -52,6 +52,6 @@
 		"body": [
 			"updatedDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\""
 		],
-		"description": "Add Now() as update date to an existing frontmatter"
+		"description": "Add the current ISO timestamp as update date"
 	}
 }
