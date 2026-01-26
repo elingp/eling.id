@@ -25,8 +25,8 @@
 			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\"",
 			"tags: []",
 			"draft: true",
-      "pinned: false",
-      "autoUpdateDate: false",
+			"pinned: false",
+			"autoUpdateDate: false",
 			"---",
 			"$2"
 		],
@@ -40,7 +40,7 @@
 			"title: \"${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}\"",
 			"description: \"Enter a description here (optional)\"",
 			"publishDate: \"${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:00Z\"",
-      "autoUpdateDate: false",
+			"autoUpdateDate: false",
 			"---",
 			"$2"
 		],
