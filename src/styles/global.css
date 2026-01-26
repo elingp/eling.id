@@ -433,6 +433,17 @@
 	a.has-external-icon.is-external:hover::after {
 		background-color: var(--color-link);
 	}
+
+	astro-embed-mastodon::part(root) {
+		width: 100%;
+		max-width: 34rem;
+	}
+
+	.bluesky-post-container img {
+		margin-top: 0 !important;
+		margin-bottom: 0 !important;
+		max-width: none;
+	}
 }
 
 @utility prose {

@@ -1,0 +1,85 @@
+---
+title: "Astro Embed Components"
+description: "Embed samples for testing"
+publishDate: "2026-01-24T17:44:00+08:00"
+tags: ["test", "markdown"]
+draft: true
+autoUpdateDate: true
+---
+
+import {
+	BaselineStatus,
+	BlueskyPost,
+	LinkPreview,
+	Gist,
+	MastodonPost,
+	Tweet,
+	Vimeo,
+	YouTube,
+} from "astro-embed";
+import TwitterPost from "@/components/TwitterPost.astro";
+
+Embed samples for visual checks and theming.
+
+## Twitter (custom component)
+
+Rendered via the site’s custom `TwitterPost` component.
+
+<TwitterPost id="https://x.com/astrodotbuild/status/1511750228428435457" />
+
+<TwitterPost id="https://twitter.com/astrodotbuild/status/2012166691371823563" />
+
+<TwitterPost id="https://x.com/astrodotbuild/status/2014039719126921371" />
+
+## Baseline Status
+
+Baseline status card.
+
+<BaselineStatus id="light-dark" />
+
+## Bluesky
+
+Representative Bluesky embed.
+
+<BlueskyPost id="https://bsky.app/profile/dierkens.dev/post/3la2wzxzixe2c" />
+
+## Gist
+
+Gist embed.
+
+<Gist id="https://gist.github.com/delucis/0b44f4ff0397767b2416cc981692c346" />
+
+## Link Preview
+
+Link preview embeds.
+
+<LinkPreview id="https://eling.id/" />
+
+<LinkPreview id="https://eling.id/posts/unexciting-date-review/" />
+
+## Mastodon
+
+Mastodon embed.
+
+<MastodonPost id="https://m.webtoo.ls/@astro/112966069629573422" />
+
+## Twitter (astro-embed)
+
+`astro-embed` Tweet component.
+
+<Tweet
+	theme="dark"
+	id="https://twitter.com/astrodotbuild/status/1511750228428435457"
+/>
+
+## Video
+
+Video embeds.
+
+<Vimeo id="https://vimeo.com/32001208" posterQuality="high" />
+
+<YouTube
+	id="https://youtu.be/TtRtkTzHVBU"
+	posterQuality="high"
+	title="The Astro Community: where contributors find a home"
+/>
