@@ -7,7 +7,7 @@
 
 Closes # <!-- Add an issue number if this PR will close it. -->
 
-### Changes
+## Changes
 
 - What does this PR change? A brief description would be great.
 - Did you change something visual? A before/after screenshot can be helpful.
