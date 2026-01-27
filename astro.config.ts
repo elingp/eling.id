@@ -5,6 +5,7 @@ import tailwind from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import metaTags from "astro-meta-tags";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -69,6 +70,7 @@ export default defineConfig({
 		Sonda({
 			server: true,
 		}),
+		metaTags(),
 	],
 	markdown: {
 		rehypePlugins: [
