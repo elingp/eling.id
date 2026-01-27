@@ -11,6 +11,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
+import Sonda from "sonda/astro";
 import { rehypeExternalLinkIcon } from "./src/plugins/rehype-external-link-icon";
 import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
 import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
@@ -65,6 +66,9 @@ export default defineConfig({
 				insertManifestLink: false,
 			},
 		}),
+		Sonda({
+			server: true,
+		}),
 	],
 	markdown: {
 		rehypePlugins: [
@@ -117,6 +121,9 @@ export default defineConfig({
 		},
 	},
 	vite: {
+		build: {
+			sourcemap: true,
+		},
 		optimizeDeps: {
 			exclude: ["@resvg/resvg-js"],
 		},
