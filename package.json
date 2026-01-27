@@ -57,6 +57,7 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
+		"astro-grab": "^0.2.0",
 		"astro-meta-tags": "^0.4.0",
 		"autoprefixer": "^10.4.23",
 		"pagefind": "^1.4.0",

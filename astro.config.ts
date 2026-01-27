@@ -4,6 +4,8 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
+// @ts-expect-error
+import { astroGrab } from "astro-grab"; // TODO: Remove ts-expect-error when astro-grab has types
 import icon from "astro-icon";
 import metaTags from "astro-meta-tags";
 import robotsTxt from "astro-robots-txt";
@@ -11,10 +13,10 @@ import webmanifest from "astro-webmanifest";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
-import remarkDirective from "remark-directive"; /* Handle ::: directives as nodes */
+import remarkDirective from "remark-directive";
 import Sonda from "sonda/astro";
 import { rehypeExternalLinkIcon } from "./src/plugins/rehype-external-link-icon";
-import { remarkAdmonitions } from "./src/plugins/remark-admonitions"; /* Add admonitions */
+import { remarkAdmonitions } from "./src/plugins/remark-admonitions";
 import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
 import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
 import { remarkGithubCard } from "./src/plugins/remark-github-card";
@@ -71,6 +73,7 @@ export default defineConfig({
 			server: true,
 		}),
 		metaTags(),
+		astroGrab(),
 	],
 	markdown: {
 		rehypePlugins: [
