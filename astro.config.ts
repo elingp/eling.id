@@ -8,6 +8,7 @@ import expressiveCode from "astro-expressive-code";
 import { astroGrab } from "astro-grab"; // TODO: Remove ts-expect-error when astro-grab has types
 import icon from "astro-icon";
 import metaTags from "astro-meta-tags";
+import og from "astro-og";
 import robotsTxt from "astro-robots-txt";
 import webmanifest from "astro-webmanifest";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -74,6 +75,7 @@ export default defineConfig({
 		}),
 		metaTags(),
 		astroGrab(),
+		og(),
 	],
 	markdown: {
 		rehypePlugins: [

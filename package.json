@@ -59,6 +59,7 @@
 		"@types/mdast": "^4.0.4",
 		"astro-grab": "^0.2.0",
 		"astro-meta-tags": "^0.4.0",
+		"astro-og": "^0.3.2",
 		"autoprefixer": "^10.4.23",
 		"pagefind": "^1.4.0",
 		"prettier": "3.8.1",
