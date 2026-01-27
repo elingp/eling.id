@@ -14,4 +14,7 @@ dist
 # EditorConfig is not JavaScript
 .editorconfig
 
+# Biome will format this
+package.json
+
 .sonda
