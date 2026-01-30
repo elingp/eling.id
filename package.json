@@ -10,7 +10,8 @@
 		"pre-commit": "pnpx lint-staged"
 	},
 	"lint-staged": {
-		"*": ["prettier --write", "biome check --write"]
+		"*.{md,mdx,astro,js,jsx,ts,tsx,json,jsonc,css,html,yml,yaml}": ["prettier --write"],
+		"*.{astro,js,jsx,ts,tsx,json,jsonc}": ["biome check --write"]
 	},
 	"scripts": {
 		"dev": "astro dev",
