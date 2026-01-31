@@ -6,6 +6,13 @@
 	"engines": {
 		"node": ">=24"
 	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpx lint-staged"
+	},
+	"lint-staged": {
+		"*.{md,mdx,astro,js,jsx,ts,tsx,json,jsonc,css,html,yml,yaml}": ["prettier --write"],
+		"*.{astro,js,jsx,ts,tsx,json,jsonc}": ["biome check --write"]
+	},
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -13,7 +20,7 @@
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"lint": "biome check --write",
-		"format": "prettier -w . --cache",
+		"format": "prettier . --write --cache",
 		"check": "astro check && biome check"
 	},
 	"dependencies": {
@@ -25,13 +32,12 @@
 		"@fontsource/source-sans-3": "^5.2.9",
 		"@fontsource/source-serif-4": "^5.2.9",
 		"@tailwindcss/vite": "^4.1.18",
-		"astro": "^5.16.15",
+		"astro": "^5.17.1",
 		"astro-embed": "^0.12.0",
 		"astro-expressive-code": "^0.41.6",
 		"astro-icon": "^1.1.5",
 		"astro-robots-txt": "^1.0.0",
 		"astro-webmanifest": "^1.0.0",
-		"cssnano": "^7.1.2",
 		"hastscript": "^9.0.1",
 		"mdast-util-directive": "^3.1.0",
 		"mdast-util-to-markdown": "^2.1.2",
@@ -49,7 +55,7 @@
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.6",
-		"@biomejs/biome": "2.3.12",
+		"@biomejs/biome": "2.3.13",
 		"@iconify-json/fa7-brands": "^1.2.1",
 		"@iconify-json/fa7-regular": "^1.2.2",
 		"@iconify-json/fa7-solid": "^1.2.3",
@@ -58,12 +64,17 @@
 		"@tailwindcss/typography": "^0.5.19",
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
-		"autoprefixer": "^10.4.23",
+		"astro-grab": "^0.2.0",
+		"astro-meta-tags": "^0.4.0",
+		"astro-og": "^0.3.2",
+		"autoprefixer": "^10.4.24",
 		"pagefind": "^1.4.0",
 		"prettier": "3.8.1",
 		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "0.7.2",
 		"reading-time": "^1.5.0",
+		"simple-git-hooks": "^2.13.1",
+		"sonda": "^0.10.1",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3"
 	},
@@ -74,5 +85,5 @@
 			"lodash": "^4.17.23"
 		}
 	},
-	"packageManager": "pnpm@10.28.1+sha512.7d7dbbca9e99447b7c3bf7a73286afaaf6be99251eb9498baefa7d406892f67b879adb3a1d7e687fc4ccc1a388c7175fbaae567a26ab44d1067b54fcb0d6a316"
+	"packageManager": "pnpm@10.28.2+sha512.41872f037ad22f7348e3b1debbaf7e867cfd448f2726d9cf74c08f19507c31d2c8e7a11525b983febc2df640b5438dee6023ebb1f84ed43cc2d654d2bc326264"
 }
