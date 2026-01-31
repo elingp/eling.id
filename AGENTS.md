@@ -5,11 +5,11 @@
 ## Build & Validation Commands
 
 ```bash
-pnpm dev          # Start dev server → localhost:4321
-pnpm build        # Production build (injects commit hash) + Pagefind index
-pnpm check        # Type-check + lint (astro check && biome check)
-pnpm lint         # Auto-fix with Biome
-pnpm format       # Format with Prettier
+pnpm run dev          # Start dev server → localhost:4321
+pnpm run build        # Production build (injects commit hash) + Pagefind index
+pnpm run check        # Type-check + lint (astro check && biome check)
+pnpm run lint         # Auto-fix with Biome
+pnpm run format       # Format with Prettier
 ```
 
 **After implementing any changes, always run:**
@@ -117,7 +117,7 @@ const lastModified = remarkPluginFrontmatter.lastModified;
 
 1. Run `pnpm run check` after every implementation
 2. Fix all TypeScript and Biome errors before committing
-3. Preview with `pnpm preview` for production build testing
+3. Preview with `pnpm run preview` for production build (`pnpm run build`) testing
 4. Check OG images at `/og-image/<slug>.png`
 
 ## Environment Variables (Optional)
@@ -134,15 +134,56 @@ WEBMENTION_PINGBACK=...
 
 The following skills are installed globally and can provide additional context:
 
-| Skill             | Use When                                       |
-| ----------------- | ---------------------------------------------- |
-| `astro`           | Astro CLI, project structure, adapters         |
-| `astro-framework` | Islands architecture, content collections, SSR |
-| `pnpm`            | Package management, workspaces, catalogs       |
-| `vite`            | Build config, plugins, dev server              |
-| `frontend-design` | UI components, styling patterns                |
-| `code-reviewer`   | Reviewing code changes                         |
-| `git-commit`      | Conventional commit messages                   |
+### Core Development
+
+| Skill             | Use When                                               |
+| ----------------- | ------------------------------------------------------ |
+| `astro`           | Astro CLI, project structure, adapters                 |
+| `astro-framework` | Islands architecture, content collections, SSR         |
+| `astroflare`      | Astro + Tailwind v4 on Cloudflare Workers              |
+| `pnpm`            | Package management, workspaces, catalogs               |
+| `vite`            | Build config, plugins, dev server                      |
+| `bun-development` | Bun runtime, bundling, testing, migration from Node.js |
+
+### UI & Design
+
+| Skill                   | Use When                                               |
+| ----------------------- | ------------------------------------------------------ |
+| `frontend-design`       | Production-grade UI components, styling patterns       |
+| `ui-ux-pro-max`         | 50 styles, 21 palettes, 50 font pairings, 20 charts    |
+| `web-design-guidelines` | UI review, accessibility audits, design best practices |
+
+### Code Quality
+
+| Skill                         | Use When                                           |
+| ----------------------------- | -------------------------------------------------- |
+| `code-reviewer`               | Reviewing local changes (staged or working tree)   |
+| `refactor`                    | Surgical code improvements without behavior change |
+| `vercel-composition-patterns` | React composition patterns that scale              |
+| `vercel-react-best-practices` | React/Next.js performance optimization             |
+| `git-commit`                  | Conventional commit messages, intelligent staging  |
+
+### SEO & Content
+
+| Skill              | Use When                                          |
+| ------------------ | ------------------------------------------------- |
+| `seo-audit`        | Technical SEO, meta tags, on-page SEO issues      |
+| `programmatic-seo` | Template pages at scale, directory/location pages |
+| `schema-markup`    | JSON-LD, structured data, rich snippets           |
+| `copywriting`      | Marketing copy for any page type                  |
+| `copy-editing`     | Edit, review, or improve existing copy            |
+
+### Utilities
+
+| Skill               | Use When                                                |
+| ------------------- | ------------------------------------------------------- |
+| `agent-browser`     | Web testing, form filling, screenshots, data extraction |
+| `agent-md-refactor` | Refactor bloated AGENTS.md into organized docs          |
+| `find-skills`       | Discover and install new agent skills                   |
+
+## MCP Servers
+
+Always use **Context7 MCP** when you need library/API documentation, code generation, setup, or configuration steps — without me having to explicitly ask.
 
 ## Key Files Reference
 
