@@ -7,9 +7,8 @@
 ```bash
 pnpm run dev          # Start dev server → localhost:4321
 pnpm run build        # Production build (injects commit hash) + Pagefind index
-pnpm run check        # Type-check + lint (astro check && biome check)
-pnpm run lint         # Auto-fix with Biome
-pnpm run format       # Format with Prettier
+pnpm run check        # Type-check + lint + format check
+pnpm run fix          # Fix everything (formatting, linting, imports)
 ```
 
 **After implementing any changes, always run:**
@@ -18,7 +17,7 @@ pnpm run format       # Format with Prettier
 pnpm run check
 ```
 
-Fix all type errors and lint issues before committing. The pre-commit hook runs `lint-staged` (Prettier + Biome).
+Fix all type errors and lint issues before committing. The pre-commit hook runs `lint-staged` (Prettier + Biome). Run `pnpm run fix` to auto-fix issues.
 
 ## Project Overview
 
@@ -54,7 +53,9 @@ autoUpdateDate: false # enable git-based last modified
 ```yaml
 ---
 title: "Note Title"
+description: "SEO description (optional)"
 publishDate: "2026-01-30T12:00:00+00:00"
+autoUpdateDate: false # enable git-based last modified
 ---
 ```
 
@@ -183,7 +184,7 @@ The following skills are installed globally and can provide additional context:
 
 ## MCP Servers
 
-Always use **Context7 MCP** when you need library/API documentation, code generation, setup, or configuration steps — without me having to explicitly ask.
+Always use **Context7 MCP** when you need library/API documentation, code generation, setup, or configuration steps.
 
 ## Key Files Reference
 

@@ -82,9 +82,8 @@ Then open [http://localhost:4321](http://localhost:4321).
 | `pnpm build`     | Build the site to `dist/` (includes commit hash when available) |
 | `pnpm postbuild` | Build the Pagefind index for search (runs after `build`)        |
 | `pnpm preview`   | Preview the production build locally                            |
-| `pnpm check`     | Type-check with `astro check` and run `biome check`             |
-| `pnpm lint`      | Run `biome check --write` (lints + applies safe fixes)          |
-| `pnpm format`    | Format with Prettier                                            |
+| `pnpm check`     | Type-check + lint + format check (comprehensive validation)     |
+| `pnpm fix`       | Fix everything (formatting, linting, imports)                   |
 
 > [!IMPORTANT]
 > `pnpm build` runs `git rev-parse` to inject a commit hash into the build when Git metadata is available.

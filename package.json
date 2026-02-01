@@ -15,13 +15,11 @@
 	},
 	"scripts": {
 		"dev": "astro dev",
-		"start": "astro dev",
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
-		"lint": "biome check --write",
-		"format": "prettier --write --cache '**/*.{css,md,mdx,yml,yaml}'",
-		"check": "astro check && biome check"
+		"check": "astro check && biome check --no-errors-on-unmatched && prettier --check '**/*.{css,md,mdx,yml,yaml}'",
+		"fix": "biome check --write --no-errors-on-unmatched && prettier --write --cache '**/*.{css,md,mdx,yml,yaml}'"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.10",
