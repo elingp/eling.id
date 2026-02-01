@@ -16,21 +16,12 @@
 # EditorConfig is not JavaScript
 .editorconfig
 
-# Biome will format this
-package.json
-
 # Build outputs
 *.min.js
-dist/
-build/
-node_modules/
-.vercel/
-.netlify/
-.astro/
-.sonda/
 
 # Cache directories
 **/.cache
 
 # Package manager files
+package.json
 pnpm-lock.yaml
