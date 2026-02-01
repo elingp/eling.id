@@ -9,8 +9,7 @@
 			"!**/.vercel",
 			"!**/.netlify",
 			"!**/.astro",
-			"!**/.sonda",
-			"!**/*.css"
+			"!**/.sonda"
 		]
 	},
 	"formatter": {
@@ -63,6 +62,9 @@
 	},
 	"html": { "formatter": { "selfCloseVoidElements": "always" } },
 	"css": {
+		"formatter": {
+			"enabled": false
+		},
 		"parser": {
 			"cssModules": false,
 			"allowWrongLineComments": true,

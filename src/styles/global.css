@@ -440,7 +440,9 @@
 	}
 
 	.bluesky-post-container img {
+		/* biome-ignore lint/complexity/noImportantStyles: override Bluesky embed styles */
 		margin-top: 0 !important;
+		/* biome-ignore lint/complexity/noImportantStyles: override Bluesky embed styles */
 		margin-bottom: 0 !important;
 		max-width: none;
 	}

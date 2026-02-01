@@ -1,11 +1,13 @@
-*.min.js
-node_modules
-
-# cache-dirs
-**/.cache
-
-pnpm-lock.yaml
-dist
+# Files handled by Biome (formatting + linting)
+# Biome handles these natively with better performance
+**/*.astro
+**/*.js
+**/*.jsx
+**/*.ts
+**/*.tsx
+**/*.json
+**/*.jsonc
+**/*.html
 
 # VS Code snippets should be strict JSON (no trailing commas)
 # Let Biome handle formatting
@@ -17,4 +19,18 @@ dist
 # Biome will format this
 package.json
 
-.sonda
+# Build outputs
+*.min.js
+dist/
+build/
+node_modules/
+.vercel/
+.netlify/
+.astro/
+.sonda/
+
+# Cache directories
+**/.cache
+
+# Package manager files
+pnpm-lock.yaml

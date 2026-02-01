@@ -145,9 +145,6 @@ importers:
       prettier:
         specifier: 3.8.1
         version: 3.8.1
-      prettier-plugin-astro:
-        specifier: 0.14.1
-        version: 0.14.1
       prettier-plugin-tailwindcss:
         specifier: 0.7.2
         version: 0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.8.1)
@@ -5747,6 +5744,7 @@ snapshots:
       '@astrojs/compiler': 2.13.0
       prettier: 3.8.1
       sass-formatter: 0.7.9
+    optional: true
 
   prettier-plugin-tailwindcss@0.7.2(prettier-plugin-astro@0.14.1)(prettier@3.8.1):
     dependencies:
@@ -6004,13 +6002,15 @@ snapshots:
 
   run-applescript@7.1.0: {}
 
-  s.color@0.0.15: {}
+  s.color@0.0.15:
+    optional: true
 
   safer-buffer@2.1.2: {}
 
   sass-formatter@0.7.9:
     dependencies:
       suf-log: 2.5.3
+    optional: true
 
   satori-html@0.3.2:
     dependencies:
@@ -6142,6 +6142,7 @@ snapshots:
   suf-log@2.5.3:
     dependencies:
       s.color: 0.0.15
+    optional: true
 
   svgo@3.3.2:
     dependencies:

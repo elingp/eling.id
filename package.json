@@ -10,8 +10,8 @@
 		"pre-commit": "pnpx lint-staged"
 	},
 	"lint-staged": {
-		"*.{md,mdx,astro,js,jsx,ts,tsx,json,jsonc,css,html,yml,yaml}": ["prettier --write"],
-		"*.{astro,js,jsx,ts,tsx,json,jsonc}": ["biome check --write"]
+		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": ["biome check --write --no-errors-on-unmatched"],
+		"*.{css,md,mdx,yml,yaml}": ["prettier --write --cache"]
 	},
 	"scripts": {
 		"dev": "astro dev",
@@ -20,7 +20,7 @@
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"lint": "biome check --write",
-		"format": "prettier . --write --cache",
+		"format": "prettier --write --cache '**/*.{css,md,mdx,yml,yaml}'",
 		"check": "astro check && biome check"
 	},
 	"dependencies": {
@@ -70,7 +70,6 @@
 		"autoprefixer": "^10.4.24",
 		"pagefind": "^1.4.0",
 		"prettier": "3.8.1",
-		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "0.7.2",
 		"reading-time": "^1.5.0",
 		"simple-git-hooks": "^2.13.1",

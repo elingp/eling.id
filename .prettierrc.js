@@ -5,14 +5,11 @@ export default {
 	singleQuote: false,
 	tabWidth: 2,
 	useTabs: true,
-	plugins: ["prettier-plugin-astro", "prettier-plugin-tailwindcss" /* Must come last */],
+	plugins: [
+		// Tailwind plugin must come last for proper sorting in CSS files
+		"prettier-plugin-tailwindcss",
+	],
 	overrides: [
-		{
-			files: "**/*.astro",
-			options: {
-				parser: "astro",
-			},
-		},
 		{
 			files: ["*.mdx", "*.md"],
 			options: {
