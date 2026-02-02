@@ -16,13 +16,14 @@ import rehypeExternalLinks from "rehype-external-links";
 import rehypeUnwrapImages from "rehype-unwrap-images";
 import remarkDirective from "remark-directive";
 import Sonda from "sonda/astro";
-import { rehypeExternalLinkIcon } from "./src/plugins/rehype-external-link-icon";
-import { remarkAdmonitions } from "./src/plugins/remark-admonitions";
-import { remarkFigureCaption } from "./src/plugins/remark-figure-caption";
-import { remarkGitMetadata } from "./src/plugins/remark-git-metadata";
-import { remarkGithubCard } from "./src/plugins/remark-github-card";
-import { remarkReadingTime } from "./src/plugins/remark-reading-time";
-import { expressiveCodeOptions, siteConfig } from "./src/site.config";
+
+import { rehypeExternalLinkIcon } from "./src/plugins/rehype-external-link-icon.ts";
+import { remarkAdmonitions } from "./src/plugins/remark-admonitions.ts";
+import { remarkFigureCaption } from "./src/plugins/remark-figure-caption.ts";
+import { remarkGitMetadata } from "./src/plugins/remark-git-metadata.ts";
+import { remarkGithubCard } from "./src/plugins/remark-github-card.ts";
+import { remarkReadingTime } from "./src/plugins/remark-reading-time.ts";
+import { expressiveCodeOptions, siteConfig } from "./src/site.config.ts";
 
 // https://astro.build/config
 export default defineConfig({

@@ -19,7 +19,7 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.minutesRead;
 
 const finalUpdatedDate = getEffectiveUpdatedDate(
-	{ publishDate, updatedDate, autoUpdateDate },
+	{ autoUpdateDate, publishDate, updatedDate },
 	remarkPluginFrontmatter.lastModified,
 );
 const articleDate = (finalUpdatedDate ?? publishDate).toISOString();

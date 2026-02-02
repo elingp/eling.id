@@ -20,7 +20,7 @@ export const getStaticPaths = (async ({ paginate }) => {
 	const pinnedPosts = allPostsByDate.filter((p) => p.data.pinned).slice(0, MAX_PINNED_POSTS);
 	return paginate(allPostsByDate, {
 		pageSize: MAX_POSTS_PER_PAGE,
-		props: { uniqueTags, pinnedPosts },
+		props: { pinnedPosts, uniqueTags },
 	});
 }) satisfies GetStaticPaths;
 

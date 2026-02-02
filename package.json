@@ -10,8 +10,12 @@
 		"pre-commit": "pnpx lint-staged"
 	},
 	"lint-staged": {
-		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": ["biome check --write --no-errors-on-unmatched"],
-		"*.{css,md,mdx,yml,yaml}": ["prettier --write --cache"]
+		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
+			"biome check --write --no-errors-on-unmatched"
+		],
+		"*.{css,md,mdx,yml,yaml}": [
+			"prettier --write --cache"
+		]
 	},
 	"scripts": {
 		"dev": "astro dev",
