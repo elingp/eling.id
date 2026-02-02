@@ -9,12 +9,4 @@ export default {
 		// Tailwind plugin must come last for proper sorting in CSS files
 		"prettier-plugin-tailwindcss",
 	],
-	overrides: [
-		{
-			files: ["*.mdx", "*.md"],
-			options: {
-				printWidth: 80,
-			},
-		},
-	],
 };
