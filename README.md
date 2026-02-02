@@ -49,7 +49,7 @@ The site is built with [Astro](https://astro.build/) and uses Astro Content Coll
 - Framework: [Astro](https://astro.build/) (TypeScript)
 - Content: Markdown/MDX + [Content Collections](https://docs.astro.build/en/guides/content-collections/)
 - Styling: [Tailwind CSS](https://tailwindcss.com/) (+ typography)
-- Formatting/linting: [Prettier](https://prettier.io/) and [Biome](https://biomejs.dev/)
+- Formatting/linting: [Biome](https://biomejs.dev/) and [Prettier](https://prettier.io/)
 - Deployment: [Cloudflare Pages](https://pages.cloudflare.com/)
 
 ## Getting started
@@ -83,6 +83,7 @@ Then open [http://localhost:4321](http://localhost:4321).
 | `pnpm postbuild` | Build the Pagefind index for search (runs after `build`)        |
 | `pnpm preview`   | Preview the production build locally                            |
 | `pnpm check`     | Type-check + lint + format check (comprehensive validation)     |
+| `pnpm check:ci`  | CI-optimized check with GitHub annotations (runs in Actions)    |
 | `pnpm fix`       | Fix everything (formatting, linting, imports)                   |
 
 > [!IMPORTANT]

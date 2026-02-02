@@ -40,7 +40,7 @@ jobs:
 
         # use astro check for issues
       - name: Run Astro check, Biome check, & Prettier check
-        run: pnpm run check
+        run: pnpm run check:ci
 
         # ensure build works
       - name: Run Astro build

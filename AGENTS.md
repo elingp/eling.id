@@ -13,14 +13,15 @@
 
 ## Commands
 
-| Command          | Purpose                                   |
-| ---------------- | ----------------------------------------- |
-| `pnpm dev`       | Start dev server at `localhost:4321`      |
-| `pnpm build`     | Production build (injects commit hash)    |
-| `pnpm postbuild` | Build Pagefind index (runs after `build`) |
-| `pnpm preview`   | Preview the production build              |
-| `pnpm check`     | Type-check + lint + format check          |
-| `pnpm fix`       | Auto-fix Biome + Prettier                 |
+| Command          | Purpose                                    |
+| ---------------- | ------------------------------------------ |
+| `pnpm dev`       | Start dev server at `localhost:4321`       |
+| `pnpm build`     | Production build (injects commit hash)     |
+| `pnpm postbuild` | Build Pagefind index (runs after `build`)  |
+| `pnpm preview`   | Preview the production build               |
+| `pnpm check`     | Type-check + lint + format check           |
+| `pnpm check:ci`  | CI-optimized check with GitHub annotations |
+| `pnpm fix`       | Auto-fix Biome + Prettier                  |
 
 ## Agent Commit & Handoff
 
