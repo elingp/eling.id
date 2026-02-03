@@ -1,4 +1,5 @@
 ---
+
 import { type CollectionEntry, getCollection } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import Note from "@/components/note/Note.astro";
@@ -48,13 +49,11 @@ const paginationProps = {
 			<RssLink href="/notes/rss.xml" label="RSS feed" />
 		</header>
 		<ul class="mt-6 space-y-3 text-start">
-			{
-				page.data.map((note) => (
+			{page.data.map((note) => (
 					<li class="">
 						<Note note={note} as="h2" isPreview />
 					</li>
-				))
-			}
+				))}
 		</ul>
 		<Pagination {...paginationProps} />
 	</section>

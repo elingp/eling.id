@@ -1,4 +1,5 @@
 ---
+
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import ExternalLink from "@/components/ExternalLink.astro";
@@ -18,8 +19,7 @@ const comments = mentions.filter(
 );
 ---
 
-{
-	!!comments.length && (
+{!!comments.length && (
 		<div>
 			<p class="text-global-text mb-0">
 				<strong>{comments.length}</strong> Mention{comments.length > 1 ? "s" : ""}
@@ -81,5 +81,4 @@ const comments = mentions.filter(
 				))}
 			</ul>
 		</div>
-	)
-}
+	)}

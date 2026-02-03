@@ -1,4 +1,5 @@
 ---
+
 import { Image } from "astro:assets";
 import elingImg from "@/assets/eling.jpg";
 import ExternalLink from "@/components/ExternalLink.astro";
@@ -21,24 +22,30 @@ const meta = {
 			<h2 class="sr-only" id="about-content">About content</h2>
 			<p>
 				Hi! I’m Eling Pramuatmaja. I currently work as a tech consultant for a digital marketing
-				agency. I studied computer science at <ExternalLink
-					class="cactus-link is-external"
-					href="https://filkom.ub.ac.id/">Universitas Brawijaya</ExternalLink
-				>, focusing on AI—particularly Indonesian text summarization. I’ve also had some great
+				agency. I studied computer science at
+				<ExternalLink class="cactus-link is-external" href="https://filkom.ub.ac.id/">
+					Universitas Brawijaya
+				</ExternalLink>, focusing on AI—particularly Indonesian text summarization. I’ve also had some great
 				learning experiences through an internship at
-				<ExternalLink class="cactus-link is-external" href="https://www.blibli.com/"
-					>Blibli</ExternalLink
-				>, plus programs like <ExternalLink
+				<ExternalLink class="cactus-link is-external" href="https://www.blibli.com/">
+					Blibli
+				</ExternalLink>, plus programs like
+				<ExternalLink
 					class="cactus-link is-external"
-					href="https://www.xlaxiata.co.id/en/xl-future-leader">XL Future Leaders</ExternalLink
-				> (Batch 9), <ExternalLink
+					href="https://www.xlaxiata.co.id/en/xl-future-leader"
+				>
+					XL Future Leaders
+				</ExternalLink> (Batch 9),
+				<ExternalLink class="cactus-link is-external" href="https://goto-impact.org/generasi-gigih">
+					Generasi GIGIH
+				</ExternalLink> 2.0 at GoTo, and
+				<ExternalLink
 					class="cactus-link is-external"
-					href="https://goto-impact.org/generasi-gigih">Generasi GIGIH</ExternalLink
-				> 2.0 at GoTo, and <ExternalLink
-					class="cactus-link is-external"
-					href="https://grow.google/intl/id_id/bangkit/">Bangkit Academy</ExternalLink
-				> 2021 in machine learning.
-			</p>
+					href="https://grow.google/intl/id_id/bangkit/"
+				>
+					Bangkit Academy
+				</ExternalLink> 2021 in machine learning.</p
+			>
 			<figure>
 				<Image alt="A picture of Eling Pramuatmaja" priority src={elingImg} />
 				<figcaption>
@@ -49,24 +56,26 @@ const meta = {
 			<p>
 				On this blog, I write about my journey in tech, plus whatever else I’m curious about along
 				the way. Expect a mix of longer posts and shorter notes—sometimes tech learnings, sometimes
-				bookish stuff, sometimes the occasional career update.
-			</p>
+				bookish stuff, sometimes the occasional career update.</p
+			>
 			<p>
 				Lately, I’ve been especially interested in how technology can have a real, positive impact
-				on the environment—and I’m hoping to explore that more in the future.
-			</p>
+				on the environment—and I’m hoping to explore that more in the future.</p
+			>
 			<p>
 				Outside of tech, I’m a big reader, and I love storytelling. I bounce between novels,
 				nonfiction, news, manga, and anime. I’m also an avid TTRPG player—my current favorite is
-				<ExternalLink class="cactus-link is-external" href="https://paizo.com/pathfinder"
-					>Pathfinder 2e</ExternalLink
-				>.
-			</p>
+				<ExternalLink class="cactus-link is-external" href="https://paizo.com/pathfinder">
+					Pathfinder 2e
+				</ExternalLink>.</p
+			>
 			<p>
 				Whether you’re here for tech-related content or simply curious about my hobbies, I hope you
-				find something that resonates with you.
-			</p>
-			<div class="not-prose"><SocialList /></div>
+				find something that resonates with you.</p
+			>
+			<div class="not-prose">
+				<SocialList />
+			</div>
 		</section>
 	</article>
 </PageLayout>

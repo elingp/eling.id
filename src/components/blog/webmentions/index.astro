@@ -1,4 +1,5 @@
 ---
+
 import ExternalLink from "@/components/ExternalLink.astro";
 import { getWebmentionsForUrl } from "@/utils/webmentions";
 import Comments from "./Comments.astro";
@@ -19,6 +20,5 @@ if (!webMentions.length) return;
 	<Comments mentions={webMentions} />
 </div>
 <p class="mt-8">
-	Responses powered by{" "}
-	<ExternalLink href="https://webmention.io">Webmentions</ExternalLink>
+	Responses powered by <ExternalLink href="https://webmention.io">Webmentions</ExternalLink>
 </p>

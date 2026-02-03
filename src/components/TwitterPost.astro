@@ -1,4 +1,5 @@
 ---
+
 interface Props {
 	id: string;
 }
@@ -8,9 +9,7 @@ const tweetUrl = id.replace("https://x.com/", "https://twitter.com/");
 ---
 
 <div class="twitter-post" data-tweet-id={tweetUrl}>
-	<blockquote class="twitter-tweet" data-dnt="true">
-		<a href={tweetUrl}></a>
-	</blockquote>
+	<blockquote class="twitter-tweet" data-dnt="true"><a href={tweetUrl}></a></blockquote>
 </div>
 
 <script is:inline>

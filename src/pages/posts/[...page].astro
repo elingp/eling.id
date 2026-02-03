@@ -1,4 +1,5 @@
 ---
+
 import type { CollectionEntry } from "astro:content";
 import type { GetStaticPaths, Page } from "astro";
 import { Icon } from "astro-icon/components";
@@ -63,8 +64,7 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 	</header>
 	<section class="grid lg:grid-cols-[3fr_1fr] lg:gap-x-8 lg:gap-y-16" aria-labelledby="posts-title">
 		<section aria-label="Post listings">
-			{
-				pinnedPosts.length > 0 && (
+			{pinnedPosts.length > 0 && (
 					<section class="mb-8">
 						<h2 class="text-global-text text-2xl font-bold md:text-3xl">Pinned posts</h2>
 						<ul class="mt-3 space-y-4 md:space-y-2">
@@ -75,10 +75,8 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 							))}
 						</ul>
 					</section>
-				)
-			}
-			{
-				descYearKeys.map((yearKey) => (
+				)}
+			{descYearKeys.map((yearKey) => (
 					<section class="mb-8">
 						<h2 id={`year-${yearKey}`} class="text-global-text text-xl font-bold md:text-2xl">
 							<span class="sr-only">Posts in</span>
@@ -92,44 +90,39 @@ const descYearKeys = Object.keys(groupedByYear).sort((a, b) => +b - +a);
 							))}
 						</ul>
 					</section>
-				))
-			}
+				))}
 			<Pagination {...paginationProps} />
 		</section>
-		{
-			!!uniqueTags.length && (
-				<aside aria-label="Tags">
-					<h2 class="text-global-text mb-4 flex items-center gap-2 text-xl font-bold md:text-2xl">
-						<a aria-label="View all blog categories" class="hover:text-accent" href="/tags/">
-							Tags
-						</a>
-						<Icon
-							aria-hidden="true"
-							name="fa7-solid:tags"
-							title="Tags"
-							class="relative top-0.5 inline-block h-5 w-5"
-						/>
-					</h2>
-					<ul class="flex flex-wrap gap-2">
-						{uniqueTags.map((tag) => (
-							<li>
-								<TagLink
-									class="cactus-link flex items-center justify-center"
-									href={`/tags/${tag}/`}
-									srPrefix="View all posts with the tag"
-									tag={tag}
-								/>
-							</li>
-						))}
-					</ul>
-					<span class="mt-4 block lg:text-end">
-						<a class="text-global-text hover:text-accent text-base md:text-lg" href="/tags/">
-							View all <span aria-hidden="true">→</span>
-							<span class="sr-only">blog tags</span>
-						</a>
-					</span>
-				</aside>
-			)
-		}
+		{!!uniqueTags.length && (
+			<aside aria-label="Tags">
+				<h2 class="text-global-text mb-4 flex items-center gap-2 text-xl font-bold md:text-2xl">
+					<a aria-label="View all blog categories" class="hover:text-accent" href="/tags/">Tags</a>
+					<Icon
+						aria-hidden="true"
+						name="fa7-solid:tags"
+						title="Tags"
+						class="relative top-0.5 inline-block h-5 w-5"
+					/>
+				</h2>
+				<ul class="flex flex-wrap gap-2">
+					{uniqueTags.map((tag) => (
+						<li>
+							<TagLink
+								class="cactus-link flex items-center justify-center"
+								href={`/tags/${tag}/`}
+								srPrefix="View all posts with the tag"
+								tag={tag}
+							/>
+						</li>
+					))}
+				</ul>
+				<span class="mt-4 block lg:text-end">
+					<a class="text-global-text hover:text-accent text-base md:text-lg" href="/tags/">
+						View all <span aria-hidden="true">→</span>
+						<span class="sr-only">blog tags</span>
+					</a>
+				</span>
+			</aside>
+		)}
 	</section>
 </PageLayout>

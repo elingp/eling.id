@@ -1,4 +1,5 @@
 ---
+
 import ExternalLink from "@/components/ExternalLink.astro";
 import { menuLinks, siteConfig } from "@/site.config";
 
@@ -28,34 +29,35 @@ const sourceUrl = encodedPath
 	<p class="me-0 lg:me-4">
 		&copy; 2018–{year}
 		{siteConfig.author}.
-		<span class="inline-block"
-			><ExternalLink
+		<span class="inline-block">
+			<ExternalLink
 				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
 				href={sourceUrl}
 				title="View page source on GitHub"
-				><span class="hover:underline">Page source</span></ExternalLink
-			>. Build: <ExternalLink
+			>
+				<span class="hover:underline">Page source</span>
+			</ExternalLink>
+			. Build:
+			<ExternalLink
 				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
 				href={`https://github.com/${githubRepo}/commit/${commitHash}`}
 				title="View build commit on GitHub"
-				><span class="font-mono hover:underline">{shortHash}</span></ExternalLink
 			>
+				<span class="font-mono hover:underline">{shortHash}</span>
+			</ExternalLink>
 		</span>
 	</p>
 	<nav aria-label="Footer links">
 		<ul class="lg:divide-global-text flex gap-x-2 lg:gap-x-0 lg:divide-x lg:divide-dotted">
-			{
-				footerMenuLinks.map((link) => (
-					<li>
-						<a
-							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
-							href={link.path}
-						>
-							{link.title}
-						</a>
-					</li>
-				))
-			}
+			{footerMenuLinks.map((link) => (
+				<li>
+					<a
+						class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
+						href={link.path}
+					>
+						{link.title}</a>
+				</li>
+			))}
 		</ul>
 	</nav>
 </footer>

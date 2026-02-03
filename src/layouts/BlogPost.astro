@@ -1,4 +1,5 @@
 ---
+
 import { type CollectionEntry, render } from "astro:content";
 import BackToTop from "@/components/BackToTop.astro";
 import Masthead from "@/components/blog/Masthead.astro";
@@ -45,16 +46,14 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 			class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"
 			aria-labelledby="post-title"
 		>
-			{
-				!!headings.length && (
+			{!!headings.length && (
 					<aside
 						aria-label="Table of contents"
 						class="lg:sticky lg:top-12 lg:order-2 lg:-me-32 lg:basis-64"
 					>
 						<TOC headings={headings} />
 					</aside>
-				)
-			}
+				)}
 			<section
 				class="prose prose-lg md:prose-xl prose-headings:text-global-text prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
 				aria-labelledby="post-content"

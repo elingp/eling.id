@@ -1,4 +1,5 @@
 ---
+
 import { Icon } from "astro-icon/components";
 import IconLink from "@/components/IconLink.astro";
 import { siteConfig } from "@/site.config";
@@ -46,8 +47,7 @@ const socialLinks: {
 <nav aria-labelledby="social-links-title" class="flex flex-wrap items-end gap-x-2">
 	<p id="social-links-title">Find me on</p>
 	<ul class="flex flex-1 items-center gap-x-2 lg:flex-initial">
-		{
-			socialLinks.map(({ friendlyName, isWebmention, link, name, newTab }) => (
+		{socialLinks.map(({ friendlyName, isWebmention, link, name, newTab }) => (
 				<li class="flex">
 					<IconLink
 						class="hover:text-accent inline-block"
@@ -65,7 +65,6 @@ const socialLinks: {
 						/>
 					</IconLink>
 				</li>
-			))
-		}
+			))}
 	</ul>
 </nav>

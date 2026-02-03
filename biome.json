@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"includes": ["**"]
+		"includes": ["**", "!!src/pages/tags/index.astro"]
 	},
 	"vcs": {
 		"enabled": true,
@@ -25,26 +25,25 @@
 			}
 		}
 	},
-	"javascript": {
-		"formatter": {
-			"trailingCommas": "all",
-			"semicolons": "always",
-			"bracketSameLine": false
-		}
-	},
-	"html": {
-		"formatter": {
-			"selfCloseVoidElements": "always"
-		}
-	},
 	"css": {
 		"formatter": {
 			"enabled": false
 		},
 		"parser": {
-			"cssModules": false,
 			"allowWrongLineComments": true,
 			"tailwindDirectives": true
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"parser": {
+			"interpolation": true
+		},
+		"formatter": {
+			"bracketSameLine": false,
+			"whitespaceSensitivity": "css",
+			"indentScriptAndStyle": true,
+			"selfCloseVoidElements": "always"
 		}
 	},
 	"overrides": [

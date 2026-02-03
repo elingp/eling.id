@@ -1,4 +1,5 @@
 ---
+
 import { render } from "astro:content";
 import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { Icon } from "astro-icon/components";
@@ -61,7 +62,10 @@ const paginationProps = {
 				<a class="text-accent hover:underline hover:decoration-2" href="/tags/">Tags</a>
 				<Icon aria-hidden="true" name="fa7-solid:chevron-right" class="mx-1.5 h-3 w-3" />
 			</li>
-			<li aria-current="page" class=""><span aria-hidden="true">#</span>{tag}</li>
+			<li aria-current="page" class="">
+				<span aria-hidden="true">#</span>
+				{tag}
+			</li>
 		</ul>
 	</nav>
 	<h1 class="title capitalize" id="tag-title">{tagMeta?.data.title ?? `Posts about ${tag}`}</h1>
@@ -71,13 +75,11 @@ const paginationProps = {
 		{TagContent && <TagContent />}
 	</section>
 	<ul class="space-y-4 md:space-y-2">
-		{
-			page.data.map((p) => (
-				<li>
-					<PostPreview as="h2" post={p} />
-				</li>
-			))
-		}
+		{page.data.map((p) => (
+			<li>
+				<PostPreview as="h2" post={p} />
+			</li>
+		))}
 	</ul>
 	<Pagination {...paginationProps} />
 </PageLayout>

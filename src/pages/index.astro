@@ -1,4 +1,5 @@
 ---
+
 import { type CollectionEntry } from "astro:content";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import ExternalLink from "@/components/ExternalLink.astro";
@@ -58,14 +59,15 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 	<section class="prose prose-lg md:prose-xl" aria-labelledby="intro-heading">
 		<h2 class="sr-only" id="intro-heading">Introduction</h2>
 		<p class="mb-4">
-			Hi! I’m <b>Eling</b> (he/him). I write about my fascination with tech, my hobbies (like manga, anime,
-			and TTRPGs), and other random musings. I’m still discovering my niche, so you’ll find a bit of everything
-			that captures my interest. Enjoy!
-		</p>
-		<div class="not-prose"><SocialList /></div>
+			Hi! I’m <b>Eling</b> (he/him). I write about my fascination with tech, my hobbies (like manga,
+			anime, and TTRPGs), and other random musings. I’m still discovering my niche, so you’ll find a
+			bit of everything that captures my interest. Enjoy!</p
+		>
+		<div class="not-prose">
+			<SocialList />
+		</div>
 	</section>
-	{
-		pinnedPosts.length > 0 && (
+	{pinnedPosts.length > 0 && (
 			<section class="mt-12">
 				<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
 					<a class="hover:text-accent" href="/posts/">
@@ -80,38 +82,33 @@ const elingProject: { desc: string; href: string; title: string }[] = [
 					))}
 				</ul>
 			</section>
-		)
-	}
+		)}
 	<section class="mt-12">
 		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">
 			<a class="hover:text-accent" href="/posts/">Recent posts</a>
 		</h2>
 		<ul class="space-y-4 md:space-y-2">
-			{
-				latestPosts.map((p) => (
+			{latestPosts.map((p) => (
 					<li>
 						<PostPreview post={p} />
 					</li>
-				))
-			}
+				))}
 		</ul>
 	</section>
 	<section class="mt-12">
 		<h2 class="text-global-text mb-6 text-2xl font-bold md:text-3xl">Public projects</h2>
 		<ul class="space-y-4 md:space-y-2">
-			{
-				elingProject.map(({ desc, href, title }) => (
-					<li class="grid gap-1 text-base md:text-lg lg:grid-cols-[auto_1fr] lg:gap-5">
-						<ExternalLink
-							class="cactus-link has-external-icon is-external min-w-66 font-semibold md:font-medium"
-							href={href}
-						>
-							{title}
-						</ExternalLink>
-						{desc}
-					</li>
-				))
-			}
+			{elingProject.map(({ desc, href, title }) => (
+				<li class="grid gap-1 text-base md:text-lg lg:grid-cols-[auto_1fr] lg:gap-5">
+					<ExternalLink
+						class="cactus-link has-external-icon is-external min-w-66 font-semibold md:font-medium"
+						href={href}
+					>
+						{title}
+					</ExternalLink>
+					{desc}
+				</li>
+			))}
 		</ul>
 	</section>
 </PageLayout>

@@ -1,4 +1,5 @@
 ---
+
 import type { MarkdownHeading } from "astro";
 import { generateToc } from "@/utils/generateToc";
 import TOCHeading from "./TOCHeading.astro";
@@ -19,7 +20,9 @@ const toc = generateToc(headings);
 	>
 	<nav class="ms-4 lg:w-full">
 		<ol class="mt-4 text-sm">
-			{toc.map((heading) => <TOCHeading heading={heading} />)}
+			{toc.map((heading) => (
+				<TOCHeading heading={heading} />
+			))}
 		</ol>
 	</nav>
 </details>
