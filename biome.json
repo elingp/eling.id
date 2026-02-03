@@ -1,7 +1,7 @@
 {
 	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
 	"files": {
-		"includes": ["**", "!!src/pages/tags/index.astro"]
+		"includes": ["**"]
 	},
 	"vcs": {
 		"enabled": true,
@@ -35,11 +35,11 @@
 		}
 	},
 	"html": {
-		"experimentalFullSupportEnabled": true,
 		"parser": {
 			"interpolation": true
 		},
 		"formatter": {
+			"enabled": true,
 			"bracketSameLine": false,
 			"whitespaceSensitivity": "css",
 			"indentScriptAndStyle": true,
