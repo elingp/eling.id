@@ -48,15 +48,18 @@ const sourceUrl = encodedPath
 	</p>
 	<nav aria-label="Footer links">
 		<ul class="lg:divide-global-text flex gap-x-2 lg:gap-x-0 lg:divide-x lg:divide-dotted">
-			{footerMenuLinks.map((link) => (
-				<li>
-					<a
-						class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
-						href={link.path}
-					>
-						{link.title}</a>
-				</li>
-			))}
+			{
+				footerMenuLinks.map((link) => (
+					<li>
+						<a
+							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
+							href={link.path}
+						>
+							{link.title}
+						</a>
+					</li>
+				))
+			}
 		</ul>
 	</nav>
 </footer>

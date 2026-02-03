@@ -27,6 +27,6 @@ const meta = {
 const sourcePath = `src/content/note/${note.id}.md`;
 ---
 
-<PageLayout meta={meta} sourcePath={sourcePath}>
-	<Note as="h1" note={note} />
+<PageLayout {meta} {sourcePath}>
+	<Note as="h1" {note} />
 </PageLayout>

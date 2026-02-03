@@ -31,21 +31,24 @@ import { menuLinks } from "@/site.config";
 				class="bg-global-bg divide-accent absolute -inset-x-4 top-14 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex lg:static lg:z-auto lg:-ms-4 lg:mt-1 lg:flex lg:flex-row lg:divide-x lg:divide-y-0 lg:divide-dotted lg:bg-transparent lg:p-0"
 				id="navigation-menu"
 			>
-				{menuLinks.map((link) => (
+				{
+					menuLinks.map((link) => (
 						<li>
 							<a
 								aria-current={Astro.url.pathname === link.path ? "page" : false}
 								class="text-global-text lg:text-accent flex items-center justify-between px-2 py-4 font-semibold hover:underline focus-visible:underline focus-visible:underline-offset-2 focus-visible:outline-none lg:px-4 lg:py-0 lg:text-lg lg:underline-offset-2"
 								href={link.path}
 							>
-								{link.title}<Icon
+								{link.title}
+								<Icon
 									aria-hidden="true"
 									name="fa7-solid:chevron-right"
 									class="ms-auto h-3 w-3 lg:hidden"
 								/>
 							</a>
 						</li>
-					))}
+					))
+				}
 			</ul>
 		</nav>
 	</div>

@@ -7,7 +7,7 @@ const meta = {
 };
 ---
 
-<PageLayout meta={meta} sourcePath="src/pages/404.astro">
+<PageLayout {meta} sourcePath="src/pages/404.astro">
 	<article class="grow">
 		<header class="mb-12">
 			<h1 class="title">404 - Page Not Found</h1>
@@ -17,8 +17,8 @@ const meta = {
 			<p>The page you are looking for doesn’t exist or has been moved.</p>
 			<p>
 				Please use the navigation to find your way back or go to
-				<a class="cactus-link" href="/">Home</a>.</p
-			>
+				<a class="cactus-link" href="/">Home</a>.
+			</p>
 		</section>
 	</article>
 </PageLayout>

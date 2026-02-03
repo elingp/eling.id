@@ -35,24 +35,26 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		ogImage: socialImage,
 		title,
 	}}
-	sourcePath={sourcePath}
+	{sourcePath}
 >
 	<article class="grow wrap-break-word" data-pagefind-body>
 		<header id="blog-hero" class="mb-12">
-			<Masthead content={post} readingTime={readingTime} updatedDate={finalUpdatedDate} />
+			<Masthead content={post} {readingTime} updatedDate={finalUpdatedDate} />
 		</header>
 		<section
 			class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"
 			aria-labelledby="post-title"
 		>
-			{!!headings.length && (
+			{
+				!!headings.length && (
 					<aside
 						aria-label="Table of contents"
 						class="lg:sticky lg:top-12 lg:order-2 lg:-me-32 lg:basis-64"
 					>
 						<TOC headings={headings} />
 					</aside>
-				)}
+				)
+			}
 			<section
 				class="prose prose-lg md:prose-xl prose-headings:text-global-text prose-th:before:content-none max-w-full lg:max-w-none lg:flex-1"
 				aria-labelledby="post-content"

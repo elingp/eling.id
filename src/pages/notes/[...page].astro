@@ -41,18 +41,20 @@ const paginationProps = {
 };
 ---
 
-<PageLayout meta={meta} sourcePath="src/pages/notes/[...page].astro">
+<PageLayout {meta} sourcePath="src/pages/notes/[...page].astro">
 	<section aria-labelledby="notes-title">
 		<header class="mb-12 flex items-center gap-2">
 			<h1 class="title" id="notes-title">Notes</h1>
 			<RssLink href="/notes/rss.xml" label="RSS feed" />
 		</header>
 		<ul class="mt-6 space-y-3 text-start">
-			{page.data.map((note) => (
+			{
+				page.data.map((note) => (
 					<li class="">
 						<Note note={note} as="h2" isPreview />
 					</li>
-				))}
+				))
+			}
 		</ul>
 		<Pagination {...paginationProps} />
 	</section>

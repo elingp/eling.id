@@ -13,4 +13,4 @@ const ariaLabel = srPrefix ? `${srPrefix} ${tag}` : undefined;
 const visibleText = showHash ? `#${tag}` : tag;
 ---
 
-<a href={href} aria-label={ariaLabel} class={className} set:text={visibleText} {...attrs} />
+<a {href} aria-label={ariaLabel} class={className} set:text={visibleText} {...attrs} />

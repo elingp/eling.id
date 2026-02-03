@@ -27,13 +27,15 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 >
 	<header>
 		<Tag class:list={["text-global-text font-bold", isPreview ? "text-base md:text-lg" : "title"]}>
-			{isPreview ? (
-				<a class="cactus-link" href={`/notes/${note.id}/`}>
-					{note.data.title}
-				</a>
-			) : (
-				note.data.title
-			)}
+			{
+				isPreview ? (
+					<a class="cactus-link" href={`/notes/${note.id}/`}>
+						{note.data.title}
+					</a>
+				) : (
+					note.data.title
+				)
+			}
 		</Tag>
 		<div
 			class:list={[
@@ -44,12 +46,14 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 			<span>
 				<FormattedDate {...!isPreview && { dateTimeOptions }} date={note.data.publishDate} />
 			</span>
-			{!isPreview && effectiveUpdatedDate && (
-				<span class="bg-accent/15 rounded-lg px-2 font-sans font-medium">
-					Updated:
-					<FormattedDate {...(!isPreview && { dateTimeOptions })} date={effectiveUpdatedDate} />
-				</span>
-			)}
+			{
+				!isPreview && effectiveUpdatedDate && (
+					<span class="bg-accent/15 rounded-lg px-2 font-sans font-medium">
+						Updated:
+						<FormattedDate {...(!isPreview && { dateTimeOptions })} date={effectiveUpdatedDate} />
+					</span>
+				)
+			}
 		</div>
 	</header>
 

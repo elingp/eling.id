@@ -54,7 +54,7 @@ const paginationProps = {
 };
 ---
 
-<PageLayout meta={meta} sourcePath={sourcePath}>
+<PageLayout {meta} {sourcePath}>
 	<nav class="mb-8" aria-label="Breadcrumbs">
 		<ul class="flex items-center">
 			<li class="flex items-center">
@@ -74,11 +74,13 @@ const paginationProps = {
 		{TagContent && <TagContent />}
 	</section>
 	<ul class="space-y-4 md:space-y-2">
-		{page.data.map((p) => (
-			<li>
-				<PostPreview as="h2" post={p} />
-			</li>
-		))}
+		{
+			page.data.map((p) => (
+				<li>
+					<PostPreview as="h2" post={p} />
+				</li>
+			))
+		}
 	</ul>
 	<Pagination {...paginationProps} />
 </PageLayout>

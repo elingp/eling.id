@@ -12,19 +12,23 @@ const meta = {
 };
 ---
 
-<PageLayout meta={meta} sourcePath="src/pages/tags/index.astro">
+<PageLayout {meta} sourcePath="src/pages/tags/index.astro">
 	<h1 class="title mb-12">Tags</h1>
 	<ul class="space-y-2">
-		{allTags.map(([tag, val]) => (
-			<li class="flex items-center gap-x-2 text-base md:text-lg">
-				<TagLink
-					class="cactus-link inline-block font-medium"
-					href={`/tags/${tag}/`}
-					tag={tag}
-					title={`View posts with the tag: ${tag}`}
-				/>
-				<span class="inline-block"> - {val} Post{val > 1 && "s"}</span>
-			</li>
-		))}
+		{
+			allTags.map(([tag, val]) => (
+				<li class="flex items-center gap-x-2 text-base md:text-lg">
+					<TagLink
+						class="cactus-link inline-block font-medium"
+						href={`/tags/${tag}/`}
+						tag={tag}
+						title={`View posts with the tag: ${tag}`}
+					/>
+					<span class="inline-block">
+						- {val} Post{val > 1 && "s"}
+					</span>
+				</li>
+			))
+		}
 	</ul>
 </PageLayout>

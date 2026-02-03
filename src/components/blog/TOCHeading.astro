@@ -17,11 +17,13 @@ const {
 	>
 		{text}</a
 	>
-	{!!children.length && (
-		<ol>
-			{children.map((subheading) => (
-				<Astro.self heading={subheading} />
-			))}
-		</ol>
-	)}
+	{
+		!!children.length && (
+			<ol>
+				{children.map((subheading) => (
+					<Astro.self heading={subheading} />
+				))}
+			</ol>
+		)
+	}
 </li>

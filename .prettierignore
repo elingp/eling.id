@@ -1,6 +1,5 @@
 # Files handled by Biome (formatting + linting)
 # Biome handles these natively with better performance
-**/*.astro
 **/*.js
 **/*.jsx
 **/*.ts

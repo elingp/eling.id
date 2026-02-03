@@ -13,7 +13,7 @@
 		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
 			"biome check --write --no-errors-on-unmatched"
 		],
-		"*.{css,md,mdx,yml,yaml}": [
+		"*.{astro,css,md,mdx,yml,yaml}": [
 			"prettier --write --cache"
 		]
 	},
@@ -22,9 +22,9 @@
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
-		"check": "astro check && biome check --no-errors-on-unmatched && prettier --check '**/*.{css,md,mdx,yml,yaml}'",
-		"check:ci": "astro check && biome ci --reporter=github --no-errors-on-unmatched && prettier --check '**/*.{css,md,mdx,yml,yaml}'",
-		"fix": "biome check --write --no-errors-on-unmatched && prettier --write --cache '**/*.{css,md,mdx,yml,yaml}'"
+		"check": "astro check && biome check --no-errors-on-unmatched && prettier --check '**/*.{astro,css,md,mdx,yml,yaml}'",
+		"check:ci": "astro check && biome ci --reporter=github --no-errors-on-unmatched && prettier --check '**/*.{astro,css,md,mdx,yml,yaml}'",
+		"fix": "biome check --write --no-errors-on-unmatched && prettier --write --cache '**/*.{astro,css,md,mdx,yml,yaml}'"
 	},
 	"dependencies": {
 		"@astrojs/markdown-remark": "^6.3.10",
@@ -74,6 +74,7 @@
 		"lint-staged": "^16.2.7",
 		"pagefind": "^1.4.0",
 		"prettier": "3.8.1",
+		"prettier-plugin-astro": "0.14.1",
 		"prettier-plugin-tailwindcss": "0.7.2",
 		"reading-time": "^1.5.0",
 		"simple-git-hooks": "^2.13.1",

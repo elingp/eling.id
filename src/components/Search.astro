@@ -36,7 +36,8 @@ import "@/styles/blocks/search.css";
 				>
 					Close
 				</button>
-				{import.meta.env.DEV ? (
+				{
+					import.meta.env.DEV ? (
 						<div class="mx-auto text-center">
 							<p>
 								Search is only available in production builds. <br />
@@ -47,7 +48,8 @@ import "@/styles/blocks/search.css";
 						<div class="search-container" aria-live="polite">
 							<div id="cactus__search" />
 						</div>
-					)}
+					)
+				}
 			</div>
 		</dialog>
 	</site-search>

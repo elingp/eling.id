@@ -9,7 +9,8 @@ interface Props {
 const { nextUrl, prevUrl } = Astro.props;
 ---
 
-{(prevUrl || nextUrl) && (
+{
+	(prevUrl || nextUrl) && (
 		<nav class="mt-8 flex items-center gap-x-4" aria-label="Pagination">
 			{prevUrl && (
 				<a
@@ -30,4 +31,5 @@ const { nextUrl, prevUrl } = Astro.props;
 				</a>
 			)}
 		</nav>
-	)}
+	)
+}

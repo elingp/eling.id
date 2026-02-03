@@ -16,7 +16,8 @@ const likesToShow = likes
 	.slice(0, MAX_LIKES);
 ---
 
-{!!likes.length && (
+{
+	!!likes.length && (
 		<div>
 			<p class="text-global-text mb-0">
 				<strong>{likes.length}</strong>
@@ -46,4 +47,5 @@ const likesToShow = likes
 				</ul>
 			)}
 		</div>
-	)}
+	)
+}
