@@ -33,7 +33,9 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 <h1 class="title" id="post-title">{data.title}</h1>
 <div class="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1">
 	<p class="font-sans font-medium">
-		<FormattedDate date={data.publishDate} {dateTimeOptions} /> / {readingTime}
+		<FormattedDate date={data.publishDate} {dateTimeOptions} />
+		<span class="px-2">·</span>
+		{readingTime}
 	</p>
 	{
 		updatedDate && (

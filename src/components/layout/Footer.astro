@@ -20,6 +20,7 @@ const encodedPath = sourcePath ? encodeURI(sourcePath) : "";
 const sourceUrl = encodedPath
 	? `https://github.com/${githubRepo}/blob/${branch}/${encodedPath}`
 	: `https://github.com/${githubRepo}`;
+const commitUrl = `https://github.com/${githubRepo}/commit/${commitHash}`;
 ---
 
 <footer
@@ -34,12 +35,12 @@ const sourceUrl = encodedPath
 				href={sourceUrl}
 				title="View page source on GitHub"
 			>
-				<span class="hover:underline">Page source</span>
+				<span class="hover:underline">View source</span>
 			</ExternalLink>
-			. Build:
+			• Build:
 			<ExternalLink
 				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
-				href={`https://github.com/${githubRepo}/commit/${commitHash}`}
+				href={commitUrl}
 				title="View build commit on GitHub"
 			>
 				<span class="font-mono hover:underline">{shortHash}</span>
