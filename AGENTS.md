@@ -6,22 +6,22 @@
 
 - **Skill usage**: Before acting, scan the Skills Index and invoke relevant skills first.
 - **Runtime**: Node >=24, pnpm >=10.
-- **Required validation**: Run `pnpm check` after any change.
-- **Auto-fix**: Run `pnpm fix` before re-checking when needed.
-- **Pre-commit**: `pnpx lint-staged` runs Biome on `*.{astro,js,jsx,ts,tsx,json,jsonc,html}` and Prettier on `*.{css,md,mdx,yml,yaml}`.
-- **Formatting authority**: Biome + Prettier + CI. `.editorconfig` is stale (spaces). Use tabs and 100 columns; md/mdx use 80 columns.
+- **Required validation**: Run `pnpm run check` after any change.
+- **Auto-fix**: Run `pnpm run fix` before re-checking when needed.
+- **Pre-commit**: `pnpm lint-staged` runs Biome on `*.{astro,js,jsx,ts,tsx,json,jsonc,html}` and Prettier on `*.{astro,css,md,mdx,yml,yaml}`.
+- **Formatting authority**: Biome + Prettier + CI. Use tabs and 100 columns.
 
 ## Commands
 
-| Command          | Purpose                                    |
-| ---------------- | ------------------------------------------ |
-| `pnpm dev`       | Start dev server at `localhost:4321`       |
-| `pnpm build`     | Production build (injects commit hash)     |
-| `pnpm postbuild` | Build Pagefind index (runs after `build`)  |
-| `pnpm preview`   | Preview the production build               |
-| `pnpm check`     | Type-check + lint + format check           |
-| `pnpm check:ci`  | CI-optimized check with GitHub annotations |
-| `pnpm fix`       | Auto-fix Biome + Prettier                  |
+| Command              | Purpose                                    |
+| -------------------- | ------------------------------------------ |
+| `pnpm run dev`       | Start dev server at `localhost:4321`       |
+| `pnpm run build`     | Production build (injects commit hash)     |
+| `pnpm run postbuild` | Build Pagefind index (runs after `build`)  |
+| `pnpm run preview`   | Preview the production build               |
+| `pnpm run check`     | Type-check + lint + format check           |
+| `pnpm run check:ci`  | CI-optimized check with GitHub annotations |
+| `pnpm run fix`       | Auto-fix Biome + Prettier                  |
 
 ## Agent Commit & Handoff
 
@@ -148,8 +148,8 @@ const lastModified = remarkPluginFrontmatter.lastModified;
 
 ## Testing & Validation
 
-1. Run `pnpm check` after every implementation.
-2. Preview with `pnpm preview` for production build (`pnpm build`) testing.
+1. Run `pnpm run check` after every implementation.
+2. Preview with `pnpm run preview` for production build (`pnpm run build`) testing.
 3. Check OG images at `/og-image/<slug>.png`.
 
 ## Environment Variables (Optional)
@@ -229,7 +229,6 @@ If a skill applies, invoke it before taking action.
 | ------------------- | ---------------------------------------- |
 | `agent-browser`     | Web testing, form filling, screenshots   |
 | `agent-md-refactor` | Refactor AGENTS/CLAUDE docs              |
-| `find-skills`       | Discover and install new skills          |
 | `git-commit`        | Conventional commit messages and staging |
 
 ### Superpowers (Process Skills)

@@ -69,22 +69,22 @@ git clone https://github.com/elingp/eling.id.git
 cd eling.id
 
 pnpm install
-pnpm dev
+pnpm run dev
 ```
 
 Then open [http://localhost:4321](http://localhost:4321).
 
 ## Project commands
 
-| Command          | Description                                                     |
-| ---------------- | --------------------------------------------------------------- |
-| `pnpm dev`       | Start the dev server (`localhost:4321`)                         |
-| `pnpm build`     | Build the site to `dist/` (includes commit hash when available) |
-| `pnpm postbuild` | Build the Pagefind index for search (runs after `build`)        |
-| `pnpm preview`   | Preview the production build locally                            |
-| `pnpm check`     | Type-check + lint + format check (comprehensive validation)     |
-| `pnpm check:ci`  | CI-optimized check with GitHub annotations (runs in Actions)    |
-| `pnpm fix`       | Fix everything (formatting, linting, imports)                   |
+| Command              | Description                                                     |
+| -------------------- | --------------------------------------------------------------- |
+| `pnpm run dev`       | Start the dev server (`localhost:4321`)                         |
+| `pnpm run build`     | Build the site to `dist/` (includes commit hash when available) |
+| `pnpm run postbuild` | Build the Pagefind index for search (runs after `build`)        |
+| `pnpm run preview`   | Preview the production build locally                            |
+| `pnpm run check`     | Type-check + lint + format check (comprehensive validation)     |
+| `pnpm run check:ci`  | CI-optimized check with GitHub annotations (runs in Actions)    |
+| `pnpm run fix`       | Fix everything (formatting, linting, imports)                   |
 
 > [!IMPORTANT]
 > `pnpm build` runs `git rev-parse` to inject a commit hash into the build when Git metadata is available.
