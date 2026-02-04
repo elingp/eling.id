@@ -77,9 +77,9 @@
 
 	.bluesky-post-container img {
 		max-width: none;
-		/* biome-ignore lint/complexity/noImportantStyles: override Bluesky embed styles */
+		/* biome-ignore lint/complexity/noImportantStyles: force reset style */
 		margin-top: 0 !important;
-		/* biome-ignore lint/complexity/noImportantStyles: override Bluesky embed styles */
+		/* biome-ignore lint/complexity/noImportantStyles: force reset style */
 		margin-bottom: 0 !important;
 	}
 }

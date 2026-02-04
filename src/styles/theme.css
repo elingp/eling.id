@@ -1,7 +1,5 @@
 /* use a selector-based strategy for dark mode */
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
-/* you could refactor below to use light-dark(), depending on your target audience */
 @theme {
 	/* Flexoki (namespaced) palette */
 	--color-flexoki-black: #100f0f;

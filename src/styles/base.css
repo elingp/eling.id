@@ -89,7 +89,7 @@
 		}
 	}
 
-	/* Tactile feedback for all interactive elements */
+	/* tactile feedback for all interactive elements */
 	a:active,
 	button:active,
 	[role="button"]:active {
