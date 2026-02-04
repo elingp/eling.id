@@ -124,9 +124,15 @@ import type { SiteConfig } from "@/types";
 
 ### Styling (Tailwind 4)
 
-- **Flexoki palette**: CSS variables `--color-flexoki-*` in `src/styles/global.css`.
+- **Flexoki palette**: CSS variables `--color-flexoki-*` in `src/styles/theme.css`.
 - **Dark mode**: `data-theme="dark"` attribute, use `@custom-variant dark`.
 - **Breakpoints**: Mobile-first, use `lg:` for layout changes, `md:` for typography only.
+- **CSS layout**: `src/styles/global.css` imports Tailwind + `theme.css`, `base.css`,
+  `components.css`, `utilities.css`, then `@config`.
+- **Component CSS**: add reusable styles to `src/styles/components/*.css` and import via
+  `src/styles/components.css`.
+- **Feature CSS**: add page/feature or third-party styles to `src/styles/blocks/` and import
+  from the owning component/page.
 
 ### Content Querying
 

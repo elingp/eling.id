@@ -185,6 +185,15 @@ src/styles/      Global + component CSS
 src/utils/       Helpers (RSS, dates, TOC, webmentions)
 ```
 
+## Styling architecture
+
+- Entry point: `src/styles/global.css` imports Tailwind v4 + local partials, then `@config`.
+- `src/styles/theme.css`: design tokens and `@custom-variant dark`.
+- `src/styles/base.css`: `@layer base` (site tokens, element defaults, Astro image helpers).
+- `src/styles/components.css`: `@layer components` + `src/styles/components/*.css`.
+- `src/styles/utilities.css`: `@utility` overrides (prose).
+- Feature or third-party CSS: `src/styles/blocks/`, imported by the owning component/page.
+
 ## UI breakpoint policy
 
 This site follows a mobile-first approach with a strict two-mode layout policy:

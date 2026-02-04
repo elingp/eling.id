@@ -1,0 +1,118 @@
+@layer base {
+	html {
+		--site-bg: var(--color-flexoki-light-bg);
+		--site-bg-2: var(--color-flexoki-light-bg-2);
+		--site-surface: var(--color-flexoki-light-bg-2);
+		--site-surface-2: var(--color-flexoki-light-ui);
+		--site-text: var(--color-flexoki-light-tx);
+		--site-muted: var(--color-flexoki-light-tx-2);
+		--site-faint: var(--color-flexoki-light-tx-3);
+		--site-ui: var(--color-flexoki-light-ui);
+		--site-ui-2: var(--color-flexoki-light-ui-2);
+		--site-ui-3: var(--color-flexoki-light-ui-3);
+		--site-link: var(--color-flexoki-light-or-2);
+		--site-accent: var(--color-flexoki-light-or-2);
+		--site-danger: var(--color-flexoki-light-re);
+		--site-warning: var(--color-flexoki-light-or);
+		--site-info: var(--color-flexoki-light-bl);
+		--site-success: var(--color-flexoki-light-gr);
+		--site-important: var(--color-flexoki-light-pu);
+		--site-caution: var(--color-flexoki-light-or);
+		--site-border: var(--color-flexoki-light-ui);
+		--site-border-hover: var(--color-flexoki-light-ui-2);
+		--site-border-active: var(--color-flexoki-light-ui-3);
+		--site-ring: var(--color-flexoki-light-or);
+		--site-invert-bg: var(--color-flexoki-dark-bg);
+		--site-invert-bg-2: var(--color-flexoki-dark-bg-2);
+		--site-invert-surface: var(--color-flexoki-dark-bg-2);
+		--site-invert-surface-2: var(--color-flexoki-dark-ui);
+		--site-invert-text: var(--color-flexoki-dark-tx);
+		--site-invert-muted: var(--color-flexoki-dark-tx-2);
+		--site-invert-faint: var(--color-flexoki-dark-tx-3);
+		--site-invert-ui: var(--color-flexoki-dark-ui);
+		--site-invert-ui-2: var(--color-flexoki-dark-ui-2);
+		--site-invert-ui-3: var(--color-flexoki-dark-ui-3);
+		--site-invert-link: var(--color-flexoki-dark-or);
+		--site-invert-accent: var(--color-flexoki-dark-or);
+		--site-invert-border: var(--color-flexoki-dark-ui);
+		--site-invert-border-hover: var(--color-flexoki-dark-ui-2);
+		--site-invert-border-active: var(--color-flexoki-dark-ui-3);
+		--site-invert-ring: var(--color-flexoki-dark-or);
+		scrollbar-gutter: stable;
+		accent-color: var(--color-accent);
+		color-scheme: light dark;
+
+		&[data-theme="light"] {
+			color-scheme: light;
+		}
+
+		&[data-theme="dark"] {
+			--site-bg: var(--color-flexoki-dark-bg);
+			--site-bg-2: var(--color-flexoki-dark-bg-2);
+			--site-surface: var(--color-flexoki-dark-bg-2);
+			--site-surface-2: var(--color-flexoki-dark-ui);
+			--site-text: var(--color-flexoki-dark-tx);
+			--site-muted: var(--color-flexoki-dark-tx-2);
+			--site-faint: var(--color-flexoki-dark-tx-3);
+			--site-ui: var(--color-flexoki-dark-ui);
+			--site-ui-2: var(--color-flexoki-dark-ui-2);
+			--site-ui-3: var(--color-flexoki-dark-ui-3);
+			--site-link: var(--color-flexoki-dark-or);
+			--site-accent: var(--color-flexoki-dark-or);
+			--site-danger: var(--color-flexoki-dark-re);
+			--site-warning: var(--color-flexoki-dark-or);
+			--site-info: var(--color-flexoki-dark-bl);
+			--site-success: var(--color-flexoki-dark-gr);
+			--site-important: var(--color-flexoki-dark-pu);
+			--site-caution: var(--color-flexoki-dark-or);
+			--site-border: var(--color-flexoki-dark-ui);
+			--site-border-hover: var(--color-flexoki-dark-ui-2);
+			--site-border-active: var(--color-flexoki-dark-ui-3);
+			--site-ring: var(--color-flexoki-dark-or);
+			--site-invert-bg: var(--color-flexoki-light-bg);
+			--site-invert-bg-2: var(--color-flexoki-light-bg-2);
+			--site-invert-surface: var(--color-flexoki-light-bg-2);
+			--site-invert-surface-2: var(--color-flexoki-light-ui);
+			--site-invert-text: var(--color-flexoki-light-tx);
+			--site-invert-muted: var(--color-flexoki-light-tx-2);
+			--site-invert-faint: var(--color-flexoki-light-tx-3);
+			--site-invert-ui: var(--color-flexoki-light-ui);
+			--site-invert-ui-2: var(--color-flexoki-light-ui-2);
+			--site-invert-ui-3: var(--color-flexoki-light-ui-3);
+			--site-invert-link: var(--color-flexoki-light-or-2);
+			--site-invert-accent: var(--color-flexoki-light-or-2);
+			--site-invert-border: var(--color-flexoki-light-ui);
+			--site-invert-border-hover: var(--color-flexoki-light-ui-2);
+			--site-invert-border-active: var(--color-flexoki-light-ui-3);
+			--site-invert-ring: var(--color-flexoki-light-or);
+			color-scheme: dark;
+		}
+	}
+
+	/* Tactile feedback for all interactive elements */
+	a:active,
+	button:active,
+	[role="button"]:active {
+		@apply bg-link/10;
+	}
+
+	:target {
+		scroll-margin-block: 5ex;
+	}
+
+	@view-transition {
+		navigation: auto;
+	}
+
+	/* Astro image responsive styles, modified from -> https://docs.astro.build/en/guides/images/#responsive-image-styles */
+	:where([data-astro-image]) {
+		object-fit: var(--fit);
+		object-position: var(--pos);
+	}
+	[data-astro-image="full-width"] {
+		width: 100%;
+	}
+	[data-astro-image="constrained"] {
+		max-width: 100%;
+	}
+}
