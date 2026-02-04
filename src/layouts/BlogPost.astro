@@ -19,7 +19,7 @@ const { headings, remarkPluginFrontmatter } = await render(post);
 const readingTime: string = remarkPluginFrontmatter.minutesRead;
 
 const finalUpdatedDate = getEffectiveUpdatedDate(
-	{ publishDate, updatedDate, autoUpdateDate },
+	{ autoUpdateDate, publishDate, updatedDate },
 	remarkPluginFrontmatter.lastModified,
 );
 const articleDate = (finalUpdatedDate ?? publishDate).toISOString();
@@ -35,11 +35,11 @@ const sourcePath = remarkPluginFrontmatter.gitSourcePath as string;
 		ogImage: socialImage,
 		title,
 	}}
-	sourcePath={sourcePath}
+	{sourcePath}
 >
 	<article class="grow wrap-break-word" data-pagefind-body>
 		<header id="blog-hero" class="mb-12">
-			<Masthead content={post} readingTime={readingTime} updatedDate={finalUpdatedDate} />
+			<Masthead content={post} {readingTime} updatedDate={finalUpdatedDate} />
 		</header>
 		<section
 			class="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between"

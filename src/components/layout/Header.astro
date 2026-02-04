@@ -22,8 +22,7 @@ import { menuLinks } from "@/site.config";
 				<path
 					transform="translate(0,500) scale(0.1,-0.1)"
 					d="M1121 4319 c-179 -21 -347 -163 -402 -340 -18 -58 -19 -115 -19 -1479 0 -1361 1 -1421 19 -1479 26 -84 59 -137 127 -202 70 -66 128 -101 209 -126 56 -17 114 -18 865 -18 l805 0 71 22 c181 57 315 206 343 383 7 40 11 287 11 642 l0 577 383 3 c370 4 384 4 445 27 126 46 242 160 294 289 l23 57 3 614 c2 530 0 621 -13 674 -21 80 -55 138 -129 215 -82 86 -169 128 -291 142 -111 12 -2637 11 -2744 -1z m2579 -1009 l0 -410 -362 0 c-408 0 -450 -5 -549 -66 -79 -47 -155 -134 -198 -224 l-36 -75 -3 -627 -3 -628 -624 0 -625 0 0 509 0 509 333 4 332 3 60 28 c102 48 155 115 174 220 24 131 -38 256 -156 317 -64 33 -143 40 -455 40 l-288 0 0 405 0 405 1200 0 1200 0 0 -410z"
-				>
-				</path>
+				></path>
 			</svg>
 			<span class="font-sans text-lg/5 font-extrabold md:text-3xl">Eling Pramuatmaja</span>
 		</a>
@@ -85,14 +84,14 @@ import { menuLinks } from "@/site.config";
 		#menuOpen: boolean = false;
 
 		connectedCallback() {
-			const headerEl = document.getElementById("main-header")!;
+			const headerEl = document.getElementById("main-header");
 			const mobileButtonEl = this.querySelector<HTMLButtonElement>("button");
 			const menuEl = document.getElementById("navigation-menu");
 			const srLabel = mobileButtonEl?.querySelector(".sr-only");
 			const firstMenuLink = menuEl?.querySelector<HTMLAnchorElement>("a");
 
 			const setMenuState = (open: boolean) => {
-				if (headerEl) headerEl.classList.toggle("menu-open", open);
+				headerEl?.classList.toggle("menu-open", open);
 				this.#menuOpen = open;
 				mobileButtonEl?.setAttribute("aria-expanded", String(open));
 				if (srLabel) {

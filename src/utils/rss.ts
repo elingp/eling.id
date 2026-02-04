@@ -138,7 +138,7 @@ async function getContainer(): Promise<AstroContainer> {
 	return containerPromise;
 }
 
-export { getEffectiveUpdatedDate } from "./updatedDate";
+export { getEffectiveUpdatedDate } from "./updatedDate.ts";
 
 export async function renderRssEntry(
 	entry: RenderableEntry,

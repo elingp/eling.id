@@ -9,10 +9,8 @@ interface Props extends Omit<HTMLAttributes<"a">, "href"> {
 }
 
 const { href, tag, srPrefix, showHash = true, class: className, ...attrs } = Astro.props;
+const ariaLabel = srPrefix ? `${srPrefix} ${tag}` : undefined;
+const visibleText = showHash ? `#${tag}` : tag;
 ---
 
-<a href={href} class={className} {...attrs}>
-	{showHash && <span aria-hidden="true">#</span>}{
-		srPrefix && <span class="sr-only">{`${srPrefix} `}</span>
-	}<span>{tag}</span>
-</a>
+<a {href} aria-label={ariaLabel} class={className} set:text={visibleText} {...attrs} />

@@ -2,26 +2,7 @@ import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
 import type { SiteConfig } from "@/types";
 
 export const siteConfig: SiteConfig = {
-	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
 	author: "Eling Pramuatmaja",
-	/*
-		- Used to construct the meta title property found in src/components/BaseHead.astro L:11
-		- The webmanifest name found in astro.config.ts L:42
-		- The link value found in src/components/layout/Header.astro L:35
-		- In the footer found in src/components/layout/Footer.astro L:12
-	*/
-	title: "Eling Pramuatmaja",
-	// Used as the default description meta property and webmanifest description
-	description: "A personal website of Eling Pramuatmaja",
-	// Used for RSS feed and SocialList component
-	email: "eling@eling.id",
-	// HTML lang property, found in src/layouts/Base.astro L:18 & astro.config.ts L:48
-	lang: "en-GB",
-	// Meta property, found in src/components/BaseHead.astro L:42
-	ogLocale: "en_GB",
-	// Site URL used in astro.config.ts
-	url: "https://eling.id/",
-	// Date.prototype.toLocaleDateString() parameters, found in src/utils/date.ts.
 	date: {
 		locale: "en-GB",
 		options: {
@@ -30,6 +11,12 @@ export const siteConfig: SiteConfig = {
 			year: "numeric",
 		},
 	},
+	description: "A personal website of Eling Pramuatmaja",
+	email: "eling@eling.id",
+	lang: "en-GB",
+	ogLocale: "en_GB",
+	title: "Eling Pramuatmaja",
+	url: "https://eling.id/",
 };
 
 // Used to generate links in both the Header & Footer.

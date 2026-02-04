@@ -10,6 +10,6 @@ interface Props {
 const { href, label } = Astro.props;
 ---
 
-<IconLink class="text-accent" href={href} label={label}>
+<IconLink class="text-accent" {href} {label}>
 	<Icon aria-hidden="true" class="h-6 w-6" focusable="false" title="RSS" name="fa7-solid:rss" />
 </IconLink>

@@ -13,9 +13,9 @@ const { href, label, newTab, showNewTabHint = true, class: className, ...attrs }
 ---
 
 <ExternalLink
-	href={href}
+	{href}
 	class={className}
-	showNewTabHint={showNewTabHint}
+	{showNewTabHint}
 	{...newTab === undefined ? {} : { newTab }}
 	{...attrs}
 >

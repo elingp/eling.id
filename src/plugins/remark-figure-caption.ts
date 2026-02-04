@@ -1,7 +1,7 @@
 import type { Image, Root } from "mdast";
 import type { ContainerDirective } from "mdast-util-directive";
 import { visit } from "unist-util-visit";
-import { h } from "../utils/remark";
+import { h } from "../utils/remark.ts";
 
 /**
  * Remark plugin to transform :::figure directives into HTML figure elements
