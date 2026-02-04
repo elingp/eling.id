@@ -60,7 +60,7 @@ const mergedClass = className ? `client-formatted-date ${className}` : "client-f
 				const date = new Date(datetime);
 
 				// Validate date
-				if (isNaN(date.getTime())) {
+				if (Number.isNaN(date.getTime())) {
 					console.error("Invalid date:", datetime);
 					return;
 				}

@@ -31,7 +31,7 @@ Isn’t the synopsis interesting enough already???
 
 Not sold yet? Fine. Let me gush about it some more.
 
-## Why It Works
+## Why it works
 
 For context: I’ve read a ton of rom-com manga. I’ve pretty much learned all the common tropes there are. Introverted boy × extroverted girl? Vice versa? Two geniuses? Two fools? Age gap? “Forbidden” romance? All the kinds of “[dere type](https://the-dere-types.fandom.com/wiki/Dere_Type)”? I’ve read them, including those for the male (shounen/seinen) and female (shoujo/josei) demographics.
 
@@ -41,7 +41,7 @@ Both main characters tick every “socially inept” box. They are shy. They ove
 
 Anyway, I could keep yapping about the character writing. Let’s talk about the jokes.
 
-## Comedy (and the Chaos)
+## Comedy (and the chaos)
 
 Comedy. Deadpan jokes. Unabashedly honest quips. Do you like absurd, dry humor? Do you like witty or outlandish delivery that leaves you dumbfounded and makes you laugh while thinking to yourself, “I just fucking died reading this”? Well, if that sounds like a good time for you—and, no shade, I know humor doesn’t work the same for everyone!—then there’s plenty of it. The author nails that mix of long, awkward silences and sudden brutality without holding back. One commenter remarked that the comedy feels like poorly-scripted game NPCs talking to each other candidly, and I agree.
 
@@ -53,7 +53,7 @@ The jokes aren’t just in the dialogue. Numerous dry gags are sprinkled through
 A lot of the humor is just… commitment to the bit. Like this scene where Haida silently stares for multiple panels while Kuroi tries to eat his steamed pork buns, getting more and more uncomfortable—over food she’s been hunting for all day. Image: Suzuyuki / Translation: OsisNie via [MangaDex](https://mangadex.org/chapter/6665a3e7-8b92-4298-bf4d-91880a4c3b1b/10)
 :::
 
-## The Art Is Quietly Great
+## The art is quietly great
 
 On the art side, three things really stand out for me: expressions, outfits, and backgrounds.
 
@@ -65,13 +65,13 @@ Another small thing I really appreciate: the backgrounds. Almost all the panels 
 
 And on that point: this is a biweekly series, which might be part of why it feels so polished.
 
-## Final Thoughts
+## Final thoughts
 
 Overall, I really adore _Unexciting Date_. It’s a slow-burn romance that focuses on the characters. It’s about adults who are trying their best with their relationship. And so far, each chapter has left me with a warm, comfy feeling in my chest. It’s great.
 
 I got the idea to write about this because chapter 27 left me with such a wonderful feeling that I need to “brain dump” my thoughts here. I literally screamed and kicked the air like a gleeful teenager reading that chapter, and I’d like to share the joy with others.
 
-## Who It’s For
+## Who it’s for
 
 So, should you read it? Look, I’m clearly biased—but if you’re already a rom-com enjoyer, this will be a lovely discovery. It’ll be right up your alley, especially if you love slow-burn romances. And if you’re coming from the shounen side and you’re tired of loud escalation, this might feel refreshing. It’s best when you want an uncomplicated story that will make you feel good. I can’t promise it’ll work for everyone—humor is subjective, and the pacing is deliberately slow—but I’m glad I gave it a shot. At the very least, give it a try.
 
@@ -87,7 +87,7 @@ And here’s the fan translation (which is how I read it):
 
 ---
 
-## The Scanlation Run
+## The scanlation run
 
 Okay, mini-detour—because the scanlation (fan translation) release experience was half the fun.
 

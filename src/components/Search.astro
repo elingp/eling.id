@@ -102,7 +102,7 @@ import "@/styles/blocks/search.css";
 				const { PagefindUI } = await import("@pagefind/default-ui");
 				new PagefindUI({
 					baseUrl: import.meta.env.BASE_URL,
-					bundlePath: import.meta.env.BASE_URL.replace(/\/$/, "") + "/pagefind/",
+					bundlePath: `${import.meta.env.BASE_URL.replace(/\/$/, "")}/pagefind/`,
 					element: "#cactus__search",
 					showImages: false,
 					showSubResults: true,

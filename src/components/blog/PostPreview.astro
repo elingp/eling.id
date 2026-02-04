@@ -18,9 +18,7 @@ const { as: Tag = "h3", post, withDesc = false } = Astro.props;
 	/>
 	<Tag class="text-base leading-tight font-medium md:text-lg md:leading-snug">
 		{post.data.draft && <span class="text-danger">(Draft) </span>}
-		<a class="cactus-link" href={`/posts/${post.id}/`}>
-			{post.data.title}
-		</a>
+		<a class="cactus-link" href={`/posts/${post.id}/`}> {post.data.title} </a>
 	</Tag>
 	{withDesc && <p class="line-clamp-3 text-sm italic">{post.data.description}</p>}
 </article>

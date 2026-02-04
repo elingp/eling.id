@@ -20,7 +20,8 @@ import { Icon } from "astro-icon/components";
 </aside>
 
 <script>
-	const scrollBtn = document.querySelector<HTMLButtonElement>("#to-top-btn")!;
+	const scrollBtn = document.querySelector<HTMLButtonElement>("#to-top-btn");
+	if (!scrollBtn) throw new Error("Back to top button not found");
 	const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 	const SCROLL_DELTA_THRESHOLD = 16;
 	const SHOW_GRACE_MS = 300;
@@ -89,6 +90,14 @@ import { Icon } from "astro-icon/components";
 
 	window.addEventListener("scroll", onScroll, { passive: true });
 
-	observer.observe(document.querySelector<HTMLElement>("#blog-hero")!);
-	footerObserver.observe(document.querySelector<HTMLElement>("footer")!);
+	const heroEl = document.querySelector<HTMLElement>("#blog-hero");
+	const footerEl = document.querySelector<HTMLElement>("footer");
+
+	if (heroEl) {
+		observer.observe(heroEl);
+	}
+
+	if (footerEl) {
+		footerObserver.observe(footerEl);
+	}
 </script>

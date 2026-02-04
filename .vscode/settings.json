@@ -3,15 +3,15 @@
 	"[typescript]": { "editor.defaultFormatter": "biomejs.biome" },
 	"[javascriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
 	"[typescriptreact]": { "editor.defaultFormatter": "biomejs.biome" },
-	"[json][jsonc]": {
-		"editor.defaultFormatter": "biomejs.biome"
-	},
+	"[json][jsonc]": { "editor.defaultFormatter": "biomejs.biome" },
 	"[astro]": { "editor.defaultFormatter": "astro-build.astro-vscode" },
 	"[markdown]": { "editor.wordWrap": "on" },
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
 		"source.fixAll.biome": "explicit",
-		"source.organizeImports.biome": "explicit"
+		"source.organizeImports.biome": "explicit",
+		"source.action.useSortedAttributes.biome": "explicit",
+		"source.action.useSortedProperties.biome": "explicit"
 	},
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"astro.content-intellisense": true,
