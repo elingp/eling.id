@@ -25,7 +25,7 @@
 
 ## Agent Commit & Handoff
 
-- Default: stop before committing and provide a handoff (files changed, tests run, suggested Conventional Commit message).
+- **IMPORTANT**: Stop before committing git (just stage them) and provide a handoff (files changed, tests run, suggested Conventional Commit message).
 - If commits require GPG, do not request or accept passphrases; the user signs locally.
 - Use `--no-gpg-sign` only when the user explicitly requests it. This removes GitHub's Verified badge and may violate branch protections.
 - Atomic commits are optional. Only do them when the user explicitly requests them.
