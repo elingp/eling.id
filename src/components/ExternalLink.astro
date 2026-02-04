@@ -23,9 +23,12 @@ const isExternal = isHttpUrl && Astro.site ? new URL(href).origin !== Astro.site
 const derivedNewTab = newTab ?? isExternal;
 const relValue = derivedNewTab ? [rel, "noopener", "noreferrer"].filter(Boolean).join(" ") : rel;
 const targetValue = derivedNewTab ? (target ?? "_blank") : target;
+const slotContent = await Astro.slots.render("default");
+const trimmedSlotContent = slotContent?.trim() ?? "";
 ---
 
-<a {href} class={className} rel={relValue} target={targetValue} {...attrs}>
-	<slot />
-	{derivedNewTab && showNewTabHint && <span class="sr-only">(opens in a new tab)</span>}
-</a>
+<a {href} class={className} rel={relValue} target={targetValue} {...attrs}
+	><Fragment set:html={trimmedSlotContent} />{
+		derivedNewTab && showNewTabHint && <span class="sr-only">(opens in a new tab)</span>
+	}</a
+>
