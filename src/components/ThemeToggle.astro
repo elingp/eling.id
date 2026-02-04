@@ -3,62 +3,316 @@ import { Icon } from "astro-icon/components";
 ---
 
 <theme-toggle class="ms-3 lg:ms-4">
-	<button
-		class="hover:text-accent focus-visible:ring-accent relative h-9 w-9 cursor-pointer rounded-md p-2 focus-visible:ring-2 focus-visible:outline-none"
-		type="button"
-	>
-		<span class="sr-only">Dark mode</span>
-		<Icon
+	<div class="relative">
+		<button
+			aria-controls="theme-toggle-menu"
+			aria-expanded="false"
+			aria-haspopup="menu"
+			aria-label="Theme"
+			class="hover:text-accent focus-visible:ring-accent relative h-9 w-9 cursor-pointer rounded-md p-2 focus-visible:ring-2 focus-visible:outline-none"
+			type="button"
+		>
+			<span class="sr-only">Theme</span>
+			<Icon
+				aria-hidden="true"
+				data-theme-icon="light"
+				name="fa7-regular:sun"
+				class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2"
+			/>
+			<Icon
+				aria-hidden="true"
+				data-theme-icon="dark"
+				name="fa7-regular:moon"
+				class="absolute start-1/2 top-1/2 hidden h-6 w-6 -translate-x-1/2 -translate-y-1/2"
+			/>
+			<Icon
+				aria-hidden="true"
+				data-theme-icon="system"
+				name="fa7-solid:circle-half-stroke"
+				class="absolute start-1/2 top-1/2 hidden h-6 w-6 -translate-x-1/2 -translate-y-1/2"
+			/>
+		</button>
+		<div
 			aria-hidden="true"
-			name="fa7-regular:sun"
-			title="Toggle Dark Theme"
-			class="absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
-		/>
-		<Icon
-			aria-hidden="true"
-			name="fa7-regular:moon"
-			title="Toggle Light Theme"
-			class="absolute start-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
-		/>
-	</button>
+			class="bg-surface-2 border-ui absolute start-1/2 z-20 mt-2 w-44 -translate-x-1/2 rounded-md border p-2 shadow-sm"
+			data-theme-menu
+			data-open="false"
+			id="theme-toggle-menu"
+			role="menu"
+		>
+			<button
+				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
+				data-theme-option="light"
+				role="menuitemradio"
+				tabindex="-1"
+				type="button"
+			>
+				<Icon aria-hidden="true" name="fa7-regular:sun" class="h-4 w-4" />
+				Light
+			</button>
+			<button
+				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
+				data-theme-option="dark"
+				role="menuitemradio"
+				tabindex="-1"
+				type="button"
+			>
+				<Icon aria-hidden="true" name="fa7-regular:moon" class="h-4 w-4" />
+				Dark
+			</button>
+			<button
+				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
+				data-theme-option="system"
+				role="menuitemradio"
+				tabindex="-1"
+				type="button"
+			>
+				<Icon aria-hidden="true" name="fa7-solid:circle-half-stroke" class="h-4 w-4" />
+				OS default
+			</button>
+		</div>
+	</div>
 </theme-toggle>
 
-<script>
-	// Note that if you fire the theme-change event outside of this component, it will not be reflected in the button's aria-checked attribute. You will need to add an event listener if you want that.
-	import { rootInDarkMode } from "@/utils/domElement";
-
-	class ThemeToggle extends HTMLElement {
-		constructor() {
-			super();
-			const button = this.querySelector<HTMLButtonElement>("button");
-
-			if (button) {
-				const updateAriaState = () => {
-					button.setAttribute("aria-pressed", String(rootInDarkMode()));
-				};
-
-				updateAriaState();
-
-				button.addEventListener("click", () => {
-					const themeChangeEvent = new CustomEvent("theme-change", {
-						detail: {
-							theme: rootInDarkMode() ? "light" : "dark",
-						},
-					});
-					document.dispatchEvent(themeChangeEvent);
-					updateAriaState();
-				});
-
-				document.addEventListener("theme-change", updateAriaState);
-				document.addEventListener("astro:after-swap", updateAriaState);
-				window
-					.matchMedia("(prefers-color-scheme: light)")
-					.addEventListener("change", updateAriaState);
-			} else {
-				console.warn("Theme Toggle: No button found");
-			}
+<style>
+	@media (prefers-reduced-motion: no-preference) {
+		[data-theme-menu] {
+			transition:
+				opacity 150ms cubic-bezier(0.16, 1, 0.3, 1),
+				transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
 		}
 	}
 
-	customElements.define("theme-toggle", ThemeToggle);
+	[data-theme-menu][data-open="false"] {
+		opacity: 0;
+		pointer-events: none;
+		transform: translate(-50%, -4px);
+	}
+
+	[data-theme-menu] {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+</style>
+
+<script>
+	const themeOrder = ["light", "dark", "system"] as const;
+	type ThemePreference = (typeof themeOrder)[number];
+	type ThemeResolved = "light" | "dark";
+	type ThemeToggleState = {
+		cleanups: Array<() => void>;
+		initialized: boolean;
+	};
+
+	const themeLabels: Record<ThemePreference, string> = {
+		light: "Light",
+		dark: "Dark",
+		system: "OS default",
+	};
+
+	const isThemePreference = (value: string | null): value is ThemePreference =>
+		value !== null && themeOrder.includes(value as ThemePreference);
+
+	const themeChangeEventName = "theme-change";
+
+	const rootTheme = (): ThemePreference => {
+		const theme = document.documentElement.getAttribute("data-theme");
+		return isThemePreference(theme) ? theme : "system";
+	};
+
+	const rootResolvedTheme = (): ThemeResolved =>
+		document.documentElement.getAttribute("data-theme-resolved") === "dark" ? "dark" : "light";
+
+	const createThemeToggle = (root: HTMLElement) => {
+		const button = root.querySelector<HTMLButtonElement>("button");
+		const menu = root.querySelector<HTMLDivElement>("[data-theme-menu]");
+		const items = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-theme-option]"));
+		const icons = Array.from(root.querySelectorAll<HTMLElement>("[data-theme-icon]"));
+		let open = false;
+
+		if (!button || !menu || items.length === 0) {
+			console.warn("Theme Toggle: Missing menu elements");
+			return () => {};
+		}
+
+		const setOpen = (nextOpen: boolean) => {
+			open = nextOpen;
+			menu.setAttribute("data-open", String(open));
+			menu.setAttribute("aria-hidden", String(!open));
+			button.setAttribute("aria-expanded", String(open));
+		};
+
+		const syncFromRoot = () => {
+			const theme = rootTheme();
+			const resolvedTheme = rootResolvedTheme();
+			root.dataset.theme = theme;
+			root.dataset.resolvedTheme = resolvedTheme;
+			button.setAttribute("aria-label", `Theme: ${themeLabels[theme]}`);
+			for (const item of items) {
+				const selected = item.dataset.themeOption === theme;
+				item.setAttribute("aria-checked", String(selected));
+				item.classList.toggle("bg-ui-2", selected);
+				item.classList.toggle("font-semibold", selected);
+			}
+			for (const icon of icons) {
+				const matches = icon.dataset.themeIcon === theme;
+				icon.classList.toggle("hidden", !matches);
+			}
+		};
+
+		const focusIndex = (index: number) => {
+			items[index]?.focus();
+		};
+
+		const focusSelected = (forceLast = false) => {
+			const currentTheme = rootTheme();
+			const selectedIndex = items.findIndex((item) => item.dataset.themeOption === currentTheme);
+			if (forceLast) {
+				focusIndex(selectedIndex === -1 ? items.length - 1 : selectedIndex);
+				return;
+			}
+			focusIndex(selectedIndex === -1 ? 0 : selectedIndex);
+		};
+
+		const moveFocus = (direction: 1 | -1) => {
+			const activeElement = document.activeElement as HTMLButtonElement | null;
+			const activeIndex = activeElement ? items.indexOf(activeElement) : -1;
+			const nextIndex =
+				activeIndex === -1 ? 0 : (activeIndex + direction + items.length) % items.length;
+			focusIndex(nextIndex);
+		};
+
+		const selectTheme = (theme: ThemePreference) => {
+			document.dispatchEvent(
+				new CustomEvent(themeChangeEventName, {
+					detail: {
+						theme,
+						source: "toggle",
+					},
+				}),
+			);
+			setOpen(false);
+			button.focus();
+			syncFromRoot();
+		};
+
+		const onDocumentClick = (event: MouseEvent) => {
+			if (!root.contains(event.target as Node)) {
+				setOpen(false);
+			}
+		};
+
+		const onDocumentKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape" && open) {
+				event.preventDefault();
+				setOpen(false);
+				button.focus();
+			}
+		};
+
+		button.addEventListener("click", () => {
+			setOpen(!open);
+			if (open) {
+				focusSelected();
+			}
+		});
+
+		button.addEventListener("keydown", (event: KeyboardEvent) => {
+			if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+				event.preventDefault();
+				setOpen(true);
+				focusSelected(event.key === "ArrowUp");
+			}
+		});
+
+		menu.addEventListener("click", (event: MouseEvent) => {
+			const target = (event.target as HTMLElement | null)?.closest<HTMLButtonElement>(
+				"[data-theme-option]",
+			);
+			const option = target?.dataset.themeOption ?? null;
+			if (!isThemePreference(option)) {
+				return;
+			}
+			selectTheme(option);
+		});
+
+		menu.addEventListener("keydown", (event: KeyboardEvent) => {
+			if (!open) {
+				return;
+			}
+			switch (event.key) {
+				case "ArrowDown":
+					event.preventDefault();
+					moveFocus(1);
+					break;
+				case "ArrowUp":
+					event.preventDefault();
+					moveFocus(-1);
+					break;
+				case "Home":
+					event.preventDefault();
+					focusIndex(0);
+					break;
+				case "End":
+					event.preventDefault();
+					focusIndex(items.length - 1);
+					break;
+				case "Tab":
+					setOpen(false);
+					break;
+			}
+		});
+
+		document.addEventListener("click", onDocumentClick);
+		document.addEventListener("keydown", onDocumentKeyDown);
+		document.addEventListener(themeChangeEventName, syncFromRoot);
+		document.addEventListener("astro:after-swap", syncFromRoot);
+		syncFromRoot();
+		setOpen(false);
+
+		return () => {
+			document.removeEventListener("click", onDocumentClick);
+			document.removeEventListener("keydown", onDocumentKeyDown);
+			document.removeEventListener(themeChangeEventName, syncFromRoot);
+			document.removeEventListener("astro:after-swap", syncFromRoot);
+		};
+	};
+
+	const windowWithThemeToggleState = window as Window & {
+		__themeToggleState?: ThemeToggleState;
+	};
+
+	const themeToggleState: ThemeToggleState = windowWithThemeToggleState.__themeToggleState ?? {
+		cleanups: [],
+		initialized: false,
+	};
+
+	windowWithThemeToggleState.__themeToggleState = themeToggleState;
+
+	const { cleanups } = themeToggleState;
+
+	const initializeToggles = () => {
+		const toggles = document.querySelectorAll<HTMLElement>("theme-toggle");
+		for (const toggle of toggles) {
+			cleanups.push(createThemeToggle(toggle));
+		}
+	};
+
+	const teardownToggles = () => {
+		while (cleanups.length > 0) {
+			cleanups.pop()?.();
+		}
+	};
+
+	const resetToggles = () => {
+		teardownToggles();
+		initializeToggles();
+	};
+
+	resetToggles();
+
+	if (!themeToggleState.initialized) {
+		themeToggleState.initialized = true;
+		window.addEventListener("astro:after-swap", resetToggles);
+	}
 </script>

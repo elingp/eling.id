@@ -11,7 +11,7 @@
 	--pagefind-ui-border: var(--color-border);
 	--pagefind-ui-border-width: 1px;
 
-	[data-theme="dark"] & {
+	[data-theme-resolved="dark"] & {
 		--pagefind-ui-background: var(--color-bg-2);
 		--pagefind-ui-border: var(--color-border);
 	}

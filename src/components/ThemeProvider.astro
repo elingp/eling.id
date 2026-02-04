@@ -1,44 +1,109 @@
 <!-- Inlined to avoid FOUC. This is a parser blocking script. -->
 <script is:inline>
-	const lightModePref = window.matchMedia("(prefers-color-scheme: light)");
+	(() => {
+		if (window.__themeProviderInit) {
+			return;
+		}
+		window.__themeProviderInit = true;
 
-	function getUserPref() {
-		const storedTheme = typeof localStorage !== "undefined" && localStorage.getItem("theme");
-		return storedTheme || (lightModePref.matches ? "light" : "dark");
-	}
+		const darkModePref =
+			typeof window.matchMedia === "function"
+				? window.matchMedia("(prefers-color-scheme: dark)")
+				: null;
+		const themeValues = new Set(["light", "dark", "system"]);
 
-	function setTheme(newTheme) {
-		if (newTheme !== "light" && newTheme !== "dark") {
-			return console.warn(
-				`Invalid theme value '${newTheme}' received. Expected 'light' or 'dark'.`,
+		function normalizeTheme(value) {
+			return themeValues.has(value) ? value : "system";
+		}
+
+		function getStoredTheme() {
+			if (typeof localStorage === "undefined") {
+				return "system";
+			}
+			try {
+				return normalizeTheme(localStorage.getItem("theme"));
+			} catch {
+				return "system";
+			}
+		}
+
+		function getResolvedTheme(theme) {
+			if (theme === "dark") {
+				return "dark";
+			}
+			if (theme === "light") {
+				return "light";
+			}
+			if (darkModePref) {
+				return darkModePref.matches ? "dark" : "light";
+			}
+			return "dark";
+		}
+
+		function applyTheme(theme, { persist = true } = {}) {
+			const root = document.documentElement;
+			const resolvedTheme = getResolvedTheme(theme);
+			const currentTheme = root.getAttribute("data-theme");
+			const currentResolvedTheme = root.getAttribute("data-theme-resolved");
+
+			if (currentTheme !== theme) {
+				root.setAttribute("data-theme", theme);
+			}
+			if (currentResolvedTheme !== resolvedTheme) {
+				root.setAttribute("data-theme-resolved", resolvedTheme);
+			}
+
+			if (persist && typeof localStorage !== "undefined") {
+				try {
+					localStorage.setItem("theme", theme);
+				} catch {
+					// ignore storage errors
+				}
+			}
+
+			return resolvedTheme;
+		}
+
+		function emitThemeChange(theme, resolvedTheme, source) {
+			document.dispatchEvent(
+				new CustomEvent("theme-change", {
+					detail: {
+						theme,
+						resolvedTheme,
+						source,
+					},
+				}),
 			);
 		}
 
-		const root = document.documentElement;
+		const applyStoredTheme = () => {
+			applyTheme(getStoredTheme(), { persist: false });
+		};
 
-		// root already set to newTheme, exit early
-		if (newTheme === root.getAttribute("data-theme")) {
-			return;
+		// initial setup
+		applyStoredTheme();
+
+		// View Transitions hook to restore theme
+		document.addEventListener("astro:after-swap", applyStoredTheme);
+
+		// listen for theme-change custom event, fired in src/components/ThemeToggle.astro
+		document.addEventListener("theme-change", (event) => {
+			if (event.detail?.source === "system") {
+				return;
+			}
+			applyTheme(normalizeTheme(event.detail?.theme), { persist: true });
+		});
+
+		// listen for prefers-color-scheme change while on system
+		if (darkModePref) {
+			darkModePref.addEventListener("change", () => {
+				const rootTheme = normalizeTheme(document.documentElement.getAttribute("data-theme"));
+				if (rootTheme !== "system") {
+					return;
+				}
+				const resolvedTheme = applyTheme(rootTheme, { persist: false });
+				emitThemeChange(rootTheme, resolvedTheme, "system");
+			});
 		}
-
-		root.setAttribute("data-theme", newTheme);
-
-		if (typeof localStorage !== "undefined") {
-			localStorage.setItem("theme", newTheme);
-		}
-	}
-
-	// initial setup
-	setTheme(getUserPref());
-
-	// View Transitions hook to restore theme
-	document.addEventListener("astro:after-swap", () => setTheme(getUserPref()));
-
-	// listen for theme-change custom event, fired in src/components/ThemeToggle.astro
-	document.addEventListener("theme-change", (e) => {
-		setTheme(e.detail.theme);
-	});
-
-	// listen for prefers-color-scheme change.
-	lightModePref.addEventListener("change", (e) => setTheme(e.matches ? "light" : "dark"));
+	})();
 </script>

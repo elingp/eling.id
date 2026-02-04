@@ -53,10 +53,12 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 		if (styleVariants.length >= 2) {
 			const baseTheme = styleVariants[0]?.theme;
 			const altTheme = styleVariants.find((v) => v.theme.type !== baseTheme?.type)?.theme;
-			if (theme === baseTheme || theme === altTheme) return `[data-theme='${theme.type}']`;
+			if (theme === baseTheme || theme === altTheme) {
+				return `[data-theme-resolved='${theme.type}']`;
+			}
 		}
 		// return default selector
-		return `[data-theme="${theme.name}"]`;
+		return `[data-theme-resolved="${theme.name}"]`;
 	},
 	useThemedScrollbars: false,
 };
