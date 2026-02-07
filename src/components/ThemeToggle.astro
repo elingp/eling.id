@@ -96,9 +96,8 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-	const themeOrder = ["light", "dark", "system"] as const;
-	type ThemePreference = (typeof themeOrder)[number];
-	type ThemeResolved = "light" | "dark";
+	import { rootTheme, rootResolvedTheme, type ThemePreference } from "@/utils/domElement";
+
 	type ThemeToggleState = {
 		cleanups: Array<() => void>;
 		initialized: boolean;
@@ -110,18 +109,10 @@ import { Icon } from "astro-icon/components";
 		system: "OS default",
 	};
 
+	const themeOrder: ThemePreference[] = ["light", "dark", "system"];
+
 	const isThemePreference = (value: string | null): value is ThemePreference =>
 		value !== null && themeOrder.includes(value as ThemePreference);
-
-	const themeChangeEventName = "theme-change";
-
-	const rootTheme = (): ThemePreference => {
-		const theme = document.documentElement.getAttribute("data-theme");
-		return isThemePreference(theme) ? theme : "system";
-	};
-
-	const rootResolvedTheme = (): ThemeResolved =>
-		document.documentElement.getAttribute("data-theme-resolved") === "dark" ? "dark" : "light";
 
 	const createThemeToggle = (root: HTMLElement) => {
 		const button = root.querySelector<HTMLButtonElement>("button");
@@ -144,9 +135,8 @@ import { Icon } from "astro-icon/components";
 
 		const syncFromRoot = () => {
 			const theme = rootTheme();
-			const resolvedTheme = rootResolvedTheme();
 			root.dataset.theme = theme;
-			root.dataset.resolvedTheme = resolvedTheme;
+			root.dataset.resolvedTheme = rootResolvedTheme();
 			button.setAttribute("aria-label", `Theme: ${themeLabels[theme]}`);
 			for (const item of items) {
 				const selected = item.dataset.themeOption === theme;
@@ -175,16 +165,13 @@ import { Icon } from "astro-icon/components";
 		};
 
 		const moveFocus = (direction: 1 | -1) => {
-			const activeElement = document.activeElement as HTMLButtonElement | null;
-			const activeIndex = activeElement ? items.indexOf(activeElement) : -1;
-			const nextIndex =
-				activeIndex === -1 ? 0 : (activeIndex + direction + items.length) % items.length;
-			focusIndex(nextIndex);
+			const activeIndex = items.indexOf(document.activeElement as HTMLButtonElement);
+			focusIndex(activeIndex === -1 ? 0 : (activeIndex + direction + items.length) % items.length);
 		};
 
 		const selectTheme = (theme: ThemePreference) => {
 			document.dispatchEvent(
-				new CustomEvent(themeChangeEventName, {
+				new CustomEvent("theme-change", {
 					detail: {
 						theme,
 						source: "toggle",
@@ -265,7 +252,7 @@ import { Icon } from "astro-icon/components";
 
 		document.addEventListener("click", onDocumentClick);
 		document.addEventListener("keydown", onDocumentKeyDown);
-		document.addEventListener(themeChangeEventName, syncFromRoot);
+		document.addEventListener("theme-change", syncFromRoot);
 		document.addEventListener("astro:after-swap", syncFromRoot);
 		syncFromRoot();
 		setOpen(false);
@@ -273,34 +260,27 @@ import { Icon } from "astro-icon/components";
 		return () => {
 			document.removeEventListener("click", onDocumentClick);
 			document.removeEventListener("keydown", onDocumentKeyDown);
-			document.removeEventListener(themeChangeEventName, syncFromRoot);
+			document.removeEventListener("theme-change", syncFromRoot);
 			document.removeEventListener("astro:after-swap", syncFromRoot);
 		};
 	};
 
-	const windowWithThemeToggleState = window as Window & {
-		__themeToggleState?: ThemeToggleState;
-	};
-
-	const themeToggleState: ThemeToggleState = windowWithThemeToggleState.__themeToggleState ?? {
+	const state = ((
+		window as Window & { __themeToggleState?: ThemeToggleState }
+	).__themeToggleState ??= {
 		cleanups: [],
 		initialized: false,
-	};
-
-	windowWithThemeToggleState.__themeToggleState = themeToggleState;
-
-	const { cleanups } = themeToggleState;
+	});
 
 	const initializeToggles = () => {
-		const toggles = document.querySelectorAll<HTMLElement>("theme-toggle");
-		for (const toggle of toggles) {
-			cleanups.push(createThemeToggle(toggle));
+		for (const toggle of document.querySelectorAll<HTMLElement>("theme-toggle")) {
+			state.cleanups.push(createThemeToggle(toggle));
 		}
 	};
 
 	const teardownToggles = () => {
-		while (cleanups.length > 0) {
-			cleanups.pop()?.();
+		while (state.cleanups.length > 0) {
+			state.cleanups.pop()?.();
 		}
 	};
 
@@ -311,8 +291,8 @@ import { Icon } from "astro-icon/components";
 
 	resetToggles();
 
-	if (!themeToggleState.initialized) {
-		themeToggleState.initialized = true;
+	if (!state.initialized) {
+		state.initialized = true;
 		window.addEventListener("astro:after-swap", resetToggles);
 	}
 </script>

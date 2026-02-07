@@ -6,10 +6,7 @@
 		}
 		window.__themeProviderInit = true;
 
-		const darkModePref =
-			typeof window.matchMedia === "function"
-				? window.matchMedia("(prefers-color-scheme: dark)")
-				: null;
+		const darkModePref = window.matchMedia("(prefers-color-scheme: dark)");
 		const themeValues = new Set(["light", "dark", "system"]);
 
 		function normalizeTheme(value) {
@@ -20,11 +17,7 @@
 			if (typeof localStorage === "undefined") {
 				return "system";
 			}
-			try {
-				return normalizeTheme(localStorage.getItem("theme"));
-			} catch {
-				return "system";
-			}
+			return normalizeTheme(localStorage.getItem("theme"));
 		}
 
 		function getResolvedTheme(theme) {
@@ -34,31 +27,22 @@
 			if (theme === "light") {
 				return "light";
 			}
-			if (darkModePref) {
-				return darkModePref.matches ? "dark" : "light";
-			}
-			return "dark";
+			return darkModePref.matches ? "dark" : "light";
 		}
 
 		function applyTheme(theme, { persist = true } = {}) {
 			const root = document.documentElement;
 			const resolvedTheme = getResolvedTheme(theme);
-			const currentTheme = root.getAttribute("data-theme");
-			const currentResolvedTheme = root.getAttribute("data-theme-resolved");
 
-			if (currentTheme !== theme) {
+			if (root.getAttribute("data-theme") !== theme) {
 				root.setAttribute("data-theme", theme);
 			}
-			if (currentResolvedTheme !== resolvedTheme) {
+			if (root.getAttribute("data-theme-resolved") !== resolvedTheme) {
 				root.setAttribute("data-theme-resolved", resolvedTheme);
 			}
 
 			if (persist && typeof localStorage !== "undefined") {
-				try {
-					localStorage.setItem("theme", theme);
-				} catch {
-					// ignore storage errors
-				}
+				localStorage.setItem("theme", theme);
 			}
 
 			return resolvedTheme;
@@ -95,15 +79,12 @@
 		});
 
 		// listen for prefers-color-scheme change while on system
-		if (darkModePref) {
-			darkModePref.addEventListener("change", () => {
-				const rootTheme = normalizeTheme(document.documentElement.getAttribute("data-theme"));
-				if (rootTheme !== "system") {
-					return;
-				}
-				const resolvedTheme = applyTheme(rootTheme, { persist: false });
-				emitThemeChange(rootTheme, resolvedTheme, "system");
-			});
-		}
+		darkModePref.addEventListener("change", () => {
+			const rootTheme = normalizeTheme(document.documentElement.getAttribute("data-theme"));
+			if (rootTheme !== "system") {
+				return;
+			}
+			emitThemeChange(rootTheme, applyTheme(rootTheme, { persist: false }), "system");
+		});
 	})();
 </script>

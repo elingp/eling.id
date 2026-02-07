@@ -6,14 +6,15 @@ export function elementHasClass(element: HTMLElement, className: string) {
 	return element.classList.contains(className);
 }
 
-const themeValues = new Set(["light", "dark", "system"]);
-
 export type ThemePreference = "light" | "dark" | "system";
 export type ThemeResolved = "light" | "dark";
 
 export function rootTheme(): ThemePreference {
 	const theme = document.documentElement.getAttribute("data-theme");
-	return themeValues.has(theme ?? "") ? (theme as ThemePreference) : "system";
+	if (theme === "light" || theme === "dark" || theme === "system") {
+		return theme;
+	}
+	return "system";
 }
 
 export function rootResolvedTheme(): ThemeResolved {
