@@ -28,7 +28,7 @@ import { menuLinks } from "@/site.config";
 		</a>
 		<nav aria-label="Main menu">
 			<ul
-				class="bg-global-bg divide-accent absolute -inset-x-4 top-14 hidden flex-col divide-y px-2 py-4 group-[.menu-open]:z-50 group-[.menu-open]:flex lg:static lg:z-auto lg:-ms-4 lg:mt-1 lg:flex lg:flex-row lg:divide-x lg:divide-y-0 lg:divide-dotted lg:bg-transparent lg:p-0"
+				class="bg-surface-2 border-ui divide-accent absolute inset-x-0 top-full z-50 mt-3 hidden flex-col divide-y rounded-md border p-2 shadow-sm group-[.menu-open]:flex lg:static lg:z-auto lg:-ms-4 lg:mt-1 lg:flex lg:flex-row lg:divide-x lg:divide-y-0 lg:divide-dotted lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none"
 				id="navigation-menu"
 			>
 				{
@@ -36,7 +36,7 @@ import { menuLinks } from "@/site.config";
 						<li>
 							<a
 								aria-current={Astro.url.pathname === link.path ? "page" : false}
-								class="text-global-text lg:text-accent flex items-center justify-between px-2 py-4 font-semibold hover:underline focus-visible:underline focus-visible:underline-offset-2 focus-visible:outline-none lg:px-4 lg:py-0 lg:text-lg lg:underline-offset-2"
+								class="text-global-text lg:text-accent focus-visible:ring-accent flex items-center justify-between rounded-md px-3 py-2 font-semibold transition-colors focus-visible:ring-2 focus-visible:outline-none lg:rounded-none lg:px-4 lg:py-0 lg:text-lg lg:underline-offset-2 lg:hover:bg-transparent lg:hover:underline lg:focus-visible:underline lg:focus-visible:underline-offset-2 lg:focus-visible:ring-0"
 								href={link.path}
 							>
 								{link.title}
@@ -67,13 +67,13 @@ import { menuLinks } from "@/site.config";
 				aria-hidden="true"
 				name="fa7-solid:navicon"
 				title="Open menu"
-				class="hover:text-accent absolute start-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-all group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
+				class="hover:text-accent absolute start-1/2 top-1/2 h-6 w-6 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition duration-150 ease-in-out group-aria-expanded:scale-0 group-aria-expanded:opacity-0"
 			/>
 			<Icon
 				aria-hidden="true"
 				name="fa7-solid:close"
 				title="Close menu"
-				class="text-accent absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 cursor-pointer opacity-0 transition-all group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
+				class="text-accent absolute start-1/2 top-1/2 h-7 w-7 -translate-x-1/2 -translate-y-1/2 scale-0 cursor-pointer opacity-0 transition duration-150 ease-in-out group-aria-expanded:scale-100 group-aria-expanded:opacity-100"
 			/>
 		</button>
 	</mobile-button>
@@ -82,6 +82,8 @@ import { menuLinks } from "@/site.config";
 <script>
 	class MobileNavBtn extends HTMLElement {
 		#menuOpen: boolean = false;
+		#handleKeydown: ((event: KeyboardEvent) => void) | null = null;
+		#handleDropdownOpen: ((event: Event) => void) | null = null;
 
 		connectedCallback() {
 			const headerEl = document.getElementById("main-header");
@@ -90,17 +92,22 @@ import { menuLinks } from "@/site.config";
 			const srLabel = mobileButtonEl?.querySelector(".sr-only");
 			const firstMenuLink = menuEl?.querySelector<HTMLAnchorElement>("a");
 
-			const setMenuState = (open: boolean) => {
+			const setMenuState = (open: boolean, focus = true) => {
 				headerEl?.classList.toggle("menu-open", open);
 				this.#menuOpen = open;
 				mobileButtonEl?.setAttribute("aria-expanded", String(open));
 				if (srLabel) {
 					srLabel.textContent = open ? "Close main menu" : "Open main menu";
 				}
+				if (focus) {
+					if (open) {
+						firstMenuLink?.focus();
+					} else {
+						mobileButtonEl?.focus();
+					}
+				}
 				if (open) {
-					firstMenuLink?.focus();
-				} else {
-					mobileButtonEl?.focus();
+					document.dispatchEvent(new CustomEvent("dropdown-open", { detail: { source: this } }));
 				}
 			};
 
@@ -115,11 +122,32 @@ import { menuLinks } from "@/site.config";
 				}
 			});
 
-			document.addEventListener("keydown", (event) => {
+			this.#handleKeydown = (event: KeyboardEvent) => {
 				if (event.key === "Escape" && this.#menuOpen) {
 					setMenuState(false);
 				}
-			});
+			};
+
+			this.#handleDropdownOpen = (event: Event) => {
+				const detail = (event as CustomEvent<{ source: HTMLElement }>).detail;
+				if (detail.source !== this && this.#menuOpen) {
+					setMenuState(false, false);
+				}
+			};
+
+			document.addEventListener("keydown", this.#handleKeydown);
+			document.addEventListener("dropdown-open", this.#handleDropdownOpen);
+		}
+
+		disconnectedCallback() {
+			if (this.#handleKeydown) {
+				document.removeEventListener("keydown", this.#handleKeydown);
+				this.#handleKeydown = null;
+			}
+			if (this.#handleDropdownOpen) {
+				document.removeEventListener("dropdown-open", this.#handleDropdownOpen);
+				this.#handleDropdownOpen = null;
+			}
 		}
 	}
 

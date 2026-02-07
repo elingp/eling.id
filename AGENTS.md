@@ -25,7 +25,7 @@
 
 ## Agent Commit & Handoff
 
-- Default: stop before committing and provide a handoff (files changed, tests run, suggested Conventional Commit message).
+- **IMPORTANT**: Stop before committing git (do **not** stage them) and provide a handoff (files changed, tests run, suggested Conventional Commit message).
 - If commits require GPG, do not request or accept passphrases; the user signs locally.
 - Use `--no-gpg-sign` only when the user explicitly requests it. This removes GitHub's Verified badge and may violate branch protections.
 - Atomic commits are optional. Only do them when the user explicitly requests them.
@@ -124,9 +124,15 @@ import type { SiteConfig } from "@/types";
 
 ### Styling (Tailwind 4)
 
-- **Flexoki palette**: CSS variables `--color-flexoki-*` in `src/styles/global.css`.
-- **Dark mode**: `data-theme="dark"` attribute, use `@custom-variant dark`.
+- **Flexoki palette**: CSS variables `--color-flexoki-*` in `src/styles/theme.css`.
+- **Dark mode**: set preference via `data-theme` (light|dark|system), style off `data-theme-resolved`, use `@custom-variant dark`.
 - **Breakpoints**: Mobile-first, use `lg:` for layout changes, `md:` for typography only.
+- **CSS layout**: `src/styles/global.css` imports Tailwind + `theme.css`, `base.css`,
+  `components.css`, `utilities.css`, then `@config`.
+- **Component CSS**: add reusable styles to `src/styles/components/*.css` and import via
+  `src/styles/components.css`.
+- **Feature CSS**: add page/feature or third-party styles to `src/styles/blocks/` and import
+  from the owning component/page.
 
 ### Content Querying
 

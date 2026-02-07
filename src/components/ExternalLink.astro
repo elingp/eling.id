@@ -25,7 +25,8 @@ const relValue = derivedNewTab ? [rel, "noopener", "noreferrer"].filter(Boolean)
 const targetValue = derivedNewTab ? (target ?? "_blank") : target;
 ---
 
-<a {href} class={className} rel={relValue} target={targetValue} {...attrs}>
-	<slot />
-	{derivedNewTab && showNewTabHint && <span class="sr-only">(opens in a new tab)</span>}
-</a>
+<a {href} class={className} rel={relValue} target={targetValue} {...attrs}
+	><Fragment set:html={(await Astro.slots.render("default"))?.trim() ?? ""} />{
+		derivedNewTab && showNewTabHint && <span class="sr-only">(opens in a new tab)</span>
+	}</a
+>
