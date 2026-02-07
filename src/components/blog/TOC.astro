@@ -25,34 +25,82 @@ const toc = generateToc(headings);
 </details>
 
 <script>
-	if (window.matchMedia("(min-width: 1024px)").matches) {
+	const BREAKPOINT_QUERY = "(min-width: 1024px)";
+	const ROOT_MARGIN = "-20% 0% -75% 0%";
+
+	const isDesktop = () => window.matchMedia(BREAKPOINT_QUERY).matches;
+
+	const initTocSpy = () => {
+		if (!isDesktop()) return null;
+
 		const tocLinks = document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]");
 		const headings = document.querySelectorAll<HTMLElement>("article :is(h2, h3, h4)[id]");
 
-		if (tocLinks.length > 0 && headings.length > 0) {
-			let activeSlug: string | null = null;
+		if (tocLinks.length === 0 || headings.length === 0) return null;
 
-			const observer = new IntersectionObserver(
-				(entries) => {
-					const visible = entries
-						.filter((entry) => entry.isIntersecting)
-						.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+		const visibleHeadings = new Map<string, number>();
+		let activeSlug: string | null = null;
 
-					const newSlug = visible[0]?.target.id;
-					if (!newSlug) return;
-					if (newSlug === activeSlug) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				for (const entry of entries) {
+					const id = (entry.target as HTMLElement).id;
+					if (!id) continue;
+					if (entry.isIntersecting) {
+						visibleHeadings.set(id, entry.boundingClientRect.top);
+						continue;
+					}
+					visibleHeadings.delete(id);
+				}
 
+				if (visibleHeadings.size === 0) return;
+
+				let newSlug = "";
+				let minTop = Number.POSITIVE_INFINITY;
+				for (const [slug, top] of visibleHeadings.entries()) {
+					if (top >= minTop) continue;
+					minTop = top;
+					newSlug = slug;
+				}
+
+				if (!newSlug) return;
+
+				if (newSlug !== activeSlug) {
 					tocLinks.forEach((link) => link.removeAttribute("aria-current"));
 					document
 						.querySelector(`[data-toc-slug="${newSlug}"]`)
 						?.setAttribute("aria-current", "true");
 					activeSlug = newSlug;
-				},
-				{ rootMargin: "-20% 0% -75% 0%" },
-			);
+				}
+			},
+			{ rootMargin: ROOT_MARGIN },
+		);
 
-			headings.forEach((heading) => observer.observe(heading));
-		}
+		headings.forEach((heading) => observer.observe(heading));
+
+		return () => observer.disconnect();
+	};
+
+	type TocSpyState = {
+		cleanup: (() => void) | null;
+		initialized: boolean;
+	};
+
+	const windowWithTocSpy = window as Window & { __tocSpyState?: TocSpyState };
+	const state = windowWithTocSpy.__tocSpyState ?? { cleanup: null, initialized: false };
+	windowWithTocSpy.__tocSpyState = state;
+
+	const run = () => {
+		state.cleanup?.();
+		state.cleanup = initTocSpy();
+	};
+
+	run();
+
+	if (!state.initialized) {
+		state.initialized = true;
+		document.addEventListener("astro:page-load", run);
+		document.addEventListener("astro:after-swap", run);
 	}
 </script>
 
