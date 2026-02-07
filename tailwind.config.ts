@@ -34,7 +34,7 @@ export default {
 							borderRadius: "2px",
 						},
 						kbd: {
-							"&:where([data-theme='dark'], [data-theme='dark'] *)": {
+							"&:where([data-theme-resolved='dark'], [data-theme-resolved='dark'] *)": {
 								background: "var(--color-global-text)",
 							},
 						},

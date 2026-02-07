@@ -3,3 +3,10 @@ declare module "@pagefind/default-ui" {
 		constructor(arg: unknown);
 	}
 }
+
+interface Window {
+	__themeProviderInit?: boolean;
+	__twitterPostInit?: boolean;
+	__formattedDateInit?: boolean;
+	__backToTopInit?: boolean;
+}

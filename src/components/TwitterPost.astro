@@ -16,7 +16,7 @@ const tweetUrl = id.replace("https://x.com/", "https://twitter.com/");
 		window.__twitterPostInit = true;
 
 		const getTheme = () =>
-			document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+			document.documentElement.getAttribute("data-theme-resolved") === "dark" ? "dark" : "light";
 
 		const renderTweets = () => {
 			const theme = getTheme();

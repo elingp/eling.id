@@ -122,5 +122,8 @@ const mergedClass = className ? `client-formatted-date ${className}` : "client-f
 
 	formatClientDates();
 
-	document.addEventListener("astro:page-load", formatClientDates);
+	if (!window.__formattedDateInit) {
+		window.__formattedDateInit = true;
+		document.addEventListener("astro:page-load", formatClientDates);
+	}
 </script>
