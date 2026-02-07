@@ -57,8 +57,8 @@ export const expressiveCodeOptions: AstroExpressiveCodeOptions = {
 				return `[data-theme-resolved='${theme.type}']`;
 			}
 		}
-		// return default selector
-		return `[data-theme-resolved="${theme.name}"]`;
+		// Fallback: use theme.type (light/dark)
+		return `[data-theme-resolved="${theme.type}"]`;
 	},
 	useThemedScrollbars: false,
 };
