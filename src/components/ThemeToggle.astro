@@ -9,7 +9,7 @@ import { Icon } from "astro-icon/components";
 			aria-expanded="false"
 			aria-haspopup="menu"
 			aria-label="Theme"
-			class="hover:text-accent focus-visible:ring-accent hover:bg-ui-2 active:bg-ui-3 relative h-9 w-9 cursor-pointer touch-manipulation rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+			class="hover:text-accent focus-visible:ring-accent relative h-9 w-9 cursor-pointer touch-manipulation rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
 			type="button"
 		>
 			<span class="sr-only">Theme</span>
@@ -131,6 +131,9 @@ import { Icon } from "astro-icon/components";
 			menu.setAttribute("data-open", String(open));
 			menu.setAttribute("aria-hidden", String(!open));
 			button.setAttribute("aria-expanded", String(open));
+			if (open) {
+				document.dispatchEvent(new CustomEvent("dropdown-open", { detail: { source: root } }));
+			}
 		};
 
 		const syncFromRoot = () => {
@@ -184,9 +187,10 @@ import { Icon } from "astro-icon/components";
 		};
 
 		const onDocumentClick = (event: MouseEvent) => {
-			if (!root.contains(event.target as Node)) {
-				setOpen(false);
+			if (root.contains(event.target as Node) || document.querySelector("dialog[open]")) {
+				return;
 			}
+			setOpen(false);
 		};
 
 		const onDocumentKeyDown = (event: KeyboardEvent) => {
@@ -250,9 +254,17 @@ import { Icon } from "astro-icon/components";
 			}
 		});
 
+		const onDropdownOpen = (event: Event) => {
+			const detail = (event as CustomEvent<{ source: HTMLElement }>).detail;
+			if (detail.source !== root) {
+				setOpen(false);
+			}
+		};
+
 		document.addEventListener("click", onDocumentClick);
 		document.addEventListener("keydown", onDocumentKeyDown);
 		document.addEventListener("theme-change", syncFromRoot);
+		document.addEventListener("dropdown-open", onDropdownOpen);
 		document.addEventListener("astro:after-swap", syncFromRoot);
 		syncFromRoot();
 		setOpen(false);
@@ -261,6 +273,7 @@ import { Icon } from "astro-icon/components";
 			document.removeEventListener("click", onDocumentClick);
 			document.removeEventListener("keydown", onDocumentKeyDown);
 			document.removeEventListener("theme-change", syncFromRoot);
+			document.removeEventListener("dropdown-open", onDropdownOpen);
 			document.removeEventListener("astro:after-swap", syncFromRoot);
 		};
 	};

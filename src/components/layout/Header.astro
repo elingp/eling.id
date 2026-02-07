@@ -36,7 +36,7 @@ import { menuLinks } from "@/site.config";
 						<li>
 							<a
 								aria-current={Astro.url.pathname === link.path ? "page" : false}
-								class="text-global-text lg:text-accent hover:bg-ui-2 active:bg-ui-3 focus-visible:ring-accent flex items-center justify-between rounded-md px-3 py-2 font-semibold transition-colors focus-visible:ring-2 focus-visible:outline-none lg:rounded-none lg:px-4 lg:py-0 lg:text-lg lg:underline-offset-2 lg:hover:bg-transparent lg:hover:underline lg:focus-visible:underline lg:focus-visible:underline-offset-2 lg:focus-visible:ring-0"
+								class="text-global-text lg:text-accent focus-visible:ring-accent flex items-center justify-between rounded-md px-3 py-2 font-semibold transition-colors focus-visible:ring-2 focus-visible:outline-none lg:rounded-none lg:px-4 lg:py-0 lg:text-lg lg:underline-offset-2 lg:hover:bg-transparent lg:hover:underline lg:focus-visible:underline lg:focus-visible:underline-offset-2 lg:focus-visible:ring-0"
 								href={link.path}
 							>
 								{link.title}
@@ -90,17 +90,22 @@ import { menuLinks } from "@/site.config";
 			const srLabel = mobileButtonEl?.querySelector(".sr-only");
 			const firstMenuLink = menuEl?.querySelector<HTMLAnchorElement>("a");
 
-			const setMenuState = (open: boolean) => {
+			const setMenuState = (open: boolean, focus = true) => {
 				headerEl?.classList.toggle("menu-open", open);
 				this.#menuOpen = open;
 				mobileButtonEl?.setAttribute("aria-expanded", String(open));
 				if (srLabel) {
 					srLabel.textContent = open ? "Close main menu" : "Open main menu";
 				}
+				if (focus) {
+					if (open) {
+						firstMenuLink?.focus();
+					} else {
+						mobileButtonEl?.focus();
+					}
+				}
 				if (open) {
-					firstMenuLink?.focus();
-				} else {
-					mobileButtonEl?.focus();
+					document.dispatchEvent(new CustomEvent("dropdown-open", { detail: { source: this } }));
 				}
 			};
 
@@ -118,6 +123,13 @@ import { menuLinks } from "@/site.config";
 			document.addEventListener("keydown", (event) => {
 				if (event.key === "Escape" && this.#menuOpen) {
 					setMenuState(false);
+				}
+			});
+
+			document.addEventListener("dropdown-open", (event) => {
+				const detail = (event as CustomEvent<{ source: HTMLElement }>).detail;
+				if (detail.source !== this && this.#menuOpen) {
+					setMenuState(false, false);
 				}
 			});
 		}
