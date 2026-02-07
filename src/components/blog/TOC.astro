@@ -23,3 +23,44 @@ const toc = generateToc(headings);
 		</ol>
 	</nav>
 </details>
+
+<script>
+	if (window.matchMedia("(min-width: 1024px)").matches) {
+		const tocLinks = document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]");
+		const headings = document.querySelectorAll<HTMLElement>("article :is(h2, h3, h4)[id]");
+
+		if (tocLinks.length > 0 && headings.length > 0) {
+			let activeSlug: string | null = null;
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					const visible = entries
+						.filter((entry) => entry.isIntersecting)
+						.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+					const newSlug = visible[0]?.target.id;
+					if (!newSlug) return;
+					if (newSlug === activeSlug) return;
+
+					tocLinks.forEach((link) => link.removeAttribute("aria-current"));
+					document
+						.querySelector(`[data-toc-slug="${newSlug}"]`)
+						?.setAttribute("aria-current", "true");
+					activeSlug = newSlug;
+				},
+				{ rootMargin: "-20% 0% -75% 0%" },
+			);
+
+			headings.forEach((heading) => observer.observe(heading));
+		}
+	}
+</script>
+
+<style is:global>
+	[data-toc-link][aria-current="true"] {
+		font-weight: 700;
+		text-decoration: underline;
+		text-decoration-color: var(--color-accent);
+		text-underline-offset: 2px;
+	}
+</style>
