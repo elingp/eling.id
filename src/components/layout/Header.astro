@@ -82,6 +82,8 @@ import { menuLinks } from "@/site.config";
 <script>
 	class MobileNavBtn extends HTMLElement {
 		#menuOpen: boolean = false;
+		#handleKeydown: ((event: KeyboardEvent) => void) | null = null;
+		#handleDropdownOpen: ((event: Event) => void) | null = null;
 
 		connectedCallback() {
 			const headerEl = document.getElementById("main-header");
@@ -120,18 +122,32 @@ import { menuLinks } from "@/site.config";
 				}
 			});
 
-			document.addEventListener("keydown", (event) => {
+			this.#handleKeydown = (event: KeyboardEvent) => {
 				if (event.key === "Escape" && this.#menuOpen) {
 					setMenuState(false);
 				}
-			});
+			};
 
-			document.addEventListener("dropdown-open", (event) => {
+			this.#handleDropdownOpen = (event: Event) => {
 				const detail = (event as CustomEvent<{ source: HTMLElement }>).detail;
 				if (detail.source !== this && this.#menuOpen) {
 					setMenuState(false, false);
 				}
-			});
+			};
+
+			document.addEventListener("keydown", this.#handleKeydown);
+			document.addEventListener("dropdown-open", this.#handleDropdownOpen);
+		}
+
+		disconnectedCallback() {
+			if (this.#handleKeydown) {
+				document.removeEventListener("keydown", this.#handleKeydown);
+				this.#handleKeydown = null;
+			}
+			if (this.#handleDropdownOpen) {
+				document.removeEventListener("dropdown-open", this.#handleDropdownOpen);
+				this.#handleDropdownOpen = null;
+			}
 		}
 	}
 
