@@ -306,6 +306,6 @@ import { Icon } from "astro-icon/components";
 
 	if (!state.initialized) {
 		state.initialized = true;
-		window.addEventListener("astro:after-swap", resetToggles);
+		document.addEventListener("astro:after-swap", resetToggles);
 	}
 </script>
