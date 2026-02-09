@@ -27,58 +27,139 @@ const toc = generateToc(headings);
 <script>
 	const BREAKPOINT_QUERY = "(min-width: 1024px)";
 	const ROOT_MARGIN = "-20% 0% -75% 0%";
+	const ACTIVE_OFFSET_RATIO = 0.2;
+	const MIN_ACTIVE_OFFSET = 72;
 
 	const isDesktop = () => window.matchMedia(BREAKPOINT_QUERY).matches;
 
 	const initTocSpy = () => {
 		if (!isDesktop()) return null;
 
-		const tocLinks = document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]");
-		const headings = document.querySelectorAll<HTMLElement>("article :is(h2, h3, h4)[id]");
+		const tocLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"));
+		const headings = Array.from(
+			document.querySelectorAll<HTMLElement>("article :is(h2, h3, h4)[id]"),
+		).filter((heading) => !!heading.id);
 
 		if (tocLinks.length === 0 || headings.length === 0) return null;
 
-		const visibleHeadings = new Map<string, number>();
+		const tocLinkBySlug = new Map<string, HTMLAnchorElement>();
+		for (const link of tocLinks) {
+			const slug = link.dataset.tocSlug;
+			if (slug) tocLinkBySlug.set(slug, link);
+		}
+
+		const headingTops = new Array<number>(headings.length).fill(0);
 		let activeSlug: string | null = null;
+		let updateRaf = 0;
+		let measureRaf = 0;
+
+		const getActiveOffset = () =>
+			Math.max(MIN_ACTIVE_OFFSET, Math.round(window.innerHeight * ACTIVE_OFFSET_RATIO));
+
+		const measureHeadings = () => {
+			let index = 0;
+			for (const heading of headings) {
+				headingTops[index] = heading.getBoundingClientRect().top + window.scrollY;
+				index += 1;
+			}
+		};
+
+		const findActiveSlug = () => {
+			if (headingTops.length === 0) return null;
+			const offsetY = window.scrollY + getActiveOffset();
+
+			const firstTop = headingTops[0];
+			const firstHeading = headings[0];
+
+			if (firstTop === undefined || !firstHeading) return null;
+
+			if (offsetY < firstTop) {
+				if (firstTop <= window.scrollY + window.innerHeight) {
+					return firstHeading.id;
+				}
+				return null;
+			}
+
+			let low = 0;
+			let high = headingTops.length - 1;
+			let result = 0;
+
+			while (low <= high) {
+				const mid = Math.floor((low + high) / 2);
+				const midTop = headingTops[mid] ?? Number.POSITIVE_INFINITY;
+				if (midTop <= offsetY) {
+					result = mid;
+					low = mid + 1;
+				} else {
+					high = mid - 1;
+				}
+			}
+
+			return headings[result]?.id ?? null;
+		};
+
+		const setActiveSlug = (slug: string | null) => {
+			if (slug === activeSlug) return;
+			if (activeSlug) tocLinkBySlug.get(activeSlug)?.removeAttribute("aria-current");
+			if (slug) tocLinkBySlug.get(slug)?.setAttribute("aria-current", "location");
+			activeSlug = slug;
+		};
+
+		const updateActive = () => {
+			setActiveSlug(findActiveSlug());
+		};
+
+		const scheduleUpdate = () => {
+			if (updateRaf) return;
+			updateRaf = window.requestAnimationFrame(() => {
+				updateRaf = 0;
+				updateActive();
+			});
+		};
+
+		const scheduleMeasure = () => {
+			if (measureRaf) return;
+			measureRaf = window.requestAnimationFrame(() => {
+				measureRaf = 0;
+				measureHeadings();
+				updateActive();
+			});
+		};
 
 		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					const id = (entry.target as HTMLElement).id;
-					if (!id) continue;
-					if (entry.isIntersecting) {
-						visibleHeadings.set(id, entry.boundingClientRect.top);
-						continue;
-					}
-					visibleHeadings.delete(id);
-				}
-
-				if (visibleHeadings.size === 0) return;
-
-				let newSlug = "";
-				let minTop = Number.POSITIVE_INFINITY;
-				for (const [slug, top] of visibleHeadings.entries()) {
-					if (top >= minTop) continue;
-					minTop = top;
-					newSlug = slug;
-				}
-
-				if (!newSlug) return;
-
-				if (newSlug !== activeSlug) {
-					tocLinks.forEach((link) => link.removeAttribute("aria-current"));
-					document
-						.querySelector(`[data-toc-slug="${newSlug}"]`)
-						?.setAttribute("aria-current", "true");
-					activeSlug = newSlug;
-				}
+			() => {
+				scheduleUpdate();
 			},
 			{ rootMargin: ROOT_MARGIN },
 		);
 
 		headings.forEach((heading) => observer.observe(heading));
 
-		return () => observer.disconnect();
+		const onScroll = () => scheduleUpdate();
+		const onResize = () => scheduleMeasure();
+
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onResize);
+
+		measureHeadings();
+		updateActive();
+
+		if ("fonts" in document) {
+			document.fonts?.ready.then(() => scheduleMeasure());
+		}
+
+		const article = document.querySelector("article");
+		const resizeObserver =
+			"ResizeObserver" in window ? new ResizeObserver(() => scheduleMeasure()) : null;
+
+		resizeObserver?.observe(article ?? document.body);
+
+		return () => {
+			observer.disconnect();
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("resize", onResize);
+			resizeObserver?.disconnect();
+		};
 	};
 
 	type TocSpyState = {
@@ -105,7 +186,7 @@ const toc = generateToc(headings);
 </script>
 
 <style is:global>
-	[data-toc-link][aria-current="true"] {
+	[data-toc-link][aria-current] {
 		font-weight: 700;
 		text-decoration: underline;
 		text-decoration-color: var(--color-accent);
