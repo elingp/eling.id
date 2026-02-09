@@ -4,8 +4,7 @@ import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
 import { defineConfig, envField } from "astro/config";
 import expressiveCode from "astro-expressive-code";
-// @ts-expect-error
-import { astroGrab } from "astro-grab"; // TODO: Remove ts-expect-error when astro-grab has types
+import { astroGrab } from "astro-grab";
 import htmlMinifier from "astro-html-minifier-next";
 import icon from "astro-icon";
 import metaTags from "astro-meta-tags";
@@ -26,7 +25,6 @@ import { remarkGithubCard } from "./src/plugins/remark-github-card.ts";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.ts";
 import { expressiveCodeOptions, siteConfig } from "./src/site.config.ts";
 
-// https://astro.build/config
 export default defineConfig({
 	site: siteConfig.url,
 	image: {
@@ -39,7 +37,6 @@ export default defineConfig({
 		mdx(),
 		robotsTxt(),
 		webmanifest({
-			// See: https://github.com/alextim/astro-lib/blob/main/packages/astro-webmanifest/README.md
 			name: siteConfig.title,
 			short_name: "Eling_Pramuatmaja", // optional
 			description: siteConfig.description,
@@ -47,7 +44,7 @@ export default defineConfig({
 			icon: "public/icon.svg", // the source for generating favicon & icons
 			icons: [
 				{
-					src: "icons/apple-touch-icon.png", // used in src/components/BaseHead.astro L:26
+					src: "icons/apple-touch-icon.png",
 					sizes: "180x180",
 					type: "image/png",
 				},
@@ -157,7 +154,7 @@ export default defineConfig({
 			remarkReadingTime,
 			remarkGitMetadata,
 			remarkDirective,
-			remarkFigureCaption, // Must be after remarkDirective
+			remarkFigureCaption, // must be after remarkDirective
 			remarkGithubCard,
 			remarkAdmonitions,
 		],
