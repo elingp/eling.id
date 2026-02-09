@@ -52,6 +52,7 @@ const toc = generateToc(headings);
 		let activeSlug: string | null = null;
 		let updateRaf = 0;
 		let measureRaf = 0;
+		let disposed = false;
 
 		const getActiveOffset = () =>
 			Math.max(MIN_ACTIVE_OFFSET, Math.round(window.innerHeight * ACTIVE_OFFSET_RATIO));
@@ -110,17 +111,18 @@ const toc = generateToc(headings);
 		};
 
 		const scheduleUpdate = () => {
-			if (updateRaf) return;
+			if (disposed || updateRaf) return;
 			updateRaf = window.requestAnimationFrame(() => {
 				updateRaf = 0;
-				updateActive();
+				if (!disposed) updateActive();
 			});
 		};
 
 		const scheduleMeasure = () => {
-			if (measureRaf) return;
+			if (disposed || measureRaf) return;
 			measureRaf = window.requestAnimationFrame(() => {
 				measureRaf = 0;
+				if (disposed) return;
 				measureHeadings();
 				updateActive();
 			});
@@ -155,6 +157,9 @@ const toc = generateToc(headings);
 		resizeObserver?.observe(article ?? document.body);
 
 		return () => {
+			disposed = true;
+			if (updateRaf) cancelAnimationFrame(updateRaf);
+			if (measureRaf) cancelAnimationFrame(measureRaf);
 			observer.disconnect();
 			window.removeEventListener("scroll", onScroll);
 			window.removeEventListener("resize", onResize);
