@@ -23,6 +23,13 @@
 | `pnpm run check:ci`  | CI-optimized check with GitHub annotations |
 | `pnpm run fix`       | Auto-fix Biome + Prettier                  |
 
+Lifecycle hooks (run automatically):
+
+| Hook          | Purpose                                     |
+| ------------- | ------------------------------------------- |
+| `preinstall`  | Enforces pnpm as the only package manager   |
+| `postinstall` | Configures git hooks via `simple-git-hooks` |
+
 ## Agent Commit & Handoff
 
 - **IMPORTANT**: Stop before committing git (do **not** stage them) and provide a handoff (files changed, tests run, suggested Conventional Commit message).
@@ -108,12 +115,12 @@ Headings get anchor links. External links open in a new tab and receive an icon.
 
 ### Imports
 
-- Use `@/` alias for `src/` imports.
+- Use `@/` alias for `src/` imports with explicit `.ts` extensions.
 - Use `import type { X }` for type-only imports.
 
 ```typescript
-import { siteConfig } from "@/site.config";
-import type { SiteConfig } from "@/types";
+import { siteConfig } from "@/site.config.ts";
+import type { SiteConfig } from "@/types.ts";
 ```
 
 ### Linting & Formatting
@@ -137,7 +144,7 @@ import type { SiteConfig } from "@/types";
 ### Content Querying
 
 ```typescript
-import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
+import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post.ts";
 const posts = await getAllPosts(); // Filters drafts in production
 ```
 

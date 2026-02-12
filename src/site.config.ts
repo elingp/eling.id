@@ -1,5 +1,5 @@
 import type { AstroExpressiveCodeOptions } from "astro-expressive-code";
-import type { SiteConfig } from "@/types";
+import type { SiteConfig } from "@/types.ts";
 
 export const siteConfig: SiteConfig = {
 	author: "Eling Pramuatmaja",

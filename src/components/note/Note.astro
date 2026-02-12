@@ -2,7 +2,7 @@
 import { type CollectionEntry, render } from "astro:content";
 import type { HTMLTag, Polymorphic } from "astro/types";
 import FormattedDate from "@/components/FormattedDate.astro";
-import { getEffectiveUpdatedDate } from "@/utils/updatedDate";
+import { getEffectiveUpdatedDate } from "@/utils/updatedDate.ts";
 
 type Props<Tag extends HTMLTag> = Polymorphic<{ as: Tag }> & {
 	note: CollectionEntry<"note">;

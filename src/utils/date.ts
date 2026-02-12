@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content";
-import { siteConfig } from "@/site.config";
+import { siteConfig } from "@/site.config.ts";
 
 export function getFormattedDate(
 	date: Date | undefined,

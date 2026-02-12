@@ -3,9 +3,9 @@ import { Resvg } from "@resvg/resvg-js";
 import type { APIContext, InferGetStaticPropsType } from "astro";
 import satori, { type SatoriOptions } from "satori";
 import { html } from "satori-html";
-import { getAllPosts } from "@/data/post";
-import { siteConfig } from "@/site.config";
-import { getFormattedDate } from "@/utils/date";
+import { getAllPosts } from "@/data/post.ts";
+import { siteConfig } from "@/site.config.ts";
+import { getFormattedDate } from "@/utils/date.ts";
 
 const ogOptions: SatoriOptions = {
 	fonts: [

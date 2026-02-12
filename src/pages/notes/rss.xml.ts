@@ -1,13 +1,13 @@
 import { getCollection } from "astro:content";
 import rss, { type RSSFeedItem } from "@astrojs/rss";
 import type { APIRoute } from "astro";
-import { siteConfig } from "@/site.config";
+import { siteConfig } from "@/site.config.ts";
 import {
 	getEffectiveUpdatedDate,
 	getRssExcerptFromHtml,
 	normalizeSiteUrl,
 	renderRssEntry,
-} from "@/utils/rss";
+} from "@/utils/rss.ts";
 
 export const GET: APIRoute = async (context) => {
 	const siteUrl = normalizeSiteUrl(context.site);

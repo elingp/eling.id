@@ -6,9 +6,9 @@ import PostPreview from "@/components/blog/PostPreview.astro";
 import Pagination from "@/components/Paginator.astro";
 import RssLink from "@/components/RssLink.astro";
 import TagLink from "@/components/TagLink.astro";
-import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post";
+import { getAllPosts, getUniqueTags, groupPostsByYear } from "@/data/post.ts";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
+import { collectionDateSort } from "@/utils/date.ts";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_POSTS_PER_PAGE = 10;
