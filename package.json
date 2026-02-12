@@ -1,6 +1,7 @@
 {
 	"name": "eling.id",
 	"version": "6.11.0",
+	"private": true,
 	"description": "Personal website of Eling Pramuatmaja",
 	"keywords": [
 		"blog",
@@ -14,7 +15,7 @@
 		"url": "https://github.com/elingp/eling.id/issues"
 	},
 	"license": "MIT",
-	"author": "Eling Pramuatmaja",
+	"author": "Eling Pramuatmaja <eling@eling.id> (https://eling.id/)",
 	"type": "module",
 	"repository": {
 		"type": "git",
@@ -92,7 +93,6 @@
 		"node": ">=24.0.0",
 		"pnpm": ">=10.0.0"
 	},
-	"private": true,
 	"simple-git-hooks": {
 		"pre-commit": "pnpm lint-staged"
 	},
@@ -104,6 +104,7 @@
 			"prettier --write --cache"
 		]
 	},
+	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc",
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"@biomejs/biome",
@@ -116,6 +117,5 @@
 			"lodash": "^4.17.23",
 			"sharp": "^0.34.5"
 		}
-	},
-	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
+	}
 }
