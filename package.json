@@ -21,6 +21,8 @@
 		"url": "git+https://github.com/elingp/eling.id.git"
 	},
 	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"postinstall": "simple-git-hooks",
 		"dev": "astro dev",
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
