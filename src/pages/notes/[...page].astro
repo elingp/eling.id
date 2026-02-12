@@ -5,7 +5,7 @@ import Note from "@/components/note/Note.astro";
 import Pagination from "@/components/Paginator.astro";
 import RssLink from "@/components/RssLink.astro";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
+import { collectionDateSort } from "@/utils/date.ts";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const MAX_NOTES_PER_PAGE = 10;
