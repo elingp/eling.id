@@ -4,9 +4,9 @@ import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
 import { Icon } from "astro-icon/components";
 import PostPreview from "@/components/blog/PostPreview.astro";
 import Pagination from "@/components/Paginator.astro";
-import { getAllPosts, getTagMeta, getUniqueTags } from "@/data/post";
+import { getAllPosts, getTagMeta, getUniqueTags } from "@/data/post.ts";
 import PageLayout from "@/layouts/Base.astro";
-import { collectionDateSort } from "@/utils/date";
+import { collectionDateSort } from "@/utils/date.ts";
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const allPosts = await getAllPosts();

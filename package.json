@@ -1,23 +1,29 @@
 {
 	"name": "eling.id",
-	"type": "module",
 	"version": "6.11.0",
-	"private": false,
-	"engines": {
-		"node": ">=24"
+	"private": true,
+	"description": "Personal website of Eling Pramuatmaja",
+	"keywords": [
+		"blog",
+		"personal-website",
+		"astro",
+		"tailwindcss",
+		"astrojs"
+	],
+	"homepage": "https://eling.id/",
+	"bugs": {
+		"url": "https://github.com/elingp/eling.id/issues"
 	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm lint-staged"
-	},
-	"lint-staged": {
-		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
-			"biome check --write --no-errors-on-unmatched"
-		],
-		"*.{astro,css,md,mdx,yml,yaml}": [
-			"prettier --write --cache"
-		]
+	"license": "MIT",
+	"author": "Eling Pramuatmaja <eling@eling.id> (https://eling.id/)",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/elingp/eling.id.git"
 	},
 	"scripts": {
+		"preinstall": "npx only-allow pnpm",
+		"postinstall": "simple-git-hooks",
 		"dev": "astro dev",
 		"build": "PUBLIC_COMMIT_HASH=$(git rev-parse HEAD 2>/dev/null || echo 'dev') astro build",
 		"postbuild": "pagefind --site dist",
@@ -35,7 +41,7 @@
 		"@fontsource/source-sans-3": "^5.2.9",
 		"@fontsource/source-serif-4": "^5.2.9",
 		"@tailwindcss/vite": "^4.1.18",
-		"astro": "^5.17.1",
+		"astro": "^5.17.2",
 		"astro-embed": "^0.12.0",
 		"astro-expressive-code": "^0.41.6",
 		"astro-icon": "^1.1.5",
@@ -49,7 +55,7 @@
 		"rehype-external-links": "^3.0.0",
 		"rehype-unwrap-images": "^1.0.0",
 		"remark-directive": "^4.0.0",
-		"satori": "^0.19.1",
+		"satori": "^0.19.2",
 		"satori-html": "^0.3.2",
 		"sharp": "^0.34.5",
 		"ultrahtml": "^1.6.0",
@@ -83,6 +89,22 @@
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3"
 	},
+	"engines": {
+		"node": ">=24.0.0",
+		"pnpm": ">=10.0.0"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "pnpm lint-staged"
+	},
+	"lint-staged": {
+		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
+			"biome check --write --no-errors-on-unmatched"
+		],
+		"*.{astro,css,md,mdx,yml,yaml}": [
+			"prettier --write --cache"
+		]
+	},
+	"packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc",
 	"pnpm": {
 		"onlyBuiltDependencies": [
 			"@biomejs/biome",
@@ -95,6 +117,5 @@
 			"lodash": "^4.17.23",
 			"sharp": "^0.34.5"
 		}
-	},
-	"packageManager": "pnpm@10.29.2+sha512.bef43fa759d91fd2da4b319a5a0d13ef7a45bb985a3d7342058470f9d2051a3ba8674e629672654686ef9443ad13a82da2beb9eeb3e0221c87b8154fff9d74b8"
+	}
 }

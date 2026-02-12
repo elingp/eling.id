@@ -71,6 +71,7 @@ export default defineConfig({
 		}),
 		Sonda({
 			server: true,
+			open: false, // automatically open reports; default is true
 		}),
 		metaTags(),
 		astroGrab(),
