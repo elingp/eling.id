@@ -74,6 +74,9 @@ pnpm run dev
 
 Then open [http://localhost:4321](http://localhost:4321).
 
+> [!NOTE]
+> `pnpm install` enforces pnpm as the package manager and configures git hooks for pre-commit linting automatically.
+
 ## Project commands
 
 | Command              | Description                                                     |
