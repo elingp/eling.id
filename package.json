@@ -1,21 +1,24 @@
 {
 	"name": "eling.id",
-	"type": "module",
 	"version": "6.11.0",
-	"private": false,
-	"engines": {
-		"node": ">=24"
+	"description": "Personal website of Eling Pramuatmaja",
+	"keywords": [
+		"blog",
+		"personal-website",
+		"astro",
+		"tailwindcss",
+		"astrojs"
+	],
+	"homepage": "https://eling.id/",
+	"bugs": {
+		"url": "https://github.com/elingp/eling.id/issues"
 	},
-	"simple-git-hooks": {
-		"pre-commit": "pnpm lint-staged"
-	},
-	"lint-staged": {
-		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
-			"biome check --write --no-errors-on-unmatched"
-		],
-		"*.{astro,css,md,mdx,yml,yaml}": [
-			"prettier --write --cache"
-		]
+	"license": "MIT",
+	"author": "Eling Pramuatmaja",
+	"type": "module",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/elingp/eling.id.git"
 	},
 	"scripts": {
 		"dev": "astro dev",
@@ -82,6 +85,21 @@
 		"sonda": "^0.10.2",
 		"tailwindcss": "^4.1.18",
 		"typescript": "^5.9.3"
+	},
+	"engines": {
+		"node": ">=24.0.0"
+	},
+	"private": true,
+	"simple-git-hooks": {
+		"pre-commit": "pnpm lint-staged"
+	},
+	"lint-staged": {
+		"*.{astro,js,jsx,ts,tsx,json,jsonc,html}": [
+			"biome check --write --no-errors-on-unmatched"
+		],
+		"*.{astro,css,md,mdx,yml,yaml}": [
+			"prettier --write --cache"
+		]
 	},
 	"pnpm": {
 		"onlyBuiltDependencies": [
