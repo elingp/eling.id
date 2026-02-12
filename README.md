@@ -87,7 +87,7 @@ Then open [http://localhost:4321](http://localhost:4321).
 | `pnpm run fix`       | Fix everything (formatting, linting, imports)                   |
 
 > [!IMPORTANT]
-> `pnpm build` runs `git rev-parse` to inject a commit hash into the build when Git metadata is available.
+> `pnpm run build` runs `git rev-parse` to inject a commit hash into the build when Git metadata is available.
 
 ## Content authoring
 
