@@ -1,0 +1,31 @@
+---
+import type { ParsedCard } from "./api.ts";
+
+interface Props {
+	card: ParsedCard;
+}
+
+const { card } = Astro.props;
+---
+
+<a href={card.url} class:list={["tweet-card", card.type]} target="_blank" rel="noopener noreferrer">
+	{
+		card.thumbnail && (
+			<div class="tweet-card-thumbnail">
+				<img
+					src={card.thumbnail.url}
+					alt={card.title}
+					width={card.thumbnail.width}
+					height={card.thumbnail.height}
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+		)
+	}
+	<div class="tweet-card-content">
+		{card.domain && <span class="tweet-card-domain">{card.domain}</span>}
+		<span class="tweet-card-title">{card.title}</span>
+		{card.description && <span class="tweet-card-description">{card.description}</span>}
+	</div>
+</a>

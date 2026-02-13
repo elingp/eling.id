@@ -1,0 +1,31 @@
+---
+import type { EnrichedTweet } from "./api.ts";
+
+interface Props {
+	tweet: EnrichedTweet;
+}
+
+const { tweet } = Astro.props;
+---
+
+<p class="tweet-body">
+	{
+		tweet.entities.map((item) => {
+			switch (item.type) {
+				case "hashtag":
+				case "mention":
+				case "url":
+				case "symbol":
+					return (
+						<a href={item.href} target="_blank" rel="noopener noreferrer">
+							{item.text}
+						</a>
+					);
+				case "media":
+					return null;
+				default:
+					return <Fragment set:html={item.text.replace(/\n/g, "<br/>")} />;
+			}
+		})
+	}
+</p>

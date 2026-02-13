@@ -1,0 +1,17 @@
+---
+import { getTweet } from "./api.ts";
+import EmbeddedTweet from "./EmbeddedTweet.astro";
+import TweetNotFound from "./TweetNotFound.astro";
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+const tweet = await getTweet(id).catch((err) => {
+	console.error(`[Tweet] Failed to fetch tweet: ${err.message}`);
+	return undefined;
+});
+---
+
+{tweet ? <EmbeddedTweet tweet={tweet} /> : <TweetNotFound />}

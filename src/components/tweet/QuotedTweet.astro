@@ -1,0 +1,57 @@
+---
+import type { EnrichedQuotedTweet } from "./api.ts";
+import { getMediaUrl } from "./api.ts";
+
+interface Props {
+	tweet: EnrichedQuotedTweet;
+}
+
+const { tweet } = Astro.props;
+const { user } = tweet;
+const firstPhoto = tweet.mediaDetails?.find((m) => m.type === "photo");
+---
+
+<a href={tweet.url} class="tweet-quoted" target="_blank" rel="noopener noreferrer">
+	<div class="tweet-quoted-header">
+		<div class="tweet-quoted-avatar">
+			<img
+				src={user.profile_image_url_https}
+				alt={user.name}
+				width="20"
+				height="20"
+				loading="lazy"
+			/>
+		</div>
+		<span class="tweet-quoted-name">{user.name}</span>
+		<span class="tweet-quoted-username">@{user.screen_name}</span>
+	</div>
+	<p class="tweet-quoted-body">
+		{
+			tweet.entities.map((item) => {
+				switch (item.type) {
+					case "hashtag":
+					case "mention":
+					case "url":
+					case "symbol":
+						return <span style="color: var(--tweet-blue-secondary)">{item.text}</span>;
+					case "media":
+						return null;
+					default:
+						return <Fragment set:html={item.text.replace(/\n/g, "<br/>")} />;
+				}
+			})
+		}
+	</p>
+	{
+		firstPhoto && (
+			<div class="tweet-quoted-media">
+				<img
+					src={getMediaUrl(firstPhoto, "small")}
+					alt={firstPhoto.ext_alt_text || "Image"}
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+		)
+	}
+</a>

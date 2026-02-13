@@ -1,0 +1,64 @@
+---
+import type { EnrichedQuotedTweet, EnrichedTweet, MediaDetails } from "./api.ts";
+import { getMediaUrl } from "./api.ts";
+import TweetMediaVideo from "./TweetMediaVideo.astro";
+
+interface Props {
+	tweet: EnrichedTweet | EnrichedQuotedTweet;
+}
+
+const { tweet } = Astro.props;
+const media = tweet.mediaDetails ?? [];
+const length = media.length;
+
+const getSkeletonPadding = (m: MediaDetails, count: number): string => {
+	let pb = 56.25; // default 16:9
+	if (count === 1) pb = (100 / m.original_info.width) * m.original_info.height;
+	if (count === 2) pb = pb * 2;
+	return `${pb}%`;
+};
+
+const gridClass = (() => {
+	if (length === 2) return "cols-2";
+	if (length === 3) return "cols-2 grid-3";
+	if (length >= 4) return "cols-2 grid-4";
+	return "";
+})();
+---
+
+<div class="tweet-media">
+	<div class:list={["tweet-media-grid", gridClass]}>
+		{
+			media.map((m) =>
+				m.type === "photo" ? (
+					<a
+						href={tweet.url}
+						class="tweet-media-item link"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<span
+							class="tweet-media-skeleton"
+							style={`padding-bottom: ${getSkeletonPadding(m, length)}`}
+						/>
+						<img
+							src={getMediaUrl(m, "small")}
+							alt={m.ext_alt_text || "Image"}
+							class="tweet-media-img"
+							loading="lazy"
+							decoding="async"
+						/>
+					</a>
+				) : (
+					<div class="tweet-media-item">
+						<span
+							class="tweet-media-skeleton"
+							style={`padding-bottom: ${getSkeletonPadding(m, length)}`}
+						/>
+						<TweetMediaVideo media={m} />
+					</div>
+				),
+			)
+		}
+	</div>
+</div>

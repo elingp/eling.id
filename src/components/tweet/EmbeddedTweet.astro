@@ -1,0 +1,34 @@
+---
+import type { Tweet } from "./api.ts";
+import { enrichTweet, parseCard } from "./api.ts";
+import QuotedTweet from "./QuotedTweet.astro";
+import TweetActions from "./TweetActions.astro";
+import TweetBody from "./TweetBody.astro";
+import TweetCard from "./TweetCard.astro";
+import TweetHeader from "./TweetHeader.astro";
+import TweetInfo from "./TweetInfo.astro";
+import TweetInReplyTo from "./TweetInReplyTo.astro";
+import TweetMedia from "./TweetMedia.astro";
+import TweetReplies from "./TweetReplies.astro";
+import "@/styles/blocks/tweet.css";
+
+interface Props {
+	tweet: Tweet;
+}
+
+const { tweet: raw } = Astro.props;
+const tweet = enrichTweet(raw);
+const card = parseCard(raw.card);
+---
+
+<article class="tweet not-prose">
+	<TweetHeader {tweet} />
+	{tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
+	<TweetBody {tweet} />
+	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
+	{card && !tweet.mediaDetails?.length && <TweetCard card={card} />}
+	{tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
+	<TweetInfo {tweet} />
+	<TweetActions {tweet} />
+	<TweetReplies {tweet} />
+</article>

@@ -1,0 +1,30 @@
+---
+import type { MediaAnimatedGif, MediaVideo } from "./api.ts";
+import { getMediaUrl, getMp4Video } from "./api.ts";
+
+interface Props {
+	media: MediaAnimatedGif | MediaVideo;
+}
+
+const { media } = Astro.props;
+const mp4 = getMp4Video(media);
+const poster = getMediaUrl(media, "small");
+const isGif = media.type === "animated_gif";
+---
+
+{
+	mp4 && (
+		<video
+			class="tweet-media-video"
+			poster={poster}
+			controls={!isGif}
+			muted
+			playsinline
+			preload="none"
+			autoplay={isGif}
+			loop={isGif}
+		>
+			<source src={mp4.url} type={mp4.content_type} />
+		</video>
+	)
+}

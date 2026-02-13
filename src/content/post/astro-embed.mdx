@@ -3,7 +3,7 @@ title: "Astro Embed Components"
 description: "Embed samples for testing"
 publishDate: "2026-01-24T17:44:00+08:00"
 tags: ["test", "markdown"]
-draft: true
+draft: false
 autoUpdateDate: true
 ---
 
@@ -13,29 +13,42 @@ import {
 	LinkPreview,
 	Gist,
 	MastodonPost,
-	Tweet,
+	Tweet as AstroEmbedTweet,
 	Vimeo,
 	YouTube,
 } from "astro-embed";
-import TwitterPost from "@/components/TwitterPost.astro";
+import Tweet from "@/components/tweet/Tweet.astro";
+import AstroTweet from "astro-tweet";
 
 Embed samples for visual checks and theming.
 
 ## Twitter (custom components)
 
-Rendered via the site’s custom `TwitterPost` component.
+Rendered via the site’s custom `Tweet` component, Astro Tweet, and Astro Embed Tweet.
 
-### Link/OGP:
+### Link/OGP
 
-<TwitterPost id="https://x.com/astrodotbuild/status/2012166691371823563" />
+<Tweet id="https://x.com/astrodotbuild/status/2012166691371823563" />
 
-### Image:
+<AstroTweet id="2012166691371823563" />
 
-<TwitterPost id="https://twitter.com/astrodotbuild/status/2010746571122426205" />
+<AstroEmbedTweet theme="dark" id="https://x.com/astrodotbuild/status/2012166691371823563" />
 
-### Video:
+### Image
 
-<TwitterPost id="https://x.com/astrodotbuild/status/1511750228428435457" />
+<Tweet id="https://twitter.com/astrodotbuild/status/2010746571122426205" />
+
+<AstroTweet id="2010746571122426205" />
+
+<AstroEmbedTweet theme="dark" id="https://twitter.com/astrodotbuild/status/2010746571122426205" />
+
+### Video
+
+<Tweet id="https://x.com/astrodotbuild/status/1511750228428435457" />
+
+<AstroTweet id="1511750228428435457" />
+
+<AstroEmbedTweet theme="dark" id="https://x.com/astrodotbuild/status/1511750228428435457" />
 
 ## Baseline Status
 
@@ -68,12 +81,6 @@ Link preview embeds.
 Mastodon embed.
 
 <MastodonPost id="https://m.webtoo.ls/@astro/112966069629573422" />
-
-## Twitter (astro-embed)
-
-`astro-embed` Tweet component.
-
-<Tweet theme="dark" id="https://twitter.com/astrodotbuild/status/1511750228428435457" />
 
 ## Video
 
