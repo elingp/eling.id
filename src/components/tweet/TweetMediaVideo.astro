@@ -8,21 +8,16 @@ interface Props {
 
 const { media } = Astro.props;
 const mp4 = getMp4Video(media);
-const poster = getMediaUrl(media, "small");
-const isGif = media.type === "animated_gif";
 ---
 
 {
 	mp4 && (
 		<video
 			class="tweet-media-video"
-			poster={poster}
-			controls={!isGif}
+			poster={getMediaUrl(media, "small")}
+			controls
 			muted
-			playsinline
-			preload="none"
-			autoplay={isGif}
-			loop={isGif}
+			preload="metadata"
 		>
 			<source src={mp4.url} type={mp4.content_type} />
 		</video>

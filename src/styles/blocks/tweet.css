@@ -1,5 +1,3 @@
-/* Tweet embed styles — uses light-dark() with site semantic tokens for instant theme switching. */
-
 .tweet {
 	--tweet-font-family: var(--font-sans);
 	--tweet-body-font-size: 1.25rem;
@@ -17,7 +15,6 @@
 	--tweet-actions-icon-size: 1.25em;
 	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.75em);
 
-	/* Semantic colors */
 	--tweet-bg: light-dark(#fff, rgb(21, 32, 43));
 	--tweet-text: light-dark(rgb(15, 20, 25), rgb(247, 249, 249));
 	--tweet-text-secondary: light-dark(rgb(83, 100, 113), rgb(139, 152, 165));
@@ -51,7 +48,6 @@
 		background-color 0.2s,
 		box-shadow 0.2s;
 
-	/* Reset inherited prose styles */
 	& *,
 	& *::before,
 	& *::after {
@@ -64,8 +60,6 @@
 	box-shadow: 0 0 0 1px var(--tweet-bg-hover);
 }
 
-/* ── Not Found ─────────────────────────────────────────────────────────────── */
-
 .tweet-not-found {
 	display: flex;
 	align-items: center;
@@ -76,8 +70,6 @@
 	color: var(--tweet-text-secondary);
 }
 
-/* ── Header ────────────────────────────────────────────────────────────────── */
-
 .tweet-header {
 	display: flex;
 	gap: 0.5rem;
@@ -86,6 +78,7 @@
 }
 
 .tweet-avatar {
+	position: relative;
 	flex-shrink: 0;
 	text-decoration: none;
 }
@@ -109,6 +102,17 @@
 
 .tweet-avatar-img:hover {
 	box-shadow: inset 0 0 0 1px var(--tweet-text);
+}
+
+.tweet-avatar-shadow {
+	position: absolute;
+	inset: 0;
+	box-shadow: rgb(0 0 0 / 3%) 0 0 2px inset;
+	transition: background-color 0.2s;
+}
+
+.tweet-avatar-shadow:hover {
+	background-color: rgba(26, 26, 26, 0.15);
 }
 
 .tweet-author {
@@ -192,13 +196,14 @@
 	fill: var(--tweet-twitter-icon-color);
 }
 
-/* Verified badge */
-
 .tweet-verified {
 	display: inline-flex;
 	flex-shrink: 0;
-	width: 1.125rem;
-	height: 1.125rem;
+	max-width: 20px;
+	height: 1.25em;
+	max-height: 20px;
+	margin-left: 0.125rem;
+	vertical-align: text-bottom;
 }
 
 .tweet-verified svg {
@@ -210,33 +215,25 @@
 	color: var(--tweet-verified-blue);
 }
 
-.tweet-verified.business svg {
-	color: #e2b719;
+.tweet-verified.old svg {
+	color: #829aab;
 }
 
 .tweet-verified.government svg {
 	color: #829aab;
 }
 
-/* ── In Reply To ───────────────────────────────────────────────────────────── */
-
 .tweet-in-reply-to {
 	padding: 0.25rem 0 0;
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
-	color: var(--tweet-text-secondary);
-}
-
-.tweet-in-reply-to a {
 	color: var(--tweet-blue-secondary);
 	text-decoration: none;
 }
 
-.tweet-in-reply-to a:hover {
+.tweet-in-reply-to:hover {
 	text-decoration: underline;
 }
-
-/* ── Body ──────────────────────────────────────────────────────────────────── */
 
 .tweet-body {
 	padding: 0.75rem 0 0;
@@ -257,11 +254,12 @@
 	text-decoration: underline;
 }
 
-/* ── Media ─────────────────────────────────────────────────────────────────── */
-
 .tweet-media {
 	margin-top: 0.75rem;
 	overflow: hidden;
+}
+
+.tweet-media.rounded {
 	border: 1px solid var(--tweet-border-color);
 	border-radius: 0.75rem;
 }
@@ -319,8 +317,6 @@
 	object-fit: cover;
 }
 
-/* ── Card (URL preview) ────────────────────────────────────────────────────── */
-
 .tweet-card {
 	display: flex;
 	margin-top: 0.75rem;
@@ -336,7 +332,6 @@
 	background: var(--tweet-bg-hover);
 }
 
-/* summary (small thumbnail left) */
 .tweet-card.summary {
 	flex-direction: row;
 }
@@ -363,7 +358,6 @@
 	overflow: hidden;
 }
 
-/* summary_large_image (large image top) */
 .tweet-card.summary_large_image {
 	flex-direction: column;
 }
@@ -418,14 +412,11 @@
 	color: var(--tweet-text-secondary);
 }
 
-/* ── Quoted Tweet ──────────────────────────────────────────────────────────── */
-
 .tweet-quoted {
 	display: block;
 	margin: 0.75rem 0 0;
 	overflow: hidden;
 	color: inherit;
-	text-decoration: none;
 	border: 1px solid var(--tweet-border-color);
 	border-radius: 0.75rem;
 	transition: background-color 0.2s;
@@ -457,6 +448,7 @@
 }
 
 .tweet-quoted-name {
+	margin-right: 0.125rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-size: var(--tweet-quoted-body-font-size);
@@ -493,17 +485,6 @@
 .tweet-quoted-body a:hover {
 	text-decoration: underline;
 }
-
-.tweet-quoted-media {
-	overflow: hidden;
-}
-
-.tweet-quoted-media img {
-	display: block;
-	width: 100%;
-}
-
-/* ── Info ──────────────────────────────────────────────────────────────────── */
 
 .tweet-info {
 	display: flex;
@@ -554,8 +535,6 @@
 	fill: currentColor;
 }
 
-/* ── Actions ───────────────────────────────────────────────────────────────── */
-
 .tweet-actions {
 	display: flex;
 	align-items: center;
@@ -605,7 +584,6 @@
 	line-height: 1rem;
 }
 
-/* Like */
 .tweet-action.like:hover > .tweet-action-icon-wrapper {
 	background-color: var(--tweet-red-hover);
 }
@@ -619,7 +597,6 @@
 	color: var(--tweet-red);
 }
 
-/* Reply */
 .tweet-action.reply:hover > .tweet-action-icon-wrapper {
 	background-color: var(--tweet-blue-secondary-hover);
 }
@@ -632,29 +609,6 @@
 .tweet-action.reply .tweet-action-icon {
 	color: var(--tweet-blue);
 }
-
-/* Copy */
-.tweet-action.copy {
-	font: inherit;
-	cursor: pointer;
-	background: none;
-	border: none;
-}
-
-.tweet-action.copy:hover > .tweet-action-icon-wrapper {
-	background-color: var(--tweet-green-hover);
-}
-
-.tweet-action.copy:hover .tweet-action-icon {
-	color: var(--tweet-green);
-}
-
-.tweet-action.copy:hover > .tweet-action-text {
-	color: var(--tweet-green);
-	text-decoration-line: underline;
-}
-
-/* ── Replies link ──────────────────────────────────────────────────────────── */
 
 .tweet-replies {
 	padding: 0.25rem 0;

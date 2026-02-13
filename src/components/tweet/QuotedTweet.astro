@@ -1,6 +1,7 @@
 ---
 import type { EnrichedQuotedTweet } from "./api.ts";
-import { getMediaUrl } from "./api.ts";
+import TweetMedia from "./TweetMedia.astro";
+import VerifiedBadge from "./VerifiedBadge.astro";
 
 interface Props {
 	tweet: EnrichedQuotedTweet;
@@ -8,10 +9,9 @@ interface Props {
 
 const { tweet } = Astro.props;
 const { user } = tweet;
-const firstPhoto = tweet.mediaDetails?.find((m) => m.type === "photo");
 ---
 
-<a href={tweet.url} class="tweet-quoted" target="_blank" rel="noopener noreferrer">
+<div class="tweet-quoted">
 	<div class="tweet-quoted-header">
 		<div class="tweet-quoted-avatar">
 			<img
@@ -23,35 +23,11 @@ const firstPhoto = tweet.mediaDetails?.find((m) => m.type === "photo");
 			/>
 		</div>
 		<span class="tweet-quoted-name">{user.name}</span>
+		<VerifiedBadge {user} />
 		<span class="tweet-quoted-username">@{user.screen_name}</span>
 	</div>
-	<p class="tweet-quoted-body">
-		{
-			tweet.entities.map((item) => {
-				switch (item.type) {
-					case "hashtag":
-					case "mention":
-					case "url":
-					case "symbol":
-						return <span style="color: var(--tweet-blue-secondary)">{item.text}</span>;
-					case "media":
-						return null;
-					default:
-						return <Fragment set:html={item.text.replace(/\n/g, "<br/>")} />;
-				}
-			})
-		}
+	<p class="tweet-quoted-body" lang={tweet.lang} dir="auto">
+		{tweet.entities.map((item) => <span set:html={item.text} />)}
 	</p>
-	{
-		firstPhoto && (
-			<div class="tweet-quoted-media">
-				<img
-					src={getMediaUrl(firstPhoto, "small")}
-					alt={firstPhoto.ext_alt_text || "Image"}
-					loading="lazy"
-					decoding="async"
-				/>
-			</div>
-		)
-	}
-</a>
+	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} quoted /> : null}
+</div>

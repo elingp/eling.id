@@ -1,8 +1,3 @@
-// Types and utilities vendored from astro-tweet / react-tweet (syndication API).
-// No external dependencies.
-
-// ── Entity types ──────────────────────────────────────────────────────────────
-
 export type Indices = [number, number];
 
 export interface HashtagEntity {
@@ -44,8 +39,6 @@ export interface TweetEntities {
 	media?: MediaEntity[];
 }
 
-// ── Media types ───────────────────────────────────────────────────────────────
-
 export type RGB = { red: number; green: number; blue: number };
 export type Rect = { x: number; y: number; w: number; h: number };
 export type Size = { h: number; w: number; resize: string };
@@ -85,8 +78,6 @@ export interface MediaVideo extends MediaBase {
 }
 export type MediaDetails = MediaPhoto | MediaAnimatedGif | MediaVideo;
 
-// ── User types ────────────────────────────────────────────────────────────────
-
 export interface TweetUser {
 	id_str: string;
 	name: string;
@@ -97,8 +88,6 @@ export interface TweetUser {
 	verified_type?: "Business" | "Government";
 	is_blue_verified: boolean;
 }
-
-// ── Photo / Video top-level ───────────────────────────────────────────────────
 
 export interface TweetPhoto {
 	backgroundColor: RGB;
@@ -120,16 +109,12 @@ export interface TweetVideo {
 	viewCount: number;
 }
 
-// ── Edit control ──────────────────────────────────────────────────────────────
-
 export interface TweetEditControl {
 	edit_tweet_ids: string[];
 	editable_until_msecs: string;
 	is_edit_eligible: boolean;
 	edits_remaining: string;
 }
-
-// ── Card types (URL preview cards) ────────────────────────────────────────────
 
 export interface CardImageValue {
 	height: number;
@@ -156,8 +141,6 @@ export interface TweetCard {
 	binding_values: Record<string, CardBindingValue | undefined>;
 }
 
-// ── Tweet types ───────────────────────────────────────────────────────────────
-
 export interface TweetBase {
 	lang: string;
 	created_at: string;
@@ -178,12 +161,14 @@ export interface Tweet extends TweetBase {
 	photos?: TweetPhoto[];
 	video?: TweetVideo;
 	conversation_count: number;
+	news_action_type: "conversation";
 	quoted_tweet?: QuotedTweet;
 	in_reply_to_screen_name?: string;
 	in_reply_to_status_id_str?: string;
 	in_reply_to_user_id_str?: string;
 	parent?: TweetParent;
 	possibly_sensitive?: boolean;
+	note_tweet?: { id: string } | undefined;
 	card?: TweetCard;
 }
 
@@ -201,8 +186,6 @@ export interface QuotedTweet extends TweetBase {
 	self_thread: { id_str: string };
 }
 
-// ── Data fetching ─────────────────────────────────────────────────────────────
-
 const SYNDICATION_URL = "https://cdn.syndication.twimg.com";
 const TWEET_ID = /^[0-9]+$/;
 
@@ -210,9 +193,6 @@ function getToken(id: string): string {
 	return ((Number(id) / 1e15) * Math.PI).toString(6 ** 2).replace(/(0+|\.)/g, "");
 }
 
-/**
- * Extract a numeric tweet ID from a URL or bare ID string.
- */
 export function extractTweetId(input: string): string {
 	const trimmed = input.trim();
 	if (TWEET_ID.test(trimmed)) return trimmed;
@@ -233,10 +213,6 @@ export class TwitterApiError extends Error {
 	}
 }
 
-/**
- * Fetch a tweet from Twitter's syndication API. Runs at build time.
- * Returns undefined for deleted/not-found tweets (does not throw).
- */
 export async function getTweet(
 	idOrUrl: string,
 	fetchOptions?: RequestInit,
@@ -275,33 +251,25 @@ export async function getTweet(
 	const isJson = res.headers.get("content-type")?.includes("application/json");
 	const data = isJson ? await res.json() : undefined;
 
-	if (res.ok) {
-		if (data?.__typename === "TweetTombstone") {
-			console.error(`Tweet ${id} is unavailable (tombstone). It may have been made private.`);
-			return undefined;
-		}
-		if (data && Object.keys(data as object).length === 0) {
-			console.error(`Tweet ${id} returned empty data — it may have been deleted.`);
-			return undefined;
-		}
-		return data as Tweet;
+	if (res.ok && data?.__typename === "TweetTombstone") {
+		throw new TwitterApiError({
+			message: "This tweet is unavailable.",
+			status: res.status,
+			data,
+		});
 	}
-	if (res.status === 404) {
-		console.error(`Tweet ${id} not found (404).`);
-		return undefined;
-	}
+	if (res.ok) return data as Tweet;
+	if (res.status === 404) return undefined;
 
 	throw new TwitterApiError({
 		message:
 			typeof (data as Record<string, unknown>)?.error === "string"
 				? String((data as Record<string, unknown>).error)
-				: `Failed to fetch tweet ${id} (status ${res.status}).`,
+				: "Bad request.",
 		status: res.status,
 		data,
 	});
 }
-
-// ── Enrichment utilities ──────────────────────────────────────────────────────
 
 const getTweetUrl = (tweet: TweetBase) =>
 	`https://x.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
@@ -325,8 +293,6 @@ const getSymbolUrl = (symbol: SymbolEntity) => `https://x.com/search?q=%24${symb
 const getInReplyToUrl = (tweet: Tweet) =>
 	`https://x.com/${tweet.in_reply_to_screen_name}/status/${tweet.in_reply_to_status_id_str}`;
 
-// ── Media helpers ─────────────────────────────────────────────────────────────
-
 export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "large"): string => {
 	const url = new URL(media.media_url_https);
 	const extension = url.pathname.split(".").pop();
@@ -337,21 +303,23 @@ export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "lar
 	return url.toString();
 };
 
-export const getMp4Video = (media: MediaAnimatedGif | MediaVideo) => {
-	const sorted = media.video_info.variants
-		.filter((v) => v.content_type === "video/mp4")
+const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
+	const { variants } = media.video_info;
+	return variants
+		.filter((vid) => vid.content_type === "video/mp4")
 		.sort((a, b) => (b.bitrate ?? 0) - (a.bitrate ?? 0));
-	// Use second-highest quality to save bandwidth
-	return sorted.length > 1 ? sorted[1] : sorted[0];
+};
+
+export const getMp4Video = (media: MediaAnimatedGif | MediaVideo) => {
+	const mp4Videos = getMp4Videos(media);
+	return mp4Videos.length > 1 ? mp4Videos[1] : mp4Videos[0];
 };
 
 export const formatNumber = (n: number): string => {
-	if (n > 999_999) return `${(n / 1_000_000).toFixed(1)}M`;
-	if (n > 999) return `${(n / 1_000).toFixed(1)}K`;
+	if (n > 999999) return `${(n / 1000000).toFixed(1)}M`;
+	if (n > 999) return `${(n / 1000).toFixed(1)}K`;
 	return n.toString();
 };
-
-// ── Date formatting ───────────────────────────────────────────────────────────
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	hour: "numeric",
@@ -377,8 +345,6 @@ export const formatDate = (date: Date): string => {
 	const p = partsToObject(dateFormatter.formatToParts(date));
 	return `${p.hour}:${p.minute} ${p.dayPeriod} \u00B7 ${p.month} ${p.day}, ${p.year}`;
 };
-
-// ── Entity parsing ────────────────────────────────────────────────────────────
 
 type TextEntity = { indices: Indices; type: "text" };
 
@@ -466,16 +432,18 @@ function getEntities(tweet: TweetBase): Entity[] {
 	});
 }
 
-// ── Enriched tweet types ──────────────────────────────────────────────────────
-
 export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet"> & {
 	url: string;
-	user: TweetUser & { url: string; follow_url: string };
+	user: {
+		url: string;
+		follow_url: string;
+	};
 	like_url: string;
 	reply_url: string;
 	in_reply_to_url?: string | undefined;
 	entities: Entity[];
 	quoted_tweet?: EnrichedQuotedTweet | undefined;
+	note_tweet?: { id: string } | undefined;
 };
 
 export type EnrichedQuotedTweet = Omit<QuotedTweet, "entities"> & {
@@ -483,9 +451,6 @@ export type EnrichedQuotedTweet = Omit<QuotedTweet, "entities"> & {
 	entities: Entity[];
 };
 
-/**
- * Enrich a raw tweet with computed URLs and parsed entities for rendering.
- */
 export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 	...tweet,
 	url: getTweetUrl(tweet),
@@ -505,9 +470,8 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 				entities: getEntities(tweet.quoted_tweet),
 			}
 		: undefined,
+	note_tweet: tweet.note_tweet,
 });
-
-// ── Card helpers ──────────────────────────────────────────────────────────────
 
 export interface ParsedCard {
 	type: "summary" | "summary_large_image";
@@ -518,10 +482,6 @@ export interface ParsedCard {
 	thumbnail?: { url: string; width: number; height: number } | undefined;
 }
 
-/**
- * Parse a raw TweetCard into a simplified structure for rendering.
- * Returns undefined if the card data is missing or unsupported.
- */
 export function parseCard(card: TweetCard | undefined): ParsedCard | undefined {
 	if (!card) return undefined;
 	if (card.name !== "summary" && card.name !== "summary_large_image") return undefined;

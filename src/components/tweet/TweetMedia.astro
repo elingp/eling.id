@@ -5,9 +5,10 @@ import TweetMediaVideo from "./TweetMediaVideo.astro";
 
 interface Props {
 	tweet: EnrichedTweet | EnrichedQuotedTweet;
+	quoted?: boolean;
 }
 
-const { tweet } = Astro.props;
+const { tweet, quoted } = Astro.props;
 const media = tweet.mediaDetails ?? [];
 const length = media.length;
 
@@ -26,7 +27,7 @@ const gridClass = (() => {
 })();
 ---
 
-<div class="tweet-media">
+<div class:list={["tweet-media", { rounded: !quoted }]}>
 	<div class:list={["tweet-media-grid", gridClass]}>
 		{
 			media.map((m) =>

@@ -9,7 +9,7 @@ interface Props {
 
 const { id } = Astro.props;
 const tweet = await getTweet(id).catch((err) => {
-	console.error(`[Tweet] Failed to fetch tweet: ${err.message}`);
+	console.error(err);
 	return undefined;
 });
 ---

@@ -8,7 +8,7 @@ interface Props {
 const { tweet } = Astro.props;
 ---
 
-<p class="tweet-body">
+<p class="tweet-body" lang={tweet.lang} dir="auto">
 	{
 		tweet.entities.map((item) => {
 			switch (item.type) {
@@ -24,8 +24,16 @@ const { tweet } = Astro.props;
 				case "media":
 					return null;
 				default:
-					return <Fragment set:html={item.text.replace(/\n/g, "<br/>")} />;
+					return <span set:html={item.text} />;
 			}
 		})
+	}
+	{
+		tweet.note_tweet ? (
+			<a href={tweet.url} target="_blank" rel="noopener noreferrer">
+				<span>&nbsp;</span>
+				Show more
+			</a>
+		) : null
 	}
 </p>
