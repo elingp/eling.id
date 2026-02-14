@@ -235,7 +235,6 @@
 }
 
 .tweet-in-reply-to {
-	padding: 0.25rem 0 0;
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
 	color: var(--tweet-blue-secondary);
@@ -248,8 +247,6 @@
 
 /* Body */
 .tweet-body {
-	padding: 0.75rem 0 0;
-	margin: 0;
 	font-size: var(--tweet-body-font-size);
 	font-weight: 400;
 	line-height: var(--tweet-body-line-height);

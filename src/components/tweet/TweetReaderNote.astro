@@ -43,6 +43,8 @@ const subtitleParts = (() => {
 
 	return parts;
 })();
+
+const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
 ---
 
 <aside class="tweet-reader-note" aria-label="Reader note">
@@ -68,12 +70,14 @@ const subtitleParts = (() => {
 					{Array.isArray(subtitleParts)
 						? subtitleParts.map((part) =>
 								part.href ? (
-									<TweetLink href={part.href}>{part.text}</TweetLink>
+									<TweetLink href={part.href}>
+										<span set:html={renderHtmlWithBreaks(part.text)} />
+									</TweetLink>
 								) : (
-									<span>{part.text}</span>
+									<span set:html={renderHtmlWithBreaks(part.text)} />
 								),
 							)
-						: subtitleParts}
+						: subtitleParts && <span set:html={renderHtmlWithBreaks(subtitleParts)} />}
 				</p>
 			)
 		}
