@@ -1,20 +1,16 @@
 ---
 import type { EnrichedTweet } from "./api.ts";
-import { formatDate } from "./api.ts";
+import TweetInfoCreatedAt from "./TweetInfoCreatedAt.astro";
 
 interface Props {
 	tweet: EnrichedTweet;
 }
 
 const { tweet } = Astro.props;
-const date = new Date(tweet.created_at);
-const formattedDate = formatDate(date);
 ---
 
 <div class="tweet-info">
-	<a href={tweet.url} class="tweet-info-link" target="_blank" rel="noopener noreferrer">
-		<time datetime={date.toISOString()}>{formattedDate}</time>
-	</a>
+	<TweetInfoCreatedAt {tweet} />
 	<a
 		href="https://help.x.com/en/x-for-websites-ads-info-and-privacy"
 		class="tweet-info-link"

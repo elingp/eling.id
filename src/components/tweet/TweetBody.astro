@@ -1,5 +1,6 @@
 ---
 import type { EnrichedTweet } from "./api.ts";
+import TweetLink from "./TweetLink.astro";
 
 interface Props {
 	tweet: EnrichedTweet;
@@ -16,11 +17,7 @@ const { tweet } = Astro.props;
 				case "mention":
 				case "url":
 				case "symbol":
-					return (
-						<a href={item.href} target="_blank" rel="noopener noreferrer">
-							{item.text}
-						</a>
-					);
+					return <TweetLink href={item.href}>{item.text}</TweetLink>;
 				case "media":
 					return null;
 				default:
@@ -30,10 +27,10 @@ const { tweet } = Astro.props;
 	}
 	{
 		tweet.note_tweet ? (
-			<a href={tweet.url} target="_blank" rel="noopener noreferrer">
+			<TweetLink href={tweet.url}>
 				<span>&nbsp;</span>
 				Show more
-			</a>
+			</TweetLink>
 		) : null
 	}
 </p>

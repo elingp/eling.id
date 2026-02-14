@@ -1,3 +1,4 @@
+// Types
 export type Indices = [number, number];
 
 export interface HashtagEntity {
@@ -87,6 +88,7 @@ export interface TweetUser {
 	verified: boolean;
 	verified_type?: "Business" | "Government";
 	is_blue_verified: boolean;
+	highlighted_label?: UserHighlightedLabel;
 }
 
 export interface TweetPhoto {
@@ -107,6 +109,18 @@ export interface TweetVideo {
 	variants: { type: string; src: string }[];
 	videoId: { type: string; id: string };
 	viewCount: number;
+}
+
+export interface HighlightedBadge {
+	url: string;
+}
+
+export interface UserHighlightedLabel {
+	description?: string;
+	badge?: HighlightedBadge;
+	url?: { url: string; url_type: "DeepLink" };
+	user_label_type: "BusinessLabel";
+	user_label_display_type: "Badge";
 }
 
 export interface TweetEditControl {
@@ -186,6 +200,7 @@ export interface QuotedTweet extends TweetBase {
 	self_thread: { id_str: string };
 }
 
+// Fetching
 const SYNDICATION_URL = "https://cdn.syndication.twimg.com";
 const TWEET_ID = /^[0-9]+$/;
 
@@ -213,10 +228,18 @@ export class TwitterApiError extends Error {
 	}
 }
 
-export async function getTweet(
+const getErrorMessage = (data: unknown, status: number, url: string): string => {
+	if (typeof data === "object" && data && "error" in data) {
+		const error = (data as { error?: unknown }).error;
+		if (typeof error === "string") return error;
+	}
+	return `Failed to fetch tweet at "${url}" with "${status}".`;
+};
+
+export async function fetchTweet(
 	idOrUrl: string,
 	fetchOptions?: RequestInit,
-): Promise<Tweet | undefined> {
+): Promise<{ data?: Tweet; tombstone?: true; notFound?: true }> {
 	const id = extractTweetId(idOrUrl);
 
 	if (id.length > 40 || !TWEET_ID.test(id)) {
@@ -251,26 +274,41 @@ export async function getTweet(
 	const isJson = res.headers.get("content-type")?.includes("application/json");
 	const data = isJson ? await res.json() : undefined;
 
-	if (res.ok && data?.__typename === "TweetTombstone") {
-		throw new TwitterApiError({
-			message: "This tweet is unavailable.",
-			status: res.status,
-			data,
-		});
+	if (res.ok) {
+		if (data?.__typename === "TweetTombstone") return { tombstone: true };
+		if (data && Object.keys(data).length === 0) return { notFound: true };
+		return { data: data as Tweet };
 	}
-	if (res.ok) return data as Tweet;
-	if (res.status === 404) return undefined;
+	if (res.status === 404) return { notFound: true };
 
 	throw new TwitterApiError({
-		message:
-			typeof (data as Record<string, unknown>)?.error === "string"
-				? String((data as Record<string, unknown>).error)
-				: "Bad request.",
+		message: getErrorMessage(data, res.status, url.toString()),
 		status: res.status,
 		data,
 	});
 }
 
+export async function getTweet(
+	idOrUrl: string,
+	fetchOptions?: RequestInit,
+): Promise<Tweet | undefined> {
+	const { data, tombstone, notFound } = await fetchTweet(idOrUrl, fetchOptions);
+	const id = extractTweetId(idOrUrl);
+
+	if (notFound) {
+		console.error(
+			`The tweet ${id} does not exist or has been deleted by the account owner. Update your code to remove this tweet when possible.`,
+		);
+	} else if (tombstone) {
+		console.error(
+			`The tweet ${id} has been made private by the account owner. Update your code to remove this tweet when possible.`,
+		);
+	}
+
+	return data;
+}
+
+// URL helpers
 const getTweetUrl = (tweet: TweetBase) =>
 	`https://x.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
@@ -303,6 +341,7 @@ export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "lar
 	return url.toString();
 };
 
+// Formatting
 const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
 	const { variants } = media.video_info;
 	return variants
@@ -346,6 +385,7 @@ export const formatDate = (date: Date): string => {
 	return `${p.hour}:${p.minute} ${p.dayPeriod} \u00B7 ${p.month} ${p.day}, ${p.year}`;
 };
 
+// Entities
 type TextEntity = { indices: Indices; type: "text" };
 
 type TweetEntity = HashtagEntity | UserMentionEntity | UrlEntity | MediaEntity | SymbolEntity;
@@ -432,6 +472,7 @@ function getEntities(tweet: TweetBase): Entity[] {
 	});
 }
 
+// Enrichment
 export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet"> & {
 	url: string;
 	user: {
@@ -473,6 +514,7 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 	note_tweet: tweet.note_tweet,
 });
 
+// Cards
 export interface ParsedCard {
 	type: "summary" | "summary_large_image";
 	url: string;
@@ -482,30 +524,40 @@ export interface ParsedCard {
 	thumbnail?: { url: string; width: number; height: number } | undefined;
 }
 
+const getString = (value?: CardBindingValue): string | undefined =>
+	typeof value?.string_value === "string" ? value.string_value : undefined;
+
+const getImage = (value?: CardBindingValue): CardImageValue | undefined => value?.image_value;
+
+const getDomain = (url: string, fallback?: string): string => {
+	try {
+		const host = new URL(url).hostname.replace(/^www\./, "");
+		return fallback?.trim() || host;
+	} catch {
+		return fallback?.trim() || "";
+	}
+};
+
 export function parseCard(card: TweetCard | undefined): ParsedCard | undefined {
 	if (!card) return undefined;
 	if (card.name !== "summary" && card.name !== "summary_large_image") return undefined;
 
 	const bv = card.binding_values;
-	const title = bv.title?.string_value;
+	const title = getString(bv.title);
 	if (!title) return undefined;
 
-	const domain = bv.vanity_url?.string_value ?? bv.domain?.string_value ?? "";
-	const cardUrl = bv.card_url?.string_value ?? card.url;
-
-	// Pick the best available thumbnail
+	const cardUrl = getString(bv.card_url) ?? card.url;
+	const domain = getDomain(cardUrl, getString(bv.vanity_url) ?? getString(bv.domain));
 	const thumbKey =
 		card.name === "summary_large_image" ? "thumbnail_image_large" : "thumbnail_image";
 	const thumb =
-		bv[thumbKey]?.image_value ??
-		bv.thumbnail_image_large?.image_value ??
-		bv.thumbnail_image?.image_value;
+		getImage(bv[thumbKey]) ?? getImage(bv.thumbnail_image_large) ?? getImage(bv.thumbnail_image);
 
 	return {
 		type: card.name,
 		url: cardUrl,
 		title,
-		description: bv.description?.string_value,
+		description: getString(bv.description),
 		domain,
 		thumbnail: thumb ? { url: thumb.url, width: thumb.width, height: thumb.height } : undefined,
 	};

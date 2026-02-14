@@ -1,0 +1,13 @@
+---
+import type { EnrichedQuotedTweet } from "./api.ts";
+
+interface Props {
+	tweet: EnrichedQuotedTweet;
+}
+
+const { tweet } = Astro.props;
+---
+
+<p class="tweet-quoted-body" lang={tweet.lang} dir="auto">
+	{tweet.entities.map((item) => <span set:html={item.text} />)}
+</p>

@@ -8,7 +8,12 @@ interface Props {
 const { card } = Astro.props;
 ---
 
-<a href={card.url} class:list={["tweet-card", card.type]} target="_blank" rel="noopener noreferrer">
+<a
+	href={card.url}
+	class:list={["tweet-card", card.type]}
+	target="_blank"
+	rel="noopener noreferrer nofollow"
+>
 	{
 		card.thumbnail && (
 			<div class="tweet-card-thumbnail">

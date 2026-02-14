@@ -16,8 +16,10 @@ const mp4 = getMp4Video(media);
 			class="tweet-media-video"
 			poster={getMediaUrl(media, "small")}
 			controls
-			muted
-			preload="metadata"
+			playsinline
+			preload="none"
+			muted={media.type === "animated_gif"}
+			loop={media.type === "animated_gif"}
 		>
 			<source src={mp4.url} type={mp4.content_type} />
 		</video>

@@ -1,0 +1,22 @@
+---
+import type { EnrichedTweet } from "./api.ts";
+import { formatDate } from "./api.ts";
+
+interface Props {
+	tweet: EnrichedTweet;
+}
+
+const { tweet } = Astro.props;
+const createdAt = new Date(tweet.created_at);
+const formatted = formatDate(createdAt);
+---
+
+<a
+	href={tweet.url}
+	class="tweet-info-link"
+	target="_blank"
+	rel="noopener noreferrer"
+	aria-label={formatted}
+>
+	<time datetime={createdAt.toISOString()}>{formatted}</time>
+</a>

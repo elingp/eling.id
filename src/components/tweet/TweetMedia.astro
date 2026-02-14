@@ -13,22 +13,20 @@ const media = tweet.mediaDetails ?? [];
 const length = media.length;
 
 const getSkeletonPadding = (m: MediaDetails, count: number): string => {
-	let pb = 56.25; // default 16:9
-	if (count === 1) pb = (100 / m.original_info.width) * m.original_info.height;
-	if (count === 2) pb = pb * 2;
-	return `${pb}%`;
+	let padding = 56.25; // default 16:9
+	if (count === 1) padding = (100 / m.original_info.width) * m.original_info.height;
+	if (count === 2) padding *= 2;
+	return `${padding}%`;
 };
-
-const gridClass = (() => {
-	if (length === 2) return "cols-2";
-	if (length === 3) return "cols-2 grid-3";
-	if (length >= 4) return "cols-2 grid-4";
-	return "";
-})();
 ---
 
 <div class:list={["tweet-media", { rounded: !quoted }]}>
-	<div class:list={["tweet-media-grid", gridClass]}>
+	<div
+		class:list={[
+			"tweet-media-grid",
+			{ "cols-2": length > 1, "grid-3": length === 3, "grid-4": length > 4 },
+		]}
+	>
 		{
 			media.map((m) =>
 				m.type === "photo" ? (

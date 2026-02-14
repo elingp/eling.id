@@ -1,5 +1,6 @@
 ---
 import type { EnrichedTweet } from "./api.ts";
+import HighlightedLabel from "./HighlightedLabel.astro";
 import VerifiedBadge from "./VerifiedBadge.astro";
 
 interface Props {
@@ -8,13 +9,11 @@ interface Props {
 
 const { tweet } = Astro.props;
 const { user } = tweet;
-
-const isSquare = user.profile_image_shape === "Square";
 ---
 
 <div class="tweet-header">
 	<a href={tweet.url} class="tweet-avatar" target="_blank" rel="noopener noreferrer">
-		<div class:list={["tweet-avatar-img", { square: isSquare }]}>
+		<div class:list={["tweet-avatar-img", { square: user.profile_image_shape === "Square" }]}>
 			<img
 				src={user.profile_image_url_https}
 				alt={user.name}
@@ -29,6 +28,7 @@ const isSquare = user.profile_image_shape === "Square";
 		<a href={tweet.url} class="tweet-author-name" target="_blank" rel="noopener noreferrer">
 			<span>{user.name}</span>
 			<VerifiedBadge {user} />
+			<HighlightedLabel {user} />
 		</a>
 		<div class="tweet-author-meta">
 			<a href={tweet.url} class="tweet-username" target="_blank" rel="noopener noreferrer">

@@ -1,0 +1,22 @@
+---
+import type { EnrichedQuotedTweet } from "./api.ts";
+import HighlightedLabel from "./HighlightedLabel.astro";
+import VerifiedBadge from "./VerifiedBadge.astro";
+
+interface Props {
+	tweet: EnrichedQuotedTweet;
+}
+
+const { tweet } = Astro.props;
+const { user } = tweet;
+---
+
+<div class="tweet-quoted-header">
+	<div class:list={["tweet-quoted-avatar", { square: user.profile_image_shape === "Square" }]}>
+		<img src={user.profile_image_url_https} alt={user.name} width="20" height="20" loading="lazy" />
+	</div>
+	<span class="tweet-quoted-name">{user.name}</span>
+	<VerifiedBadge {user} />
+	<HighlightedLabel {user} />
+	<span class="tweet-quoted-username">@{user.screen_name}</span>
+</div>

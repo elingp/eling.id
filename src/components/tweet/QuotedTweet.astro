@@ -1,33 +1,18 @@
 ---
 import type { EnrichedQuotedTweet } from "./api.ts";
+import QuotedTweetBody from "./QuotedTweetBody.astro";
+import QuotedTweetHeader from "./QuotedTweetHeader.astro";
 import TweetMedia from "./TweetMedia.astro";
-import VerifiedBadge from "./VerifiedBadge.astro";
 
 interface Props {
 	tweet: EnrichedQuotedTweet;
 }
 
 const { tweet } = Astro.props;
-const { user } = tweet;
 ---
 
 <div class="tweet-quoted">
-	<div class="tweet-quoted-header">
-		<div class="tweet-quoted-avatar">
-			<img
-				src={user.profile_image_url_https}
-				alt={user.name}
-				width="20"
-				height="20"
-				loading="lazy"
-			/>
-		</div>
-		<span class="tweet-quoted-name">{user.name}</span>
-		<VerifiedBadge {user} />
-		<span class="tweet-quoted-username">@{user.screen_name}</span>
-	</div>
-	<p class="tweet-quoted-body" lang={tweet.lang} dir="auto">
-		{tweet.entities.map((item) => <span set:html={item.text} />)}
-	</p>
+	<QuotedTweetHeader {tweet} />
+	<QuotedTweetBody {tweet} />
 	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} quoted /> : null}
 </div>
