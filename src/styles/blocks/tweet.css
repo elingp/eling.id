@@ -268,7 +268,7 @@
 	vertical-align: text-bottom;
 }
 
-.tweet-reader-note {
+.tweet-community-note {
 	display: block;
 	margin-top: 0.75rem;
 	overflow: hidden;
@@ -278,11 +278,11 @@
 	transition: background-color 0.2s;
 }
 
-.tweet-reader-note:hover {
+.tweet-community-note:hover {
 	background: var(--tweet-quoted-bg-hover);
 }
 
-.tweet-reader-note-header {
+.tweet-community-note-header {
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
@@ -293,7 +293,7 @@
 	background: var(--tweet-quoted-bg-hover);
 }
 
-.tweet-reader-note-icon {
+.tweet-community-note-icon {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -302,38 +302,38 @@
 	color: var(--tweet-blue);
 }
 
-.tweet-reader-note-icon svg {
+.tweet-community-note-icon svg {
 	width: 100%;
 	height: 100%;
 	fill: currentColor;
 }
 
-.tweet-reader-note-title {
+.tweet-community-note-title {
 	margin: 0;
 	font-weight: 700;
 	color: var(--tweet-text);
 }
 
-.tweet-reader-note-body {
+.tweet-community-note-body {
 	padding: 0.5rem 0.75rem 0.75rem;
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
 	color: var(--tweet-text-secondary);
 }
 
-.tweet-reader-note-subtitle {
+.tweet-community-note-subtitle {
 	margin: 0 0 0.5rem;
 	white-space: pre-wrap;
 }
 
-.tweet-reader-note-link {
+.tweet-community-note-link {
 	display: inline-flex;
 	align-items: center;
 	color: var(--tweet-blue-secondary);
 	text-decoration: none;
 }
 
-.tweet-reader-note-link:hover {
+.tweet-community-note-link:hover {
 	text-decoration: underline;
 }
 
