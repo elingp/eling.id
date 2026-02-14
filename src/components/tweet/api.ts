@@ -338,6 +338,38 @@ export async function getTweet(
 }
 
 // URL helpers
+export const normalizeTwitterUrl = (url: string) =>
+	url.replace(/^https?:\/\/(www\.)?twitter\.com\//, "https://x.com/");
+
+const normalizeBirdwatchText = (text: BirdwatchTextWithEntities) => {
+	if (text.entities.length === 0) return text;
+
+	return {
+		...text,
+		entities: text.entities.map((entity) => {
+			const url = entity.ref.url?.url;
+			if (!url || !entity.ref.url) return entity;
+			return {
+				...entity,
+				ref: {
+					...entity.ref,
+					url: {
+						...entity.ref.url,
+						url: normalizeTwitterUrl(url),
+					},
+				},
+			};
+		}),
+	};
+};
+
+const normalizeBirdwatchPivot = (pivot: BirdwatchPivot): BirdwatchPivot => ({
+	...pivot,
+	destinationUrl: normalizeTwitterUrl(pivot.destinationUrl),
+	...(pivot.subtitle ? { subtitle: normalizeBirdwatchText(pivot.subtitle) } : {}),
+	...(pivot.footer ? { footer: normalizeBirdwatchText(pivot.footer) } : {}),
+});
+
 const getTweetUrl = (tweet: TweetBase) =>
 	`https://x.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
@@ -521,27 +553,32 @@ export type EnrichedQuotedTweet = Omit<QuotedTweet, "entities"> & {
 	entities: Entity[];
 };
 
-export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
-	...tweet,
-	url: getTweetUrl(tweet),
-	user: {
-		...tweet.user,
-		url: getUserUrl(tweet),
-		follow_url: getFollowUrl(tweet),
-	},
-	like_url: getLikeUrl(tweet),
-	reply_url: getReplyUrl(tweet),
-	in_reply_to_url: tweet.in_reply_to_screen_name ? getInReplyToUrl(tweet) : undefined,
-	entities: getEntities(tweet),
-	quoted_tweet: tweet.quoted_tweet
-		? {
-				...tweet.quoted_tweet,
-				url: getTweetUrl(tweet.quoted_tweet),
-				entities: getEntities(tweet.quoted_tweet),
-			}
-		: undefined,
-	note_tweet: tweet.note_tweet,
-});
+export const enrichTweet = (tweet: Tweet): EnrichedTweet => {
+	const { birdwatch_pivot, ...rest } = tweet;
+
+	return {
+		...rest,
+		url: getTweetUrl(tweet),
+		user: {
+			...tweet.user,
+			url: getUserUrl(tweet),
+			follow_url: getFollowUrl(tweet),
+		},
+		like_url: getLikeUrl(tweet),
+		reply_url: getReplyUrl(tweet),
+		in_reply_to_url: tweet.in_reply_to_screen_name ? getInReplyToUrl(tweet) : undefined,
+		entities: getEntities(tweet),
+		quoted_tweet: tweet.quoted_tweet
+			? {
+					...tweet.quoted_tweet,
+					url: getTweetUrl(tweet.quoted_tweet),
+					entities: getEntities(tweet.quoted_tweet),
+				}
+			: undefined,
+		...(birdwatch_pivot ? { birdwatch_pivot: normalizeBirdwatchPivot(birdwatch_pivot) } : {}),
+		note_tweet: tweet.note_tweet,
+	};
+};
 
 // Cards
 export interface ParsedCard {

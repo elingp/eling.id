@@ -318,7 +318,6 @@
 	padding: 0.5rem 0.75rem 0.75rem;
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
-	color: var(--tweet-text-secondary);
 }
 
 .tweet-community-note-subtitle {
