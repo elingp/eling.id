@@ -16,7 +16,7 @@ const { user } = tweet;
 		<img src={user.profile_image_url_https} alt={user.name} width="20" height="20" loading="lazy" />
 	</div>
 	<span class="tweet-quoted-name">{user.name}</span>
-	<VerifiedBadge {user} />
+	<VerifiedBadge {user} className="tweet-verified-quoted" />
 	<HighlightedLabel {user} />
 	<span class="tweet-quoted-username">@{user.screen_name}</span>
 </div>

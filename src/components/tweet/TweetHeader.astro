@@ -22,7 +22,8 @@ const { user } = tweet;
 				loading="lazy"
 			/>
 		</div>
-		<div class="tweet-avatar-shadow"></div>
+		<div class:list={["tweet-avatar-shadow", { square: user.profile_image_shape === "Square" }]}>
+		</div>
 	</a>
 	<div class="tweet-author">
 		<a href={tweet.url} class="tweet-author-name" target="_blank" rel="noopener noreferrer">
