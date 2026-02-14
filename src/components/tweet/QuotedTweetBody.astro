@@ -1,5 +1,6 @@
 ---
 import type { EnrichedQuotedTweet } from "./api.ts";
+import TweetLink from "./TweetLink.astro";
 
 interface Props {
 	tweet: EnrichedQuotedTweet;
@@ -9,5 +10,19 @@ const { tweet } = Astro.props;
 ---
 
 <p class="tweet-quoted-body" lang={tweet.lang} dir="auto">
-	{tweet.entities.map((item) => <span set:html={item.text} />)}
+	{
+		tweet.entities.map((item) => {
+			switch (item.type) {
+				case "hashtag":
+				case "mention":
+				case "url":
+				case "symbol":
+					return <TweetLink href={item.href}>{item.text}</TweetLink>;
+				case "media":
+					return null;
+				default:
+					return <span set:html={item.text} />;
+			}
+		})
+	}
 </p>

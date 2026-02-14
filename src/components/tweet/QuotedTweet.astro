@@ -12,7 +12,9 @@ const { tweet } = Astro.props;
 ---
 
 <div class="tweet-quoted">
-	<QuotedTweetHeader {tweet} />
+	<a href={tweet.url} class="tweet-quoted-link" target="_blank" rel="noopener noreferrer">
+		<QuotedTweetHeader {tweet} />
+	</a>
 	<QuotedTweetBody {tweet} />
 	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} quoted /> : null}
 </div>

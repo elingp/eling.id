@@ -9,6 +9,7 @@ import TweetHeader from "./TweetHeader.astro";
 import TweetInfo from "./TweetInfo.astro";
 import TweetInReplyTo from "./TweetInReplyTo.astro";
 import TweetMedia from "./TweetMedia.astro";
+import TweetReaderNote from "./TweetReaderNote.astro";
 import TweetReplies from "./TweetReplies.astro";
 import "@/styles/blocks/tweet.css";
 
@@ -26,6 +27,7 @@ const card = parseCard(raw.card);
 	{tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
 	<TweetBody {tweet} />
 	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
+	{tweet.birdwatch_pivot && <TweetReaderNote pivot={tweet.birdwatch_pivot} />}
 	{card && !tweet.mediaDetails?.length && <TweetCard card={card} />}
 	{tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
 	<TweetInfo {tweet} />

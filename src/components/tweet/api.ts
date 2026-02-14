@@ -143,6 +143,34 @@ export interface CardBindingValue {
 	scribe_key?: string;
 }
 
+export interface BirdwatchTextEntity {
+	fromIndex: number;
+	toIndex: number;
+	ref: {
+		url?: {
+			url: string;
+			urlType: string;
+		};
+	};
+}
+
+export interface BirdwatchTextWithEntities {
+	text: string;
+	entities: BirdwatchTextEntity[];
+}
+
+export interface BirdwatchPivot {
+	destinationUrl: string;
+	title?: string;
+	shorttitle?: string;
+	visualStyle: string;
+	subtitle?: BirdwatchTextWithEntities;
+	iconType: string;
+	footer?: BirdwatchTextWithEntities;
+	noteId: string;
+	footerIconType?: string;
+}
+
 export interface TweetCard {
 	card_platform?: {
 		platform: {
@@ -184,6 +212,7 @@ export interface Tweet extends TweetBase {
 	possibly_sensitive?: boolean;
 	note_tweet?: { id: string } | undefined;
 	card?: TweetCard;
+	birdwatch_pivot?: BirdwatchPivot;
 }
 
 export interface TweetParent extends TweetBase {
