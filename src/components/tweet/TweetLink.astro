@@ -7,6 +7,6 @@ interface Props {
 const { href, className } = Astro.props;
 ---
 
-<a {href} class:list={["tweet-link", className]} target="_blank" rel="noopener noreferrer nofollow">
-	<slot />
-</a>
+<a {href} class:list={["tweet-link", className]} target="_blank" rel="noopener noreferrer nofollow"
+	><Fragment set:html={(await Astro.slots.render("default"))?.trim() ?? ""} /></a
+>
