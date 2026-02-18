@@ -6,7 +6,7 @@
 	--tweet-header-font-size: 0.9375rem;
 	--tweet-header-line-height: 1.25rem;
 	--tweet-footer-font-size: 0.875rem;
-	--tweet-footer-line-height: 1.25rem;
+	--tweet-footer-line-height: 1rem;
 	--tweet-info-font-size: 1rem;
 	--tweet-actions-font-size: 0.875rem;
 	--tweet-replies-font-size: 0.875rem;
@@ -18,6 +18,19 @@
 	--tweet-actions-icon-size: 1em;
 	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.5em);
 
+	/* Spacing */
+	--tweet-padding: 0.75rem 1rem;
+	--tweet-inner-gap: 0.75rem; /* gap between sections within the card */
+	--tweet-radius: 0.75rem;
+	--tweet-avatar-size: 48px;
+	--tweet-brand-icon-size: 23.75px;
+	--tweet-square-radius: 4px;
+	--tweet-card-summary-thumb-width: 8.25rem;
+	--tweet-media-grid-gap: 2px;
+	/* Negative margin so the info icon circle aligns to the card edge */
+	--tweet-info-icon-edge-offset: -4px;
+
+	/* Colors */
 	--tweet-bg: light-dark(#fff, rgb(21, 32, 43));
 	--tweet-text: light-dark(rgb(15, 20, 25), rgb(247, 249, 249));
 	--tweet-text-secondary: light-dark(rgb(83, 100, 113), rgb(139, 152, 165));
@@ -28,9 +41,9 @@
 	--tweet-blue-secondary: light-dark(rgb(0, 111, 214), rgb(107, 201, 251));
 	--tweet-blue-secondary-hover: light-dark(rgba(0, 111, 214, 0.1), rgba(107, 201, 251, 0.1));
 	--tweet-red: rgb(249, 24, 128);
-	--tweet-red-hover: light-dark(rgba(249, 24, 128, 0.1), rgba(249, 24, 128, 0.1));
+	--tweet-red-hover: rgba(249, 24, 128, 0.1);
 	--tweet-green: rgb(0, 186, 124);
-	--tweet-green-hover: light-dark(rgba(0, 186, 124, 0.1), rgba(0, 186, 124, 0.1));
+	--tweet-green-hover: rgba(0, 186, 124, 0.1);
 	--tweet-verified-blue: light-dark(var(--tweet-blue), #fff);
 	--tweet-quoted-bg-hover: light-dark(rgba(0, 0, 0, 0.03), rgba(255, 255, 255, 0.03));
 	--tweet-skeleton-from: light-dark(#eaeaea, rgb(30, 39, 50));
@@ -40,14 +53,14 @@
 	position: relative;
 	width: 100%;
 	max-width: 550px;
-	padding: 0.75rem 1rem;
+	padding: var(--tweet-padding);
 	margin: 1.5rem 0;
 	overflow: hidden;
 	font-family: var(--tweet-font-family);
 	color: var(--tweet-text);
 	background: var(--tweet-bg);
 	border: 1px solid var(--tweet-border-color);
-	border-radius: 0.75rem;
+	border-radius: var(--tweet-radius);
 	transition:
 		background-color 0.2s,
 		box-shadow 0.2s;
@@ -86,7 +99,7 @@
 .tweet-header {
 	display: flex;
 	align-items: center;
-	padding: 0 0 0.75rem 0;
+	padding: 0 0 var(--tweet-inner-gap) 0;
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
 }
@@ -94,8 +107,8 @@
 .tweet-avatar {
 	position: relative;
 	flex-shrink: 0;
-	width: 48px;
-	height: 48px;
+	width: var(--tweet-avatar-size);
+	height: var(--tweet-avatar-size);
 	text-decoration: none;
 }
 
@@ -107,7 +120,7 @@
 }
 
 .tweet-avatar-img.square {
-	border-radius: 4px;
+	border-radius: var(--tweet-square-radius);
 }
 
 .tweet-avatar-img img {
@@ -126,7 +139,7 @@
 }
 
 .tweet-avatar-shadow.square {
-	border-radius: 4px;
+	border-radius: var(--tweet-square-radius);
 }
 
 .tweet-avatar-shadow:hover {
@@ -196,16 +209,16 @@
 	flex-shrink: 0;
 	align-items: flex-start;
 	justify-content: flex-end;
-	width: 48px;
-	height: 48px;
+	width: var(--tweet-avatar-size);
+	height: var(--tweet-avatar-size);
 	margin-left: auto;
 	color: var(--tweet-text);
 	text-decoration: none;
 }
 
 .tweet-brand svg {
-	width: 23.75px;
-	height: 23.75px;
+	width: var(--tweet-brand-icon-size);
+	height: var(--tweet-brand-icon-size);
 	fill: var(--tweet-twitter-icon-color);
 }
 
@@ -232,10 +245,7 @@
 	color: var(--tweet-verified-blue);
 }
 
-.tweet-verified.old svg {
-	color: #829aab;
-}
-
+.tweet-verified.old svg,
 .tweet-verified.government svg {
 	color: #829aab;
 }
@@ -259,11 +269,13 @@
 	white-space: pre-wrap;
 }
 
+.tweet-body a,
 .tweet-link {
 	color: var(--tweet-blue-secondary);
 	text-decoration: none;
 }
 
+.tweet-body a:hover,
 .tweet-link:hover {
 	text-decoration: underline;
 }
@@ -273,13 +285,14 @@
 	vertical-align: text-bottom;
 }
 
+/* Community Note */
 .tweet-community-note {
 	display: block;
-	margin-top: 0.75rem;
+	margin-top: var(--tweet-inner-gap);
 	overflow: hidden;
 	color: inherit;
 	border: 1px solid var(--tweet-border-color);
-	border-radius: 0.75rem;
+	border-radius: var(--tweet-radius);
 	transition: background-color 0.2s;
 }
 
@@ -295,7 +308,7 @@
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
-	padding: 0.75rem 0.75rem;
+	padding: var(--tweet-inner-gap);
 	font-size: var(--tweet-actions-font-size);
 	line-height: var(--tweet-header-line-height);
 	color: var(--tweet-text-secondary);
@@ -311,7 +324,8 @@
 	color: var(--tweet-blue);
 }
 
-.tweet-community-note-icon svg {
+.tweet-community-note-icon svg,
+.tweet-community-note-arrow svg {
 	width: 100%;
 	height: 100%;
 	fill: currentColor;
@@ -334,14 +348,8 @@
 	color: var(--tweet-text);
 }
 
-.tweet-community-note-arrow svg {
-	width: 100%;
-	height: 100%;
-	fill: currentColor;
-}
-
 .tweet-community-note-body {
-	padding: 0.5rem 0.75rem 0.75rem;
+	padding: 0.5rem var(--tweet-inner-gap) var(--tweet-inner-gap);
 	font-size: var(--tweet-header-font-size);
 	line-height: var(--tweet-header-line-height);
 }
@@ -362,51 +370,36 @@
 }
 
 .tweet-community-note-footer {
-	margin: 0.5rem 0 0;
+	margin: 0.75rem 0;
 	font-size: var(--tweet-footer-font-size);
 	line-height: var(--tweet-footer-line-height);
 	color: var(--tweet-text-secondary);
 }
 
-.tweet-body a {
-	color: var(--tweet-blue-secondary);
-	text-decoration: none;
-}
-
-.tweet-body a:hover {
-	text-decoration: underline;
-}
-
 /* Media */
 .tweet-media {
-	margin-top: 0.75rem;
+	margin-top: var(--tweet-inner-gap);
 	overflow: hidden;
 }
 
 .tweet-media.rounded {
 	border: 1px solid var(--tweet-border-color);
-	border-radius: 0.75rem;
+	border-radius: var(--tweet-radius);
 }
 
 .tweet-media-grid {
 	display: grid;
-	gap: 2px;
+	gap: var(--tweet-media-grid-gap);
 }
 
-.tweet-media-grid.cols-2 {
-	grid-template-columns: 1fr 1fr;
-}
-
-.tweet-media-grid.grid-3 {
+.tweet-media-grid.cols-2,
+.tweet-media-grid.grid-3,
+.tweet-media-grid.grid-4 {
 	grid-template-columns: 1fr 1fr;
 }
 
 .tweet-media-grid.grid-3 > :first-child {
 	grid-row: span 2;
-}
-
-.tweet-media-grid.grid-4 {
-	grid-template-columns: 1fr 1fr;
 }
 
 .tweet-media-item {
@@ -425,14 +418,7 @@
 	background: var(--tweet-skeleton-from);
 }
 
-.tweet-media-img {
-	position: absolute;
-	inset: 0;
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
+.tweet-media-img,
 .tweet-media-video {
 	position: absolute;
 	inset: 0;
@@ -444,12 +430,12 @@
 /* Card */
 .tweet-card {
 	display: flex;
-	margin-top: 0.75rem;
+	margin-top: var(--tweet-inner-gap);
 	overflow: hidden;
 	color: inherit;
 	text-decoration: none;
 	border: 1px solid var(--tweet-border-color);
-	border-radius: 0.75rem;
+	border-radius: var(--tweet-radius);
 	transition: background-color 0.2s;
 }
 
@@ -463,7 +449,7 @@
 
 .tweet-card.summary .tweet-card-thumbnail {
 	flex-shrink: 0;
-	width: 8.25rem;
+	width: var(--tweet-card-summary-thumb-width);
 	border-right: 1px solid var(--tweet-border-color);
 }
 
@@ -479,7 +465,7 @@
 	flex-direction: column;
 	gap: 0.125rem;
 	justify-content: center;
-	padding: 0.75rem;
+	padding: var(--tweet-inner-gap);
 	overflow: hidden;
 }
 
@@ -503,7 +489,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0.125rem;
-	padding: 0.75rem;
+	padding: var(--tweet-inner-gap);
 	overflow: hidden;
 }
 
@@ -537,14 +523,14 @@
 	color: var(--tweet-text-secondary);
 }
 
-/* Quoted */
+/* Quoted Tweet */
 .tweet-quoted {
 	display: block;
-	margin: 0.75rem 0 0;
+	margin: var(--tweet-inner-gap) 0 0;
 	overflow: hidden;
 	color: inherit;
 	border: 1px solid var(--tweet-border-color);
-	border-radius: 0.75rem;
+	border-radius: var(--tweet-radius);
 	transition: background-color 0.2s;
 }
 
@@ -562,7 +548,7 @@
 	display: flex;
 	gap: 0.1rem;
 	align-items: center;
-	padding: 0.75rem 0.75rem 0;
+	padding: var(--tweet-inner-gap) var(--tweet-inner-gap) 0;
 }
 
 .tweet-quoted-avatar {
@@ -603,7 +589,7 @@
 }
 
 .tweet-quoted-body {
-	padding: 0.25rem 0.75rem 0.75rem;
+	padding: 0.25rem var(--tweet-inner-gap) var(--tweet-inner-gap);
 	margin: 0;
 	font-size: var(--tweet-quoted-body-font-size);
 	font-weight: 400;
@@ -626,10 +612,7 @@
 	display: flex;
 	align-items: center;
 	margin-top: 0.125rem;
-	text-overflow: ellipsis;
 	color: var(--tweet-text-secondary);
-	overflow-wrap: break-word;
-	white-space: nowrap;
 }
 
 .tweet-info-link {
@@ -644,17 +627,17 @@
 	text-decoration-thickness: 1px;
 }
 
+/* The info icon (privacy link) — circular hit area flush to card edge */
 .tweet-info-link:last-child {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	width: var(--tweet-info-icon-wrapper-size);
 	height: var(--tweet-info-icon-wrapper-size);
-	margin-right: -4px;
+	margin-right: var(--tweet-info-icon-edge-offset);
 	margin-left: auto;
 	border-radius: 9999px;
-	transition-duration: 0.2s;
-	transition-property: background-color;
+	transition: background-color 0.2s;
 }
 
 .tweet-info-link:last-child:hover {
@@ -677,10 +660,7 @@
 	align-items: center;
 	padding-top: 0.25rem;
 	margin-top: 0.25rem;
-	text-overflow: ellipsis;
 	color: var(--tweet-text-secondary);
-	overflow-wrap: break-word;
-	white-space: nowrap;
 	border-top: 1px solid var(--tweet-border-color);
 }
 
@@ -690,10 +670,6 @@
 	margin-right: 1.25rem;
 	color: inherit;
 	text-decoration: none;
-}
-
-.tweet-action:hover {
-	background-color: transparent;
 }
 
 .tweet-action-icon-wrapper {
@@ -721,6 +697,10 @@
 	line-height: 1rem;
 }
 
+.tweet-action.like .tweet-action-icon {
+	color: var(--tweet-red);
+}
+
 .tweet-action.like:hover > .tweet-action-icon-wrapper {
 	background-color: var(--tweet-red-hover);
 }
@@ -730,8 +710,8 @@
 	text-decoration-line: underline;
 }
 
-.tweet-action.like .tweet-action-icon {
-	color: var(--tweet-red);
+.tweet-action.reply .tweet-action-icon {
+	color: var(--tweet-blue);
 }
 
 .tweet-action.reply:hover > .tweet-action-icon-wrapper {
@@ -741,10 +721,6 @@
 .tweet-action.reply:hover > .tweet-action-text {
 	color: var(--tweet-blue-secondary);
 	text-decoration-line: underline;
-}
-
-.tweet-action.reply .tweet-action-icon {
-	color: var(--tweet-blue);
 }
 
 /* Replies */
@@ -765,8 +741,7 @@
 	outline-style: none;
 	border: 1px solid var(--tweet-border-color);
 	border-radius: 9999px;
-	transition-duration: 0.2s;
-	transition-property: background-color;
+	transition: background-color 0.2s;
 }
 
 .tweet-replies-link:hover {
@@ -778,7 +753,7 @@
 	text-overflow: ellipsis;
 	font-size: var(--tweet-replies-font-size);
 	font-weight: 700;
-	line-height: 1rem;
+	line-height: var(--tweet-replies-line-height);
 	overflow-wrap: break-word;
 	white-space: nowrap;
 }

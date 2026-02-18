@@ -1,4 +1,3 @@
-// Types
 export type Indices = [number, number];
 
 export interface HashtagEntity {
@@ -229,7 +228,8 @@ export interface QuotedTweet extends TweetBase {
 	self_thread: { id_str: string };
 }
 
-// Fetching
+// --- Fetching ---
+
 const SYNDICATION_URL = "https://cdn.syndication.twimg.com";
 const TWEET_ID = /^[0-9]+$/;
 
@@ -240,7 +240,6 @@ function getToken(id: string): string {
 export function extractTweetId(input: string): string {
 	const trimmed = input.trim();
 	if (TWEET_ID.test(trimmed)) return trimmed;
-	// Handle URLs like https://x.com/user/status/123456 or https://twitter.com/user/status/123456
 	const match = trimmed.match(/(?:twitter\.com|x\.com)\/\w+\/status\/(\d+)/);
 	if (match?.[1]) return match[1];
 	throw new Error(`Cannot extract tweet ID from: ${input}`);
@@ -258,10 +257,13 @@ export class TwitterApiError extends Error {
 }
 
 const getErrorMessage = (data: unknown, status: number, url: string): string => {
-	if (typeof data === "object" && data && "error" in data) {
-		const error = (data as { error?: unknown }).error;
-		if (typeof error === "string") return error;
-	}
+	if (
+		typeof data === "object" &&
+		data !== null &&
+		"error" in data &&
+		typeof data.error === "string"
+	)
+		return data.error;
 	return `Failed to fetch tweet at "${url}" with "${status}".`;
 };
 
@@ -299,7 +301,7 @@ export async function fetchTweet(
 	);
 	url.searchParams.set("token", getToken(id));
 
-	const res = await fetch(url.toString(), fetchOptions);
+	const res = await fetch(url, fetchOptions);
 	const isJson = res.headers.get("content-type")?.includes("application/json");
 	const data = isJson ? await res.json() : undefined;
 
@@ -338,7 +340,8 @@ export async function getTweet(
 	return { ...data, birdwatch_pivot: await normalizeBirdwatchPivot(data.birdwatch_pivot) };
 }
 
-// URL helpers
+// --- URL helpers ---
+
 const normalizeTwitterUrl = (url: string) =>
 	url.replace(/^https?:\/\/(www\.)?twitter\.com\//, "https://x.com/");
 
@@ -366,10 +369,7 @@ const normalizeBirdwatchText = async (text: BirdwatchTextWithEntities) => {
 					...entity,
 					ref: {
 						...entity.ref,
-						url: {
-							...entity.ref.url,
-							url: resolvedUrl,
-						},
+						url: { ...entity.ref.url, url: resolvedUrl },
 					},
 				};
 			}),
@@ -380,12 +380,11 @@ const normalizeBirdwatchText = async (text: BirdwatchTextWithEntities) => {
 const normalizeBirdwatchPivot = async (pivot: BirdwatchPivot): Promise<BirdwatchPivot> => {
 	const subtitle = pivot.subtitle ? await normalizeBirdwatchText(pivot.subtitle) : undefined;
 	const footer = pivot.footer ? await normalizeBirdwatchText(pivot.footer) : undefined;
-
 	return {
 		...pivot,
 		destinationUrl: normalizeTwitterUrl(pivot.destinationUrl),
-		...(subtitle ? { subtitle } : {}),
-		...(footer ? { footer } : {}),
+		...(subtitle && { subtitle }),
+		...(footer && { footer }),
 	};
 };
 
@@ -393,9 +392,7 @@ const getTweetUrl = (tweet: TweetBase) =>
 	`https://x.com/${tweet.user.screen_name}/status/${tweet.id_str}`;
 
 const getUserUrl = (usernameOrTweet: string | TweetBase) =>
-	`https://x.com/${
-		typeof usernameOrTweet === "string" ? usernameOrTweet : usernameOrTweet.user.screen_name
-	}`;
+	`https://x.com/${typeof usernameOrTweet === "string" ? usernameOrTweet : usernameOrTweet.user.screen_name}`;
 
 const getLikeUrl = (tweet: TweetBase) => `https://x.com/intent/like?tweet_id=${tweet.id_str}`;
 
@@ -421,13 +418,12 @@ export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "lar
 	return url.toString();
 };
 
-// Formatting
-const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) => {
-	const { variants } = media.video_info;
-	return variants
+// --- Formatting ---
+
+const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) =>
+	media.video_info.variants
 		.filter((vid) => vid.content_type === "video/mp4")
 		.sort((a, b) => (b.bitrate ?? 0) - (a.bitrate ?? 0));
-};
 
 export const getMp4Video = (media: MediaAnimatedGif | MediaVideo) => {
 	const mp4Videos = getMp4Videos(media);
@@ -465,7 +461,8 @@ export const formatDate = (date: Date): string => {
 	return `${p.hour}:${p.minute} ${p.dayPeriod} \u00B7 ${p.month} ${p.day}, ${p.year}`;
 };
 
-// Entities
+// --- Entities ---
+
 type TextEntity = { indices: Indices; type: "text" };
 
 type TweetEntity = HashtagEntity | UserMentionEntity | UrlEntity | MediaEntity | SymbolEntity;
@@ -552,7 +549,8 @@ function getEntities(tweet: TweetBase): Entity[] {
 	});
 }
 
-// Enrichment
+// --- Enrichment ---
+
 export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet"> & {
 	url: string;
 	user: {
@@ -594,7 +592,8 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 	note_tweet: tweet.note_tweet,
 });
 
-// Cards
+// --- Cards ---
+
 export interface ParsedCard {
 	type: "summary" | "summary_large_image";
 	url: string;

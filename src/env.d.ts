@@ -6,7 +6,6 @@ declare module "@pagefind/default-ui" {
 
 interface Window {
 	__themeProviderInit?: boolean;
-	__twitterPostInit?: boolean;
 	__formattedDateInit?: boolean;
 	__backToTopInit?: boolean;
 }

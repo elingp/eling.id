@@ -1,5 +1,5 @@
 ---
-import type { BirdwatchPivot } from "@/components/tweet/api.ts";
+import type { BirdwatchPivot, BirdwatchTextWithEntities } from "@/components/tweet/api.ts";
 import TweetLink from "./TweetLink.astro";
 
 interface Props {
@@ -7,76 +7,36 @@ interface Props {
 }
 
 const { pivot } = Astro.props;
-const noteTitle = pivot.shorttitle ?? pivot.title;
+
 const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
-const noteSubtitle = pivot.subtitle;
-const subtitleText = noteSubtitle?.text ?? "";
-const subtitleEntities =
-	noteSubtitle?.entities
-		?.map((entity) => ({
-			start: entity.fromIndex,
-			end: entity.toIndex,
-			href: entity.ref.url?.url ?? "",
-		}))
-		.filter((entity) => entity.href.length > 0 && entity.end > entity.start)
-		.sort((a, b) => a.start - b.start) ?? [];
-const subtitleChars = Array.from(subtitleText);
-const subtitleParts: Array<{ text: string; href?: string }> = [];
 
-const footerText = pivot.footer?.text ?? "";
-const footerEntities =
-	pivot.footer?.entities
-		?.map((entity) => ({
-			start: entity.fromIndex,
-			end: entity.toIndex,
-			href: entity.ref.url?.url ?? "https://x.com/i/birdwatch",
-		}))
-		.filter((entity) => entity.href.length > 0 && entity.end > entity.start)
-		.sort((a, b) => a.start - b.start) ?? [];
-const footerChars = Array.from(footerText);
-const footerParts: Array<{ text: string; href?: string }> = [];
+type TextPart = { text: string; href?: string };
 
-if (subtitleText) {
+const parseTextParts = (field: BirdwatchTextWithEntities | undefined): TextPart[] => {
+	if (!field?.text) return [];
+	const chars = Array.from(field.text);
+	const entities = field.entities
+		.map((e) => ({ start: e.fromIndex, end: e.toIndex, href: e.ref.url?.url ?? "" }))
+		.filter((e) => e.href.length > 0 && e.end > e.start)
+		.sort((a, b) => a.start - b.start);
+
+	const parts: TextPart[] = [];
 	let cursor = 0;
-
-	for (const entity of subtitleEntities) {
+	for (const entity of entities) {
 		if (entity.start > cursor) {
-			subtitleParts.push({ text: subtitleChars.slice(cursor, entity.start).join("") });
+			parts.push({ text: chars.slice(cursor, entity.start).join("") });
 		}
-		subtitleParts.push({
-			text: subtitleChars.slice(entity.start, entity.end).join(""),
-			href: entity.href,
-		});
+		parts.push({ text: chars.slice(entity.start, entity.end).join(""), href: entity.href });
 		cursor = entity.end;
 	}
-
-	if (cursor < subtitleChars.length) {
-		subtitleParts.push({ text: subtitleChars.slice(cursor).join("") });
+	if (cursor < chars.length) {
+		parts.push({ text: chars.slice(cursor).join("") });
 	}
-}
+	return parts;
+};
 
-if (footerText) {
-	if (footerEntities.length === 0) {
-		footerParts.push({ text: footerText });
-	} else {
-		let cursor = 0;
-
-		for (const entity of footerEntities) {
-			if (entity.start > cursor) {
-				footerParts.push({ text: footerChars.slice(cursor, entity.start).join("") });
-			}
-			footerParts.push({
-				text: footerChars.slice(entity.start, entity.end).join(""),
-				href: entity.href,
-			});
-			cursor = entity.end;
-		}
-
-		if (cursor < footerChars.length) {
-			footerParts.push({ text: footerChars.slice(cursor).join("") });
-		}
-	}
-}
+const subtitleParts = parseTextParts(pivot.subtitle);
+const footerParts = parseTextParts(pivot.footer);
 ---
 
 <div class="tweet-community-note-wrapper">
@@ -94,7 +54,11 @@ if (footerText) {
 					></path>
 				</svg>
 			</span>
-			{noteTitle && <p class="tweet-community-note-title">{noteTitle}</p>}
+			{
+				(pivot.shorttitle ?? pivot.title) && (
+					<p class="tweet-community-note-title">{pivot.shorttitle ?? pivot.title}</p>
+				)
+			}
 			<span class="tweet-community-note-arrow" aria-hidden="true">
 				<svg viewBox="0 0 24 24" focusable="false">
 					<path
