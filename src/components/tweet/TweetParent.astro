@@ -51,7 +51,7 @@ const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
 			</div>
 			<VerifiedBadge {user} />
 			<HighlightedLabel {user} />
-			<span aria-hidden="true">&middot;</span>
+			<span class="tweet-parent-name-sep" aria-hidden="true">&middot;</span>
 			<a href={tweet.url} class="tweet-parent-date" title={tweet.created_at}>
 				{formattedDate}
 			</a>

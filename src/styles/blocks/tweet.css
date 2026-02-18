@@ -808,6 +808,10 @@
 	min-width: 0;
 }
 
+.tweet-parent-name-sep {
+	color: var(--tweet-text-secondary);
+}
+
 .tweet-parent-date {
 	flex-shrink: 0;
 	color: var(--tweet-text-secondary);
