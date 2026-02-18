@@ -14,9 +14,9 @@
 	--tweet-quoted-body-font-size: 0.9375rem;
 	--tweet-quoted-body-line-height: 1.25rem;
 	--tweet-info-icon-size: 1.25em;
-	--tweet-info-icon-wrapper-size: calc(var(--tweet-info-icon-size) + 1em);
+	--tweet-info-icon-wrapper-size: calc(var(--tweet-info-icon-size) + 0.75em);
 	--tweet-actions-icon-size: 1em;
-	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.75em);
+	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.5em);
 
 	--tweet-bg: light-dark(#fff, rgb(21, 32, 43));
 	--tweet-text: light-dark(rgb(15, 20, 25), rgb(247, 249, 249));
