@@ -406,9 +406,11 @@ const getReplyUrl = (tweet: TweetBase) => `https://x.com/intent/tweet?in_reply_t
 const getFollowUrl = (tweet: TweetBase) =>
 	`https://x.com/intent/follow?screen_name=${tweet.user.screen_name}`;
 
-const getHashtagUrl = (hashtag: HashtagEntity) => `https://x.com/hashtag/${hashtag.text}`;
+const getHashtagUrl = (hashtag: HashtagEntity) =>
+	`https://x.com/hashtag/${encodeURIComponent(hashtag.text)}`;
 
-const getSymbolUrl = (symbol: SymbolEntity) => `https://x.com/search?q=%24${symbol.text}`;
+const getSymbolUrl = (symbol: SymbolEntity) =>
+	`https://x.com/search?q=%24${encodeURIComponent(symbol.text)}`;
 
 const getInReplyToUrl = (tweet: Tweet) =>
 	`https://x.com/${tweet.in_reply_to_screen_name}/status/${tweet.in_reply_to_status_id_str}`;
@@ -444,7 +446,8 @@ const escapeHtml = (text: string): string =>
 		.replaceAll("&", "&amp;")
 		.replaceAll("<", "&lt;")
 		.replaceAll(">", "&gt;")
-		.replaceAll('"', "&quot;");
+		.replaceAll('"', "&quot;")
+		.replaceAll("'", "&#39;");
 
 export const safeHtmlWithBreaks = (text: string): string =>
 	escapeHtml(decodeEntities(text)).replaceAll("\n", "<br />");

@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { href, className } = Astro.props;
+// Slots must contain pre-sanitized content (see TweetEntities, TweetCommunityNote).
 ---
 
 <a {href} class:list={["tweet-link", className]} target="_blank" rel="noopener noreferrer nofollow"
