@@ -425,7 +425,29 @@ export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "lar
 
 // --- Formatting ---
 
-export const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
+// Decode HTML entities from Twitter API text (e.g. &gt; → >), then re-escape and
+// convert newlines to <br> so the result is safe to pass to set:html.
+const decodeEntities = (text: string): string =>
+	text
+		.replaceAll("&lt;", "<")
+		.replaceAll("&gt;", ">")
+		.replaceAll("&quot;", '"')
+		.replaceAll("&#39;", "'")
+		.replaceAll("&apos;", "'")
+		.replaceAll("&nbsp;", "\u00A0")
+		.replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number(code)))
+		.replace(/&#x([0-9a-fA-F]+);/g, (_, code) => String.fromCodePoint(parseInt(code, 16)))
+		.replaceAll("&amp;", "&"); // must be last to avoid double-decoding
+
+const escapeHtml = (text: string): string =>
+	text
+		.replaceAll("&", "&amp;")
+		.replaceAll("<", "&lt;")
+		.replaceAll(">", "&gt;")
+		.replaceAll('"', "&quot;");
+
+export const safeHtmlWithBreaks = (text: string): string =>
+	escapeHtml(decodeEntities(text)).replaceAll("\n", "<br />");
 
 const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) =>
 	media.video_info.variants

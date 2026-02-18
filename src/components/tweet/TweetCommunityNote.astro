@@ -1,6 +1,6 @@
 ---
 import type { BirdwatchPivot, BirdwatchTextWithEntities } from "./api.ts";
-import { renderHtmlWithBreaks } from "./api.ts";
+import { safeHtmlWithBreaks } from "./api.ts";
 import TweetLink from "./TweetLink.astro";
 
 interface Props {
@@ -72,10 +72,10 @@ const footerParts = parseTextParts(pivot.footer);
 					{subtitleParts.map((part) =>
 						part.href ? (
 							<TweetLink href={part.href} className="tweet-community-note-link">
-								<span set:html={renderHtmlWithBreaks(part.text)} />
+								<span set:html={safeHtmlWithBreaks(part.text)} />
 							</TweetLink>
 						) : (
-							<span set:html={renderHtmlWithBreaks(part.text)} />
+							<span set:html={safeHtmlWithBreaks(part.text)} />
 						),
 					)}
 				</p>
@@ -89,10 +89,10 @@ const footerParts = parseTextParts(pivot.footer);
 			{footerParts.map((part) =>
 				part.href ? (
 					<TweetLink href={part.href} className="tweet-community-note-link">
-						<span set:html={renderHtmlWithBreaks(part.text)} />
+						<span set:html={safeHtmlWithBreaks(part.text)} />
 					</TweetLink>
 				) : (
-					<span set:html={renderHtmlWithBreaks(part.text)} />
+					<span set:html={safeHtmlWithBreaks(part.text)} />
 				),
 			)}
 		</p>
