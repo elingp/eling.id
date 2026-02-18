@@ -231,7 +231,6 @@
 	width: 1.25em;
 	height: 1.25em;
 	vertical-align: text-bottom;
-	transform: translateY(-1px);
 }
 
 .tweet-verified-quoted {
@@ -583,6 +582,7 @@
 }
 
 .tweet-quoted-username {
+	margin-left: 0.15rem;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	font-size: var(--tweet-quoted-body-font-size);
