@@ -7,11 +7,10 @@ interface Props {
 }
 
 const { user, className } = Astro.props;
-const verified = user.verified || user.is_blue_verified || user.verified_type;
 
 let badgeType: "blue" | "old" | "business" | "government" | null = null;
 
-if (verified) {
+if (user.verified || user.is_blue_verified || user.verified_type) {
 	badgeType = user.is_blue_verified ? "blue" : "old";
 	if (user.verified_type === "Government") badgeType = "government";
 	if (user.verified_type === "Business") badgeType = "business";

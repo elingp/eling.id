@@ -306,8 +306,9 @@ export async function fetchTweet(
 	url.searchParams.set("token", getToken(id));
 
 	const res = await fetch(url, fetchOptions);
-	const isJson = res.headers.get("content-type")?.includes("application/json");
-	const data = isJson ? await res.json() : undefined;
+	const data = res.headers.get("content-type")?.includes("application/json")
+		? await res.json()
+		: undefined;
 
 	if (res.ok) {
 		if (data?.__typename === "TweetTombstone") return { tombstone: true };
@@ -423,6 +424,8 @@ export const getMediaUrl = (media: MediaDetails, size: "small" | "medium" | "lar
 };
 
 // --- Formatting ---
+
+export const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
 
 const getMp4Videos = (media: MediaAnimatedGif | MediaVideo) =>
 	media.video_info.variants

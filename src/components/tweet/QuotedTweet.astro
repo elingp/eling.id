@@ -1,20 +1,38 @@
 ---
 import type { EnrichedQuotedTweet } from "./api.ts";
-import QuotedTweetBody from "./QuotedTweetBody.astro";
-import QuotedTweetHeader from "./QuotedTweetHeader.astro";
+import HighlightedLabel from "./HighlightedLabel.astro";
+import TweetEntities from "./TweetEntities.astro";
 import TweetMedia from "./TweetMedia.astro";
+import VerifiedBadge from "./VerifiedBadge.astro";
 
 interface Props {
 	tweet: EnrichedQuotedTweet;
 }
 
 const { tweet } = Astro.props;
+const { user } = tweet;
 ---
 
 <div class="tweet-quoted">
 	<a href={tweet.url} class="tweet-quoted-link" target="_blank" rel="noopener noreferrer">
-		<QuotedTweetHeader {tweet} />
+		<div class="tweet-quoted-header">
+			<div class:list={["tweet-quoted-avatar", { square: user.profile_image_shape === "Square" }]}>
+				<img
+					src={user.profile_image_url_https}
+					alt={user.name}
+					width="20"
+					height="20"
+					loading="lazy"
+				/>
+			</div>
+			<span class="tweet-quoted-name">{user.name}</span>
+			<VerifiedBadge {user} className="tweet-verified-quoted" />
+			<HighlightedLabel {user} />
+			<span class="tweet-quoted-username">@{user.screen_name}</span>
+		</div>
 	</a>
-	<QuotedTweetBody {tweet} />
+	<p class="tweet-quoted-body" lang={tweet.lang} dir="auto">
+		<TweetEntities entities={tweet.entities} />
+	</p>
 	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} quoted /> : null}
 </div>

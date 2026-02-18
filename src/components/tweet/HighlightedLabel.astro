@@ -9,13 +9,12 @@ interface Props {
 const { user, className } = Astro.props;
 const label = user.highlighted_label;
 const url = label?.badge?.url;
-const alt = label?.description ?? "Verified label";
 ---
 
 {
 	url ? (
 		<span class:list={["tweet-highlighted-label", className]}>
-			<img src={url} alt={alt} loading="lazy" decoding="async" />
+			<img src={url} alt={label?.description ?? "Verified label"} loading="lazy" decoding="async" />
 		</span>
 	) : null
 }

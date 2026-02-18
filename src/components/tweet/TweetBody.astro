@@ -1,5 +1,6 @@
 ---
 import type { EnrichedTweet } from "./api.ts";
+import TweetEntities from "./TweetEntities.astro";
 import TweetLink from "./TweetLink.astro";
 
 interface Props {
@@ -7,30 +8,10 @@ interface Props {
 }
 
 const { tweet } = Astro.props;
-
-const renderHtmlWithBreaks = (text: string) => text.replaceAll("\n", "<br />");
 ---
 
 <p class="tweet-body" lang={tweet.lang} dir="auto">
-	{
-		tweet.entities.map((item) => {
-			switch (item.type) {
-				case "hashtag":
-				case "mention":
-				case "url":
-				case "symbol":
-					return (
-						<TweetLink href={item.href}>
-							<span set:html={renderHtmlWithBreaks(item.text)} />
-						</TweetLink>
-					);
-				case "media":
-					return null;
-				default:
-					return <span set:html={renderHtmlWithBreaks(item.text)} />;
-			}
-		})
-	}
+	<TweetEntities entities={tweet.entities} />
 	{
 		tweet.note_tweet ? (
 			<TweetLink href={tweet.url}>
