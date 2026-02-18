@@ -218,6 +218,10 @@ export interface TweetParent extends TweetBase {
 	reply_count: number;
 	retweet_count: number;
 	favorite_count: number;
+	mediaDetails?: MediaDetails[];
+	photos?: TweetPhoto[];
+	video?: TweetVideo;
+	quoted_tweet?: QuotedTweet;
 }
 
 export interface QuotedTweet extends TweetBase {
@@ -446,6 +450,12 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 	year: "numeric",
 });
 
+const shortDateFormatter = new Intl.DateTimeFormat("en-US", {
+	month: "short",
+	day: "numeric",
+	year: "numeric",
+});
+
 type PartsObject = Record<keyof Intl.DateTimeFormatPartTypesRegistry, string>;
 
 const partsToObject = (parts: ReturnType<typeof dateFormatter.formatToParts>): PartsObject => {
@@ -459,6 +469,11 @@ const partsToObject = (parts: ReturnType<typeof dateFormatter.formatToParts>): P
 export const formatDate = (date: Date): string => {
 	const p = partsToObject(dateFormatter.formatToParts(date));
 	return `${p.hour}:${p.minute} ${p.dayPeriod} \u00B7 ${p.month} ${p.day}, ${p.year}`;
+};
+
+export const formatShortDate = (date: Date): string => {
+	const p = partsToObject(shortDateFormatter.formatToParts(date));
+	return `${p.month} ${p.day}, ${p.year}`;
 };
 
 // --- Entities ---
@@ -551,7 +566,7 @@ function getEntities(tweet: TweetBase): Entity[] {
 
 // --- Enrichment ---
 
-export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet"> & {
+export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet" | "parent"> & {
 	url: string;
 	user: {
 		url: string;
@@ -563,11 +578,19 @@ export type EnrichedTweet = Omit<Tweet, "entities" | "quoted_tweet"> & {
 	entities: Entity[];
 	quoted_tweet?: EnrichedQuotedTweet | undefined;
 	note_tweet?: { id: string } | undefined;
+	parent?: EnrichedTweetParent | undefined;
 };
 
 export type EnrichedQuotedTweet = Omit<QuotedTweet, "entities"> & {
 	url: string;
 	entities: Entity[];
+};
+
+export type EnrichedTweetParent = Omit<TweetParent, "entities" | "quoted_tweet"> & {
+	url: string;
+	user: TweetUser & { url: string; follow_url: string };
+	entities: Entity[];
+	quoted_tweet?: EnrichedQuotedTweet | undefined;
 };
 
 export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
@@ -590,6 +613,25 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 			}
 		: undefined,
 	note_tweet: tweet.note_tweet,
+	parent: tweet.parent
+		? {
+				...tweet.parent,
+				url: getTweetUrl(tweet.parent),
+				user: {
+					...tweet.parent.user,
+					url: getUserUrl(tweet.parent),
+					follow_url: getFollowUrl(tweet.parent),
+				},
+				entities: getEntities(tweet.parent),
+				quoted_tweet: tweet.parent.quoted_tweet
+					? {
+							...tweet.parent.quoted_tweet,
+							url: getTweetUrl(tweet.parent.quoted_tweet),
+							entities: getEntities(tweet.parent.quoted_tweet),
+						}
+					: undefined,
+			}
+		: undefined,
 });
 
 // --- Cards ---

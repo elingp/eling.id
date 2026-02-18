@@ -1,10 +1,15 @@
 ---
-import type { EnrichedQuotedTweet, EnrichedTweet, MediaDetails } from "./api.ts";
+import type {
+	EnrichedQuotedTweet,
+	EnrichedTweet,
+	EnrichedTweetParent,
+	MediaDetails,
+} from "./api.ts";
 import { getMediaUrl } from "./api.ts";
 import TweetMediaVideo from "./TweetMediaVideo.astro";
 
 interface Props {
-	tweet: EnrichedTweet | EnrichedQuotedTweet;
+	tweet: EnrichedTweet | EnrichedQuotedTweet | EnrichedTweetParent;
 	quoted?: boolean;
 }
 
