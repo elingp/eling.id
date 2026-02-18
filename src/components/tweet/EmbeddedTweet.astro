@@ -27,9 +27,9 @@ const card = parseCard(raw.card);
 	{tweet.in_reply_to_status_id_str && <TweetInReplyTo tweet={tweet} />}
 	<TweetBody {tweet} />
 	{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
-	{tweet.birdwatch_pivot && <TweetCommunityNote pivot={tweet.birdwatch_pivot} />}
 	{card && !tweet.mediaDetails?.length && <TweetCard card={card} />}
 	{tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
+	{tweet.birdwatch_pivot && <TweetCommunityNote pivot={tweet.birdwatch_pivot} />}
 	<TweetInfo {tweet} />
 	<TweetActions {tweet} />
 	<TweetReplies {tweet} />

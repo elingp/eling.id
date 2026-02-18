@@ -5,15 +5,17 @@
 	--tweet-body-line-height: 1.5rem;
 	--tweet-header-font-size: 0.9375rem;
 	--tweet-header-line-height: 1.25rem;
+	--tweet-footer-font-size: 0.875rem;
+	--tweet-footer-line-height: 1.25rem;
 	--tweet-info-font-size: 1rem;
 	--tweet-actions-font-size: 0.875rem;
 	--tweet-replies-font-size: 0.875rem;
 	--tweet-replies-line-height: 1rem;
 	--tweet-quoted-body-font-size: 0.9375rem;
 	--tweet-quoted-body-line-height: 1.25rem;
-	--tweet-info-icon-size: 1.5em;
+	--tweet-info-icon-size: 1.25em;
 	--tweet-info-icon-wrapper-size: calc(var(--tweet-info-icon-size) + 1em);
-	--tweet-actions-icon-size: 1.25em;
+	--tweet-actions-icon-size: 1em;
 	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.75em);
 
 	--tweet-bg: light-dark(#fff, rgb(21, 32, 43));
@@ -175,7 +177,7 @@
 
 .tweet-follow-sep {
 	padding: 0 0.25rem;
-	color: var(--tweet-text);
+	color: var(--tweet-text-secondary);
 }
 
 .tweet-follow {
@@ -213,13 +215,12 @@
 	width: 1.25em;
 	height: 1.25em;
 	vertical-align: text-bottom;
-	transform: translateY(-2px);
+	transform: translateY(-1px);
 }
 
 .tweet-verified-quoted {
 	width: 0.9em;
 	height: 0.9em;
-	transform: translateY(-1px);
 }
 
 .tweet-verified svg {
@@ -241,7 +242,7 @@
 
 .tweet-in-reply-to {
 	font-size: var(--tweet-header-font-size);
-	color: var(--tweet-blue-secondary);
+	color: var(--tweet-text-secondary);
 	text-decoration: none;
 }
 
@@ -282,6 +283,10 @@
 	transition: background-color 0.2s;
 }
 
+.tweet-community-note-wrapper {
+	display: block;
+}
+
 .tweet-community-note:hover {
 	background: var(--tweet-quoted-bg-hover);
 }
@@ -290,8 +295,8 @@
 	display: flex;
 	gap: 0.5rem;
 	align-items: center;
-	padding: 0.5rem 0.75rem;
-	font-size: var(--tweet-header-font-size);
+	padding: 0.75rem 0.75rem;
+	font-size: var(--tweet-actions-font-size);
 	line-height: var(--tweet-header-line-height);
 	color: var(--tweet-text-secondary);
 	background: var(--tweet-quoted-bg-hover);
@@ -318,6 +323,23 @@
 	color: var(--tweet-text);
 }
 
+.tweet-community-note-arrow {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-left: auto;
+	color: var(--tweet-text);
+}
+
+.tweet-community-note-arrow svg {
+	width: 100%;
+	height: 100%;
+	fill: currentColor;
+}
+
 .tweet-community-note-body {
 	padding: 0.5rem 0.75rem 0.75rem;
 	font-size: var(--tweet-header-font-size);
@@ -337,6 +359,13 @@
 
 .tweet-community-note-link:hover {
 	text-decoration: underline;
+}
+
+.tweet-community-note-footer {
+	margin: 0.5rem 0 0;
+	font-size: var(--tweet-footer-font-size);
+	line-height: var(--tweet-footer-line-height);
+	color: var(--tweet-text-secondary);
 }
 
 .tweet-body a {
@@ -646,7 +675,7 @@
 .tweet-actions {
 	display: flex;
 	align-items: center;
-	padding: 0.25rem 0;
+	padding-top: 0.25rem;
 	margin-top: 0.25rem;
 	text-overflow: ellipsis;
 	color: var(--tweet-text-secondary);
