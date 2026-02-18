@@ -1,32 +1,35 @@
 /* Base */
 .tweet {
+	/* Typography */
 	--tweet-font-family: var(--font-sans);
 	--tweet-body-font-size: 1.25rem;
 	--tweet-body-line-height: 1.5rem;
 	--tweet-header-font-size: 0.9375rem;
 	--tweet-header-line-height: 1.25rem;
-	--tweet-footer-font-size: 0.875rem;
+	--tweet-footer-font-size: 0.8125rem;
 	--tweet-footer-line-height: 1rem;
-	--tweet-info-font-size: 1rem;
-	--tweet-actions-font-size: 0.875rem;
-	--tweet-replies-font-size: 0.875rem;
-	--tweet-replies-line-height: 1rem;
+	--tweet-card-font-size: 0.875rem;
+	--tweet-card-line-height: 1rem;
 	--tweet-quoted-body-font-size: 0.9375rem;
 	--tweet-quoted-body-line-height: 1.25rem;
-	--tweet-info-icon-size: 1.25em;
-	--tweet-info-icon-wrapper-size: calc(var(--tweet-info-icon-size) + 0.75em);
-	--tweet-actions-icon-size: 1em;
-	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.5em);
+	--tweet-replies-font-size: 0.875rem;
+	--tweet-replies-line-height: 1rem;
+	--tweet-info-font-size: 1rem;
+	--tweet-actions-font-size: 0.875rem;
 
 	/* Spacing */
 	--tweet-padding: 0.75rem 1rem;
 	--tweet-inner-gap: 0.75rem; /* gap between sections within the card */
 	--tweet-radius: 0.75rem;
 	--tweet-avatar-size: 48px;
-	--tweet-brand-icon-size: 23.75px;
+	--tweet-brand-icon-size: 25px;
 	--tweet-square-radius: 4px;
 	--tweet-card-summary-thumb-width: 8.25rem;
 	--tweet-media-grid-gap: 2px;
+	--tweet-info-icon-size: 1.25em;
+	--tweet-info-icon-wrapper-size: calc(var(--tweet-info-icon-size) + 0.75em);
+	--tweet-actions-icon-size: 1em;
+	--tweet-actions-icon-wrapper-size: calc(var(--tweet-actions-icon-size) + 0.5em);
 	/* Negative margin so the info icon circle aligns to the card edge */
 	--tweet-info-icon-edge-offset: -4px;
 
@@ -496,8 +499,8 @@
 .tweet-card-domain {
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-size: 0.8125rem;
-	line-height: 1rem;
+	font-size: var(--tweet-footer-font-size);
+	line-height: var(--tweet-footer-line-height);
 	color: var(--tweet-text-secondary);
 	text-transform: lowercase;
 	white-space: nowrap;
@@ -506,9 +509,9 @@
 .tweet-card-title {
 	overflow: hidden;
 	text-overflow: ellipsis;
-	font-size: 0.9375rem;
+	font-size: var(--tweet-header-font-size);
 	font-weight: 400;
-	line-height: 1.25rem;
+	line-height: var(--tweet-header-line-height);
 	color: var(--tweet-text);
 	white-space: nowrap;
 }
@@ -518,8 +521,8 @@
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	-webkit-line-clamp: 2;
-	font-size: 0.8125rem;
-	line-height: 1rem;
+	font-size: var(--tweet-card-font-size);
+	line-height: var(--tweet-card-line-height);
 	color: var(--tweet-text-secondary);
 }
 
@@ -756,4 +759,20 @@
 	line-height: var(--tweet-replies-line-height);
 	overflow-wrap: break-word;
 	white-space: nowrap;
+}
+
+/* Responsive design (viewport < md = 48rem / 768px) */
+@media (width < 48rem) {
+	.tweet {
+		/* Typography */
+		--tweet-body-font-size: 0.9375rem; /* 15px (down from 20px) */
+		--tweet-body-line-height: 1.25rem;
+		--tweet-footer-font-size: 0.75rem; /* 12px (down from 13px) */
+		--tweet-info-font-size: 0.875rem; /* 14px (down from 16px) */
+
+		/* Spacing */
+		--tweet-avatar-size: 46px; /* 46px (down from 48px) */
+		--tweet-brand-icon-size: 23.75px; /* 23.75px (down from 25px) */
+		--tweet-padding: 0.75rem; /* uniform padding on mobile */
+	}
 }
