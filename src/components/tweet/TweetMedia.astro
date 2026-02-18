@@ -28,10 +28,10 @@ const getSkeletonPadding = (m: MediaDetails, count: number): string => {
 		]}
 	>
 		{
-			media.map((m) =>
+			media.map((m, i) =>
 				m.type === "photo" ? (
 					<a
-						href={tweet.url}
+						href={`${tweet.url}/photo/${i + 1}`}
 						class="tweet-media-item link"
 						target="_blank"
 						rel="noopener noreferrer"
