@@ -14,12 +14,19 @@
 	},
 	"linter": {
 		"domains": {
-			"project": "all"
+			"project": "all",
+			"types": "all"
+		},
+		"rules": {
+			"correctness": {
+				"noUnresolvedImports": "off"
+			}
 		}
 	},
 	"assist": {
 		"actions": {
 			"source": {
+				"noDuplicateClasses": "on",
 				"useSortedAttributes": "on",
 				"useSortedProperties": "on"
 			}

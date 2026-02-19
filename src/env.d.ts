@@ -5,7 +5,7 @@ declare module "@pagefind/default-ui" {
 }
 
 interface Window {
-	__themeProviderInit?: boolean;
-	__formattedDateInit?: boolean;
 	__backToTopInit?: boolean;
+	__formattedDateInit?: boolean;
+	__themeProviderInit?: boolean;
 }
