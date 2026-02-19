@@ -3,6 +3,7 @@
 @import "./base.css";
 @import "./components.css";
 @import "./utilities.css";
+@import "./blocks/expressive-code.css";
 
 /* config for tailwindcss-typography plugin */
 @config "../../tailwind.config.ts";
