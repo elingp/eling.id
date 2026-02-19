@@ -1,0 +1,78 @@
+---
+import type { EnrichedTweetParent } from "./api.ts";
+import { formatShortDate } from "./api.ts";
+import HighlightedLabel from "./HighlightedLabel.astro";
+import QuotedTweet from "./QuotedTweet.astro";
+import TweetEntities from "./TweetEntities.astro";
+import TweetMedia from "./TweetMedia.astro";
+import VerifiedBadge from "./VerifiedBadge.astro";
+
+interface Props {
+	tweet: EnrichedTweetParent;
+}
+
+const { tweet } = Astro.props;
+const { user } = tweet;
+---
+
+<div class="tweet-parent">
+	<div class="tweet-parent-col">
+		<a
+			href={user.url}
+			class="tweet-avatar"
+			aria-label={user.name}
+			target="_blank"
+			rel="noopener noreferrer"
+		>
+			<div class:list={["tweet-avatar-img", { square: user.profile_image_shape === "Square" }]}>
+				<img
+					src={user.profile_image_url_https}
+					alt={user.name}
+					width={48}
+					height={48}
+					loading="lazy"
+				/>
+			</div>
+			<div class:list={["tweet-avatar-shadow", { square: user.profile_image_shape === "Square" }]}>
+			</div>
+		</a>
+		<div class="tweet-thread-line"></div>
+	</div>
+
+	<div class="tweet-parent-content">
+		<div class="tweet-parent-name-row">
+			<div class="tweet-parent-name-slot">
+				<a href={user.url} class="tweet-author-name" target="_blank" rel="noopener noreferrer">
+					<span>{user.name}</span>
+				</a>
+			</div>
+			<VerifiedBadge {user} />
+			<HighlightedLabel {user} />
+			<span class="tweet-parent-name-sep" aria-hidden="true">&middot;</span>
+			<a
+				href={tweet.url}
+				class="tweet-parent-date"
+				title={tweet.created_at}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{formatShortDate(new Date(tweet.created_at))}
+			</a>
+		</div>
+		<div class="tweet-author-meta">
+			<a href={user.url} class="tweet-username" target="_blank" rel="noopener noreferrer"
+				>@{user.screen_name}</a
+			>
+			<span class="tweet-follow-sep" aria-hidden="true">&middot;</span>
+			<a href={user.follow_url} class="tweet-follow" target="_blank" rel="noopener noreferrer"
+				>Follow</a
+			>
+		</div>
+
+		<p class="tweet-parent-body" lang={tweet.lang} dir="auto">
+			<TweetEntities entities={tweet.entities} />
+		</p>
+		{tweet.mediaDetails?.length ? <TweetMedia tweet={tweet} /> : null}
+		{tweet.quoted_tweet && <QuotedTweet tweet={tweet.quoted_tweet} />}
+	</div>
+</div>

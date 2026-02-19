@@ -159,6 +159,31 @@ Caption text here.
 ::github{user="withastro"}
 ```
 
+## Components
+
+### Tweet
+
+Custom X/Twitter embed component with features beyond `astro-tweet` and `react-tweet`:
+
+```mdx
+---
+import Tweet from "@/components/tweet/Tweet.astro";
+---
+
+<Tweet id="2017006280255189145" />
+<!-- Or with full URL -->
+<Tweet id="https://x.com/chrismmustcode/status/2017006280255189145" />
+```
+
+Features:
+
+- **Link cards** — renders OGP cards for URLs shared in tweets
+- **Reply context** — shows parent tweet in reply threads
+- **Community Notes** — displays Birdwatch notes when available
+- **Verified badges** — blue, government, and business verification
+- **Dark mode** — automatic via CSS `light-dark()`, respects site theme
+- **No API key** — fetches from Twitter's public syndication API
+
 ## Configuration
 
 - `src/site.config.ts` — site metadata, nav links, date formatting, Expressive Code themes

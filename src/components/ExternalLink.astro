@@ -23,6 +23,7 @@ const isExternal = isHttpUrl && Astro.site ? new URL(href).origin !== Astro.site
 const derivedNewTab = newTab ?? isExternal;
 const relValue = derivedNewTab ? [rel, "noopener", "noreferrer"].filter(Boolean).join(" ") : rel;
 const targetValue = derivedNewTab ? (target ?? "_blank") : target;
+// Slots must contain trusted content (internal markdown, explicit strings).
 ---
 
 <a {href} class={className} rel={relValue} target={targetValue} {...attrs}

@@ -1,0 +1,20 @@
+---
+import type { TweetUser } from "./api.ts";
+
+interface Props {
+	user: TweetUser;
+	className?: string;
+}
+
+const { user, className } = Astro.props;
+const label = user.highlighted_label;
+const url = label?.badge?.url;
+---
+
+{
+	url ? (
+		<span class:list={["tweet-highlighted-label", className]}>
+			<img src={url} alt={label?.description ?? "Verified label"} loading="lazy" decoding="async" />
+		</span>
+	) : null
+}
