@@ -31,7 +31,7 @@ const commitUrl = `https://github.com/${githubRepo}/commit/${commitHash}`;
 		{siteConfig.author}.
 		<span class="inline-block">
 			<ExternalLink
-				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
+				class="hover:text-global-text focus-visible:underline focus-visible:ring-0 focus-visible:outline-none"
 				href={sourceUrl}
 				title="View page source on GitHub"
 			>
@@ -39,7 +39,7 @@ const commitUrl = `https://github.com/${githubRepo}/commit/${commitHash}`;
 			</ExternalLink>
 			• Build:
 			<ExternalLink
-				class="hover:text-global-text focus-visible:underline focus-visible:outline-none"
+				class="hover:text-global-text focus-visible:underline focus-visible:ring-0 focus-visible:outline-none"
 				href={commitUrl}
 				title="View build commit on GitHub"
 			>
@@ -53,7 +53,7 @@ const commitUrl = `https://github.com/${githubRepo}/commit/${commitHash}`;
 				footerMenuLinks.map((link) => (
 					<li>
 						<a
-							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:outline-none lg:py-0"
+							class="hover:text-global-text px-2 py-2 hover:underline focus-visible:underline focus-visible:ring-0 focus-visible:outline-none lg:py-0"
 							href={link.path}
 						>
 							{link.title}
