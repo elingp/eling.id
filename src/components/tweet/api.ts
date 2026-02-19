@@ -85,8 +85,8 @@ export interface TweetUser {
 	profile_image_shape: "Circle" | "Square" | "Hexagon";
 	screen_name: string;
 	verified: boolean;
-	verified_type?: "Business" | "Government";
 	is_blue_verified: boolean;
+	verified_type?: "Business" | "Government";
 	highlighted_label?: UserHighlightedLabel;
 }
 
@@ -115,18 +115,18 @@ export interface HighlightedBadge {
 }
 
 export interface UserHighlightedLabel {
+	user_label_display_type: "Badge";
+	user_label_type: "BusinessLabel";
 	description?: string;
 	badge?: HighlightedBadge;
 	url?: { url: string; url_type: "DeepLink" };
-	user_label_type: "BusinessLabel";
-	user_label_display_type: "Badge";
 }
 
 export interface TweetEditControl {
 	edit_tweet_ids: string[];
 	editable_until_msecs: string;
-	is_edit_eligible: boolean;
 	edits_remaining: string;
+	is_edit_eligible: boolean;
 }
 
 export interface CardImageValue {
@@ -136,9 +136,9 @@ export interface CardImageValue {
 }
 
 export interface CardBindingValue {
+	type: string;
 	string_value?: string;
 	image_value?: CardImageValue;
-	type: string;
 	scribe_key?: string;
 }
 
@@ -154,23 +154,24 @@ export interface BirdwatchTextEntity {
 }
 
 export interface BirdwatchTextWithEntities {
-	text: string;
 	entities: BirdwatchTextEntity[];
+	text: string;
 }
 
 export interface BirdwatchPivot {
 	destinationUrl: string;
+	iconType: string;
+	noteId: string;
+	visualStyle: string;
 	title?: string;
 	shorttitle?: string;
-	visualStyle: string;
 	subtitle?: BirdwatchTextWithEntities;
-	iconType: string;
 	footer?: BirdwatchTextWithEntities;
-	noteId: string;
 	footerIconType?: string;
 }
 
 export interface TweetCard {
+	binding_values: Record<string, CardBindingValue | undefined>;
 	card_platform?: {
 		platform: {
 			audience: { name: string };
@@ -179,7 +180,15 @@ export interface TweetCard {
 	};
 	name: string;
 	url: string;
-	binding_values: Record<string, CardBindingValue | undefined>;
+}
+
+export interface ParsedCard {
+	type: "summary" | "summary_large_image";
+	url: string;
+	title: string;
+	domain: string;
+	description?: string | undefined;
+	thumbnail?: { url: string; width: number; height: number } | undefined;
 }
 
 export interface TweetBase {
@@ -197,12 +206,12 @@ export interface TweetBase {
 
 export interface Tweet extends TweetBase {
 	__typename: "Tweet";
+	conversation_count: number;
 	favorite_count: number;
+	news_action_type: "conversation";
 	mediaDetails?: MediaDetails[];
 	photos?: TweetPhoto[];
 	video?: TweetVideo;
-	conversation_count: number;
-	news_action_type: "conversation";
 	quoted_tweet?: QuotedTweet;
 	in_reply_to_screen_name?: string;
 	in_reply_to_status_id_str?: string;
@@ -663,15 +672,6 @@ export const enrichTweet = (tweet: Tweet): EnrichedTweet => ({
 });
 
 // --- Cards ---
-
-export interface ParsedCard {
-	type: "summary" | "summary_large_image";
-	url: string;
-	title: string;
-	description?: string | undefined;
-	domain: string;
-	thumbnail?: { url: string; width: number; height: number } | undefined;
-}
 
 const getString = (value?: CardBindingValue): string | undefined =>
 	typeof value?.string_value === "string" ? value.string_value : undefined;
