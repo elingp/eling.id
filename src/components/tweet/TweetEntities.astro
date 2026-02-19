@@ -1,0 +1,31 @@
+---
+import type { Entity } from "./api.ts";
+import { safeHtmlWithBreaks } from "./api.ts";
+import TweetLink from "./TweetLink.astro";
+
+interface Props {
+	entities: Entity[];
+}
+
+const { entities } = Astro.props;
+---
+
+{
+	entities.map((item) => {
+		switch (item.type) {
+			case "hashtag":
+			case "mention":
+			case "url":
+			case "symbol":
+				return (
+					<TweetLink href={item.href}>
+						<span set:html={safeHtmlWithBreaks(item.text)} />
+					</TweetLink>
+				);
+			case "media":
+				return null;
+			default:
+				return <span set:html={safeHtmlWithBreaks(item.text)} />;
+		}
+	})
+}

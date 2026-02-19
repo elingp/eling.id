@@ -41,21 +41,22 @@ Lifecycle hooks (run automatically):
 
 Content-driven static site using Astro Content Collections.
 
-| Path                 | Purpose                                |
-| -------------------- | -------------------------------------- |
-| `public/`            | Static assets (includes `icon.svg`)    |
-| `src/assets/`        | Images and media                       |
-| `src/components/`    | UI components                          |
-| `src/content/post/`  | Long-form posts (Markdown/MDX)         |
-| `src/content/note/`  | Short notes                            |
-| `src/content/tag/`   | Tag metadata                           |
-| `src/layouts/`       | Page layouts                           |
-| `src/pages/`         | Routes (includes OG image route)       |
-| `src/plugins/`       | Custom remark/rehype plugins           |
-| `src/styles/`        | Global + component CSS                 |
-| `src/utils/`         | Helpers (RSS, dates, TOC, webmentions) |
-| `src/data/post.ts`   | Content querying helpers               |
-| `src/site.config.ts` | Site metadata, nav, Expressive Code    |
+| Path                    | Purpose                                |
+| ----------------------- | -------------------------------------- |
+| `public/`               | Static assets (includes `icon.svg`)    |
+| `src/assets/`           | Images and media                       |
+| `src/components/`       | UI components                          |
+| `src/components/tweet/` | Custom X/Twitter embed component       |
+| `src/content/post/`     | Long-form posts (Markdown/MDX)         |
+| `src/content/note/`     | Short notes                            |
+| `src/content/tag/`      | Tag metadata                           |
+| `src/layouts/`          | Page layouts                           |
+| `src/pages/`            | Routes (includes OG image route)       |
+| `src/plugins/`          | Custom remark/rehype plugins           |
+| `src/styles/`           | Global + component CSS                 |
+| `src/utils/`            | Helpers (RSS, dates, TOC, webmentions) |
+| `src/data/post.ts`      | Content querying helpers               |
+| `src/site.config.ts`    | Site metadata, nav, Expressive Code    |
 
 ## Content Authoring
 

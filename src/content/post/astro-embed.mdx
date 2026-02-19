@@ -13,23 +13,55 @@ import {
 	LinkPreview,
 	Gist,
 	MastodonPost,
-	Tweet,
+	Tweet as AstroEmbedTweet,
 	Vimeo,
 	YouTube,
 } from "astro-embed";
-import TwitterPost from "@/components/TwitterPost.astro";
+import Tweet from "@/components/tweet/Tweet.astro";
+
+<script async src="https://platform.twitter.com/widgets.js"></script>
 
 Embed samples for visual checks and theming.
 
-## Twitter (custom component)
+## X/Twitter
 
-Rendered via the site’s custom `TwitterPost` component.
+Rendered via the site’s custom `Tweet` component and Astro Embed Tweet.
 
-<TwitterPost id="https://x.com/astrodotbuild/status/1511750228428435457" />
+### Link/OGP
 
-<TwitterPost id="https://twitter.com/astrodotbuild/status/2012166691371823563" />
+<Tweet id="2012166691371823563" />
 
-<TwitterPost id="https://x.com/astrodotbuild/status/2014039719126921371" />
+<AstroEmbedTweet theme="dark" id="https://x.com/astrodotbuild/status/2012166691371823563" />
+
+### Image
+
+<Tweet id="https://twitter.com/astrodotbuild/status/2010746571122426205" />
+
+<AstroEmbedTweet theme="dark" id="https://twitter.com/astrodotbuild/status/2010746571122426205" />
+
+### Video
+
+<Tweet id="https://x.com/astrodotbuild/status/1511750228428435457" />
+
+<AstroEmbedTweet theme="dark" id="https://x.com/astrodotbuild/status/1511750228428435457" />
+
+### Reply
+
+<Tweet id="https://x.com/chrismustcode/status/2017006280255189145" />
+
+<AstroEmbedTweet theme="dark" id="https://x.com/chrismustcode/status/2017006280255189145" />
+
+### Repost Quote
+
+<Tweet id="2022409136718385508" />
+
+<AstroEmbedTweet theme="dark" id="https://x.com/DrizzleORM/status/2022409136718385508" />
+
+### Post with Community Notes
+
+<Tweet id="https://x.com/WhiteHouse/status/2017370992436249025" />
+
+<AstroEmbedTweet theme="dark" id="https://x.com/WhiteHouse/status/2017370992436249025" />
 
 ## Baseline Status
 
@@ -62,12 +94,6 @@ Link preview embeds.
 Mastodon embed.
 
 <MastodonPost id="https://m.webtoo.ls/@astro/112966069629573422" />
-
-## Twitter (astro-embed)
-
-`astro-embed` Tweet component.
-
-<Tweet theme="dark" id="https://twitter.com/astrodotbuild/status/1511750228428435457" />
 
 ## Video
 

@@ -1,0 +1,23 @@
+---
+import type { EnrichedTweet } from "./api.ts";
+import TweetEntities from "./TweetEntities.astro";
+import TweetLink from "./TweetLink.astro";
+
+interface Props {
+	tweet: EnrichedTweet;
+}
+
+const { tweet } = Astro.props;
+---
+
+<p class="tweet-body" lang={tweet.lang} dir="auto">
+	<TweetEntities entities={tweet.entities} />
+	{
+		tweet.note_tweet ? (
+			<TweetLink href={tweet.url}>
+				<span>&nbsp;</span>
+				Show more
+			</TweetLink>
+		) : null
+	}
+</p>
