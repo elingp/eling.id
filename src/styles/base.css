@@ -94,6 +94,11 @@
 		navigation: auto;
 	}
 
+	/* Custom text selection colors */
+	::selection {
+		background-color: light-dark(var(--color-flexoki-orange-150), var(--color-flexoki-orange-850));
+	}
+
 	/* Astro image responsive styles, modified from -> https://docs.astro.build/en/guides/images/#responsive-image-styles */
 	:where([data-astro-image]) {
 		object-fit: var(--fit);
