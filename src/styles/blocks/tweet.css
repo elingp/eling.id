@@ -515,6 +515,7 @@
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	-webkit-line-clamp: 2;
+	line-clamp: 2;
 	font-size: var(--tweet-card-font-size);
 	line-height: var(--tweet-card-line-height);
 	color: var(--tweet-text-secondary);
