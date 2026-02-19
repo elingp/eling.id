@@ -84,8 +84,8 @@ import { Icon } from "astro-icon/components";
 	}
 
 	[data-theme-menu][data-open="false"] {
-		opacity: 0;
 		pointer-events: none;
+		opacity: 0;
 		transform: translate(-50%, -4px);
 	}
 
@@ -96,7 +96,7 @@ import { Icon } from "astro-icon/components";
 </style>
 
 <script>
-	import { rootTheme, rootResolvedTheme, type ThemePreference } from "@/utils/domElement";
+	import { rootResolvedTheme, rootTheme, type ThemePreference } from "@/utils/domElement";
 
 	type ThemeToggleState = {
 		cleanups: Array<() => void>;
