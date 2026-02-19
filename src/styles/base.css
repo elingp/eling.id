@@ -86,7 +86,6 @@
 		@apply bg-link/10;
 	}
 
-	/* consistent focus-visible ring for all interactive elements */
 	a:focus-visible,
 	button:focus-visible,
 	[role="button"]:focus-visible {

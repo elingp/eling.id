@@ -4,12 +4,6 @@
 	--pagefind-ui-font: inherit;
 }
 
-/* Override Pagefind's focus-visible */
-#cactus__search .pagefind-ui__search-input:focus-visible,
-#cactus__search .pagefind-ui__search-clear:focus-visible,
-#cactus__search .pagefind-ui__filter-checkbox:focus-visible,
-#cactus__search .pagefind-ui__filter-name:focus-visible,
-#cactus__search .pagefind-ui__result-link:focus-visible,
 #search-dialog:focus-visible {
 	outline: 2px solid var(--color-accent);
 }
@@ -21,68 +15,72 @@
 	--pagefind-ui-border: var(--color-border);
 	--pagefind-ui-border-width: 1px;
 
-	[data-theme-resolved="dark"] & {
-		--pagefind-ui-background: var(--color-bg-2);
-		--pagefind-ui-border: var(--color-border);
+	/* Override Pagefind's focus-visible */
+	& .pagefind-ui__search-input:focus-visible,
+	& .pagefind-ui__search-clear:focus-visible,
+	& .pagefind-ui__filter-checkbox:focus-visible,
+	& .pagefind-ui__filter-name:focus-visible,
+	& .pagefind-ui__result-link:focus-visible {
+		outline: 2px solid var(--color-accent);
 	}
-}
 
-#cactus__search .pagefind-ui__search-clear {
-	width: calc(60px * var(--pagefind-ui-scale));
-	padding: 0;
-	overflow: hidden;
-	background-color: transparent;
-}
+	& .pagefind-ui__search-input {
+		color: var(--color-global-text);
 
-#cactus__search .pagefind-ui__search-clear::before {
-	display: block;
-	width: 100%;
-	height: 100%;
-	content: "";
-	background-color: var(--color-accent);
-	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E")
-		center / 60% no-repeat;
-	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E")
-		center / 60% no-repeat;
-}
+		&::placeholder {
+			color: var(--color-muted);
+			opacity: 1;
+		}
+	}
 
-#cactus__search .pagefind-ui__search-input {
-	color: var(--color-global-text);
-}
+	& .pagefind-ui__search-clear {
+		width: calc(60px * var(--pagefind-ui-scale));
+		padding: 0;
+		overflow: hidden;
+		background-color: transparent;
 
-#cactus__search .pagefind-ui__search-input::placeholder {
-	color: var(--color-muted);
-	opacity: 1;
-}
+		&::before {
+			display: block;
+			width: 100%;
+			height: 100%;
+			content: "";
+			background-color: var(--color-accent);
+			-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E")
+				center / 60% no-repeat;
+			mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke-width='1.5' stroke='currentColor' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M6 18L18 6M6 6l12 12'%3E%3C/path%3E%3C/svg%3E")
+				center / 60% no-repeat;
+		}
+	}
 
-#cactus__search .pagefind-ui__result {
-	border: 0;
-}
+	& .pagefind-ui__result {
+		border: 0;
+	}
 
-#cactus__search .pagefind-ui__result-link {
-	background-image: linear-gradient(
-		transparent,
-		transparent 5px,
-		var(--color-global-text) 5px,
-		var(--color-global-text)
-	);
-	background-repeat: repeat-x;
-	background-position: bottom;
-	background-size: 100% 6px;
-}
+	& .pagefind-ui__result-link {
+		background-image: linear-gradient(
+			transparent,
+			transparent 5px,
+			var(--color-global-text) 5px,
+			var(--color-global-text)
+		);
+		background-repeat: repeat-x;
+		background-position: bottom;
+		background-size: 100% 6px;
 
-#cactus__search .pagefind-ui__result-link:hover {
-	text-decoration: none;
-	background-image: linear-gradient(
-		transparent,
-		transparent 4px,
-		var(--color-link) 4px,
-		var(--color-link)
-	);
-}
+		&:hover {
+			text-decoration: none;
+			background-image: linear-gradient(
+				transparent,
+				transparent 4px,
+				var(--color-link) 4px,
+				var(--color-link)
+			);
+		}
+	}
 
-#cactus__search mark {
-	font-weight: 600;
-	color: color-mix(in oklch, var(--color-accent) 90%, transparent);
-	background-color: transparent;
+	& mark {
+		font-weight: 600;
+		color: color-mix(in oklch, var(--color-accent) 90%, transparent);
+		background-color: transparent;
+	}
 }
