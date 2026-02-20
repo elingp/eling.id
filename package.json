@@ -29,7 +29,7 @@
 		"postbuild": "pagefind --site dist",
 		"preview": "astro preview",
 		"check": "astro check && biome check --no-errors-on-unmatched && prettier --check '**/*.{astro,css,md,mdx,yml,yaml}'",
-		"check:ci": "astro check && biome ci --reporter=default --reporter=github --no-errors-on-unmatched && prettier --check '**/*.{astro,css,md,mdx,yml,yaml}'",
+		"check:ci": "astro check && biome ci --no-errors-on-unmatched && prettier --check '**/*.{astro,css,md,mdx,yml,yaml}'",
 		"fix": "biome check --write --no-errors-on-unmatched && prettier --write --cache '**/*.{astro,css,md,mdx,yml,yaml}'"
 	},
 	"dependencies": {
