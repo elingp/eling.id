@@ -44,6 +44,7 @@ import { Icon } from "astro-icon/components";
 				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
 				data-theme-option="light"
 				role="menuitemradio"
+				aria-checked="false"
 				tabindex="-1"
 				type="button"
 			>
@@ -54,6 +55,7 @@ import { Icon } from "astro-icon/components";
 				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
 				data-theme-option="dark"
 				role="menuitemradio"
+				aria-checked="false"
 				tabindex="-1"
 				type="button"
 			>
@@ -64,6 +66,7 @@ import { Icon } from "astro-icon/components";
 				class="hover:bg-ui-2 focus-visible:ring-accent text-global-text flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:outline-none"
 				data-theme-option="system"
 				role="menuitemradio"
+				aria-checked="false"
 				tabindex="-1"
 				type="button"
 			>
@@ -278,12 +281,12 @@ import { Icon } from "astro-icon/components";
 		};
 	};
 
-	const state = ((
-		window as Window & { __themeToggleState?: ThemeToggleState }
-	).__themeToggleState ??= {
+	const windowWithState = window as Window & { __themeToggleState?: ThemeToggleState };
+	windowWithState.__themeToggleState ??= {
 		cleanups: [],
 		initialized: false,
-	});
+	};
+	const state = windowWithState.__themeToggleState;
 
 	const initializeToggles = () => {
 		for (const toggle of document.querySelectorAll<HTMLElement>("theme-toggle")) {

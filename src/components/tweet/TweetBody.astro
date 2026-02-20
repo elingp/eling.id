@@ -14,7 +14,7 @@ const { tweet } = Astro.props;
 	<TweetEntities entities={tweet.entities} />
 	{
 		tweet.note_tweet ? (
-			<TweetLink href={tweet.url}>
+			<TweetLink href={tweet.url} ariaLabel="Show more">
 				<span>&nbsp;</span>
 				Show more
 			</TweetLink>
