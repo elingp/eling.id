@@ -135,7 +135,7 @@ const toc = generateToc(headings);
 			{ rootMargin: ROOT_MARGIN },
 		);
 
-		headings.forEach((heading) => observer.observe(heading));
+		for (const heading of headings) observer.observe(heading);
 
 		const onScroll = () => scheduleUpdate();
 		const onResize = () => scheduleMeasure();
