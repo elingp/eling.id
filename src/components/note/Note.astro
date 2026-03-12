@@ -26,7 +26,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	data-pagefind-body={isPreview ? false : true}
 >
 	<header>
-		<Tag class:list={["text-global-text font-bold", isPreview ? "text-base md:text-lg" : "title"]}>
+		<Tag class:list={["text-global-text font-bold", isPreview ? "text-lg" : "title"]}>
 			{
 				isPreview ? (
 					<a class="cactus-link" href={`/notes/${note.id}/`}>
@@ -60,7 +60,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 	<section
 		class:list={[
 			"prose mt-4 max-w-none [&>p:last-of-type]:mb-0",
-			isPreview ? "prose-sm md:prose-base line-clamp-4" : "prose-lg md:prose-xl",
+			isPreview ? "prose-base line-clamp-4" : "prose-lg md:prose-xl",
 		]}
 	>
 		<Content />
