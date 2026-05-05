@@ -74,7 +74,7 @@
 		"@types/hast": "^3.0.4",
 		"@types/mdast": "^4.0.4",
 		"astro-grab": "^0.3.0",
-		"astro-html-minifier-next": "^2.1.0",
+		"astro-html-minifier-next": "^3.0.0",
 		"astro-meta-tags": "^0.4.1",
 		"astro-og": "^0.3.2",
 		"autoprefixer": "^10.5.0",
