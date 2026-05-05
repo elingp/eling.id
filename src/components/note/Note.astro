@@ -23,7 +23,7 @@ const dateTimeOptions: Intl.DateTimeFormatOptions = {
 
 <article
 	class:list={[isPreview && "bg-global-text/5 inline-grid rounded-md px-4 py-3"]}
-	data-pagefind-body={isPreview ? false : true}
+	data-pagefind-body={!isPreview}
 >
 	<header>
 		<Tag class:list={["text-global-text font-bold", isPreview ? "text-lg" : "title"]}>
