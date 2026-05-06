@@ -630,18 +630,18 @@
 	transition: background-color 0.2s;
 }
 
+.tweet-info-icon {
+	width: var(--tweet-info-icon-size);
+	height: var(--tweet-info-icon-size);
+	fill: currentColor;
+}
+
 .tweet-info-link:last-child:hover {
 	background-color: var(--tweet-blue-secondary-hover);
 }
 
 .tweet-info-link:last-child:hover .tweet-info-icon {
 	color: var(--tweet-blue-secondary);
-}
-
-.tweet-info-icon {
-	width: var(--tweet-info-icon-size);
-	height: var(--tweet-info-icon-size);
-	fill: currentColor;
 }
 
 /* Actions */

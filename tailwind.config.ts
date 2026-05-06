@@ -31,7 +31,15 @@ export default {
 						},
 						code: {
 							border: "1px dotted var(--color-border)",
-							borderRadius: "2px",
+							borderRadius: "0.25rem",
+							backgroundColor: "var(--color-ui)",
+							padding: "0.1em 0.35em",
+						},
+						"code::before": {
+							content: "none",
+						},
+						"code::after": {
+							content: "none",
 						},
 						kbd: {
 							"&:where([data-theme-resolved='dark'], [data-theme-resolved='dark'] *)": {
