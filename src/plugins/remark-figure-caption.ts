@@ -27,12 +27,12 @@ export function remarkFigureCaption() {
 			}
 
 			const firstChild = node.children[0];
-			if (!firstChild || firstChild.type !== "paragraph") {
+			if (firstChild?.type !== "paragraph") {
 				return;
 			}
 
 			const imageNode = firstChild.children[0] as Image;
-			if (!imageNode || imageNode.type !== "image") {
+			if (imageNode?.type !== "image") {
 				return;
 			}
 
