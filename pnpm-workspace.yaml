@@ -5,5 +5,4 @@ allowBuilds:
   "@biomejs/biome": true
   "@tailwindcss/oxide": true
 overrides:
-  lodash: ^4.17.23
   sharp: ^0.34.5
